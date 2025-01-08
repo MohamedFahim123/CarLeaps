@@ -6,9 +6,7 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "build-css": "sass public/main.scss public/main.css",
-    "dev-css": "sass --watch public/main.scss public/main.css"
+    "lint": "next lint"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
