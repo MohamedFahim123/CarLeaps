@@ -8,7 +8,6 @@ import Features from "@/components/Homes/home-1/Features";
 import Features2 from "@/components/Homes/home-1/Features2";
 import Features3 from "@/components/Homes/home-1/Features3";
 import Hero from "@/components/Homes/home-1/Hero";
-import Testimonials from "@/components/Homes/home-1/Testimonials";
 import { Metadata } from "next";
 
 
@@ -28,7 +27,6 @@ export default function HomePage() {
       <Features2 />
       <Cars2 />
       <Features3 />
-      <Testimonials />
       <Blogs />
       <Cta />
     </>

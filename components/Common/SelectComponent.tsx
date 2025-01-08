@@ -20,7 +20,7 @@ export default function SelectComponent({
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [handleClickOutside]); // Added handleClickOutside to dependencies
+  }, [handleClickOutside]);
 
   return (
     <div ref={ref} className={`drop-menu  ${isDropdownOpen ? "active" : ""} `}>
@@ -54,4 +54,4 @@ export default function SelectComponent({
       )}
     </div>
   );
-}
+};

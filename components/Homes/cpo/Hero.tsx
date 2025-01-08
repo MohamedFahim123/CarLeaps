@@ -1,11 +1,9 @@
 "use client";
+
 import SelectComponent from "@/components/Common/SelectComponent";
 import Link from "next/link";
 
-import React, { useState } from "react";
-const categories = ["All", "New", "Used"];
 export default function Hero() {
-  const [selectedCategory, setSelectedCategory] = useState(categories[0]);
   return (
     <section className="boxcar-banner-section-v1 banner-style-three">
       <div className="banner-content-three">
@@ -18,20 +16,6 @@ export default function Hero() {
               Find Your Perfect Car
             </h2>
             <div className="form-tabs">
-              <ul
-                className="form-tabs-list wow fadeInUp"
-                data-wow-delay="200ms"
-              >
-                {categories.map((category, index) => (
-                  <li
-                    className={selectedCategory == category ? "current" : ""}
-                    onClick={() => setSelectedCategory(category)}
-                    key={index}
-                  >
-                    {category}
-                  </li>
-                ))}
-              </ul>
               <div
                 className="form-tab-content wow fadeInUp"
                 data-wow-delay="300ms"

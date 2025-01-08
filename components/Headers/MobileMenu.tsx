@@ -68,22 +68,22 @@ function MobileMenu() {
                   </Link>
                 </div>
                 <ul className="navigation mm-listview">
-                  <li
-                  >
+
+                  <li>
                     <Link
-                      href={`/${currRegion}/discover/home`}
+                      href={`/${currRegion}/discover/cars-for-sale`}
                       className="mm-btn mm-btn_next mm-listitem__btn mm-listitem__text"
                     >
-                      Home
+                      Cars for sale
                     </Link>
                   </li>
 
                   <li>
                     <Link
-                      href={`/${currRegion}/discover/shop`}
                       className="mm-btn mm-btn_next mm-listitem__btn mm-listitem__text"
+                      href={`/${currRegion}/discover/research-new-cars`}
                     >
-                      Shop
+                      Research
                     </Link>
                   </li>
 
@@ -101,16 +101,7 @@ function MobileMenu() {
                       href={`/${currRegion}/discover/certified-preowned-cars`}
                       className="mm-btn mm-btn_next mm-listitem__btn mm-listitem__text"
                     >
-                      CPO
-                    </Link>
-                  </li>
-
-                  <li>
-                    <Link
-                      className="mm-btn mm-btn_next mm-listitem__btn mm-listitem__text"
-                      href={`/${currRegion}/discover/research-new-cars`}
-                    >
-                      Research
+                      Certified used cars
                     </Link>
                   </li>
 
