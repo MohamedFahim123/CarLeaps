@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import SetRegion from "./setregion/page";
 import { cookies } from "next/headers";
-import RegionPage from "./[region]/page";
+import { redirect } from "next/navigation";
 
 export const metaData: Metadata = {
     title: 'Select Your Current Region',
@@ -13,7 +13,7 @@ export default async function MainHome() {
     const region: string | undefined = cookiesData.get('region')?.value;
 
     if (region) {
-        return <RegionPage params={{region}} />
+        redirect(`/${region}/discover/home`);
     } else {
         return <SetRegion />
     };

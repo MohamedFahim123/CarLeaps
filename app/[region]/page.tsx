@@ -1,7 +1,10 @@
-import { notFound, redirect } from "next/navigation";
+'use client';
 
-export default async function RegionPage({ params }: { params: { region: string } }) {
-    const { region } = await params;
+import { notFound, redirect } from "next/navigation";
+import Cookies from "js-cookie";
+
+export default function RegionPage() {
+    const region = Cookies.get('region') || 'riyadh';
 
     const validRegions = ["Riyadh"];
 
