@@ -1,7 +1,7 @@
 import { notFound, redirect } from "next/navigation";
 
-export default function RegionPage({ params }: { params: { region: string } }) {
-    const { region } = params;
+export default async function RegionPage({ params }: { params: { region: string } }) {
+    const { region } = await params;
 
     const validRegions = ["Riyadh"];
 
