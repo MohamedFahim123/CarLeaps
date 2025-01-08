@@ -3,13 +3,12 @@ import React, { useState } from "react";
 
 export default function Pagination() {
   const [activePage, setActivePage] = useState(1);
-  const totalPages = 20; // Adjust as needed
+  const totalPages = 20;
 
-  const handlePageClick = (page) => {
+  const handlePageClick = (page: number) => {
     if (page != 0 && page <= totalPages) {
       setActivePage(page);
     }
-    // Add navigation logic here, e.g., using a router or window.location
   };
 
   return (
