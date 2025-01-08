@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 
 interface CounterProps {
   parentClass?: string;
@@ -12,7 +12,7 @@ const Counter: React.FC<CounterProps> = ({ parentClass = "", min = 0, max }) => 
   const targetElement = useRef<HTMLSpanElement | null>(null);
   const [counted, setCounted] = useState<number>(min);
 
-  const startCountup = () => {
+  const startCountup = useCallback(() => {
     const intervalId = setInterval(() => {
       setCounted((prevCount) => {
         const tempCount = prevCount + Math.ceil(max / 20);
@@ -23,7 +23,7 @@ const Counter: React.FC<CounterProps> = ({ parentClass = "", min = 0, max }) => 
         return tempCount;
       });
     }, 50);
-  };
+  }, [max]);
 
   useEffect(() => {
     const handleIntersection = (
@@ -45,16 +45,18 @@ const Counter: React.FC<CounterProps> = ({ parentClass = "", min = 0, max }) => 
     };
 
     const observer = new IntersectionObserver(handleIntersection, options);
-    if (targetElement.current) {
-      observer.observe(targetElement.current);
+    const element = targetElement.current;
+
+    if (element) {
+      observer.observe(element);
     }
 
     return () => {
-      if (targetElement.current) {
-        observer.unobserve(targetElement.current);
-      }
+      if (element) {
+        observer.unobserve(element);
+      };
     };
-  }, []);
+  }, [startCountup]);
 
   return (
     <span ref={targetElement} className={parentClass}>

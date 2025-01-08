@@ -2,7 +2,6 @@
 
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
-import SelectComponent from "./SelectComponent";
 
 export default function FilterSidebar() {
   const pathname = usePathname();
@@ -13,7 +12,7 @@ export default function FilterSidebar() {
       ".close-filters, .sidebar-backdrop"
     );
 
-    const openSidebar = (e) => {
+    const openSidebar = (e: { preventDefault: () => void; }) => {
       e.preventDefault();
       wrapFixedSidebar?.classList.add("active");
     };
