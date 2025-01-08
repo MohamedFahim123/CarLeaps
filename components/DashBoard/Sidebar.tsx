@@ -1,12 +1,10 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import Cookies from "js-cookie";
-
-const currRegion = Cookies.get('region');
 
 interface menuItem {
   href: string;
@@ -17,40 +15,47 @@ interface menuItem {
   isExternal?: boolean;
 };
 
-const menuItems: menuItem[] = [
-  {
-    href: `/${currRegion}/dashboard/profile`,
-    src: "/images/icons/dash7.svg",
-    width: 18,
-    height: 18,
-    label: "My Profile",
-  },
-  {
-    href: `/${currRegion}/dashboard/my-listings`,
-    src: "/images/icons/dash2.svg",
-    width: 22,
-    height: 22,
-    label: "My Listings",
-  },
-  {
-    href: `/${currRegion}/dashboard/add-listings`,
-    src: "/images/icons/dash3.svg",
-    width: 22,
-    height: 22,
-    label: "Add Listings",
-  },
-  {
-    href: "#",
-    src: "/images/icons/dash8.svg",
-    width: 18,
-    height: 18,
-    label: "Logout",
-    isExternal: true,
-  },
-];
-
 export default function Sidebar() {
   const pathname = usePathname();
+  const [currRegion, setCurrentRegion] = useState<string | undefined>();
+
+  useEffect(() => {
+    const region = Cookies.get("region") || "riyadh";
+    setCurrentRegion(region);
+  }, []);
+
+  const menuItems: menuItem[] = [
+    {
+      href: `/${currRegion}/dashboard/profile`,
+      src: "/images/icons/dash7.svg",
+      width: 18,
+      height: 18,
+      label: "My Profile",
+    },
+    {
+      href: `/${currRegion}/dashboard/my-listings`,
+      src: "/images/icons/dash2.svg",
+      width: 22,
+      height: 22,
+      label: "My Listings",
+    },
+    {
+      href: `/${currRegion}/dashboard/add-listings`,
+      src: "/images/icons/dash3.svg",
+      width: 22,
+      height: 22,
+      label: "Add Listings",
+    },
+    {
+      href: "#",
+      src: "/images/icons/dash8.svg",
+      width: 18,
+      height: 18,
+      label: "Logout",
+      isExternal: true,
+    },
+  ];
+
   return (
     <div className="side-bar">
       <ul className="nav-list">
