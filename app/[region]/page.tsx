@@ -1,13 +1,15 @@
-import { redirect } from "next/navigation";
-import NotFound from "../404";
+import { notFound, redirect } from "next/navigation";
 
-export default async function RegionPage({ params }: { params: { region: string } }) {
+export default function RegionPage({ params }: { params: { region: string } }) {
     const { region } = params;
 
     const validRegions = ["Riyadh"];
+
     if (!validRegions.includes(region)) {
-        NotFound();
+        notFound();
     };
 
-    redirect(`/${region}/discover/home`)
+    redirect(`/${region}/discover/home`);
+
+    return null;
 };
