@@ -1,5 +1,5 @@
 
-export default function Features() {
+export default function CpoFeatures() {
   return (
     <section className="why-choose-us-section ">
       <div className="boxcar-container">

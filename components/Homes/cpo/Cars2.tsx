@@ -12,7 +12,7 @@ const buttons = [
   { label: "In Stock", isActive: false },
 ];
 
-export default function Cars2() {
+export default function CpoCars2() {
   const [selectedCategory, setSelectedCategory] = useState(buttons[0]);
   const [sortedItems, setSortedItems] = useState([...carData]);
 

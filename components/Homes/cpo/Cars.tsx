@@ -103,7 +103,7 @@ const navButtons = [
   },
 ];
 
-export default function Cars() {
+export default function CpoCars() {
   const [selectedBrand, setSelectedBrand] = useState(navButtons[0]);
   const [filteres, setFilteres] = useState<Car[]>([]);
   useEffect(() => {

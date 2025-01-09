@@ -3,7 +3,7 @@
 import SelectComponent from "@/components/Common/SelectComponent";
 import Link from "next/link";
 
-export default function Hero() {
+export default function CpoHero() {
   return (
     <section className="boxcar-banner-section-v1 banner-style-three">
       <div className="banner-content-three">

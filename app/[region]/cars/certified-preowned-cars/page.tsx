@@ -1,8 +1,8 @@
 
 import Cta from "@/components/Common/Cta";
-import Cars from "@/components/Homes/CPO/Cars";
-import Features from "@/components/Homes/CPO/Features";
-import Hero from "@/components/Homes/CPO/Hero";
+import CpoCars from "@/components/Homes/CPO/Cars";
+import CpoFeatures from "@/components/Homes/CPO/Features";
+import CpoHero from "@/components/Homes/CPO/Hero";
 import Brands from "@/components/Homes/Home/Brands";
 import { Metadata } from "next";
 
@@ -14,10 +14,10 @@ export default function CPOPage() {
     return (
         <>
             <div id="nav-mobile"></div>
-            <Hero />
-            <Cars />
+            <CpoHero />
+            <CpoCars />
             <Cta />
-            <Features />
+            <CpoFeatures />
             <Brands currPage="cpo" />
         </>
     );
