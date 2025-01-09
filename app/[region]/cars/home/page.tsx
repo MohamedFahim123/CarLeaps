@@ -1,5 +1,5 @@
 import Cta from "@/components/Common/Cta";
-import CpoCars2 from "@/components/Homes/CPO/Cars2";
+import CpoCars2 from "@/components/Homes/CPO/CpoCars2";
 import Blogs from "@/components/Homes/Home/Blogs";
 import Brands from "@/components/Homes/Home/Brands";
 import Cars from "@/components/Homes/Home/Cars";

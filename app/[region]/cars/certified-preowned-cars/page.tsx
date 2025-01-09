@@ -1,8 +1,8 @@
 
 import Cta from "@/components/Common/Cta";
-import CpoCars from "@/components/Homes/CPO/Cars";
-import CpoFeatures from "@/components/Homes/CPO/Features";
-import CpoHero from "@/components/Homes/CPO/Hero";
+import CpoCars from "@/components/Homes/CPO/CpoCars";
+import CpoFeatures from "@/components/Homes/CPO/CpoFeatures";
+import CpoHero from "@/components/Homes/CPO/CpoHero";
 import Brands from "@/components/Homes/Home/Brands";
 import { Metadata } from "next";
 
