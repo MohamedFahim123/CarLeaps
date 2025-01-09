@@ -42,9 +42,9 @@ License: copyright commercial
 
 :root {
   --theme-color-light: #ffffff;
-  --theme-color-dark: #050b20;
+  --theme-color-dark: #000000;
   --theme-color-gray: #f6f6f6;
-  --theme-color1: #405ff2;
+  --theme-color1: #2C25EB;
   --theme-color2: #00b67a;
   --theme-color3: #faf7f2;
   --bg-theme-color1: var(--theme-color1);

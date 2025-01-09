@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import SetRegion from "./setregion/page";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -9,12 +8,15 @@ export const metadata: Metadata = {
 };
 
 export default async function MainHome() {
-    const cookiesData = await cookies();
-    const region: string | undefined = cookiesData.get('region')?.value;
+    const cookieStore = await cookies();
+    const region: string | undefined = cookieStore.get('region')?.value;
 
     if (region) {
-        return redirect(`/${region}/discover/home`);
+        return redirect(`/${region}`);
     } else {
-        return <SetRegion />
+        const headers = new Headers();
+        headers.append('Set-Cookie', `region=riyadh; Path=/; Max-Age=${60 * 60}; Secure; HttpOnly`);
+
+        return redirect(`/riyadh`);
     };
 };

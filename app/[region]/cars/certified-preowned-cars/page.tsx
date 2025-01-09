@@ -1,11 +1,10 @@
 
 import Cta from "@/components/Common/Cta";
-import Cars from "@/components/Homes/cpo/Cars";
-import Features from "@/components/Homes/cpo/Features";
-import Hero from "@/components/Homes/cpo/Hero";
-import Brands from "@/components/Homes/home-1/Brands";
+import Cars from "@/components/Homes/CPO/Cars";
+import Features from "@/components/Homes/CPO/Features";
+import Hero from "@/components/Homes/CPO/Hero";
+import Brands from "@/components/Homes/Home/Brands";
 import { Metadata } from "next";
-
 
 export const metadata: Metadata = {
     title: "Certified PreOwned Cars",

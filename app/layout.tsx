@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import '../public/main.scss';
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Valid Cars",
   description: "Your Favorite Cars Portal.",
+  icons: {
+    icon: "/images/ValidCars.png",
+  },
 };
 
 export default function RootLayout({
@@ -19,4 +23,4 @@ export default function RootLayout({
       </body>
     </html>
   );
-}
+};

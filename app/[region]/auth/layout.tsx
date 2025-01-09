@@ -11,10 +11,11 @@ export default function AuthLayout({ children }: ChildrenPropsInterface) {
         <>
             <MobileMenu />
             <div className="boxcar-wrapper">
-                <Header1 headerClass="boxcar-header header-style-v1 style-two inner-header cus-style-1" />
+                <Header1 headerClass="boxcar-header" />
                 {children}
-                <Footer parentClass="boxcar-footer footer-style-one v1 cus-st-1" />
-            </div> <FilterSidebar />{" "}
+                <Footer parentClass="boxcar-footer footer-style-one" />
+            </div>
+            <FilterSidebar />
             <BackToTop />
         </>
     );

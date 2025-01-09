@@ -63,7 +63,7 @@ function MobileMenu() {
                 id="navbar"
               >
                 <div className="mm-navbar mm-navbar_sticky">
-                  <Link href={`/${currRegion}/discover/home`} className="mm-navbar__title ps-2">
+                  <Link href={`/${currRegion}/cars/home`} className="mm-navbar__title ps-2">
                     <span>ValidCars</span>
                   </Link>
                 </div>
@@ -71,7 +71,7 @@ function MobileMenu() {
 
                   <li>
                     <Link
-                      href={`/${currRegion}/discover/cars-for-sale`}
+                      href={`/${currRegion}/cars/cars-for-sale`}
                       className="mm-btn mm-btn_next mm-listitem__btn mm-listitem__text"
                     >
                       Cars for sale
@@ -81,7 +81,7 @@ function MobileMenu() {
                   <li>
                     <Link
                       className="mm-btn mm-btn_next mm-listitem__btn mm-listitem__text"
-                      href={`/${currRegion}/discover/research-new-cars`}
+                      href={`/${currRegion}/cars/research-new-cars`}
                     >
                       Research
                     </Link>
@@ -90,7 +90,7 @@ function MobileMenu() {
                   <li>
                     <Link
                       className="mm-btn mm-btn_next mm-listitem__btn mm-listitem__text"
-                      href={`/${currRegion}/discover/perfect-match`}
+                      href={`/${currRegion}/cars/perfect-match`}
                     >
                       Perfect Match
                     </Link>
@@ -98,7 +98,7 @@ function MobileMenu() {
 
                   <li>
                     <Link
-                      href={`/${currRegion}/discover/certified-preowned-cars`}
+                      href={`/${currRegion}/cars/certified-preowned-cars`}
                       className="mm-btn mm-btn_next mm-listitem__btn mm-listitem__text"
                     >
                       Certified used cars
@@ -108,7 +108,7 @@ function MobileMenu() {
                   <li>
                     <Link
                       className="mm-btn mm-btn_next mm-listitem__btn mm-listitem__text"
-                      href={`/${currRegion}/discover/pricing-hub`}
+                      href={`/${currRegion}/cars/pricing-hub`}
                     >
                       Pricing Hub
                     </Link>

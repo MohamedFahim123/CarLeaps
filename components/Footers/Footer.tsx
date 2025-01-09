@@ -11,7 +11,7 @@ import {
 import Link from "next/link";
 export default function Footer({
   parentClass = "boxcar-footer footer-style-one cus-st-1",
-}) {
+}: { parentClass: string; }) {
   return (
     <footer className={parentClass}>
       <div className="footer-top pt-5">

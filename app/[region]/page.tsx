@@ -1,18 +1,40 @@
 'use client';
 
-import { notFound, redirect } from "next/navigation";
-import Cookies from "js-cookie";
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import Cookies from 'js-cookie';
 
-export default function RegionPage() {
-    const region = Cookies.get('region') || 'riyadh';
+export default function RegionPage({ params }: { params: Promise<{ region?: string }> }) {
+    const router = useRouter();
 
-    const validRegions = ["Riyadh"];
+    useEffect(() => {
+        const resolveParams = async () => {
+            const resolvedParams = await params;
+            const regionFromUrl = resolvedParams?.region?.toLowerCase();
+            const regionFromCookie = Cookies.get('region')?.toLowerCase() || 'riyadh';
 
-    if (!validRegions.includes(region)) {
-        notFound();
-    };
+            const validRegions : string[] = ["riyadh"];
 
-    redirect(`/${region}/discover/home`);
+            const finalRegion = regionFromUrl || regionFromCookie;
+
+            if (!validRegions.includes(finalRegion)) {
+                router.replace('/404');
+                return;
+            };
+
+            if (regionFromCookie !== finalRegion) {
+                Cookies.set('region', finalRegion, {
+                    path: '/',
+                    maxAge: 60 * 60 * 24 * 30,
+                    secure: true,
+                });
+            }
+
+            router.replace(`/${finalRegion}/cars/home`);
+        };
+
+        resolveParams();
+    }, [params, router]);
 
     return null;
-};
+}

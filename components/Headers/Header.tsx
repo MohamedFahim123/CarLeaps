@@ -1,10 +1,11 @@
 "use client";
-import React, { useState, ChangeEvent, useEffect } from "react";
-import Nav from "./Nav";
-import Link from "next/link";
-import Image from "next/image";
 import { carItemsSearch } from "@/data/cars";
 import Cookies from "js-cookie";
+import Image from "next/image";
+import Link from "next/link";
+import { ChangeEvent, useEffect, useState } from "react";
+import Nav from "./Nav";
+import styles from './headerStyles.module.css';
 
 interface Header1Props {
   headerClass?: string;
@@ -41,19 +42,20 @@ export default function Header1({
     setSearchQuery(event.target.value);
   };
 
+
   return (
-    <header className={`boxcar-header ${headerClass}`}>
-      <div className="header-inner">
+    <header className={`boxcar-header ${styles.backGroundBlack} ${styles.mainPadding} ${headerClass}`}>
+      <div className="header-inner py-3">
         <div className="inner-container">
           <div className="c-box">
             <div className="logo-inner">
               <div className="logo">
-                <Link href={`/`}>
+                <Link href={`/${currRegion}/cars/home`}>
                   {white ? (
                     <Image
                       alt="Valid Cars logo"
                       title="Valid Cars"
-                      src="/images/logo2.svg"
+                      src="/images/weblogo.png"
                       width={108}
                       height={26}
                     />
@@ -61,7 +63,7 @@ export default function Header1({
                     <Image
                       alt="Valid Cars logo"
                       title="Valid Cars"
-                      src="/images/logo.svg"
+                      src="/images/weblogo.png"
                       width={108}
                       height={26}
                     />
@@ -168,7 +170,7 @@ export default function Header1({
                 Sign in
               </Link>
               <div className="btn">
-                <Link href={`/${currRegion}/dashboard/profile`} className="header-btn-two">
+                <Link href={`/${currRegion}/dashboard/profile`} className="btn btn-light">
                   Car Portal
                 </Link>
               </div>

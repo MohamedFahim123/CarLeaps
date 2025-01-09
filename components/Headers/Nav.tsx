@@ -15,31 +15,31 @@ function Nav() {
   return (
     <>
       <li>
-        <Link href={`/${currRegion}/discover/cars-for-sale`}>
+        <Link href={`/${currRegion}/cars/cars-for-sale`}>
           Cars for Sale
         </Link>
       </li>
 
       <li>
-        <Link href={`/${currRegion}/discover/research-new-cars`}>
+        <Link href={`/${currRegion}/cars/research-new-cars`}>
           Research new cars
         </Link>
       </li>
 
       <li>
-        <Link href={`/${currRegion}/discover/perfect-match`}>
+        <Link href={`/${currRegion}/cars/perfect-match`}>
           Perfect Match
         </Link>
       </li>
 
       <li>
-        <Link href={`/${currRegion}/discover/certified-preowned-cars`}>
+        <Link href={`/${currRegion}/cars/certified-preowned-cars`}>
           Certified used cars
         </Link>
       </li>
 
       <li>
-        <Link href={`/${currRegion}/discover/pricing-hub`}>
+        <Link href={`/${currRegion}/cars/pricing-hub`}>
           Pricing Hub
         </Link>
       </li>

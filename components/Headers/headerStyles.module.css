@@ -1,0 +1,7 @@
+.backGroundBlack {
+  background-color: black !important;
+}
+.mainPadding {
+  padding-block: 20px !important;
+  padding-inline: 10px !important;
+}
