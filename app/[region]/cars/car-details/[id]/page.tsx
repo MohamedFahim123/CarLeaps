@@ -7,8 +7,9 @@ export const metadata: Metadata = {
   description: "",
 };
 
-export default function CarDetailsPage({ params }: { params: { id: string } }) {
-  const carItem = allCars?.find((elm) => +elm.id === +params.id) || allCars[0];
+export default async function CarDetailsPage({ params }: { params: Promise<{ id: string }> }) {
+  const resolvedParams = await params;
+  const carItem = allCars?.find((elm) => +elm.id === +resolvedParams.id) || allCars[0];
 
   return <CarDetailsSection carItem={carItem} />;
 }
