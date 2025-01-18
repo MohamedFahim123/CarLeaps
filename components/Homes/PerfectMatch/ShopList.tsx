@@ -4,9 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { products } from "@/data/products";
 import Slider from "rc-slider";
-import SelectComponent from "@/components/Common/SelectComponent";
 import Pagination from "@/components/Common/Pagination";
-import styles from '../PricingHub/hero.module.css';
+import SelectComponent from "@/components/Common/SelectComponent";
 
 export default function ShopList() {
     const [price, setPrice] = useState<number[]>([5000, 35000]);
@@ -14,7 +13,7 @@ export default function ShopList() {
         setPrice([value]);
     };
     return (
-        <section className={`${styles.boxCar_banner_section2} cars-section-fourteen layout-radius`}>
+        <section className={`cars-section-fourteen layout-radius`}>
             <div className="boxcar-container">
                 <div className="boxcar-title-three">
                     <ul className="breadcrumb">

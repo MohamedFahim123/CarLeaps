@@ -4,8 +4,8 @@ import Slider from "react-slick";
 import Image from "next/image";
 import { banners } from "@/data/heroSlides";
 import Link from "next/link";
-import SelectComponent from "@/components/Common/SelectComponent";
 import styles from './hero.module.css';
+import SelectComponent from "@/components/Common/SelectComponent";
 
 interface SlickOptions {
     autoplay: boolean;

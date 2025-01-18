@@ -1,50 +1,39 @@
 "use client";
-import { carItemsSearch } from "@/data/cars";
 import Cookies from "js-cookie";
 import Image from "next/image";
 import Link from "next/link";
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Nav from "./Nav";
-import styles from './headerStyles.module.css';
+import styles from "./headerStyles.module.css";
+import { usePathname } from "next/navigation";
 
 interface Header1Props {
   headerClass?: string;
   white?: boolean;
-};
+}
 
 export default function Header1({
   headerClass = "header-style-v1 header-default",
   white = false,
 }: Header1Props) {
-  const [searchQuery, setSearchQuery] = useState<string>("");
+  const pathName = usePathname();
   const [currRegion, setCurrRegion] = useState<string>("riyadh");
 
   useEffect(() => {
-    const region = Cookies.get("region") || "riyadh";
+    const region: string = Cookies.get("region") || "riyadh";
     setCurrRegion(region);
   }, []);
-
-  const handleFocus = () => {
-    const searchBox = document.getElementById("box-content-search");
-    const layoutSearch = searchBox?.closest(".layout-search");
-    if (searchBox) searchBox.classList.add("active");
-    if (layoutSearch) layoutSearch.classList.add("active");
-  };
-
-  const handleBlur = () => {
-    const searchBox = document.getElementById("box-content-search");
-    const layoutSearch = searchBox?.closest(".layout-search");
-    if (searchBox) searchBox.classList.remove("active");
-    if (layoutSearch) layoutSearch.classList.remove("active");
-  };
-
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(event.target.value);
-  };
-
+  const condition: boolean =
+    pathName.includes(`/${currRegion}/cars/cars-for-sale/search`) ||
+    pathName.includes(`/${currRegion}/cars/car-details`) ||
+    pathName.includes(`/${currRegion}/cars/perfect-match`);
 
   return (
-    <header className={`boxcar-header ${styles.backGroundBlack} ${styles.mainPadding} ${headerClass}`}>
+    <header
+      className={`boxcar-header ${styles.backGroundBlack} ${
+        !condition && styles.mainPadding
+      } ${headerClass}`}
+    >
       <div className="header-inner py-3">
         <div className="inner-container">
           <div className="c-box">
@@ -70,67 +59,6 @@ export default function Header1({
                   )}
                 </Link>
               </div>
-
-              <div className="layout-search">
-                <div className="search-box">
-                  <svg
-                    className="icon"
-                    width={16}
-                    height={16}
-                    viewBox="0 0 16 16"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M7.29301 1.2876C3.9872 1.2876 1.29431 3.98048 1.29431 7.28631C1.29431 10.5921 3.9872 13.2902 7.29301 13.2902C8.70502 13.2902 10.0036 12.7954 11.03 11.9738L13.5287 14.4712C13.6548 14.5921 13.8232 14.6588 13.9979 14.657C14.1725 14.6552 14.3395 14.5851 14.4631 14.4617C14.5867 14.3382 14.6571 14.1713 14.6591 13.9967C14.6611 13.822 14.5947 13.6535 14.474 13.5272L11.9753 11.0285C12.7976 10.0006 13.293 8.69995 13.293 7.28631C13.293 3.98048 10.5988 1.2876 7.29301 1.2876ZM7.29301 2.62095C9.87824 2.62095 11.9584 4.70108 11.9584 7.28631C11.9584 9.87153 9.87824 11.9569 7.29301 11.9569C4.70778 11.9569 2.62764 9.87153 2.62764 7.28631C2.62764 4.70108 4.70778 2.62095 7.29301 2.62095Z"
-                      fill="white"
-                    />
-                  </svg>
-                  <input
-                    type="search"
-                    placeholder="Search Cars eg. Audi Q7"
-                    className="show-search"
-                    name="name"
-                    tabIndex={2}
-                    aria-required="true"
-                    required
-                    onFocus={handleFocus}
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className="box-content-search" id="box-content-search">
-                  <ul className="box-car-search">
-                    {
-                      carItemsSearch
-                        .filter((elm) =>
-                          elm.title.toLowerCase().includes(searchQuery.toLowerCase())
-                        )
-                        .map((car) => (
-                          <li key={car.id}>
-                            <Link
-                              href={`/inventory-page-single-v1/${car.id}`}
-                              className="car-search-item"
-                            >
-                              <div className="box-img">
-                                <Image
-                                  alt="Car image"
-                                  src={car.imgSrc}
-                                  width={70}
-                                  height={70}
-                                />
-                              </div>
-                              <div className="info">
-                                <p className="name">{car.title}</p>
-                                <span className="price">${car.newPrice}</span>
-                              </div>
-                            </Link>
-                          </li>
-                        ))
-                    }
-                  </ul>
-                </div>
-              </div>
             </div>
             {/*Nav Box*/}
             <div className="nav-out-bar mx-auto">
@@ -141,7 +69,11 @@ export default function Header1({
               </nav>
             </div>
             <div className="right-box ms-auto">
-              <Link href={`/${currRegion}/auth/login`} title="" className="box-account">
+              <Link
+                href={`/${currRegion}/auth/login`}
+                title=""
+                className="box-account"
+              >
                 <span className="icon">
                   <svg
                     width={16}
@@ -170,7 +102,10 @@ export default function Header1({
                 Sign in
               </Link>
               <div className="btn">
-                <Link href={`/${currRegion}/dashboard/profile`} className="btn btn-light">
+                <Link
+                  href={`/${currRegion}/dashboard/profile`}
+                  className="btn btn-light px-3"
+                >
                   Car Portal
                 </Link>
               </div>
@@ -208,29 +143,7 @@ export default function Header1({
           {/* Mobile Menu */}
         </div>
       </div>
-      <div className="search-popup">
-        <span className="search-back-drop" />
-        <button type="button" title="close search" className="close-search">
-          <span className="fa fa-times" />
-        </button>
-        <div className="search-inner">
-          <form onSubmit={(e) => e.preventDefault()} method="post">
-            <div className="form-group">
-              <input
-                type="search"
-                name="search-field"
-                defaultValue=""
-                placeholder="Search..."
-                required
-              />
-              <button title="search" type="submit">
-                <i className="fa fa-search" />
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
       <div id="nav-mobile" />
     </header>
   );
-};
+}

@@ -1,4 +1,3 @@
-// Define interfaces for the team members
 interface TeamMember {
   id: number;
   name: string;

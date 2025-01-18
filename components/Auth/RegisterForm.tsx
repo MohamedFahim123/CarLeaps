@@ -1,6 +1,5 @@
 import Image from "next/image";
 
-
 export default function RegisterForm() {
     return (
         <div
@@ -47,9 +46,17 @@ export default function RegisterForm() {
                             placeholder="********"
                         />
                     </div>
+                    <div className="form_boxes">
+                        <label>Documents</label>
+                        <input
+                            required
+                            type="file"
+                            name="documents"
+                        />
+                    </div>
                     <div className="btn-box-three">
                         <label className="contain">
-                            Private seller
+                            User
                             <input
                                 required
                                 type="radio"
@@ -71,7 +78,7 @@ export default function RegisterForm() {
                     </div>
                     <div className="form-submit">
                         <button type="submit" className="theme-btn">
-                            Login{" "}
+                            Register{" "}
                             <Image
                                 alt=""
                                 src="/images/arrow.svg"

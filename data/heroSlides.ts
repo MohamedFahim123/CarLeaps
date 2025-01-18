@@ -1,4 +1,3 @@
-// Define interfaces for the data structures
 interface BannerSlide {
   imgSrc: string;
   subTitle: string;
