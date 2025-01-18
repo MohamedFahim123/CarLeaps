@@ -12,6 +12,7 @@ export default function AddListingFeatures({ tab }: TabProps) {
     >
       <div className="right-box-two">
         <div className="cheak-box">
+          <h4>Seats</h4>
           <label className="contain">
             Heated Seats
             <input type="checkbox" defaultChecked={true} />
@@ -34,6 +35,7 @@ export default function AddListingFeatures({ tab }: TabProps) {
           </label>
         </div>
         <div className="cheak-box">
+          <h4>Entertainment</h4>
           <label className="contain">
             Apple CarPlay/Android Auto
             <input type="checkbox" defaultChecked={true} />
@@ -51,6 +53,7 @@ export default function AddListingFeatures({ tab }: TabProps) {
           </label>
         </div>
         <div className="cheak-box">
+          <h4>Safety</h4>
           <label className="contain">
             Airbag - Driver
             <input type="checkbox" defaultChecked={true} />
@@ -78,6 +81,7 @@ export default function AddListingFeatures({ tab }: TabProps) {
           </label>
         </div>
         <div className="cheak-box">
+          <h4>Heading 4</h4>
           <label className="contain">
             Center Console
             <input type="checkbox" defaultChecked={true} />
@@ -105,6 +109,7 @@ export default function AddListingFeatures({ tab }: TabProps) {
           </label>
         </div>
         <div className="cheak-box">
+          <h4>Heading 5</h4>
           <label className="contain">
             Alloy Wheels
             <input type="checkbox" defaultChecked={true} />

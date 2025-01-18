@@ -1,6 +1,5 @@
 import SelectComponent from "../Common/SelectComponent";
 
-
 export interface TabProps {
   tab: string;
 }
@@ -16,51 +15,7 @@ export default function AddListingCarDetails({ tab }: TabProps) {
       <form onSubmit={(e) => e.preventDefault()} className="row">
         <div className="form-column col-lg-4">
           <div className="form_boxes">
-            <label>Listing Title</label>
-
-            <SelectComponent
-              options={["Ali Tufan", "Ali Tufan", "Ali Tufan"]}
-            />
-          </div>
-        </div>
-        <div className="form-column col-lg-4">
-          <div className="form_boxes">
-            <label>Category</label>
-
-            <SelectComponent options={["Cars", "Cars", "Cars"]} />
-          </div>
-        </div>
-        <div className="form-column col-lg-4">
-          <div className="form_boxes">
-            <label>Label</label>
-
-            <SelectComponent
-              options={["Select Label", "Select Label", "Select Label"]}
-            />
-          </div>
-        </div>
-        <div className="form-column col-lg-4">
-          <div className="form_boxes">
-            <label>Condition</label>
-
-            <SelectComponent
-              options={["New", "Select Label", "Select Label"]}
-            />
-          </div>
-        </div>
-        <div className="form-column col-lg-4">
-          <div className="form_boxes">
-            <label>Type</label>
-
-            <SelectComponent
-              options={["Sedan", "Select Label", "Select Label"]}
-            />
-          </div>
-        </div>
-        <div className="form-column col-lg-4">
-          <div className="form_boxes">
             <label>Make</label>
-
             <SelectComponent
               options={["Select Make", "Select Label", "Select Lable"]}
             />
@@ -69,7 +24,6 @@ export default function AddListingCarDetails({ tab }: TabProps) {
         <div className="form-column col-lg-4">
           <div className="form_boxes">
             <label>Model</label>
-
             <SelectComponent
               options={["Select Model", "Select Label", "Select Label"]}
             />
@@ -77,8 +31,27 @@ export default function AddListingCarDetails({ tab }: TabProps) {
         </div>
         <div className="form-column col-lg-4">
           <div className="form_boxes">
+            <label>Trim</label>
+            <SelectComponent options={["LXI", "GXI", "LX"]} />
+          </div>
+        </div>
+        <div className="form-column col-lg-4">
+          <div className="form_boxes">
+            <label>Listing Type</label>
+            <SelectComponent
+              options={["Sedan", "Select Label", "Select Label"]}
+            />
+          </div>
+        </div>
+        <div className="form-column col-lg-4">
+          <div className="form_boxes">
+            <label>Body Style</label>
+            <SelectComponent options={["SUV", "Coupe", "Sedan"]} />
+          </div>
+        </div>
+        <div className="form-column col-lg-4">
+          <div className="form_boxes">
             <label>Year</label>
-
             <SelectComponent
               options={["Select Year", "Select Label", "Select Label"]}
             />
@@ -86,17 +59,7 @@ export default function AddListingCarDetails({ tab }: TabProps) {
         </div>
         <div className="form-column col-lg-4">
           <div className="form_boxes">
-            <label>Offer Type</label>
-
-            <SelectComponent
-              options={["Select Offer", "Select Label", "Select Label"]}
-            />
-          </div>
-        </div>
-        <div className="form-column col-lg-4">
-          <div className="form_boxes">
             <label>Drive Type</label>
-
             <SelectComponent
               options={["Select Type", "Select Label", "Select Label"]}
             />
@@ -105,7 +68,6 @@ export default function AddListingCarDetails({ tab }: TabProps) {
         <div className="form-column col-lg-4">
           <div className="form_boxes">
             <label>Transmission</label>
-
             <SelectComponent
               options={["Select Transmission", "Select Label", "Select Label"]}
             />
@@ -114,7 +76,6 @@ export default function AddListingCarDetails({ tab }: TabProps) {
         <div className="form-column col-lg-4">
           <div className="form_boxes">
             <label>Fuel Type</label>
-
             <SelectComponent
               options={["Select Fuel", "Select Label", "Select Label"]}
             />
@@ -123,7 +84,6 @@ export default function AddListingCarDetails({ tab }: TabProps) {
         <div className="form-column col-lg-4">
           <div className="form_boxes">
             <label>Mileage</label>
-
             <SelectComponent
               options={["75,000", "Select Label", "Select Label"]}
             />
@@ -131,17 +91,19 @@ export default function AddListingCarDetails({ tab }: TabProps) {
         </div>
         <div className="form-column col-lg-4">
           <div className="form_boxes">
-            <label>Engine Size</label>
-
-            <SelectComponent
-              options={["Engine Size", "Select Label", "Select Label"]}
+            <label htmlFor="EngineSize">Engine Size</label>
+            <input
+              id="EngineSize"
+              required
+              placeholder="Engine Size"
+              type="text"
+              name="engine_size"
             />
           </div>
         </div>
         <div className="form-column col-lg-4">
           <div className="form_boxes">
             <label>Cylinder</label>
-
             <SelectComponent
               options={["Select Cylinder", "Select Label", "Select Label"]}
             />
@@ -150,7 +112,6 @@ export default function AddListingCarDetails({ tab }: TabProps) {
         <div className="form-column col-lg-4">
           <div className="form_boxes">
             <label>Color</label>
-
             <SelectComponent
               options={["Select Color", "Select Label", "Select Label"]}
             />
@@ -159,7 +120,6 @@ export default function AddListingCarDetails({ tab }: TabProps) {
         <div className="form-column col-lg-4">
           <div className="form_boxes">
             <label>Door</label>
-
             <SelectComponent
               options={["Select Door", "Select Label", "Select Label"]}
             />
@@ -167,15 +127,8 @@ export default function AddListingCarDetails({ tab }: TabProps) {
         </div>
         <div className="form-column col-lg-4">
           <div className="form_boxes">
-            <label>VIN</label>
-
-            <SelectComponent
-              options={[
-                "05034................",
-                "Select Label",
-                "Select Label",
-              ]}
-            />
+            <label htmlFor="VIN">VIN</label>
+            <input id="VIN" required placeholder="VIN" type="text" name="VIN" />
           </div>
         </div>
         <div className="form-column col-lg-12">

@@ -1,4 +1,3 @@
-
 import SelectComponent from "../Common/SelectComponent";
 import { TabProps } from "./AddListingCarDetails";
 
@@ -13,10 +12,13 @@ export default function AddListingPrice({ tab }: TabProps) {
       <form onSubmit={(e) => e.preventDefault()} className="row">
         <div className="col-lg-12">
           <div className="form_boxes v2">
-            <label>Price ($)</label>
-
-            <SelectComponent
-              options={["e.g. 1000", "e.g. 1000", "e.g. 1000"]}
+            <label htmlFor="Price">Price ($)</label>
+            <input
+              id="Price"
+              required
+              placeholder="1000$"
+              type="text"
+              name="price"
             />
           </div>
         </div>
@@ -24,7 +26,6 @@ export default function AddListingPrice({ tab }: TabProps) {
           <div className="inner-box">
             <div className="form_boxes">
               <label>Price Prefix</label>
-
               <SelectComponent
                 options={["e.g. 1000", "e.g. 1000", "e.g. 1000"]}
               />
@@ -38,7 +39,6 @@ export default function AddListingPrice({ tab }: TabProps) {
           <div className="inner-box">
             <div className="form_boxes">
               <label>Price Suffix</label>
-
               <SelectComponent
                 options={["e.g. 1000", "e.g. 1000", "e.g. 1000"]}
               />
@@ -52,9 +52,12 @@ export default function AddListingPrice({ tab }: TabProps) {
           <div className="inner-box">
             <div className="form_boxes">
               <label>Price Custom</label>
-
-              <SelectComponent
-                options={["e.g. 1000", "e.g. 1000", "e.g. 1000", "", "", ""]}
+              <input
+                id="PriceCustom"
+                required
+                placeholder="1000$"
+                type="text"
+                name="price_custom"
               />
             </div>
             <div className="text">
