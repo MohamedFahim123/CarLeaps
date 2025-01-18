@@ -5,8 +5,10 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Car Details",
   description: "",
-}; 
-export default function page({ params }: { params: { id: string } }) {
-  const carItem = allCars.filter((elm) => +elm.id === +params.id)[0] || allCars[0];
-  return <CarDetailsSection carItem={carItem}/>;
+};
+
+export default function CarDetailsPage({ params }: { params: { id: string } }) {
+  const carItem = allCars?.find((elm) => +elm.id === +params.id) || allCars[0];
+
+  return <CarDetailsSection carItem={carItem} />;
 }
