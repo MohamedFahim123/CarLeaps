@@ -4,7 +4,7 @@ import { useState } from "react";
 import ModalVideo from "react-modal-video";
 import Image from "next/image";
 export default function Features() {
-  const [isOpen, setOpen] = useState(false);
+  const [isOpen, setOpen] = useState<boolean>(false);
   return (
     <>
       <section className="boxcar-pricing-section pb-0 pt-0">
@@ -99,7 +99,7 @@ export default function Features() {
         isOpen={isOpen}
         videoId="AC1cREPIw_o"
         onClose={() => setOpen(false)}
-      />{" "}
+      />
     </>
   );
 }

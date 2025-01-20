@@ -1,0 +1,127 @@
+.heroSection {
+  height: 70vh !important;
+  min-height: 70vh !important;
+}
+.title {
+  font-size: 4rem;
+  font-weight: bold;
+  color: #ffffff;
+}
+.description {
+  max-width: 700px;
+  font-size: 1.1rem;
+  color: #ffffff;
+}
+.buttonLight:hover {
+  color: #2c25eb !important;
+}
+.transparentBtn {
+  text-decoration: underline;
+  color: #ffffff;
+}
+.transparentBtn:hover {
+  color: #2c25eb;
+}
+.brandsBannerSection {
+  padding: 60px 0;
+  background-color: #f9fbfc;
+}
+.brandsBannerHead {
+  margin-bottom: 40px;
+}
+.brandsBannerHead h3 {
+  font-weight: bold;
+  margin-top: -15px;
+  margin-bottom: 30px;
+}
+.brandBlock h4 {
+  cursor: pointer;
+  font-size: 24px;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+}
+.brandBlock h4:hover {
+  color: #2c25eb;
+  text-decoration: underline;
+}
+.brandBlock p {
+  margin-top: -10px;
+}
+.sliderSlide {
+  height: 300px !important;
+  max-height: 300px !important;
+}
+.sliderBadge {
+  width: fit-content !important;
+}
+.bgBlack {
+  background-color: #000 !important;
+  color: #fff;
+}
+.specialSectionContainer {
+  background-image: url("../../../public/images/brands/bgSection.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 100px 0;
+  height: 60vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.specialSectionContainer::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(#000, transparent);
+}
+.specialSectionContainer h3,
+.specialSectionContainer p,
+.specialSectionContainer button {
+  position: relative;
+  z-index: 1;
+}
+.specialSectionContainer h3,
+.specialSectionContainer p {
+  color: #fff;
+}
+.chooseUsSection p {
+  font-size: 13px;
+}
+.chooseUsSection img {
+  height: 100%;
+  object-fit: fill !important;
+}
+.chooseUsSection div {
+  background-color: #fff !important ;
+}
+.modelsContainer {
+  background-color: #f7f7f7;
+  padding: 60px 0;
+}
+.modelContainer {
+  cursor: pointer;
+  padding: 15px 30px;
+  border-radius: 8px;
+  background-color: #fff;
+  transition: all 0.5s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modelContainer:hover {
+  box-shadow: 0 6px 15px #404f680d;
+}
+.modelContainer h4 {
+  transition: all 0.5s ease-in-out;
+  margin: 0 !important;
+  font-size: 25px;
+  font-weight: bold;
+}
+.modelContainer:hover h4 {
+  color: #2c25eb;
+  text-decoration: underline;
+}

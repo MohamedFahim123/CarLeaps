@@ -1,7 +1,6 @@
-import React, { useState } from "react";
 import Image from "next/image";
+import React, { useState } from "react";
 import { TabProps } from "./AddListingCarDetails";
-import SelectComponent from "../Common/SelectComponent";
 
 export default function AddListingMedia({ tab }: TabProps) {
   const [images, setImages] = useState<string[]>([
@@ -100,7 +99,6 @@ export default function AddListingMedia({ tab }: TabProps) {
                       </a>
                     </li>
                     <li>
-                      {/* Hidden input and label for upload */}
                       <label htmlFor={`file-upload-${index}`}>
                         <a>
                           <Image
@@ -123,8 +121,6 @@ export default function AddListingMedia({ tab }: TabProps) {
                 </div>
               </div>
             ))}
-
-            {/* Upload Button */}
             <div className="uplode-box">
               <div className="content-box">
                 <label htmlFor="upload-new">
@@ -170,7 +166,6 @@ export default function AddListingMedia({ tab }: TabProps) {
                   </a>
                 </li>
                 <li>
-                  {/* Hidden input and label for upload */}
                   <label htmlFor={`file-upload2-${index}`}>
                     <a>
                       <Image
@@ -191,8 +186,6 @@ export default function AddListingMedia({ tab }: TabProps) {
               </ul>
             </div>
           ))}
-
-          {/* Upload Button */}
           <div className="uplode-box">
             <div className="content-box">
               <label htmlFor="upload-new2">
@@ -224,9 +217,14 @@ export default function AddListingMedia({ tab }: TabProps) {
           <div className="form-column col-lg-12">
             <div className="inner-box">
               <div className="form_boxes">
-                <label>Video Link</label>
-
-                <SelectComponent options={["#", "#", "#", "#", "#", "#"]} />
+                <label htmlFor="videoLink">Video Link</label>
+                <input
+                  id="videoLink"
+                  required
+                  placeholder="https://www.youtube.com/your_video_link"
+                  type="text"
+                  name="video_link"
+                />
               </div>
               <div className="text">Enter Youtube or Vimeo url.</div>
             </div>

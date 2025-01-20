@@ -1,0 +1,43 @@
+.hero_section {
+  position: relative;
+  height: 80vh;
+  overflow: hidden;
+}
+.hero_section::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right ,rgb(0, 0, 0), transparent);
+}
+.section {
+  padding: 60px 0;
+}
+
+.hero_bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.9;
+}
+
+.hero_content {
+  max-width: 500px;
+  position: relative;
+  z-index: 1;
+}
+.hero_content h1 {
+    font-size: 60px;
+}
+.breadcrumb {
+  margin-bottom: 20px;
+  font-size: 14px;
+  position: relative;
+  z-index: 1;
+  color: #fff;
+}

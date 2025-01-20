@@ -1,10 +1,12 @@
 "use client";
 import Image from "next/image";
 import { Car, carData } from "@/data/cars";
-import Slider from "react-slick";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination } from "swiper/modules";
+import Slider from "react-slick";
 
 interface Button {
   label: string;
@@ -75,163 +77,129 @@ export default function Cars() {
               ))}
             </div>
           </nav>
-          <div
-            className="tab-content wow fadeInUp"
-            data-wow-delay="200ms"
-            id="nav-tabContent"
-          >
+          <div className="boxcar-container">
             <div
-              className="tab-pane fade show active"
-              id="nav-home"
-              role="tabpanel"
-              aria-labelledby="nav-home-tab"
+              className="tab-content wow fadeInUp"
+              data-wow-delay="200ms"
+              id="nav-tabContent"
             >
-              <Slider
-                slidesToScroll={1}
-                slidesToShow={4}
-                responsive={[
-                  {
-                    breakpoint: 1600,
-                    settings: {
-                      slidesToShow: 4,
-                      slidesToScroll: 1,
-                      infinite: true,
-                    },
-                  },
-                  {
-                    breakpoint: 1300,
-                    settings: {
-                      slidesToShow: 3,
-                      slidesToScroll: 1,
-                      infinite: true,
-                    },
-                  },
-                  {
-                    breakpoint: 991,
-                    settings: {
-                      slidesToShow: 2,
-                      slidesToScroll: 1,
-                      infinite: true,
-                    },
-                  },
-                  {
-                    breakpoint: 767,
-                    settings: {
-                      slidesToShow: 1,
-                      slidesToScroll: 1,
-                    },
-                  },
-                  {
-                    breakpoint: 576,
-                    settings: {
-                      slidesToShow: 1,
-                      slidesToScroll: 1,
-                    },
-                  },
-                  {
-                    breakpoint: 480,
-                    settings: {
-                      slidesToShow: 1,
-                      slidesToScroll: 1,
-                    },
-                  },
-                ]}
-                arrows
-                className="row car-slider-three wow fadeInUp"
-                data-preview="4.8"
+              <div
+                className="tab-pane fade show active"
+                id="nav-home"
+                role="tabpanel"
+                aria-labelledby="nav-home-tab"
               >
-                {sortedItems.map((car, index) => (
-                  <div
-                    key={index}
-                    className="box-car car-block-ten col-lg-3 col-md-6"
-                  >
-                    <div className="inner-box">
-                      <div
-                        className={`image-box ${
-                          car.badge == "Great Price" ? "two" : ""
-                        }`}
-                      >
-                        <Slider
-                          dots
-                          slidesToShow={1}
-                          key={car.id}
-                          className="slider-thumb"
+                <Swiper
+                  slidesPerView={4}
+                  spaceBetween={20}
+                  pagination={{ clickable: true }}
+                  autoplay={{ delay: 3000, pauseOnMouseEnter: true }}
+                  breakpoints={{
+                    1600: { slidesPerView: 4.5, spaceBetween: 20 },
+                    1300: { slidesPerView: 4, spaceBetween: 20 },
+                    991: { slidesPerView: 3, spaceBetween: 20 },
+                    767: { slidesPerView: 2, spaceBetween: 15 },
+                    480: { slidesPerView: 1, spaceBetween: 10 },
+                  }}
+                  modules={[Pagination, Autoplay]}
+                  className="car-slider-three slider-layout-1 row"
+                >
+                  {sortedItems.map((car, index) => (
+                    <SwiperSlide
+                      key={index}
+                      className="box-car car-block-ten col-lg-3 col-md-6"
+                    >
+                      <div className="inner-box">
+                        <div
+                          className={`image-box ${
+                            car.badge === "Great Price" ? "two" : ""
+                          }`}
                         >
-                          {car.images.map((image, i) => (
-                            <div key={i} className="image d-block">
-                              <Link
-                                href={`/inventory-page-single-v1/${car.id}`}
-                              >
-                                <Image
-                                  alt=""
-                                  src={image}
-                                  width={329}
-                                  height={220}
-                                />
-                              </Link>
-                            </div>
-                          ))}
-                        </Slider>
-                        {car.badge && <span>{car.badge}</span>}
-                        <Link
-                          href={`/inventory-page-single-v1/${car.id}`}
-                          title=""
-                          className="icon-box"
-                        >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="12"
-                            height="12"
-                            viewBox="0 0 12 12"
-                            fill="none"
+                          <Slider
+                            dots
+                            slidesToShow={1}
+                            key={car.id}
+                            className="slider-thumb"
                           >
-                            <g clipPath="url(#clip0_601_1274)">
-                              <path
-                                d="M9.39062 12C9.15156 12 8.91671 11.9312 8.71128 11.8009L6.11794 10.1543C6.04701 10.1091 5.95296 10.1096 5.88256 10.1543L3.28869 11.8009C2.8048 12.1082 2.13755 12.0368 1.72722 11.6454C1.47556 11.4047 1.33685 11.079 1.33685 10.728V1.2704C1.33738 0.570053 1.90743 0 2.60778 0H9.39272C10.0931 0 10.6631 0.570053 10.6631 1.2704V10.728C10.6631 11.4294 10.0925 12 9.39062 12ZM6.00025 9.06935C6.24193 9.06935 6.47783 9.13765 6.68169 9.26743L9.27503 10.9135C9.31233 10.9371 9.35069 10.9487 9.39114 10.9487C9.48046 10.9487 9.61286 10.8788 9.61286 10.728V1.2704C9.61233 1.14956 9.51356 1.05079 9.39272 1.05079H2.60778C2.48642 1.05079 2.38817 1.14956 2.38817 1.2704V10.728C2.38817 10.7911 2.41023 10.8436 2.45384 10.8851C2.52582 10.9539 2.63563 10.9708 2.72599 10.9135L5.31934 9.2669C5.52267 9.13765 5.75857 9.06935 6.00025 9.06935Z"
-                                fill="black"
-                              ></path>
-                            </g>
-                            <defs>
-                              <clipPath id="clip0_601_1274">
-                                <rect
-                                  width="12"
-                                  height="12"
-                                  fill="white"
-                                ></rect>
-                              </clipPath>
-                            </defs>
-                          </svg>
-                        </Link>
-                      </div>
-                      <div className="content-box">
-                        <h6 className="title">
-                          <Link href={`/inventory-page-single-v1/${car.id}`}>
-                            {car.title}
-                          </Link>
-                        </h6>
-
-                        <ul>
-                          {car.specs.map((spec, i) => (
-                            <li key={i}>{spec.text}</li>
-                          ))}
-                        </ul>
-                        <div className="btn-box">
-                          <span>{car.price}</span>
-                          <small>{car.oldPrice}</small>
+                            {car.images.map((image, i) => (
+                              <div key={i} className="image d-block">
+                                <Link
+                                  href={`/inventory-page-single-v1/${car.id}`}
+                                >
+                                  <Image
+                                    alt={car.title}
+                                    src={image}
+                                    width={329}
+                                    height={220}
+                                  />
+                                </Link>
+                              </div>
+                            ))}
+                          </Slider>
+                          {car.badge && (
+                            <span className="badge">{car.badge}</span>
+                          )}
                           <Link
-                            href={`/${region}/cars/car-details/${car.id}`}
-                            className="details"
+                            href={`/inventory-page-single-v1/${car.id}`}
+                            aria-label={`Bookmark ${car.title}`}
+                            className="icon-box"
                           >
-                            View Details
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="12"
+                              height="12"
+                              viewBox="0 0 12 12"
+                              fill="none"
+                              aria-hidden="true"
+                            >
+                              <g clipPath="url(#clip0_601_1274)">
+                                <path
+                                  d="M9.39062 12C9.15156 12 8.91671 11.9312 8.71128 11.8009L6.11794 10.1543C6.04701 10.1091 5.95296 10.1096 5.88256 10.1543L3.28869 11.8009C2.8048 12.1082 2.13755 12.0368 1.72722 11.6454C1.47556 11.4047 1.33685 11.079 1.33685 10.728V1.2704C1.33738 0.570053 1.90743 0 2.60778 0H9.39272C10.0931 0 10.6631 0.570053 10.6631 1.2704V10.728C10.6631 11.4294 10.0925 12 9.39062 12ZM6.00025 9.06935C6.24193 9.06935 6.47783 9.13765 6.68169 9.26743L9.27503 10.9135C9.31233 10.9371 9.35069 10.9487 9.39114 10.9487C9.48046 10.9487 9.61286 10.8788 9.61286 10.728V1.2704C9.61233 1.14956 9.51356 1.05079 9.39272 1.05079H2.60778C2.48642 1.05079 2.38817 1.14956 2.38817 1.2704V10.728C2.38817 10.7911 2.41023 10.8436 2.45384 10.8851C2.52582 10.9539 2.63563 10.9708 2.72599 10.9135L5.31934 9.2669C5.52267 9.13765 5.75857 9.06935 6.00025 9.06935Z"
+                                  fill="black"
+                                ></path>
+                              </g>
+                              <defs>
+                                <clipPath id="clip0_601_1274">
+                                  <rect
+                                    width="12"
+                                    height="12"
+                                    fill="white"
+                                  ></rect>
+                                </clipPath>
+                              </defs>
+                            </svg>
                           </Link>
                         </div>
+                        <div className="content-box">
+                          <h6 className="title">
+                            <Link href={`/inventory-page-single-v1/${car.id}`}>
+                              {car.title}
+                            </Link>
+                          </h6>
+
+                          <ul>
+                            {car.specs.map((spec, i) => (
+                              <li key={i}>{spec.text}</li>
+                            ))}
+                          </ul>
+                          <div className="btn-box">
+                            <span>{car.price}</span>
+                            <small>{car.oldPrice}</small>
+                            <Link
+                              href={`/${region}/cars/car-details/${car.id}`}
+                              className="details"
+                            >
+                              View Details
+                            </Link>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                ))}
-              </Slider>
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              </div>
             </div>
-          </div>{" "}
+          </div>
         </div>
       </div>
     </section>

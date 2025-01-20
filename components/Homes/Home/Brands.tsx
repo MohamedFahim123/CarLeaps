@@ -32,7 +32,6 @@ export default function Brands({ currPage }: { currPage: string }) {
           </Link>
         </div>
         <div className="row">
-          {/* cars-block */}
           {carBrands.map((car, index) => (
             <div
               key={index}

@@ -30,7 +30,6 @@ export default function CarType() {
                     </Link>
                 </div>
                 <div className="right-box">
-                    {/* cars-block */}
                     <div className="cars-block-six home-8">
                         <div className="inner-box wow fadeInUp">
                             <div className="image-box">
@@ -65,7 +64,6 @@ export default function CarType() {
                             </div>
                         </div>
                     </div>
-                    {/* cars-block */}
                     <div className="cars-block-six home-8">
                         <div className="inner-box wow fadeInUp" data-wow-delay="100ms">
                             <div className="image-box">
@@ -101,7 +99,6 @@ export default function CarType() {
                             </div>
                         </div>
                     </div>
-                    {/* cars-block */}
                     <div className="cars-block-six home-8">
                         <div className="inner-box wow fadeInUp" data-wow-delay="200ms">
                             <div className="image-box">
@@ -125,7 +122,6 @@ export default function CarType() {
                             </div>
                         </div>
                     </div>
-                    {/* cars-block */}
                     <div className="cars-block-six home-8">
                         <div className="inner-box wow fadeInUp" data-wow-delay="300ms">
                             <div className="image-box">
@@ -161,7 +157,6 @@ export default function CarType() {
                             </div>
                         </div>
                     </div>
-                    {/* cars-block */}
                     <div className="cars-block-six home-8">
                         <div className="inner-box wow fadeInUp" data-wow-delay="400ms">
                             <div className="image-box">
@@ -189,7 +184,6 @@ export default function CarType() {
                             </div>
                         </div>
                     </div>
-                    {/* cars-block */}
                     <div className="cars-block-six home-8">
                         <div className="inner-box wow fadeInUp" data-wow-delay="500ms">
                             <div className="image-box">
@@ -289,7 +283,6 @@ export default function CarType() {
                             </div>
                         </div>
                     </div>
-                    {/* cars-block */}
                     <div className="cars-block-six home-8">
                         <div className="inner-box wow fadeInUp" data-wow-delay="300ms">
                             <div className="image-box">
@@ -386,7 +379,6 @@ export default function CarType() {
                             </div>
                         </div>
                     </div>
-                    {/* cars-block */}
                     <div className="cars-block-six home-8">
                         <div className="inner-box wow fadeInUp" data-wow-delay="400ms">
                             <div className="image-box">
@@ -422,7 +414,6 @@ export default function CarType() {
                             </div>
                         </div>
                     </div>
-                    {/* cars-block */}
                     <div className="cars-block-six home-8">
                         <div className="inner-box wow fadeInUp" data-wow-delay="500ms">
                             <div className="image-box">

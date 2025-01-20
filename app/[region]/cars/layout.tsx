@@ -7,7 +7,6 @@ import Header1 from "@/components/Headers/Header";
 import MobileMenu from "@/components/Headers/MobileMenu";
 import "@/public/main.scss";
 import "photoswipe/dist/photoswipe.css";
-import "rc-slider/assets/index.css";
 import { ChildrenPropsInterface } from "../../utils/interfaces";
 import { usePathname } from "next/navigation";
 

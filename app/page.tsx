@@ -1,6 +1,10 @@
 import { Metadata } from "next";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import "swiper/css";
+import "swiper/css/autoplay";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 
 export const metadata: Metadata = {
     title: 'Select Your Current Region',
