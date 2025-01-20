@@ -9,8 +9,8 @@ export const metadata: Metadata = {
   title: "Model Details",
 };
 
-export default function ModelPage({ params }: { params: { model: string } }) {
-  const { model } = params;
+export default async function ModelPage({ params }: { params: { model: string } }) {
+  const { model } = await params;
 
   const selectedModel: MODEL | undefined = Models.find(
     (el) => el.model.toLowerCase() === model.toLowerCase()

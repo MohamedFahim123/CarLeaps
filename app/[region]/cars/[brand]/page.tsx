@@ -13,14 +13,14 @@ export const metadata: Metadata = {
   title: "Brand Details",
 };
 
-export default function BrandsPage({
+export default async function BrandsPage({
   params,
 }: {
   params: {
     brand: string;
   };
 }) {
-  const { brand } = params;
+  const { brand } = await params;
   const selectedBrand: Brand | undefined = Brands?.find(
     (b) => b.slug.toLowerCase() === brand.toLowerCase()
   );
