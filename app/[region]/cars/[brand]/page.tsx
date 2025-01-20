@@ -7,15 +7,20 @@ import BrandsHeroSection from "@/components/Homes/Brands/BrandsHeroSection";
 import BrandsSpecialSection from "@/components/Homes/Brands/BrandsSpecialSection";
 import { Brand, Brands } from "@/components/Homes/Brands/Data";
 import IncentivesSection from "@/components/Homes/Brands/IncentivesSection";
+import { Metadata } from "next";
 
-export default async function BrandsPage({
+export const metadata: Metadata = {
+  title: "Brand Details",
+};
+
+export default function BrandsPage({
   params,
 }: {
   params: {
     brand: string;
   };
 }) {
-  const { brand } = await params;
+  const { brand } = params;
   const selectedBrand: Brand | undefined = Brands?.find(
     (b) => b.slug.toLowerCase() === brand.toLowerCase()
   );
