@@ -16,9 +16,9 @@ export const metadata: Metadata = {
 export default async function BrandsPage({
   params,
 }: {
-  params: {
+  params: Promise<{
     brand: string;
-  };
+  }>;
 }) {
   const { brand } = await params;
   const selectedBrand: Brand | undefined = Brands?.find(

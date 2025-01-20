@@ -9,7 +9,11 @@ export const metadata: Metadata = {
   title: "Model Details",
 };
 
-export default async function ModelPage({ params }: { params: { model: string } }) {
+export default async function ModelPage({
+  params,
+}: {
+  params: Promise<{ model: string }>;
+}) {
   const { model } = await params;
 
   const selectedModel: MODEL | undefined = Models.find(
