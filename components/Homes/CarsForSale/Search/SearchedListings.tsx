@@ -7,6 +7,7 @@ import Link from "next/link";
 import Slider from "rc-slider";
 import { useState } from "react";
 import Cookies from "js-cookie";
+import { MainRegionName } from "@/app/utils/mainData";
 
 const filters: { text: string }[] = [
   { text: "SUV" },
@@ -21,7 +22,7 @@ const filters: { text: string }[] = [
   { text: "Diesel" },
 ];
 export default function SearchedListings() {
-  const currRegion: string = Cookies.get("region") || "riyadh";
+  const currRegion: string = Cookies.get("region") || MainRegionName;
   const [price, setPrice] = useState<number[]>([5000, 35000]);
 
   const handlePrice = (value: number | number[]) => {

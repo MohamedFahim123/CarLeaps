@@ -5,9 +5,10 @@ import { Brand } from "./Data";
 import styles from "./Brands.module.css";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
+import { MainRegionName } from "@/app/utils/mainData";
 
 function AllCurrentModels({ brand }: { brand: Brand }) {
-  const region: string = Cookies.get("region") || "riyadh";
+  const region: string = Cookies.get("region") || MainRegionName;
   const router = useRouter();
 
   return (

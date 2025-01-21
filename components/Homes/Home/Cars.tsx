@@ -6,7 +6,6 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "swiper/css";
-import "swiper/css/navigation";
 import { Autoplay, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -30,53 +29,6 @@ export default function Cars() {
       ),
     ]);
   }, [selectedCategory]);
-
-  // const options = {
-  //   infinite: false,
-  //   slidesToShow: 4,
-  //   slidesToScroll: 1,
-  //   arrows: true,
-  //   responsive: [
-  //     {
-  //       breakpoint: 1600,
-  //       settings: {
-  //         slidesToShow: 4,
-  //         slidesToScroll: 1,
-  //         infinite: true,
-  //       },
-  //     },
-  //     {
-  //       breakpoint: 1300,
-  //       settings: {
-  //         slidesToShow: 3,
-  //         slidesToScroll: 1,
-  //         infinite: true,
-  //       },
-  //     },
-  //     {
-  //       breakpoint: 991,
-  //       settings: {
-  //         slidesToShow: 2,
-  //         slidesToScroll: 1,
-  //         infinite: true,
-  //       },
-  //     },
-  //     {
-  //       breakpoint: 767,
-  //       settings: {
-  //         slidesToShow: 1,
-  //         slidesToScroll: 1,
-  //       },
-  //     },
-  //     {
-  //       breakpoint: 576,
-  //       settings: {
-  //         slidesToShow: 1,
-  //         slidesToScroll: 1,
-  //       },
-  //     },
-  //   ],
-  // };
 
   return (
     <section className="cars-section-three">

@@ -2,7 +2,7 @@
 import SelectComponent from "@/components/Common/SelectComponent";
 import { carTypes } from "@/data/categories";
 import Link from "next/link";
-import React, { useState } from "react";
+import { useState } from "react";
 
 const categories = ["All", "New", "Used"];
 

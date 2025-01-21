@@ -1,4 +1,4 @@
-const features : {
+const features: {
   title: string;
   items: string[];
 }[] = [
@@ -54,7 +54,6 @@ export default function Features() {
             </div>
           </div>
         ))}
-        {/* list-column */}
         <div className="list-column col-lg-3 col-md-6 col-sm-12">
           <div className="inner-column">
             <h6 className="title">Comfort &amp; Convenience</h6>

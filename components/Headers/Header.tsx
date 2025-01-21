@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import Nav from "./Nav";
 import styles from "./headerStyles.module.css";
 import { usePathname } from "next/navigation";
+import { MainRegionName } from "@/app/utils/mainData";
 
 interface Header1Props {
   headerClass?: string;
@@ -17,10 +18,10 @@ export default function Header1({
   white = false,
 }: Header1Props) {
   const pathName = usePathname();
-  const [currRegion, setCurrRegion] = useState<string>("riyadh");
+  const [currRegion, setCurrRegion] = useState<string>(MainRegionName);
 
   useEffect(() => {
-    const region: string = Cookies.get("region") || "riyadh";
+    const region: string = Cookies.get("region") || MainRegionName;
     setCurrRegion(region);
   }, []);
   const condition: boolean =

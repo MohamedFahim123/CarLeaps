@@ -1,4 +1,3 @@
-
 export default function Features2() {
   return (
     <section className="why-choose-us-section">
@@ -7,7 +6,6 @@ export default function Features2() {
           <h2 className="title">Why Choose Us?</h2>
         </div>
         <div className="row">
-          {/* choose-us-block */}
           <div className="choose-us-block col-lg-3 col-md-6 col-sm-12">
             <div className="inner-box wow fadeInUp">
               <div className="icon-box">
@@ -72,7 +70,6 @@ export default function Features2() {
               </div>
             </div>
           </div>
-          {/* choose-us-block */}
           <div className="choose-us-block col-lg-3 col-md-6 col-sm-12">
             <div className="inner-box wow fadeInUp" data-wow-delay="100ms">
               <div className="icon-box">
@@ -227,7 +224,6 @@ export default function Features2() {
               </div>
             </div>
           </div>
-          {/* choose-us-block */}
           <div className="choose-us-block col-lg-3 col-md-6 col-sm-12">
             <div className="inner-box wow fadeInUp" data-wow-delay="300ms">
               <div className="icon-box">

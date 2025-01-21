@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 const BackToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
 
-  // Show button when scrolled 200px
   const toggleVisibility = () => {
     if (window.pageYOffset > 200) {
       setIsVisible(true);
@@ -16,7 +15,7 @@ const BackToTop = () => {
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth", // Smooth scroll to the top
+      behavior: "smooth",
     });
   };
 
@@ -42,4 +41,4 @@ const BackToTop = () => {
   );
 };
 
-export default BackToTop;
+export default React.memo(BackToTop);

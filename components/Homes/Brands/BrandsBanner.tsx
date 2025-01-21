@@ -6,12 +6,13 @@ import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./Brands.module.css";
 
-import { Brand } from "./Data";
-import { useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { MainRegionName } from "@/app/utils/mainData";
 import Cookies from "js-cookie";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { Brand } from "./Data";
 
 const buttons: { label: string; isActive: boolean }[] = [
   { label: "All Models", isActive: true },
@@ -22,11 +23,11 @@ const buttons: { label: string; isActive: boolean }[] = [
 export default function BrandsBanner({ brand }: { brand: Brand }) {
   const [selectedCategory, setSelectedCategory] = useState(buttons[0]);
   const router = useRouter();
-  const region: string = Cookies.get("region") || "riyadh";
+  const region: string = Cookies.get("region") || MainRegionName;
 
   return (
     <div className={styles.brandsBannerSection}>
-      <div className="container">
+      <div className="boxcar-container">
         <div className={`${styles.brandsBannerHead}`}>
           <p>Explore the full range</p>
           <h3>Find the Alfa Romeo that{"'"}s right for you</h3>

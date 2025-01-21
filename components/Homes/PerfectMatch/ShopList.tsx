@@ -1,11 +1,11 @@
 "use client";
-import React, { useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { products } from "@/data/products";
-import Slider from "rc-slider";
 import Pagination from "@/components/Common/Pagination";
 import SelectComponent from "@/components/Common/SelectComponent";
+import { products } from "@/data/products";
+import Image from "next/image";
+import Link from "next/link";
+import Slider from "rc-slider";
+import { useState } from "react";
 
 export default function ShopList() {
   const [price, setPrice] = useState<number[]>([5000, 35000]);
@@ -151,17 +151,9 @@ export default function ShopList() {
                           <del>${product.originalPrice}</del>$
                           {product.discountedPrice}
                         </h6>
-                        <a
-                          // onClick={() => addProductToCart(product.id)}
-                          className="shoping-btn"
-                        >
+                        <a className="shoping-btn">
                           <i className="fa-solid fa-cart-shopping" />
-                          {
-                            // isAddedToCartProducts(product.id)
-                            //     ? "Already Added"
-                            //     :
-                            "Add To Cart"
-                          }
+                          {"Add To Cart"}
                         </a>
                       </div>
                     </div>

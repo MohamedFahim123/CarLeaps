@@ -1,10 +1,14 @@
-import Link from "next/link";
-import Image from "next/image";
 import { carBrands } from "@/data/brands";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function Brands({ currPage }: { currPage: string }) {
   return (
-    <section className={`boxcar-brand-section ${currPage === 'home' ? 'section-radius-top bg-1' : 'pt-0'}`}>
+    <section
+      className={`boxcar-brand-section ${
+        currPage === "home" ? "section-radius-top bg-1" : "pt-0"
+      }`}
+    >
       <div className="boxcar-container">
         <div className="boxcar-title">
           <h2 className="wow fadeInUp">Explore Our Premium Brands</h2>

@@ -32,7 +32,6 @@ export default function RelatedCars() {
             </svg>
           </a>
         </div>
-
         <Slider
           slidesToScroll={1}
           slidesToShow={4}

@@ -1,9 +1,9 @@
 "use client";
 import { Car, carData } from "@/data/cars";
-import Slider from "react-slick";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import Slider from "react-slick";
 const navButtons = [
   {
     label: "SUV",
@@ -172,8 +172,9 @@ export default function CpoCars() {
                 >
                   <div className="inner-box">
                     <div
-                      className={`image-box ${car.badge == "Great Price" ? "two" : ""
-                        }`}
+                      className={`image-box ${
+                        car.badge == "Great Price" ? "two" : ""
+                      }`}
                     >
                       <Slider
                         dots

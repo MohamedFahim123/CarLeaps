@@ -6,12 +6,10 @@ export default function Faqs() {
   const [activeTab, setActiveTab] = useState(1);
   return (
     <div className="inner-container">
-      {/* FAQ Column */}
       <h4 className="title">Specifications</h4>
       <div className="faq-column wow fadeInUp" data-wow-delay="400ms">
         <div className="inner-column">
           <ul className="widget-accordion wow fadeInUp">
-            {/*Block*/}
             <li
               className={`accordion block  ${
                 activeTab == 1 ? "active-block" : ""

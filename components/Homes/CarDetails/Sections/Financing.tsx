@@ -6,7 +6,6 @@ import React from "react";
 export default function Financing() {
   return (
     <>
-      {" "}
       <h4 className="title">Financing Calculator</h4>
       <form onSubmit={(e) => e.preventDefault()} className="row">
         <div className="col-lg-6">

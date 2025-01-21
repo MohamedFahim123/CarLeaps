@@ -1,8 +1,31 @@
 import { BlogPost, incentive } from "../Brands/Data";
 
-
 interface Feature {
   title: string;
+  description: string;
+  image: string;
+}
+export interface FactoryWranty {
+  id: number;
+  title: string;
+  description: string;
+}
+export interface ExploreModel {
+  title: string;
+  subtitle: string;
+  description: string;
+  content: string;
+}
+
+export interface TrimInteface {
+  make: string;
+  makeSlug: string;
+  model: string;
+  year: number;
+  trim: string;
+  price: number;
+  transmission: string;
+  fuelType: string;
   description: string;
   image: string;
 }
@@ -51,6 +74,9 @@ export interface MODEL {
   isSunroof: boolean;
   isRoof: boolean;
   isMoonroof: boolean;
+  factoryWranties: FactoryWranty[];
+  exploreModel: ExploreModel[];
+  trims: TrimInteface[];
 }
 
 export const Models: MODEL[] = [
@@ -66,6 +92,78 @@ export const Models: MODEL[] = [
     fuelType: "Gasoline",
     description: "lorem ipsum dolor sit amet, consectetur adip",
     images: ["/images/models/alfa-romeo-159-sport.jpg"],
+    trims: [
+      {
+        image: "/images/brands/audi.webp",
+        make: "Alfa Romeo",
+        makeSlug: "alfa-romeo",
+        model: "ABCD",
+        year: 2022,
+        trim: "Sport",
+        price: 28999,
+        transmission: "Automatic",
+        fuelType: "Gasoline",
+        description: "lorem ipsum dolor sit amet, consectetur adip",
+      },
+    ],
+    exploreModel: [
+      {
+        title: "Safty",
+        subtitle: "Explore Safty",
+        description: "Explore Safty description",
+        content: "Explore Safty content",
+      },
+      {
+        title: "Entertainment",
+        description: "Explore Entertainment description",
+        content: "Explore Entertainment content",
+        subtitle: "Explore Entertainment",
+      },
+      {
+        title: "Safty",
+        subtitle: "Explore Safty",
+        description: "Explore Safty description",
+        content: "Explore Safty content",
+      },
+      {
+        title: "Entertainment",
+        description: "Explore Entertainment description",
+        content: "Explore Entertainment content",
+        subtitle: "Explore Entertainment",
+      },
+    ],
+    factoryWranties: [
+      {
+        id: 1,
+        title: "factory wranty 1",
+        description: "factory warranty 1 description",
+      },
+      {
+        id: 2,
+        title: "factory wranty 2",
+        description: "factory warranty 2 description",
+      },
+      {
+        id: 3,
+        title: "factory wranty 3",
+        description: "factory warranty 3 description",
+      },
+      {
+        id: 4,
+        title: "factory wranty 4",
+        description: "factory warranty 4 description",
+      },
+      {
+        id: 5,
+        title: "factory wranty 5",
+        description: "factory warranty 5 description",
+      },
+      {
+        id: 6,
+        title: "factory wranty 6",
+        description: "factory warranty 6 description",
+      },
+    ],
     incentives: [
       {
         title: "$1,000 Stellantis US National Select Inventory Bonus Cash",

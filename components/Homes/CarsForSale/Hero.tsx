@@ -1,9 +1,10 @@
 "use client";
 
+import { MainRegionName } from "@/app/utils/mainData";
 import SelectComponent from "@/components/Common/SelectComponent";
+import Cookies from "js-cookie";
 import Link from "next/link";
 import { useState } from "react";
-import Cookies from "js-cookie";
 
 interface VihicleTab {
   label: string;
@@ -17,7 +18,7 @@ const vehicleTabs: VihicleTab[] = [
 ];
 
 export default function Hero() {
-  const currRegion: string = Cookies.get("region") || 'riyadh';
+  const currRegion: string = Cookies.get("region") || MainRegionName;
   const [activeVehiclesTab, setactiveVehiclesTab] = useState<string>(
     vehicleTabs[0].label
   );
@@ -52,7 +53,10 @@ export default function Hero() {
                   <div className="form_boxes">
                     <SelectComponent options={["Any Price", "200$", "300$"]} />
                   </div>
-                  <Link href={`/${currRegion}/cars/cars-for-sale/search`} className="form-submit">
+                  <Link
+                    href={`/${currRegion}/cars/cars-for-sale/search`}
+                    className="form-submit"
+                  >
                     <button type="submit" className="theme-btn">
                       <i className="flaticon-search" />
                       Search 9451 Cars

@@ -1,10 +1,11 @@
+import { MainRegionName } from "@/app/utils/mainData";
 import Cookies from "js-cookie";
 import Image from "next/image";
 import Link from "next/link";
 import { BlogPost } from "./Data";
 
 export default function BrandsBlogs({ blogPosts }: { blogPosts: BlogPost[] }) {
-  const region: string = Cookies.get("region") || "riyadh";
+  const region: string = Cookies.get("region") || MainRegionName;
   return (
     <section className="blog-section">
       <div className="boxcar-container">

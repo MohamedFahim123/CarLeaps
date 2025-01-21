@@ -5,12 +5,13 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
+import { MainRegionName } from "@/app/utils/mainData";
 
 export default function MainAuthFormLayout({ currPage }: { currPage: string }) {
     const [currRegion, setCurrRegion] = useState<string | undefined>();
 
     useEffect(() => {
-        const region: string = Cookies.get("region") || "riyadh";
+        const region: string = Cookies.get("region") || MainRegionName;
         setCurrRegion(region);
     }, [currRegion]);
 

@@ -1,7 +1,6 @@
-import React from "react";
-import Link from "next/link";
-import Image from "next/image";
 import { blogPosts7 } from "@/data/blogs";
+import Image from "next/image";
+import Link from "next/link";
 export default function Blogs() {
   return (
     <section className="blog-section">

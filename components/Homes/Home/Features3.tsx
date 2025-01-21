@@ -1,6 +1,5 @@
 import { carGroups } from "@/data/categories";
 import Link from "next/link";
-import React from "react";
 
 export default function Features3() {
   return (

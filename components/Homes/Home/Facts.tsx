@@ -1,6 +1,5 @@
 import Counter from "@/components/Common/Counter";
 import { counters } from "@/data/facts";
-import React from "react";
 
 export default function Facts() {
   return (

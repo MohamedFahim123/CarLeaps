@@ -5,9 +5,10 @@ import Link from "next/link";
 import Cookies from "js-cookie";
 import styles from "./Models.module.css";
 import { MODEL } from "./data";
+import { MainRegionName } from "@/app/utils/mainData";
 
 export default function ModelHeroSection({ model }: { model: MODEL }) {
-  const region: string = Cookies.get("region") || "riyadh";
+  const region: string = Cookies.get("region") || MainRegionName;
 
   return (
     <section className={`${styles.hero_section} position-relative`}>
@@ -20,7 +21,7 @@ export default function ModelHeroSection({ model }: { model: MODEL }) {
           style={{ zIndex: -1 }}
         />
       </div>
-      <div className="container position-relative py-5 d-flex flex-column justify-content-between h-100">
+      <div className="boxcar-container position-relative py-5 d-flex flex-column justify-content-between h-100">
         <nav className={`${styles.breadcrumb} position-relative z-1`}>
           <Link
             href={`/${region}/cars/home`}
@@ -28,7 +29,6 @@ export default function ModelHeroSection({ model }: { model: MODEL }) {
           >
             Home /
           </Link>
-
           <Link
             href={`/${region}/cars/${model.makeSlug}`}
             className="breadcrumb-item active ms-1"
@@ -61,8 +61,8 @@ export default function ModelHeroSection({ model }: { model: MODEL }) {
             <h4 className="text-primary fs-3 fw-bold">$43,845</h4>
           </div>
           <div className="d-flex align-items-center justify-content-center gap-4">
-            <button className="btn btn-dark btn-lg px-4 w-100">
-              Choose your trim
+            <button className="btn btn-dark btn-lg px-4 w-100 text-capitalize">
+              Book a test drive
             </button>
           </div>
         </div>

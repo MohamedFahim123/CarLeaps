@@ -8,20 +8,20 @@ import Hero from "@/components/Homes/ResearchCars/Hero";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Research New Cars",
-    description: "Find the best cars for your needs.",
+  title: "Research New Cars",
+  description: "Find the best cars for your needs.",
 };
 
 export default function ResearchNewCarsPage() {
-    return (
-        <>
-            <Hero />
-            <Categories />
-            <CarsCollection />
-            <Banner />
-            <Cars />
-            <Features />
-            <Blogs />
-        </>
-    );
-};
+  return (
+    <>
+      <Hero />
+      <Categories />
+      <CarsCollection />
+      <Banner />
+      <Cars />
+      <Features />
+      <Blogs />
+    </>
+  );
+}

@@ -11,8 +11,8 @@ export default function GallerySection({ model }: { model: MODEL }) {
   const [isOpen, setOpen] = useState<boolean>(false);
 
   return (
-    <section className={styles.section}>
-      <div className="container">
+    <section className={`${styles.sectionDiff} ${styles.section}`}>
+      <div className="boxcar-container">
         <div className="row">
           <div className="col-12">
             <h2 className="mb-4">Photo & video gallery for {model.model}</h2>

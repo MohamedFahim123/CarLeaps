@@ -3,13 +3,14 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
+import { MainRegionName } from "@/app/utils/mainData";
 
 function MobileMenu() {
   const [showMenu, setShowMenu] = useState<boolean>(false);
-  const [currRegion, setCurrRegion] = useState<string>("riyadh");
+  const [currRegion, setCurrRegion] = useState<string>(MainRegionName);
 
   useEffect(() => {
-    const region = Cookies.get("region") || "riyadh";
+    const region: string = Cookies.get("region") || MainRegionName;
     setCurrRegion(region);
   }, []);
 

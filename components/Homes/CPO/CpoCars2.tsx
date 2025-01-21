@@ -1,6 +1,6 @@
 "use client";
 
-import { carData } from "@/data/cars";
+import { Car, carData } from "@/data/cars";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -8,15 +8,18 @@ import Slider from "react-slick";
 import { Autoplay, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-const buttons = [
+const buttons: { label: string; isActive: boolean }[] = [
   { label: "New cars", isActive: true },
   { label: "Used Cars", isActive: false },
   { label: "In Stock", isActive: false },
 ];
 
 export default function CpoCars2() {
-  const [selectedCategory, setSelectedCategory] = useState(buttons[0]);
-  const [sortedItems, setSortedItems] = useState([...carData]);
+  const [selectedCategory, setSelectedCategory] = useState<{
+    label: string;
+    isActive: boolean;
+  }>(buttons[0]);
+  const [sortedItems, setSortedItems] = useState<Car[]>([...carData]);
 
   useEffect(() => {
     setSortedItems([
