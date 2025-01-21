@@ -1,5 +1,5 @@
-import NotFound from "@/app/404";
+import { redirect } from "next/navigation";
 
-export default async function page() {
-  return <NotFound />;
-};
+export default function page() {
+  return redirect("/");
+}
