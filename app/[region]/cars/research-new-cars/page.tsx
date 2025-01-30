@@ -8,7 +8,7 @@ import Hero from "@/components/Homes/ResearchCars/Hero";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Research New Cars",
+  title: "CarLeaps - Research New Cars",
   description: "Find the best cars for your needs.",
 };
 

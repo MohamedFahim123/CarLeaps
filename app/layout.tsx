@@ -4,7 +4,7 @@ import '../public/main.scss';
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Valid Cars",
+  title: "CarLeaps",
   description: "Your Favorite Cars Portal.",
   icons: {
     icon: "/images/ValidCars.png",

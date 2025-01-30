@@ -2,7 +2,7 @@ import MainAuthFormLayout from "@/components/Auth/MainAuthFormLayout";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Login",
+  title: "CarLeaps - Login",
 };
 
 export default function LoginPage() {

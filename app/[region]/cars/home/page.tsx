@@ -10,9 +10,8 @@ import Features3 from "@/components/Homes/Home/Features3";
 import Hero from "@/components/Homes/Home/Hero";
 import { Metadata } from "next";
 
-
 export const metadata: Metadata = {
-  title: "Valid Cars",
+  title: "CarLeaps - Home",
   description: "Your Favorite Cars Portal.",
 };
 

@@ -10,7 +10,7 @@ import IncentivesSection from "@/components/Homes/Brands/IncentivesSection";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Brand Details",
+  title: "CarLeaps - Brand Details",
 };
 
 export default async function BrandsPage({

@@ -7,19 +7,19 @@ import Cars from "@/components/Homes/Home/Cars";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: 'Cars For Sale',
-    description: 'Find and rent cars at the best prices',
+  title: "CarLeaps - Cars For Sale",
+  description: "Find and rent cars at the best prices",
 };
 
 export default function CarsForSalePage() {
-    return (
-        <>
-            <Hero />
-            <CarType />
-            <Brands currPage="carsForSale" />
-            <Cars />
-            <Features />
-            <Cars2 />
-        </>
-    );
-};
+  return (
+    <>
+      <Hero />
+      <CarType />
+      <Brands currPage="carsForSale" />
+      <Cars />
+      <Features />
+      <Cars2 />
+    </>
+  );
+}

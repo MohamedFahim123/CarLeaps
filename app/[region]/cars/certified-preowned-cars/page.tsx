@@ -1,4 +1,3 @@
-
 import Cta from "@/components/Common/Cta";
 import CpoCars from "@/components/Homes/CPO/CpoCars";
 import CpoFeatures from "@/components/Homes/CPO/CpoFeatures";
@@ -7,18 +6,18 @@ import Brands from "@/components/Homes/Home/Brands";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Certified PreOwned Cars",
+  title: "CarLeaps - Certified PreOwned Cars",
 };
 
 export default function CPOPage() {
-    return (
-        <>
-            <div id="nav-mobile"></div>
-            <CpoHero />
-            <CpoCars />
-            <Cta />
-            <CpoFeatures />
-            <Brands currPage="cpo" />
-        </>
-    );
-};
+  return (
+    <>
+      <div id="nav-mobile"></div>
+      <CpoHero />
+      <CpoCars />
+      <Cta />
+      <CpoFeatures />
+      <Brands currPage="cpo" />
+    </>
+  );
+}

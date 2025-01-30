@@ -2,7 +2,7 @@ import Listings from "@/components/DashBoard/Listings";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "My Listings",
+  title: "CarLeaps - Listings",
   description: "",
 };
 export default function page() {

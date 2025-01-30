@@ -1,9 +1,5 @@
-import { ChildrenPropsInterface } from '../utils/interfaces'
+import { ChildrenPropsInterface } from "../utils/interfaces";
 
 export default function RegionLayout({ children }: ChildrenPropsInterface) {
-    return (
-        <>
-            {children}
-        </>
-    );
-};
+  return <>{children}</>;
+}

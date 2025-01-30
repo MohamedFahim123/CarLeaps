@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
-  title: "Login To Valid Cars",
+  title: "Login To CarLeaps",
 };
 
 export default async function AuthPage() {

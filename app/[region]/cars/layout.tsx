@@ -6,9 +6,9 @@ import Footer from "@/components/Footers/Footer";
 import Header1 from "@/components/Headers/Header";
 import MobileMenu from "@/components/Headers/MobileMenu";
 import "@/public/main.scss";
+import { usePathname } from "next/navigation";
 import "photoswipe/dist/photoswipe.css";
 import { ChildrenPropsInterface } from "../../utils/interfaces";
-import { usePathname } from "next/navigation";
 
 export default function CarsLayout({ children }: ChildrenPropsInterface) {
   const pathName = usePathname();

@@ -5,17 +5,17 @@ import Hero from "@/components/Homes/PricingHub/Hero";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: 'Pricing Hub',
-    description: 'Valid Cars Offers The Best Prices Ever.',
+  title: "CarLeaps - Pricing Hub",
+  description: "CarLeaps Offers The Best Prices Ever.",
 };
 
 export default function PricingHubPage() {
-    return (
-        <>
-            <Hero />
-            <CpoFeatures />
-            <Banner />
-            <Blogs />
-        </>
-    );
-};
+  return (
+    <>
+      <Hero />
+      <CpoFeatures />
+      <Banner />
+      <Blogs />
+    </>
+  );
+}

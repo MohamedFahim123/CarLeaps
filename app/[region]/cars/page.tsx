@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
-  title: "Valid Cars",
+  title: "CarLeaps",
   description: "Your Favorite Cars Portal.",
 };
 

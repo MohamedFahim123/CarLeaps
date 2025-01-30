@@ -10,7 +10,7 @@ import TrimView from "@/components/Homes/Model/TrimView";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Model Details",
+  title: "CarLeaps - Model Details",
 };
 
 export default async function ModelPage({
