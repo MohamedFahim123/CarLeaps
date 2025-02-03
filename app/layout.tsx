@@ -1,6 +1,7 @@
+import "bootstrap/dist/css/bootstrap.min.css";
 import type { Metadata } from "next";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import '../public/main.scss';
+import { ToastContainer } from "react-toastify";
+import "../public/main.scss";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -19,8 +20,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <ToastContainer position="top-right" />
         {children}
       </body>
     </html>
   );
-};
+}
