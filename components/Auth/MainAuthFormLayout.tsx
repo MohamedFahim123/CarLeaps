@@ -17,15 +17,37 @@ export default function MainAuthFormLayout({ currPage }: { currPage: string }) {
 
   return (
     <section className="login-section layout-radius">
-      <div className="inner-container">
-        <div className="right-box">
-          <div className="form-sec form">
+      <div className="container">
+        <div className="row justify-content-center">
+          <div className={`auth-form ${currPage === 'login' ? 'col-lg-5' : 'col-lg-7'}`}>
             <nav>
               <div className="nav nav-tabs" id="nav-tab" role="tablist">
-                <Link href={`/${currRegion}/auth/login`} className={`nav-link ${currPage === "login" ? "active" : ""}`} id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">
+                <Link
+                  href={`/${currRegion}/auth/login`}
+                  className={`nav-link ${currPage === "login" ? "active" : ""}`}
+                  id="nav-home-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#nav-home"
+                  type="button"
+                  role="tab"
+                  aria-controls="nav-home"
+                  aria-selected="true"
+                >
                   Sign in
                 </Link>
-                <Link href={`/${currRegion}/auth/register`} className={`nav-link ${currPage === "register" ? "active" : ""}`} id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">
+                <Link
+                  href={`/${currRegion}/auth/register`}
+                  className={`nav-link ${
+                    currPage === "register" ? "active" : ""
+                  }`}
+                  id="nav-profile-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#nav-profile"
+                  type="button"
+                  role="tab"
+                  aria-controls="nav-profile"
+                  aria-selected="false"
+                >
                   Register
                 </Link>
               </div>

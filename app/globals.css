@@ -31,7 +31,7 @@
   display: block;
 }
 
-.form {
+.auth-form {
   border: 1px solid #e1e1e1;
   border-radius: 8px;
   padding: 30px 45px;
@@ -41,8 +41,8 @@
   -moz-border-radius: 8px;
   -ms-border-radius: 8px;
   -o-border-radius: 8px;
-  max-width: 34.375rem;
 }
+
 
 .form-select,
 .form-select:focus,

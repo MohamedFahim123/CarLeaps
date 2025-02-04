@@ -542,9 +542,7 @@ figure.image {
   background-size: cover;
 }
 
-.bg-pattern-1 {
-  /* background-image: url(../images/icons/pattern-1.png); */
-}
+
 
 .bg-white {
   background-color: #fff;
@@ -7858,8 +7856,7 @@ Section Title
   margin-bottom: 12px;
 }
 
-.cars-block-two .inner-box .image-box svg path {
-}
+
 
 .cars-block-two .inner-box .content-box .title {
   font-size: 18px;
@@ -8433,9 +8430,6 @@ Section Title
   background: #f9fbfc;
 }
 
-.boxcar-testimonial-section .image-column .inner-column .image-box .image {
-  /* Medium devices */
-}
 
 @media (max-width: 991px) {
   .boxcar-testimonial-section .image-column .inner-column .image-box .image {
@@ -10818,9 +10812,6 @@ Section Title
   padding: 120px 0 160px;
 }
 
-.cars-section-six .slick-list {
-  /* overflow: unset; */
-}
 
 .cars-section-six .boxcar-title .btn-title {
   position: absolute;
@@ -12416,9 +12407,6 @@ Section Title
   gap: 10px;
 }
 
-.service-block-thirteen .inner-box .right-box .content-box .ul-cotent li {
-  /* margin-right: 10px; */
-}
 
 .service-block-thirteen
   .inner-box
@@ -14432,9 +14420,6 @@ Section Title
   margin-right: 20px;
 }
 
-.cart-table .shop-cart-product .shop-product-cart-img > img {
-}
-
 .cart-table .shop-cart-product .shop-product-cart-info h3 {
   max-width: 170px;
   color: #050b20;
@@ -14636,10 +14621,11 @@ Section Title
   position: relative;
   top: -5px;
   width: 120px;
-  height: 40px;
+  height: 2.5rem;
   z-index: 1;
   border-radius: 50%;
   cursor: pointer;
+  perspective: 1000;
   -webkit-perspective: 1000;
 }
 
@@ -16710,10 +16696,6 @@ Section Title
 
 .team-block-four .inner-box .content-box span {
   font-size: 14px;
-}
-
-.boxcar-title .btn-title {
-  /* Small devices */
 }
 
 @media (max-width: 767px) {
@@ -23071,10 +23053,6 @@ Chat Widget
   margin-right: 10px;
 }
 
-.inventory-section .gallery-sec .image-column-two .inner-column {
-  /* margin-bottom: 34px; */
-  /* height: 100%; */
-}
 
 .inventory-section .gallery-sec .image-column-two .inner-column .image-box {
   position: relative;
@@ -27056,30 +27034,16 @@ Chat Widget
 }
 
 .boxcar-footer .footer-bg-6 {
-  /* background-image: url(../images/icons/footer-bg-6.png); */
   background-position: right top;
 }
 
-.boxcar-footer .footer-bg-7 {
-  /* background-image: url(../images/icons/footer-bg-7.png); */
-}
-
-.boxcar-footer .footer-bg-8 {
-  /* background-image: url(../images/icons/footer-bg-8.png); */
-}
 
 .boxcar-footer .footer-bg-9 {
-  /* background-image: url(../images/icons/footer-bg-9.png); */
   background-position: right bottom;
 }
 
 .boxcar-footer .footer-bg-10 {
-  /* background-image: url(../images/icons/footer-bg-10.png); */
   background-position: right bottom;
-}
-
-.boxcar-footer .footer-bg-11 {
-  /* background-image: url(../images/icons/footer-bg-11.png); */
 }
 
 .boxcar-footer .widgets-section {
@@ -27309,10 +27273,6 @@ Chat Widget
   .compare-section {
     padding-bottom: 90px;
   }
-}
-
-.footer-style-one .footer-top .right-box .top-left {
-  /* Medium devices */
 }
 
 @media (max-width: 991px) {
@@ -29929,10 +29889,6 @@ Chat Widget
     margin-top: 0;
   }
 
-  .text-box {
-    /* margin-top: 30px; */
-  }
-
   .service-block-thirteen .image-box {
     width: 200px;
   }
@@ -30055,12 +30011,6 @@ Chat Widget
 
   .boxcar-banner-section-five .banner-content {
     width: 100%;
-  }
-
-  .boxcar-brand-section-four .right-box {
-    /* -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center; */
   }
 
   .boxcar-testimonial-section-three .content-column .inner-column {
@@ -30736,10 +30686,6 @@ Chat Widget
   .boxcar-banner-section-five .banner-content .form-tab-pane form {
     padding: 30px;
     border-radius: 15px;
-  }
-
-  .boxcar-banner-section-five .banner-content .form-submit {
-    /* padding-left: 30px; */
   }
 
   .brand-block-four .image img {
@@ -31901,14 +31847,8 @@ Chat Widget
   .calculater-section .content-column .inner-column {
     padding: 40px;
   }
-
-  .brand-block-four .inner-box {
-    /* width: 100%; */
-  }
-
   .brand-block-four {
     width: 100%;
-    /* margin-right: 0; */
   }
 
   .why-choose-us-section-three .right-box {
@@ -33078,6 +33018,7 @@ Chat Widget
   outline: 0;
   height: 20px;
   width: 20px;
+  appearance: none;
   -webkit-appearance: none;
   position: relative;
   display: inline-flex;
@@ -33153,6 +33094,7 @@ Chat Widget
   position: relative;
   width: 55px;
   height: 30px;
+  appearance: none;
   -webkit-appearance: none;
   background: rgba(225, 225, 225, 1);
   border-radius: 30px;
@@ -34408,10 +34350,6 @@ li.nav-sub.mm-listitem .mm-listitem__btn {
   overflow: auto;
   flex-wrap: nowrap;
 }
-
-.category-section .cate-nav-tab {
-}
-
 .category-section .cate-nav-tab::-webkit-scrollbar {
   width: 2px;
 }
