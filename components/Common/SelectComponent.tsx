@@ -1,10 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
-export default function SelectComponent({
-  options = ["New York", "Los Vegas", "California"],
-}) {
+export default function SelectComponent({ options }: { options: string[] }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(options[0]);
   const ref = useRef<HTMLDivElement | null>(null);
@@ -54,4 +52,4 @@ export default function SelectComponent({
       )}
     </div>
   );
-};
+}

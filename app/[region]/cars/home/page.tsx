@@ -20,6 +20,7 @@ export default function HomePage() {
     <>
       <Hero />
       <Brands currPage="home" />
+      <Cta />
       <Cars />
       <Features />
       <Facts />
@@ -27,7 +28,6 @@ export default function HomePage() {
       <CpoCars2 />
       <Features3 />
       <Blogs />
-      <Cta />
     </>
   );
 }

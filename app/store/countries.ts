@@ -6,6 +6,8 @@ import { baseUrl } from "../utils/mainData";
 export interface Country {
   id: number;
   name: string;
+  code: string;
+  flag: string;
 }
 
 export interface UseCountryStoreIterface {

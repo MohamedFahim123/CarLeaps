@@ -121,8 +121,10 @@ export default function RegisterForm() {
           <div className="d-flex gap-2 w-100">
             <div className="form_boxes w-50">
               <label htmlFor="reg-country-id">country</label>
-              <select className="form-select" {...register("country_id", { required: "required" })} id="reg-country-id">
-                <option selected>select</option>
+              <select className="form-select" defaultValue={""} {...register("country_id", { required: "required" })} id="reg-country-id">
+                <option value="" disabled>
+                  select
+                </option>
                 {countries.map((country) => (
                   <option key={country.id} value={country.id}>
                     {country.name}
@@ -133,8 +135,10 @@ export default function RegisterForm() {
             </div>
             <div className="form_boxes w-50">
               <label htmlFor="reg-type-id">type</label>
-              <select className="form-select" {...register("type", { required: "required" })} id="reg-type-id">
-                <option selected>select type</option>
+              <select className="form-select" defaultValue={""} {...register("type", { required: "required" })} id="reg-type-id">
+                <option value="" disabled>
+                  select type
+                </option>
                 <option value="authorized_dealer">Authorized Dealer</option>
                 <option value="showroom">Show Room</option>
               </select>
@@ -146,25 +150,13 @@ export default function RegisterForm() {
             <input {...register("password", { required: "required" })} required type={showPassword ? "text" : "password"} placeholder="********" />
             {errors.password && <div className="text-danger text-small">{errors.password.message}</div>}
             <span className="show-password" onClick={() => setShowPassword(!showPassword)}>
-              {showPassword ? <FaEye /> : <FaEyeSlash />}
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
             </span>
           </div>
           <div className="form_boxes ">
             <label>Documents</label>
             <input className="form-control form-control-sm h-25" {...register("documents", { required: "required" })} required type="file" accept="application/pdf,application/file" multiple />
             {errors.documents && <div className="text-danger text-small">{errors.documents.message}</div>}
-          </div>
-          <div className="btn-box-three">
-            <label className="contain">
-              User
-              <input required type="radio" defaultChecked={true} name="radio" />
-              <span className="checkmark" />
-            </label>
-            <label className="contain">
-              Business seller
-              <input required type="radio" defaultChecked={true} name="radio" />
-              <span className="checkmark" />
-            </label>
           </div>
           <div className="btn-box mt-0 mb-3">
             <label className="contain">

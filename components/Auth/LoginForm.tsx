@@ -92,7 +92,7 @@ export default function LoginForm() {
             <input {...register("password", { required: "Required" })} required type={showPassword ? "text" : "password"} placeholder="********" />
             {errors.password && <span className="text-danger text-sm error">{errors.password.message}</span>}
             <span className="show-password" onClick={() => setShowPassword(!showPassword)}>
-              {showPassword ? <FaEye /> : <FaEyeSlash />}
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
             </span>
           </div>
           <div className="btn-box row">
