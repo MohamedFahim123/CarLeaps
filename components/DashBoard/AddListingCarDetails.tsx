@@ -10,6 +10,7 @@ import { Transmissions } from "@/app/store/transmissions";
 import { Years } from "@/app/store/years";
 import { baseUrl } from "@/app/utils/mainData";
 import axios from "axios";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { FieldErrors, UseFormRegister, UseFormSetValue, UseFormWatch } from "react-hook-form";
 import { toast } from "react-toastify";
@@ -47,7 +48,8 @@ export interface TabProps {
   store?: store;
 }
 
-export default function AddListingCarDetails({ tab, handleTabChange, register, errors, watch, store }: TabProps) {
+export default function AddListingCarDetails({ tab, handleTabChange, setValue, register, errors, watch, store }: TabProps) {
+  const [images2, setImages2] = useState<string[]>([]);
   const [currCities, setCurrCities] = useState<CITY[]>([]);
   const country_id: string = watch ? (watch("country_id") ? `${watch("country_id")}` : "") : "";
   const getCurrCitiesInsideChosenCountry = async () => {
@@ -84,6 +86,43 @@ export default function AddListingCarDetails({ tab, handleTabChange, register, e
     }
   };
 
+  const handleImageChange2 = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+    const file: File | null = e?.target?.files?.[0] ? e.target.files[0] : null;
+
+    if (!file) return;
+
+    const currentImages = (watch && watch("images")) ?? [];
+
+    if (setValue) {
+      setValue("images", [...currentImages, file]);
+    }
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setImages2((prevImages) => {
+        const newImages = [...prevImages];
+        newImages[index] = file.name as string;
+        return newImages;
+      });
+    };
+
+    reader.readAsDataURL(file);
+  };
+  const handleDelete2 = (index: number) => {
+    setImages2((prevImages) => {
+      const updatedImages = prevImages.filter((_, imgIndex) => imgIndex !== index);
+
+      // Update form state
+      if (setValue) {
+        const currentImages = (watch && watch("images")) ?? [];
+        const updatedFormImages = currentImages.filter((_, imgIndex) => imgIndex !== index);
+        setValue("images", updatedFormImages);
+      }
+
+      return updatedImages;
+    });
+  };
+
   useEffect(() => {
     if (country_id) {
       getCurrCitiesInsideChosenCountry();
@@ -94,10 +133,7 @@ export default function AddListingCarDetails({ tab, handleTabChange, register, e
   return (
     <div className={`tab-pane fade ${tab === "car_details" ? "show active" : ""}`} id="car_details" role="tabpanel" aria-labelledby="car_details_tab">
       <div className="row">
-        <div className="form-column col-lg-3">
-          <InputField label="Name" name="name" register={register} errors={errors} type="text" placeholder="Enter Name" />
-        </div>
-        <div className="form-column col-lg-3">
+        <div className="form-column col-lg-4 col-md-6">
           <div className="form_boxes">
             <label htmlFor="condition">Condition</label>
             <select className="form-select" {...register("condition", { required: "Required" })} id="condition" defaultValue={""}>
@@ -113,56 +149,98 @@ export default function AddListingCarDetails({ tab, handleTabChange, register, e
             {errors.condition && <p className="text-danger">{errors.condition.message}</p>}
           </div>
         </div>
-        <div className="form-column col-lg-3">
+        <div className="form-column col-lg-4 col-md-6">
           <SelectField label="Body" name="body_id" register={register} errors={errors} options={store?.bodies || []} />
         </div>
-        <div className="form-column col-lg-3">
+        <div className="form-column col-lg-4 col-md-6">
           <SelectField label="Make" name="make_id" register={register} errors={errors} options={store?.makesCars || []} />
         </div>
-        <div className="form-column col-lg-3">
+        <div className="form-column col-lg-4 col-md-6">
           <SelectField label="Model" name="model_id" register={register} errors={errors} options={store?.models || []} />
         </div>
-        <div className="form-column col-lg-3">
+        <div className="form-column col-lg-4 col-md-6">
           <SelectField label="Trim" name="trim_id" register={register} errors={errors} options={store?.trims || []} />
         </div>
-        <div className="form-column col-lg-3">
+        <div className="form-column col-lg-4 col-md-6">
           <SelectField label="Transmission" name="transmission_id" register={register} errors={errors} options={store?.transmissions || []} />
         </div>
-        <div className="form-column col-lg-3">
+        <div className="form-column col-lg-4 col-md-6">
           <SelectField label="Year" name="year_id" register={register} errors={errors} options={store?.years || []} />
         </div>
-        <div className="form-column col-lg-3">
+        <div className="form-column col-lg-4 col-md-6">
           <InputField label="Mileage" name="mileage" register={register} errors={errors} type="number" placeholder="Enter Mileage" />
         </div>
-        <div className="form-column col-lg-3">
-          <InputField label="Exterior" name="exterior" register={register} errors={errors} type="text" placeholder="Enter Exterior" />
+        <div className="form-column col-lg-4 col-md-6">
+          <InputField label="Exterior Color" name="exterior" register={register} errors={errors} type="text" placeholder="Enter Exterior" />
         </div>
-        <div className="form-column col-lg-3">
-          <InputField label="Interior" name="interior" register={register} errors={errors} type="text" placeholder="Enter Interior" />
+        <div className="form-column col-lg-4 col-md-6">
+          <InputField label="Interior Color" name="interior" register={register} errors={errors} type="text" placeholder="Enter Interior" />
         </div>
-        <div className="form-column col-lg-3">
+        <div className="form-column col-lg-4 col-md-6">
           <SelectField label="Country" name="country_id" register={register} errors={errors} options={store?.countries || []} />
         </div>
-        <div className="form-column col-lg-3">
+        <div className="form-column col-lg-4 col-md-6">
           <SelectField label="City" name="city_id" register={register} errors={errors} options={currCities || []} />
         </div>
-        <div className="form-column col-lg-3">
+        <div className="form-column col-lg-4 col-md-6">
           <SelectField label="Fuel Type" name="fuel_type_id" register={register} errors={errors} options={store?.fuelTypes || []} />
         </div>
-        <div className="form-column col-lg-3">
+        <div className="form-column col-lg-4 col-md-6">
           <InputField label="Engine Size" name="engine_size" register={register} errors={errors} type="text" placeholder="Enter Engine Size" />
         </div>
-        <div className="form-column col-lg-3">
-          <InputField label="Drive Type" name="drive" register={register} errors={errors} type="text" placeholder="Enter Drive Type" />
+        <div className="form-column col-lg-4 col-md-6">
+          <div className="form_boxes">
+            <label htmlFor="Driver">Drive Type</label>
+            <select className="form-select" id="Driver" defaultValue={""}>
+              <option value="" disabled>
+                select
+              </option>
+              <option value="New">AWD</option>
+              <option value="Used">FWD</option>
+            </select>
+          </div>
+          {/* <InputField label="Drive Type" name="drive" register={register} errors={errors} type="text" placeholder="Enter Drive Type" /> */}
         </div>
-        <div className="form-column col-lg-3">
+        <div className="form-column col-lg-4 col-md-6">
           <InputField label="VIN" name="VIN" register={register} errors={errors} type="text" placeholder="Enter VIN" />
         </div>
-        <div className="form-column col-lg-3">
-          <InputField label="History" name="history" register={register} errors={errors} type="text" placeholder="Enter History" />
-        </div>
-        <div className="form-column col-lg-3">
-          <SelectField label="Address State" name="ad_state_id" register={register} errors={errors} options={store?.adStates || []} />
+        <div className="form-column col-lg-12 tab-pane gallery-sec">
+          <div className="attachment-sec">
+            <h6 className="title">History</h6>
+            {errors.images && <span className="text-danger">{errors.images.message}</span>}
+            <div className="right-box-four row gap-2">
+              {images2.map((imgSrc, index) => (
+                <div key={index} className="report-box col-lg-3 col-md-6 col-sm-12">
+                  <span>{imgSrc.slice(0, 15) + "..."}</span>
+                  <ul className="social-icon">
+                    <li>
+                      <a onClick={() => handleDelete2(index)}>
+                        <Image width={18} height={18} src="/images/resource/delet.svg" alt="" />
+                      </a>
+                    </li>
+                    <li>
+                      <label style={{ cursor: "pointer" }} htmlFor={`file-upload2-${index}`}>
+                        <a>
+                          <Image width={18} height={18} src="/images/resource/delet1-1.svg" alt="Upload" />
+                        </a>
+                      </label>
+                      <input id={`file-upload2-${index}`} type="file" onChange={(e) => handleImageChange2(e, index)} style={{ display: "none" }} />
+                    </li>
+                  </ul>
+                </div>
+              ))}
+              <div className="uplode-box col-lg-3 col-md-6 col-sm-12">
+                <div className="content-box">
+                  <label style={{ cursor: "pointer" }} htmlFor="upload-new2">
+                    <Image width={34} height={34} src="/images/resource/uplode.svg" alt="Upload" />
+                    <span>Upload</span>
+                  </label>
+                  <input id="upload-new2" type="file" accept="image/*" style={{ display: "none" }} onChange={(e) => handleImageChange2(e, images2.length)} />
+                </div>
+              </div>
+            </div>
+            <div className="text">Max file size is 5MB,only docs files (pdf,doc,docx)</div>
+          </div>
         </div>
 
         <div className="form-column col-lg-12">

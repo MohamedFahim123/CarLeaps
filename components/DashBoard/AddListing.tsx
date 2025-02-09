@@ -17,7 +17,6 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import AddListingCarDetails from "./AddListingCarDetails";
 import AddListingFeatures from "./AddListingFeatures";
-import AddListingLocation from "./AddListingLocation";
 import AddListingMedia from "./AddListingMedia";
 import AddListingPrice from "./AddListingPrice";
 import Sidebar from "./Sidebar";
@@ -175,11 +174,11 @@ export default function AddListing() {
                 </li>
               </ul>
               <form onSubmit={handleSubmit(onSubmit)} className="tab-content" id="myTabContent">
-                <AddListingCarDetails register={register} watch={watch} errors={errors} store={{ makesCars, models, trims, countries, condition, bodies, transmissions, years, fuelTypes, adStates }} tab={activeTab} handleTabChange={handleTabChange} />
+                <AddListingCarDetails register={register} watch={watch} errors={errors} setValue={setValue} store={{ makesCars, models, trims, countries, condition, bodies, transmissions, years, fuelTypes, adStates }} tab={activeTab} handleTabChange={handleTabChange} />
                 <AddListingPrice register={register} errors={errors} tab={activeTab} handleTabChange={handleTabChange} />
                 <AddListingFeatures register={register} errors={errors} store={{ features }} tab={activeTab} handleTabChange={handleTabChange} />
-                <AddListingMedia register={register} errors={errors} setValue={setValue} watch={watch} tab={activeTab} handleTabChange={handleTabChange} />
-                <AddListingLocation isSubmitting={isSubmitting} register={register} errors={errors} tab={activeTab} />
+                <AddListingMedia register={register} errors={errors} setValue={setValue} watch={watch} tab={activeTab} isSubmitting={isSubmitting} handleTabChange={handleTabChange} />
+                {/* <AddListingLocation isSubmitting={isSubmitting} register={register} errors={errors} tab={activeTab} /> */}
               </form>
             </div>
           </div>

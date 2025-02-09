@@ -2,7 +2,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { TabProps } from "./AddListingCarDetails";
 
-export default function AddListingMedia({ tab, handleTabChange, errors, setValue, watch }: TabProps) {
+export default function AddListingMedia({ tab, handleTabChange, isSubmitting, errors, setValue, watch }: TabProps) {
   const [images, setImages] = useState<string>("");
   const [images2, setImages2] = useState<string[]>([]);
 
@@ -66,7 +66,7 @@ export default function AddListingMedia({ tab, handleTabChange, errors, setValue
   return (
     <div className={`tab-pane fade gallery-sec style1 ${tab === "media" ? "show active" : ""}`} id="media" role="tabpanel" aria-labelledby="media-=_tab">
       <div className="right-box-three">
-        <h6 className="title">Image</h6>
+        <h6 className="title">Main Image</h6>
         {errors.main_image && <span className="text-danger">{errors.main_image.message}</span>}
         <div className="gallery-box">
           <div className="inner-box add-input-image">
@@ -108,7 +108,7 @@ export default function AddListingMedia({ tab, handleTabChange, errors, setValue
         </div>
       </div>
       <div className="attachment-sec">
-        <h6 className="title">Attachments</h6>
+        <h6 className="title">Gallery</h6>
         {errors.images && <span className="text-danger">{errors.images.message}</span>}
         <div className="right-box-four row gap-2">
           {images2.map((imgSrc, index) => (
@@ -157,7 +157,7 @@ export default function AddListingMedia({ tab, handleTabChange, errors, setValue
             </div>
           </div>
           <div className="form-submit">
-            <button type="button" onClick={() => handleTabChange && handleTabChange("location")} className="theme-btn">
+            <button type="submit" disabled={isSubmitting} onClick={() => handleTabChange && handleTabChange("location")} className="theme-btn">
               Next Location
               <svg xmlns="http://www.w3.org/2000/svg" width={14} height={14} viewBox="0 0 14 14" fill="none">
                 <g clipPath="url(#clip0_711_3214)">

@@ -22,10 +22,9 @@ function HeaderDashboard() {
   const { adStates, getAdStates, adStatesLoading } = useAdStatesStore();
   const { bodies, getBodies, bodiesLoading } = useBodiesStore();
   const { condition, getCondition, conditionLoading } = useConditionStore();
-  const { getFeatures, featuresLoading } = useFeaturesStore();
+  const { features, getFeatures, featuresLoading } = useFeaturesStore();
   const { fuelTypes, getFuelTypes, fuelTypesLoading } = useFuelTypesStore();
-  const { transmissions, getTransmissions, transmissionsLoading } =
-    useTransmissionsStore();
+  const { transmissions, getTransmissions, transmissionsLoading } = useTransmissionsStore();
   const { years, getYears, yearsLoading } = useYearsStore();
   const { countries, getCountries, countriesLoading } = useCountriesStore();
 
@@ -66,10 +65,10 @@ function HeaderDashboard() {
   }, [getCondition, conditionLoading, condition.length]);
 
   const getAllFeatures = useCallback(() => {
-    if (!featuresLoading) {
+    if (features.length === 0 && !featuresLoading) {
       getFeatures();
     }
-  }, [getFeatures, featuresLoading]);
+  }, [getFeatures, featuresLoading, features.length]);
 
   const getAllFuelTypes = useCallback(() => {
     if (fuelTypes.length === 0 && !fuelTypesLoading) {
@@ -107,19 +106,7 @@ function HeaderDashboard() {
     getAllFuelTypes();
     getAllYears();
     getAllCountries();
-  }, [
-    getAllModels,
-    getAllTrims,
-    getAllMakesCars,
-    getAllAdStates,
-    getAllBodies,
-    getAllCondition,
-    getAllFeatures,
-    getAllFuelTypes,
-    getAllTransmissions,
-    getAllYears,
-    getAllCountries,
-  ]);
+  }, [getAllModels, getAllTrims, getAllMakesCars, getAllAdStates, getAllBodies, getAllCondition, getAllFeatures, getAllFuelTypes, getAllTransmissions, getAllYears, getAllCountries]);
 
   return (
     <header className="boxcar-header header-style-ten">
@@ -130,13 +117,7 @@ function HeaderDashboard() {
             <div className="logo-inner">
               <div className="logo">
                 <Link href={`/`}>
-                  <Image
-                    alt=""
-                    title="Boxcar"
-                    width={108}
-                    height={26}
-                    src="/images/logo.svg"
-                  />
+                  <Image alt="" title="Boxcar" width={108} height={26} src="/images/logo.svg" />
                 </Link>
               </div>
             </div>
@@ -151,22 +132,11 @@ function HeaderDashboard() {
             </div>
             <div className="right-box">
               <a href="#" className="haeder-img">
-                <Image
-                  width={50}
-                  height={50}
-                  src="/images/resource/header-img.png"
-                  alt=""
-                />
+                <Image width={50} height={50} src="/images/resource/header-img.png" alt="" />
               </a>
               <div className="mobile-navigation">
                 <a href="#nav-mobile" title="">
-                  <svg
-                    width={22}
-                    height={11}
-                    viewBox="0 0 22 11"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg width={22} height={11} viewBox="0 0 22 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect width={22} height={2} fill="white" />
                     <rect y={9} width={22} height={2} fill="white" />
                   </svg>
