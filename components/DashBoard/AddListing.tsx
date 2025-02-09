@@ -167,11 +167,6 @@ export default function AddListing() {
                     Media
                   </button>
                 </li>
-                <li className="nav-item" role="presentation">
-                  <button className={`nav-link ${activeTab === "location" ? "active" : ""}`} id="location_tab" type="button" onClick={() => handleTabChange("location")}>
-                    Location
-                  </button>
-                </li>
               </ul>
               <form onSubmit={handleSubmit(onSubmit)} className="tab-content" id="myTabContent">
                 <AddListingCarDetails register={register} watch={watch} errors={errors} setValue={setValue} store={{ makesCars, models, trims, countries, condition, bodies, transmissions, years, fuelTypes, adStates }} tab={activeTab} handleTabChange={handleTabChange} />
