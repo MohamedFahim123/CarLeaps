@@ -24,18 +24,19 @@ export function InputField({ label, name, register, errors, type = "text", class
 interface SelectFieldProps {
   label: string;
   name: keyof IFormInput;
+  select?: string;
   register: UseFormRegister<IFormInput>;
   errors: FieldErrors<IFormInput>;
   options: { id: string | number; name: string }[];
 }
 
-export function SelectField({ label, name, register, errors, options }: SelectFieldProps) {
+export function SelectField({ label, select = "Select", name, register, errors, options }: SelectFieldProps) {
   return (
     <div className="form_boxes">
       <label htmlFor={name}>{label}</label>
       <select className="form-select" {...register(name, { required: "Required" })} defaultValue={""} id={name}>
         <option value="" disabled>
-          Select
+          {select}
         </option>
         {options.map((option, index) => (
           <option key={option.id ? option.id : index} value={option.id}>

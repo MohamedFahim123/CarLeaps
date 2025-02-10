@@ -51,10 +51,13 @@ export interface TabProps {
 export default function AddListingCarDetails({ tab, handleTabChange, setValue, register, errors, watch, store }: TabProps) {
   const [images2, setImages2] = useState<string[]>([]);
   const [currCities, setCurrCities] = useState<CITY[]>([]);
+  const [currModel, setCurrModel] = useState<Models[]>([]);
+  const [currTrims, setCurrTrims] = useState<Trims[]>([]);
   const country_id: string = watch ? (watch("country_id") ? `${watch("country_id")}` : "") : "";
+  const make_id: string = watch ? (watch("make_id") ? `${watch("make_id")}` : "") : "";
+  const model_id: string = watch ? (watch("model_id") ? `${watch("model_id")}` : "") : "";
   const getCurrCitiesInsideChosenCountry = async () => {
     if (country_id) {
-      const toastId = toast.loading("Loading...");
       const data: { country_id: string } = {
         country_id: country_id,
       };
@@ -67,20 +70,55 @@ export default function AddListingCarDetails({ tab, handleTabChange, setValue, r
         });
 
         setCurrCities(res?.data?.data);
-        toast.update(toastId, {
-          render: res?.data?.message || "Success! Cities loaded.",
-          type: "success",
-          isLoading: false,
-          autoClose: 1000,
-        });
       } catch (error) {
         if (axios.isAxiosError(error)) {
-          toast.update(toastId, {
-            render: error.response?.data?.message || "Error loading Cities!",
-            type: "error",
-            isLoading: false,
-            autoClose: 1500,
-          });
+          toast.error(error?.response?.data?.message || "City Not Found");
+        }
+      }
+    }
+  };
+
+  const getModelByMake = async () => {
+    if (make_id) {
+      const data: { make_id: string } = {
+        make_id: make_id,
+      };
+
+      try {
+        const res = await axios.post(`${baseUrl}/get-model?t=${new Date().getTime()}`, data, {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        });
+
+        setCurrModel(res?.data?.data);
+      } catch (error) {
+        if (axios.isAxiosError(error)) {
+          toast.error("Model Not Found");
+        }
+      }
+    }
+  };
+
+  const getTrimsByModel = async () => {
+    if (model_id) {
+      const data: { model_id: string } = {
+        model_id: model_id,
+      };
+
+      try {
+        const res = await axios.post(`${baseUrl}/get-trim?t=${new Date().getTime()}`, data, {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        });
+
+        setCurrTrims(res?.data?.data);
+      } catch (error) {
+        if (axios.isAxiosError(error)) {
+          toast.error("Trim Not Found");
         }
       }
     }
@@ -127,8 +165,14 @@ export default function AddListingCarDetails({ tab, handleTabChange, setValue, r
     if (country_id) {
       getCurrCitiesInsideChosenCountry();
     }
+    if (make_id) {
+      getModelByMake();
+    }
+    if (model_id) {
+      getTrimsByModel();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [country_id]);
+  }, [country_id, make_id, model_id]);
 
   return (
     <div className={`tab-pane fade ${tab === "car_details" ? "show active" : ""}`} id="car_details" role="tabpanel" aria-labelledby="car_details_tab">
@@ -156,10 +200,10 @@ export default function AddListingCarDetails({ tab, handleTabChange, setValue, r
           <SelectField label="Make" name="make_id" register={register} errors={errors} options={store?.makesCars || []} />
         </div>
         <div className="form-column col-lg-4 col-md-6">
-          <SelectField label="Model" name="model_id" register={register} errors={errors} options={store?.models || []} />
+          <SelectField label="Model" select="Should be selected after make" name="model_id" register={register} errors={errors} options={currModel || []} />
         </div>
         <div className="form-column col-lg-4 col-md-6">
-          <SelectField label="Trim" name="trim_id" register={register} errors={errors} options={store?.trims || []} />
+          <SelectField label="Trim" select="Should be selected after model" name="trim_id" register={register} errors={errors} options={currTrims || []} />
         </div>
         <div className="form-column col-lg-4 col-md-6">
           <SelectField label="Transmission" name="transmission_id" register={register} errors={errors} options={store?.transmissions || []} />
@@ -180,7 +224,7 @@ export default function AddListingCarDetails({ tab, handleTabChange, setValue, r
           <SelectField label="Country" name="country_id" register={register} errors={errors} options={store?.countries || []} />
         </div>
         <div className="form-column col-lg-4 col-md-6">
-          <SelectField label="City" name="city_id" register={register} errors={errors} options={currCities || []} />
+          <SelectField label="City" select="Should be selected after country" name="city_id" register={register} errors={errors} options={currCities || []} />
         </div>
         <div className="form-column col-lg-4 col-md-6">
           <SelectField label="Fuel Type" name="fuel_type_id" register={register} errors={errors} options={store?.fuelTypes || []} />

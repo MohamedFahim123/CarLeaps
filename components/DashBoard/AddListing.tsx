@@ -173,7 +173,6 @@ export default function AddListing() {
                 <AddListingPrice register={register} errors={errors} tab={activeTab} handleTabChange={handleTabChange} />
                 <AddListingFeatures register={register} errors={errors} store={{ features }} tab={activeTab} handleTabChange={handleTabChange} />
                 <AddListingMedia register={register} errors={errors} setValue={setValue} watch={watch} tab={activeTab} isSubmitting={isSubmitting} handleTabChange={handleTabChange} />
-                {/* <AddListingLocation isSubmitting={isSubmitting} register={register} errors={errors} tab={activeTab} /> */}
               </form>
             </div>
           </div>
