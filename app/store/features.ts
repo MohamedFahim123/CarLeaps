@@ -56,7 +56,9 @@ export const useFeaturesStore = create<UseFeaturesStoreIterface>((set) => ({
     } catch (err) {
       set({
         features: {},
-        featuresError: axios.isAxiosError(err) ? err?.response?.data?.message || "Error fetching features" : "Unexpected error occurred!",
+        featuresError: axios.isAxiosError(err)
+          ? err?.response?.data?.message || "Error fetching features"
+          : "Unexpected error occurred!",
         featuresLoading: false,
       });
 

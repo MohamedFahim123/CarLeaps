@@ -1,10 +1,11 @@
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TabProps } from "./AddListingCarDetails";
 
 export default function AddListingMedia({
   tab,
-  handleTabChange,
+  register,
+  clearErrors,
   isSubmitting,
   errors,
   setValue,
@@ -12,6 +13,19 @@ export default function AddListingMedia({
 }: TabProps) {
   const [images, setImages] = useState<string>("");
   const [images2, setImages2] = useState<string[]>([]);
+  useEffect(() => {
+    if (watch && watch("image") && clearErrors && errors.image) {
+      clearErrors("image");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [watch && watch("image"), errors.image]);
+
+  useEffect(() => {
+    if (watch && watch("main_image") && clearErrors && errors.main_image) {
+      clearErrors("main_image");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [watch && watch("main_image"), errors.main_image]);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -32,19 +46,20 @@ export default function AddListingMedia({
   const handleDelete = () => {
     setImages("");
   };
-
   const handleImageChange2 = (
     e: React.ChangeEvent<HTMLInputElement>,
     index: number
   ) => {
     const file: File | null = e?.target?.files?.[0] ? e.target.files[0] : null;
 
+    console.log(file);
+
     if (!file) return;
 
-    const currentImages = (watch && watch("images")) ?? [];
+    const currentImages = (watch && watch("image")) ?? [];
 
     if (setValue) {
-      setValue("images", [...currentImages, file]);
+      setValue("image", [...currentImages, file]);
     }
 
     const reader = new FileReader();
@@ -56,6 +71,8 @@ export default function AddListingMedia({
       });
     };
 
+    console.log(images2);
+
     reader.readAsDataURL(file);
   };
   const handleDelete2 = (index: number) => {
@@ -66,11 +83,11 @@ export default function AddListingMedia({
 
       // Update form state
       if (setValue) {
-        const currentImages = (watch && watch("images")) ?? [];
+        const currentImages = (watch && watch("image")) ?? [];
         const updatedFormImages = currentImages.filter(
           (_, imgIndex) => imgIndex !== index
         );
-        setValue("images", updatedFormImages);
+        setValue("image", updatedFormImages);
       }
 
       return updatedImages;
@@ -96,11 +113,11 @@ export default function AddListingMedia({
             {images && (
               <div className="image-box">
                 <Image
-                  width={190}
-                  height={167}
+                  width={180}
+                  height={180}
                   src={images}
-                  alt={`Preview `}
-                  className="uploaded-img"
+                  alt={`Preview`}
+                  className="uploaded-img object-fit-cover"
                 />
                 <div className="content-box">
                   <ul className="social-icon">
@@ -171,8 +188,8 @@ export default function AddListingMedia({
       </div>
       <div className="attachment-sec">
         <h6 className="title">Gallery</h6>
-        {errors.images && (
-          <span className="text-danger">{errors.images.message}</span>
+        {errors.image && (
+          <span className="text-danger">{errors.image.message}</span>
         )}
         <div className="right-box-four row gap-2">
           {images2.map((imgSrc, index) => (
@@ -192,7 +209,7 @@ export default function AddListingMedia({
                 <li>
                   <label
                     style={{ cursor: "pointer" }}
-                    htmlFor={`file-upload2-${index}`}
+                    htmlFor={`addListing-image-upload-${index}`}
                   >
                     <a>
                       <Image
@@ -204,7 +221,7 @@ export default function AddListingMedia({
                     </a>
                   </label>
                   <input
-                    id={`file-upload2-${index}`}
+                    id={`addListing-image-upload-${index}`}
                     type="file"
                     onChange={(e) => handleImageChange2(e, index)}
                     style={{ display: "none" }}
@@ -215,7 +232,10 @@ export default function AddListingMedia({
           ))}
           <div className="uplode-box col-lg-3 col-md-6 col-sm-12">
             <div className="content-box">
-              <label style={{ cursor: "pointer" }} htmlFor="upload-new2">
+              <label
+                style={{ cursor: "pointer" }}
+                htmlFor="addListing-image-upload-new2"
+              >
                 <Image
                   width={34}
                   height={34}
@@ -225,9 +245,8 @@ export default function AddListingMedia({
                 <span>Upload</span>
               </label>
               <input
-                id="upload-new2"
+                id="addListing-image-upload-new2"
                 type="file"
-                accept="image/*"
                 style={{ display: "none" }}
                 onChange={(e) => handleImageChange2(e, images2.length)}
               />
@@ -249,21 +268,20 @@ export default function AddListingMedia({
                 <label htmlFor="videoLink">Video Link</label>
                 <input
                   id="videoLink"
+                  {...register("video_link", { required: "Required" })}
                   placeholder="https://www.youtube.com/your_video_link"
                   type="text"
                   name="video_link"
                 />
+                {errors.video_link && (
+                  <p className="text-danger">{errors.video_link.message}</p>
+                )}
               </div>
               <div className="text">Enter Youtube or Vimeo url.</div>
             </div>
           </div>
           <div className="form-submit">
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              onClick={() => handleTabChange && handleTabChange("location")}
-              className="theme-btn"
-            >
+            <button type="submit" disabled={isSubmitting} className="theme-btn">
               Submit
               <svg
                 xmlns="http://www.w3.org/2000/svg"

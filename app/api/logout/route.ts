@@ -5,22 +5,21 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const token = body?.token;
 
-    if (!token || typeof token !== "string") {
-      return NextResponse.json({ message: "Token missing or invalid" }, { status: 400 });
-    }
-
-    const response = NextResponse.json({ message: "Token stored securely" });
+    const response = NextResponse.json({ message: "Logged out successfully" });
 
     response.cookies.set("CARS_TOKEN", token, {
       httpOnly: true,
       secure: true,
       sameSite: "lax",
       path: "/",
-      maxAge: 86400,
+      expires: new Date(0),
     });
 
     return response;
   } catch (error: unknown) {
-    return NextResponse.json({ message: "Server error", error }, { status: 500 });
+    return NextResponse.json(
+      { message: "Server error", error },
+      { status: 500 }
+    );
   }
 }

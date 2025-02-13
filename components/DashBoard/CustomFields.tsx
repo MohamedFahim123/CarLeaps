@@ -38,9 +38,9 @@ export function SelectField({ label, select = "Select", name, register, errors, 
         <option value="" disabled>
           {select}
         </option>
-        {options.map((option, index) => (
-          <option key={option.id ? option.id : index} value={option.id}>
-            {option.name}
+        {options?.map((option, index) => (
+          <option key={option?.id ? option?.id : index} value={option?.id ? option?.id : "1"}>
+            {option?.name}
           </option>
         ))}
       </select>

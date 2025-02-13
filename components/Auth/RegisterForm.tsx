@@ -105,23 +105,23 @@ export default function RegisterForm() {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="form_boxes">
             <label>Name</label>
-            <input {...register("name", { required: "required" })} required type="text" placeholder="Creativelayer088" />
+            <input {...register("name", { required: "Required" })} type="text" placeholder="Creativelayer088" />
             {errors.name && <div className="text-danger text-small">{errors.name.message}</div>}
           </div>
           <div className="form_boxes">
             <label>Email</label>
-            <input {...register("email", { required: "required" })} required type="email" placeholder="Creative@gmail.com" />
+            <input {...register("email", { required: "Required" })} type="email" placeholder="Creative@gmail.com" />
             {errors.email && <div className="text-danger text-small">{errors.email.message}</div>}
           </div>
           <div className="form_boxes">
             <label>Phone</label>
-            <input {...register("phone", { required: "required" })} required type="tel" placeholder={"+67"} />
+            <input {...register("phone", { required: "Required" })} type="tel" placeholder={"+67"} />
             {errors.phone && <div className="text-danger text-small">{errors.phone.message}</div>}
           </div>
           <div className="d-flex gap-2 w-100">
             <div className="form_boxes w-50">
               <label htmlFor="reg-country-id">country</label>
-              <select className="form-select" defaultValue={""} {...register("country_id", { required: "required" })} id="reg-country-id">
+              <select className="form-select" defaultValue={""} {...register("country_id", { required: "Required" })} id="reg-country-id">
                 <option value="" disabled>
                   select
                 </option>
@@ -135,7 +135,7 @@ export default function RegisterForm() {
             </div>
             <div className="form_boxes w-50">
               <label htmlFor="reg-type-id">type</label>
-              <select className="form-select" defaultValue={""} {...register("type", { required: "required" })} id="reg-type-id">
+              <select className="form-select" defaultValue={""} {...register("type", { required: "Required" })} id="reg-type-id">
                 <option value="" disabled>
                   select type
                 </option>
@@ -147,7 +147,7 @@ export default function RegisterForm() {
           </div>
           <div className="form_boxes position-relative">
             <label>Password</label>
-            <input {...register("password", { required: "required" })} required type={showPassword ? "text" : "password"} placeholder="********" />
+            <input {...register("password", { required: "Required" })} type={showPassword ? "text" : "password"} placeholder="********" />
             {errors.password && <div className="text-danger text-small">{errors.password.message}</div>}
             <span className="show-password" onClick={() => setShowPassword(!showPassword)}>
               {showPassword ? <FaEyeSlash /> : <FaEye />}
@@ -155,13 +155,13 @@ export default function RegisterForm() {
           </div>
           <div className="form_boxes ">
             <label>Documents</label>
-            <input className="form-control form-control-sm h-25" {...register("documents", { required: "required" })} required type="file" accept="application/pdf,application/file" multiple />
+            <input className="form-control form-control-sm h-25" {...register("documents", { required: "Required" })} type="file" accept="application/pdf,application/file" multiple />
             {errors.documents && <div className="text-danger text-small">{errors.documents.message}</div>}
           </div>
           <div className="btn-box mt-0 mb-3">
             <label className="contain">
               I accept the privacy policy
-              <input {...register("privacy_policy", { required: "required" })} required type="checkbox" />
+              <input {...register("privacy_policy", { required: "Required" })} type="checkbox" />
               {errors.privacy_policy && <div className="text-danger text-small">{errors.privacy_policy.message}</div>}
               <span className="checkmark" />
             </label>

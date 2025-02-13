@@ -475,7 +475,6 @@ button {
 img {
   display: inline-block;
   max-width: 100%;
-  height: auto;
 }
 
 ul,
@@ -20865,7 +20864,6 @@ Section Title
   .form_boxes
   textarea {
   width: 100%;
-  height: 150px;
 }
 
 .dashboard-widget-two

@@ -8,6 +8,7 @@ import { useCountriesStore } from "@/app/store/countries";
 import { useFeaturesStore } from "@/app/store/features";
 import { useFuelTypesStore } from "@/app/store/fuel-types";
 import { useMakesCarsStore } from "@/app/store/makeCars";
+import { useTokenStore } from "@/app/store/Token";
 import { useTransmissionsStore } from "@/app/store/transmissions";
 import { useYearsStore } from "@/app/store/years";
 import { baseUrl } from "@/app/utils/mainData";
@@ -22,35 +23,35 @@ import AddListingPrice from "./AddListingPrice";
 import Sidebar from "./Sidebar";
 
 export type IFormInput = {
-  name?: string;
   condition?: string[];
-  body_id?: number;
-  make_id?: number;
-  model_id?: number;
-  trim_id?: number;
+  body_id?: string;
+  make_id?: string;
+  model_id?: string;
+  trim_id?: string;
   transmission_id?: number;
-  year_id?: number;
-  city_id?: number;
+  year_id?: string;
+  price?: number;
+  fuel_type_id?: string;
   mileage?: string;
   exterior?: string;
   interior?: string;
   country_id?: string;
+  city_id?: string;
   description?: string;
-  price?: number;
-  office_price?: number;
-  fuel_type_id?: number;
-  engine_size?: number;
-  history?: number;
-  VIN?: string;
-  drive?: string;
-  register?: string;
-  ad_state_id?: number;
-  comfort?: string[];
-  seats?: string[];
-  safty?: string[];
-  entertainment?: string[];
   main_image?: File;
-  images?: File[];
+  comfort?: string[];
+  entertainment?: string[];
+  safty?: string[];
+  seats?: string[];
+  image?: File[];
+  video_link?: string;
+  drive?: string;
+  vin?: string;
+  engine?: number;
+  office_price?: number;
+  stock_id?: string;
+  history?: File;
+  ad_state_id?: string;
 };
 export default function AddListing() {
   const [activeTab, setActiveTab] = useState<string>("car_details");
@@ -65,6 +66,8 @@ export default function AddListing() {
   const { fuelTypes } = useFuelTypesStore();
   const { features } = useFeaturesStore();
   const { adStates } = useAdStatesStore();
+  const { token } = useTokenStore();
+  console.log(token);
 
   const {
     register,
@@ -72,24 +75,41 @@ export default function AddListing() {
     watch,
     setError,
     setValue,
+    clearErrors,
     formState: { errors, isSubmitting },
   } = useForm<IFormInput>();
 
   const onSubmit: SubmitHandler<IFormInput> = async (data: IFormInput) => {
     const toastId = toast.loading("Submitting...");
-    console.log(data);
 
     try {
-      const token = await axios.get("/api/get-token");
-      console.log(token);
+      const formData = new FormData();
 
-      const response = await axios.post(`${baseUrl}/dealer/store-car`, data, {
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          Authorization: `Bearer ${token?.data?.token}`,
-        },
+      Object.keys(data).forEach((key) => {
+        const value = data[key as keyof IFormInput];
+
+        if (Array.isArray(value)) {
+          value.forEach((item) => formData.append(`${key}[]`, item));
+        } else if (value instanceof FileList) {
+          Array.from(value).forEach((file) => formData.append(key, file));
+        } else if (value instanceof File) {
+          formData.append(key, value);
+        } else if (value !== undefined && value !== null) {
+          formData.append(key, value.toString());
+        }
       });
+
+      const response = await axios.post(
+        `${baseUrl}/dealer/store-car`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Accept: "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       toast.dismiss(toastId);
       toast.success(response?.data?.message || "Adding Successful!", {
@@ -143,36 +163,110 @@ export default function AddListing() {
           <div className="inner-column">
             <div className="list-title">
               <h3 className="title">Add Listings</h3>
-              <div className="text">Lorem ipsum dolor sit amet, consectetur.</div>
+              <div className="text">
+                Lorem ipsum dolor sit amet, consectetur.
+              </div>
             </div>
             <div className="form-box">
               <ul className="nav nav-tabs" id="myTab" role="tablist">
                 <li className="nav-item" role="presentation">
-                  <button className={`nav-link ${activeTab === "car_details" ? "active" : ""}`} id="car_details_tab" type="button" onClick={() => handleTabChange("car_details")}>
+                  <button
+                    className={`nav-link ${
+                      activeTab === "car_details" ? "active" : ""
+                    }`}
+                    id="car_details_tab"
+                    type="button"
+                    onClick={() => handleTabChange("car_details")}
+                  >
                     Car Details
                   </button>
                 </li>
                 <li className="nav-item" role="presentation">
-                  <button className={`nav-link ${activeTab === "price" ? "active" : ""}`} id="price_tab" type="button" onClick={() => handleTabChange("price")}>
+                  <button
+                    className={`nav-link ${
+                      activeTab === "price" ? "active" : ""
+                    }`}
+                    id="price_tab"
+                    type="button"
+                    onClick={() => handleTabChange("price")}
+                  >
                     Price
                   </button>
                 </li>
                 <li className="nav-item" role="presentation">
-                  <button className={`nav-link ${activeTab === "features" ? "active" : ""}`} id="features_tab" type="button" onClick={() => handleTabChange("features")}>
+                  <button
+                    className={`nav-link ${
+                      activeTab === "features" ? "active" : ""
+                    }`}
+                    id="features_tab"
+                    type="button"
+                    onClick={() => handleTabChange("features")}
+                  >
                     Features
                   </button>
                 </li>
                 <li className="nav-item" role="presentation">
-                  <button className={`nav-link ${activeTab === "media" ? "active" : ""}`} id="media_tab" type="button" onClick={() => handleTabChange("media")}>
+                  <button
+                    className={`nav-link ${
+                      activeTab === "media" ? "active" : ""
+                    }`}
+                    id="media_tab"
+                    type="button"
+                    onClick={() => handleTabChange("media")}
+                  >
                     Media
                   </button>
                 </li>
               </ul>
-              <form onSubmit={handleSubmit(onSubmit)} className="tab-content" id="myTabContent">
-                <AddListingCarDetails register={register} watch={watch} errors={errors} setValue={setValue} store={{ makesCars, models, trims, countries, condition, bodies, transmissions, years, fuelTypes, adStates }} tab={activeTab} handleTabChange={handleTabChange} />
-                <AddListingPrice register={register} errors={errors} tab={activeTab} handleTabChange={handleTabChange} />
-                <AddListingFeatures register={register} errors={errors} store={{ features }} tab={activeTab} handleTabChange={handleTabChange} />
-                <AddListingMedia register={register} errors={errors} setValue={setValue} watch={watch} tab={activeTab} isSubmitting={isSubmitting} handleTabChange={handleTabChange} />
+              <form
+                onSubmit={handleSubmit(onSubmit)}
+                className="tab-content"
+                id="myTabContent"
+              >
+                <AddListingCarDetails
+                  register={register}
+                  clearErrors={clearErrors}
+                  watch={watch}
+                  errors={errors}
+                  setValue={setValue}
+                  store={{
+                    makesCars,
+                    models,
+                    trims,
+                    countries,
+                    condition,
+                    bodies,
+                    transmissions,
+                    years,
+                    fuelTypes,
+                    adStates,
+                  }}
+                  tab={activeTab}
+                  handleTabChange={handleTabChange}
+                />
+                <AddListingPrice
+                  register={register}
+                  errors={errors}
+                  tab={activeTab}
+                  handleTabChange={handleTabChange}
+                />
+                <AddListingFeatures
+                  register={register}
+                  errors={errors}
+                  store={{ features }}
+                  tab={activeTab}
+                  handleTabChange={handleTabChange}
+                />
+                <AddListingMedia
+                  register={register}
+                  clearErrors={clearErrors}
+                  errors={errors}
+                  setValue={setValue}
+                  watch={watch}
+                  tab={activeTab}
+                  isSubmitting={isSubmitting}
+                  handleTabChange={handleTabChange}
+                />
               </form>
             </div>
           </div>

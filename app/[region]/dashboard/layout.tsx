@@ -1,8 +1,10 @@
-import { ChildrenPropsInterface } from "@/app/utils/interfaces";
+"use client";
 import Footer from "@/components/Footers/Footer";
 import HeaderDashboard from "@/components/Headers/HeaderDashboard";
+import WithAuth from "@/components/ProtectedRoute/WithAuth";
+import { PropsWithChildren } from "react";
 
-export default function DashboardLayout({ children }: ChildrenPropsInterface) {
+function DashboardLayout({ children }: PropsWithChildren) {
   return (
     <div style={{ background: "var(--theme-color-dark)" }}>
       <HeaderDashboard />
@@ -11,3 +13,4 @@ export default function DashboardLayout({ children }: ChildrenPropsInterface) {
     </div>
   );
 }
+export default WithAuth(DashboardLayout);

@@ -12,7 +12,7 @@ import { baseUrl } from "@/app/utils/mainData";
 import axios from "axios";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { FieldErrors, UseFormRegister, UseFormSetValue, UseFormWatch } from "react-hook-form";
+import { FieldErrors, UseFormClearErrors, UseFormRegister, UseFormSetValue, UseFormWatch } from "react-hook-form";
 import { toast } from "react-toastify";
 import { IFormInput } from "./AddListing";
 import { InputField, SelectField } from "./CustomFields";
@@ -44,18 +44,30 @@ export interface TabProps {
   errors: FieldErrors<IFormInput>;
   watch?: UseFormWatch<IFormInput>;
   setValue?: UseFormSetValue<IFormInput>;
+  clearErrors?: UseFormClearErrors<IFormInput>;
   isSubmitting?: boolean;
   store?: store;
 }
 
-export default function AddListingCarDetails({ tab, handleTabChange, setValue, register, errors, watch, store }: TabProps) {
-  const [images2, setImages2] = useState<string[]>([]);
+export default function AddListingCarDetails({
+  tab,
+  handleTabChange,
+  clearErrors,
+  setValue,
+  register,
+  errors,
+  watch,
+  store,
+}: TabProps) {
+  const [images2, setImages2] = useState<string>("");
   const [currCities, setCurrCities] = useState<CITY[]>([]);
   const [currModel, setCurrModel] = useState<Models[]>([]);
   const [currTrims, setCurrTrims] = useState<Trims[]>([]);
   const country_id: string = watch ? (watch("country_id") ? `${watch("country_id")}` : "") : "";
   const make_id: string = watch ? (watch("make_id") ? `${watch("make_id")}` : "") : "";
   const model_id: string = watch ? (watch("model_id") ? `${watch("model_id")}` : "") : "";
+  console.log(watch && watch("city_id"));
+
   const getCurrCitiesInsideChosenCountry = async () => {
     if (country_id) {
       const data: { country_id: string } = {
@@ -93,6 +105,10 @@ export default function AddListingCarDetails({ tab, handleTabChange, setValue, r
         });
 
         setCurrModel(res?.data?.data);
+
+        if (setValue) {
+          setValue("model_id", "");
+        }
       } catch (error) {
         if (axios.isAxiosError(error)) {
           toast.error("Model Not Found");
@@ -116,6 +132,9 @@ export default function AddListingCarDetails({ tab, handleTabChange, setValue, r
         });
 
         setCurrTrims(res?.data?.data);
+        if (setValue) {
+          setValue("trim_id", "");
+        }
       } catch (error) {
         if (axios.isAxiosError(error)) {
           toast.error("Trim Not Found");
@@ -124,58 +143,60 @@ export default function AddListingCarDetails({ tab, handleTabChange, setValue, r
     }
   };
 
-  const handleImageChange2 = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
-    const file: File | null = e?.target?.files?.[0] ? e.target.files[0] : null;
-
-    if (!file) return;
-
-    const currentImages = (watch && watch("images")) ?? [];
+  const handleImageChange2 = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
 
     if (setValue) {
-      setValue("images", [...currentImages, file]);
+      setValue("history", file);
     }
 
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setImages2((prevImages) => {
-        const newImages = [...prevImages];
-        newImages[index] = file.name as string;
-        return newImages;
-      });
-    };
-
-    reader.readAsDataURL(file);
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImages2(reader.result as string); // Store Base64 URL
+      };
+      reader.readAsDataURL(file);
+    }
   };
-  const handleDelete2 = (index: number) => {
-    setImages2((prevImages) => {
-      const updatedImages = prevImages.filter((_, imgIndex) => imgIndex !== index);
-
-      // Update form state
-      if (setValue) {
-        const currentImages = (watch && watch("images")) ?? [];
-        const updatedFormImages = currentImages.filter((_, imgIndex) => imgIndex !== index);
-        setValue("images", updatedFormImages);
-      }
-
-      return updatedImages;
-    });
+  const handleDelete2 = () => {
+    setImages2("");
   };
 
   useEffect(() => {
     if (country_id) {
       getCurrCitiesInsideChosenCountry();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [country_id]);
+
+  useEffect(() => {
     if (make_id) {
       getModelByMake();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [make_id]);
+
+  useEffect(() => {
     if (model_id) {
       getTrimsByModel();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [country_id, make_id, model_id]);
+  }, [model_id]);
+
+  useEffect(() => {
+    if (watch && watch("history") && clearErrors && errors.history) {
+      clearErrors("history");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [watch && watch("history"), errors.history]);
 
   return (
-    <div className={`tab-pane fade ${tab === "car_details" ? "show active" : ""}`} id="car_details" role="tabpanel" aria-labelledby="car_details_tab">
+    <div
+      className={`tab-pane fade ${tab === "car_details" ? "show active" : ""}`}
+      id="car_details"
+      role="tabpanel"
+      aria-labelledby="car_details_tab"
+    >
       <div className="row">
         <div className="form-column col-lg-4 col-md-6">
           <div className="form_boxes">
@@ -200,86 +221,158 @@ export default function AddListingCarDetails({ tab, handleTabChange, setValue, r
           <SelectField label="Make" name="make_id" register={register} errors={errors} options={store?.makesCars || []} />
         </div>
         <div className="form-column col-lg-4 col-md-6">
-          <SelectField label="Model" select="Should be selected after make" name="model_id" register={register} errors={errors} options={currModel || []} />
+          <SelectField
+            label="Model"
+            select="Should be selected after make"
+            name="model_id"
+            register={register}
+            errors={errors}
+            options={currModel || []}
+          />
         </div>
         <div className="form-column col-lg-4 col-md-6">
-          <SelectField label="Trim" select="Should be selected after model" name="trim_id" register={register} errors={errors} options={currTrims || []} />
+          <SelectField
+            label="Trim"
+            select="Should be selected after model"
+            name="trim_id"
+            register={register}
+            errors={errors}
+            options={currTrims || []}
+          />
         </div>
         <div className="form-column col-lg-4 col-md-6">
-          <SelectField label="Transmission" name="transmission_id" register={register} errors={errors} options={store?.transmissions || []} />
+          <SelectField
+            label="Transmission"
+            name="transmission_id"
+            register={register}
+            errors={errors}
+            options={store?.transmissions || []}
+          />
         </div>
         <div className="form-column col-lg-4 col-md-6">
           <SelectField label="Year" name="year_id" register={register} errors={errors} options={store?.years || []} />
         </div>
         <div className="form-column col-lg-4 col-md-6">
-          <InputField label="Mileage" name="mileage" register={register} errors={errors} type="number" placeholder="Enter Mileage" />
+          <InputField
+            label="Mileage"
+            name="mileage"
+            register={register}
+            errors={errors}
+            type="number"
+            placeholder="Enter Mileage"
+          />
         </div>
         <div className="form-column col-lg-4 col-md-6">
-          <InputField label="Exterior Color" name="exterior" register={register} errors={errors} type="text" placeholder="Enter Exterior" />
+          <InputField
+            label="Exterior Color"
+            name="exterior"
+            register={register}
+            errors={errors}
+            type="text"
+            placeholder="Enter Exterior"
+          />
         </div>
         <div className="form-column col-lg-4 col-md-6">
-          <InputField label="Interior Color" name="interior" register={register} errors={errors} type="text" placeholder="Enter Interior" />
+          <InputField
+            label="Interior Color"
+            name="interior"
+            register={register}
+            errors={errors}
+            type="text"
+            placeholder="Enter Interior"
+          />
         </div>
         <div className="form-column col-lg-4 col-md-6">
           <SelectField label="Country" name="country_id" register={register} errors={errors} options={store?.countries || []} />
         </div>
         <div className="form-column col-lg-4 col-md-6">
-          <SelectField label="City" select="Should be selected after country" name="city_id" register={register} errors={errors} options={currCities || []} />
+          <SelectField
+            label="City"
+            select="Should be selected after country"
+            name="city_id"
+            register={register}
+            errors={errors}
+            options={currCities || []}
+          />
         </div>
         <div className="form-column col-lg-4 col-md-6">
-          <SelectField label="Fuel Type" name="fuel_type_id" register={register} errors={errors} options={store?.fuelTypes || []} />
+          <SelectField
+            label="Fuel Type"
+            name="fuel_type_id"
+            register={register}
+            errors={errors}
+            options={store?.fuelTypes || []}
+          />
         </div>
         <div className="form-column col-lg-4 col-md-6">
-          <InputField label="Engine Size" name="engine_size" register={register} errors={errors} type="text" placeholder="Enter Engine Size" />
+          <InputField
+            label="Engine Size"
+            name="engine"
+            register={register}
+            errors={errors}
+            type="text"
+            placeholder="Enter Engine Size"
+          />
         </div>
         <div className="form-column col-lg-4 col-md-6">
           <div className="form_boxes">
             <label htmlFor="Driver">Drive Type</label>
-            <select className="form-select" id="Driver" defaultValue={""}>
+            <select className="form-select" {...register("drive", { required: "Required" })} id="Driver" defaultValue={""}>
               <option value="" disabled>
                 select
               </option>
-              <option value="New">AWD</option>
-              <option value="Used">FWD</option>
+              <option value="awd">AWD</option>
+              <option value="fwd">FWD</option>
             </select>
           </div>
           {/* <InputField label="Drive Type" name="drive" register={register} errors={errors} type="text" placeholder="Enter Drive Type" /> */}
         </div>
         <div className="form-column col-lg-4 col-md-6">
-          <InputField label="VIN" name="VIN" register={register} errors={errors} type="text" placeholder="Enter VIN" />
+          <InputField label="VIN" name="vin" register={register} errors={errors} type="text" placeholder="Enter VIN" />
         </div>
         <div className="form-column col-lg-12 tab-pane gallery-sec">
           <div className="attachment-sec">
             <h6 className="title">History</h6>
-            {errors.images && <span className="text-danger">{errors.images.message}</span>}
+            {errors.history && <span className="text-danger">{errors.history.message}</span>}
             <div className="right-box-four row gap-2">
-              {images2.map((imgSrc, index) => (
-                <div key={index} className="report-box col-lg-3 col-md-6 col-sm-12">
-                  <span>{imgSrc.slice(0, 15) + "..."}</span>
+              {images2 && (
+                <div className="report-box col-lg-3 col-md-6 col-sm-12">
+                  <span>{images2.slice(0, 15) + "..."}</span>
                   <ul className="social-icon">
                     <li>
-                      <a onClick={() => handleDelete2(index)}>
+                      <a onClick={() => handleDelete2()}>
                         <Image width={18} height={18} src="/images/resource/delet.svg" alt="" />
                       </a>
                     </li>
                     <li>
-                      <label style={{ cursor: "pointer" }} htmlFor={`file-upload2-${index}`}>
+                      <label style={{ cursor: "pointer" }} htmlFor={`addListing-history-upload2`}>
                         <a>
                           <Image width={18} height={18} src="/images/resource/delet1-1.svg" alt="Upload" />
                         </a>
                       </label>
-                      <input id={`file-upload2-${index}`} type="file" onChange={(e) => handleImageChange2(e, index)} style={{ display: "none" }} />
+                      <input
+                        id={`addListing-history-upload2`}
+                        type="file"
+                        accept=".pdf,.doc,.docx"
+                        onChange={(e) => handleImageChange2(e)}
+                        style={{ display: "none" }}
+                      />
                     </li>
                   </ul>
                 </div>
-              ))}
+              )}
               <div className="uplode-box col-lg-3 col-md-6 col-sm-12">
                 <div className="content-box">
-                  <label style={{ cursor: "pointer" }} htmlFor="upload-new2">
+                  <label style={{ cursor: "pointer" }} htmlFor="addListing-history-new-upload2">
                     <Image width={34} height={34} src="/images/resource/uplode.svg" alt="Upload" />
                     <span>Upload</span>
                   </label>
-                  <input id="upload-new2" type="file" accept="image/*" style={{ display: "none" }} onChange={(e) => handleImageChange2(e, images2.length)} />
+                  <input
+                    id="addListing-history-new-upload2"
+                    type="file"
+                    style={{ display: "none" }}
+                    onChange={(e) => handleImageChange2(e)}
+                  />
                 </div>
               </div>
             </div>
@@ -291,7 +384,11 @@ export default function AddListingCarDetails({ tab, handleTabChange, setValue, r
           <div className="form_boxes v2">
             <label>Listing Description</label>
             <div className="drop-menu">
-              <textarea {...register("description", { required: "Required" })} placeholder="Lorem Ipsum Dolar Sit Amet" defaultValue={""} />
+              <textarea
+                {...register("description", { required: "Required" })}
+                placeholder="Lorem Ipsum Dolar Sit Amet"
+                defaultValue={""}
+              />
               {errors.description && <p className="text-danger">{errors.description.message}</p>}
             </div>
           </div>

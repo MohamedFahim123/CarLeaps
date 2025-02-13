@@ -1,11 +1,14 @@
-import { ChildrenPropsInterface } from "@/app/utils/interfaces";
+"use client";
+
 import BackToTop from "@/components/Common/BackToTop";
 import FilterSidebar from "@/components/Common/FilterSidebar";
 import Footer from "@/components/Footers/Footer";
 import Header1 from "@/components/Headers/Header";
 import MobileMenu from "@/components/Headers/MobileMenu";
+import WithoutAuth from "@/components/ProtectedRoute/WithoutAuth";
+import { PropsWithChildren } from "react";
 
-export default function AuthLayout({ children }: ChildrenPropsInterface) {
+function AuthLayout({ children }: PropsWithChildren) {
   return (
     <>
       <MobileMenu />
@@ -19,3 +22,4 @@ export default function AuthLayout({ children }: ChildrenPropsInterface) {
     </>
   );
 }
+export default WithoutAuth(AuthLayout);

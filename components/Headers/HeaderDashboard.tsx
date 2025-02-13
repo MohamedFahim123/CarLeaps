@@ -8,6 +8,8 @@ import { useCountriesStore } from "@/app/store/countries";
 import { useFeaturesStore } from "@/app/store/features";
 import { useFuelTypesStore } from "@/app/store/fuel-types";
 import { useMakesCarsStore } from "@/app/store/makeCars";
+import { useProfileStore } from "@/app/store/profile";
+import { useTokenStore } from "@/app/store/Token";
 import { useTransmissionsStore } from "@/app/store/transmissions";
 import { useYearsStore } from "@/app/store/years";
 import Image from "next/image";
@@ -28,6 +30,8 @@ function HeaderDashboard() {
     useTransmissionsStore();
   const { years, getYears, yearsLoading } = useYearsStore();
   const { countries, getCountries, countriesLoading } = useCountriesStore();
+  const { token, getToken, tokenLoading } = useTokenStore();
+  const { profile, getProfile, profileLoading } = useProfileStore();
 
   const getAllMakesCars = useCallback(() => {
     if (makesCars.length === 0 && !makesCarsLoading) {
@@ -95,6 +99,18 @@ function HeaderDashboard() {
     }
   }, [getCountries, countriesLoading, countries.length]);
 
+  const getTheToken = useCallback(() => {
+    if (!token && !tokenLoading) {
+      getToken();
+    }
+  }, [token, getToken, tokenLoading]);
+
+  const getTheProfile = useCallback(() => {
+    if (!profile && !profileLoading) {
+      getProfile();
+    }
+  }, [profile, getProfile, profileLoading]);
+
   useEffect(() => {
     getAllModels();
     getAllTrims();
@@ -107,6 +123,8 @@ function HeaderDashboard() {
     getAllFuelTypes();
     getAllYears();
     getAllCountries();
+    getTheToken();
+    getTheProfile();
   }, [
     getAllModels,
     getAllTrims,
@@ -119,13 +137,14 @@ function HeaderDashboard() {
     getAllTransmissions,
     getAllYears,
     getAllCountries,
+    getTheToken,
+    getTheProfile,
   ]);
 
   return (
     <header className="boxcar-header header-style-ten">
       <div className="header-inner">
         <div className="inner-container">
-          {/* Main box */}
           <div className="c-box">
             <div className="logo-inner">
               <div className="logo">
@@ -140,22 +159,27 @@ function HeaderDashboard() {
                 </Link>
               </div>
             </div>
-            {/*Nav Box*/}
             <div className="nav-out-bar">
               <nav className="nav main-menu">
                 <ul className="navigation" id="navbar">
                   <Nav />
                 </ul>
               </nav>
-              {/* Main Menu End*/}
             </div>
             <div className="right-box">
               <a href="#" className="haeder-img">
                 <Image
                   width={50}
                   height={50}
-                  src="/images/resource/header-img.png"
-                  alt=""
+                  src={
+                    profile?.image === "N/A"
+                      ? "/images/resource/header-img.png"
+                      : profile?.image
+                      ? profile?.image
+                      : "/images/resource/header-img.png"
+                  }
+                  alt={"Profile Image"}
+                  className="object-fit-cover rounded-circle"
                 />
               </a>
               <div className="mobile-navigation">
@@ -174,10 +198,8 @@ function HeaderDashboard() {
               </div>
             </div>
           </div>
-          {/* Mobile Menu  */}
         </div>
       </div>
-      {/* End Header Search */}
       <div id="nav-mobile" />
     </header>
   );

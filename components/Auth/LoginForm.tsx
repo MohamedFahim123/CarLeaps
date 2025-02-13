@@ -40,7 +40,7 @@ export default function LoginForm() {
       const token: string = response?.data?.data?.token;
       if (token) {
         await axios.post("/api/token", { token });
-        window.location.href = `/${Region}/dashboard`;
+        window.location.pathname = `/${Region}/dashboard`;
       }
     } catch (error) {
       toast.dismiss(toastId);
@@ -84,12 +84,12 @@ export default function LoginForm() {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="form_boxes">
             <label>Email or Username</label>
-            <input {...register("email", { required: "Required" })} required type="email" placeholder="Creativelayer088" />
+            <input {...register("email", { required: "Required" })} type="email" placeholder="Creativelayer088" />
             {errors.email && <span className="text-danger text-sm error">{errors.email.message}</span>}
           </div>
           <div className="form_boxes position-relative">
             <label>Password</label>
-            <input {...register("password", { required: "Required" })} required type={showPassword ? "text" : "password"} placeholder="********" />
+            <input {...register("password", { required: "Required" })} type={showPassword ? "text" : "password"} placeholder="********" />
             {errors.password && <span className="text-danger text-sm error">{errors.password.message}</span>}
             <span className="show-password" onClick={() => setShowPassword(!showPassword)}>
               {showPassword ? <FaEyeSlash /> : <FaEye />}
@@ -98,7 +98,7 @@ export default function LoginForm() {
           <div className="btn-box row">
             <label className="contain col-md-5">
               Remember
-              <input required type="checkbox" defaultChecked={true} />
+              <input type="checkbox" defaultChecked={true} />
               <span className="checkmark" />
             </label>
             <a href="#" className="pasword-btn text-end col-md-6">

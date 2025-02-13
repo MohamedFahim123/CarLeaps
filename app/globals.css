@@ -92,3 +92,7 @@
   -ms-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
 }
+
+.pointer {
+  cursor: pointer !important;
+}
