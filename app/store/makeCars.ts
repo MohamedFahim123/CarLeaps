@@ -6,7 +6,10 @@ import { baseUrl } from "../utils/mainData";
 export interface MakesCars {
   id: number;
   name: string;
+  description: string;
   image: string;
+  cover: string;
+  status: string;
 }
 
 export interface UseMakesCarsStoreIterface {
@@ -50,7 +53,9 @@ export const useMakesCarsStore = create<UseMakesCarsStoreIterface>((set) => ({
     } catch (err) {
       set({
         makesCars: [],
-        makesCarsError: axios.isAxiosError(err) ? err?.response?.data?.message || "Error fetching makesCars" : "Unexpected error occurred!",
+        makesCarsError: axios.isAxiosError(err)
+          ? err?.response?.data?.message || "Error fetching makesCars"
+          : "Unexpected error occurred!",
         makesCarsLoading: false,
       });
 

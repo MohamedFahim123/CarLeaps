@@ -5,6 +5,7 @@ import CarsCollection from "@/components/Homes/ResearchCars/CarsCollection";
 import Categories from "@/components/Homes/ResearchCars/Categories";
 import Features from "@/components/Homes/ResearchCars/Features";
 import Hero from "@/components/Homes/ResearchCars/Hero";
+import ResearchCarsBrands from "@/components/Homes/ResearchCars/ResearchCarsBrands";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -17,6 +18,7 @@ export default function ResearchNewCarsPage() {
     <>
       <Hero />
       <Categories />
+      <ResearchCarsBrands />
       <CarsCollection />
       <Banner />
       <Cars />

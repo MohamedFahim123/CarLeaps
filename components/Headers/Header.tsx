@@ -13,6 +13,7 @@ import { CiLogout } from "react-icons/ci";
 import styles from "./headerStyles.module.css";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { useMakesCarsStore } from "@/app/store/makeCars";
 
 interface Header1Props {
   headerClass?: string;
@@ -28,6 +29,13 @@ export default function Header1({
   const { countries, getCountries, countriesLoading } = useCountriesStore();
   const { token, clearToken, getToken, tokenLoading } = useTokenStore();
   const { profile, getProfile, profileLoading } = useProfileStore();
+  const { makesCars, getMakesCars, makesCarsLoading } = useMakesCarsStore();
+
+  const getAllMakesCars = useCallback(() => {
+    if (makesCars.length === 0 && !makesCarsLoading) {
+      getMakesCars();
+    }
+  }, [getMakesCars, makesCarsLoading, makesCars.length]);
 
   const getAllCountries = useCallback(() => {
     if (countries.length === 0 && !countriesLoading) {
@@ -51,7 +59,8 @@ export default function Header1({
     getAllCountries();
     getTheToken();
     getTheProfile();
-  }, [getAllCountries, getTheToken, getTheProfile]);
+    getAllMakesCars();
+  }, [getAllCountries, getAllMakesCars, getTheToken, getTheProfile]);
 
   useEffect(() => {
     const region: string = Cookies.get("region") || MainRegionName;
