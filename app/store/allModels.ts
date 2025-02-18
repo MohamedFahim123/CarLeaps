@@ -3,12 +3,31 @@ import { toast } from "react-toastify";
 import { create } from "zustand";
 import { baseUrl } from "../utils/mainData";
 
+export interface ModelGallery {
+  id: number;
+  name: string;
+  image: string;
+  description: string;
+}
+export interface ModelSpecification {
+  id: number;
+  name: string;
+  title: string;
+  subtitle: string;
+  image: string;
+  description: string;
+}
+
 export interface Models {
   id: number;
   name: string;
   make: string;
   make_id: number;
   image: string;
+  cover: string;
+  status: string;
+  specifications: ModelSpecification[];
+  gallery: ModelGallery[];
 }
 
 export interface UseModelsStoreIterface {
@@ -52,7 +71,9 @@ export const useModelsStore = create<UseModelsStoreIterface>((set) => ({
     } catch (err) {
       set({
         models: [],
-        modelsError: axios.isAxiosError(err) ? err?.response?.data?.message || "Error fetching Models" : "Unexpected error occurred!",
+        modelsError: axios.isAxiosError(err)
+          ? err?.response?.data?.message || "Error fetching Models"
+          : "Unexpected error occurred!",
         modelsLoading: false,
       });
 

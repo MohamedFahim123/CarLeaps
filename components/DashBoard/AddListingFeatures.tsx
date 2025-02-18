@@ -3,7 +3,7 @@ import { TabProps } from "./AddListingCarDetails";
 export default function AddListingFeatures({ tab, handleTabChange, register, errors, store }: TabProps) {
   const comfort = store?.features?.comfort || [];
   const entertainment = store?.features?.entertainment || [];
-  const safty = store?.features?.safty || [];
+  const safty = store?.features?.safety || [];
   const seats = store?.features?.seats || [];
 
   return (
@@ -56,12 +56,12 @@ export default function AddListingFeatures({ tab, handleTabChange, register, err
         </div>
         <div className="cheak-box">
           <h4>Safety</h4>
-          {errors.safty && <p className="error">{errors.safty.message}</p>}
+          {errors.safety && <p className="error">{errors.safety.message}</p>}
           {safty.length > 0 ? (
             safty.map((item, index) => (
               <label key={index} className="contain">
                 {item.name}
-                <input type="checkbox" value={item.id} {...register("safty", { required: index === 0 && "required" })} multiple />
+                <input type="checkbox" value={item.id} {...register("safety", { required: index === 0 && "required" })} multiple />
                 <span className="checkmark" />
               </label>
             ))

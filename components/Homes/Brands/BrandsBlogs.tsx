@@ -1,11 +1,5 @@
-import { MainRegionName } from "@/app/utils/mainData";
-import Cookies from "js-cookie";
-import Image from "next/image";
-import Link from "next/link";
-import { BlogPost } from "./Data";
 
-export default function BrandsBlogs({ blogPosts }: { blogPosts: BlogPost[] }) {
-  const region: string = Cookies.get("region") || MainRegionName;
+export default function BrandsBlogs() {
   return (
     <section className="blog-section">
       <div className="boxcar-container">
@@ -13,7 +7,7 @@ export default function BrandsBlogs({ blogPosts }: { blogPosts: BlogPost[] }) {
           <h2>Latest Blog Posts</h2>
         </div>
         <div className="row">
-          {blogPosts.slice(0, 4).map((post, index) => (
+          {/* {blogPosts.slice(0, 4).map((post, index) => (
             <div className="blog-block col-lg-3 col-md-6 col-sm-12" key={index}>
               <div className={`inner-box wow fadeInUp`}>
                 <div className="image-box">
@@ -45,7 +39,7 @@ export default function BrandsBlogs({ blogPosts }: { blogPosts: BlogPost[] }) {
                 </div>
               </div>
             </div>
-          ))}
+          ))} */}
         </div>
       </div>
     </section>

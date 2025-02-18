@@ -3,10 +3,10 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import ModalVideo from "react-modal-video";
-import { Brand } from "./Data";
 import styles from "./Brands.module.css";
+import { MakesCars } from "@/app/store/makeCars";
 
-function BrandsChooseUs({ brand }: { brand: Brand }) {
+function BrandsChooseUs({ brand }: {brand: MakesCars}) {
   const [isOpen, setOpen] = useState<boolean>(false);
   return (
     <>

@@ -1,18 +1,10 @@
 "use client";
 
-import "swiper/css";
-import "swiper/css/navigation";
-import { Autoplay } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
+// import "swiper/css";
+// import "swiper/css/navigation";
 import styles from "./Brands.module.css";
 
-import { MainRegionName } from "@/app/utils/mainData";
-import Cookies from "js-cookie";
-import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { Brand } from "./Data";
 
 const buttons: { label: string; isActive: boolean }[] = [
   { label: "All Models", isActive: true },
@@ -20,10 +12,10 @@ const buttons: { label: string; isActive: boolean }[] = [
   { label: "Sedans", isActive: false },
 ];
 
-export default function BrandsBanner({ brand }: { brand: Brand }) {
+export default function BrandsBanner() {
   const [selectedCategory, setSelectedCategory] = useState(buttons[0]);
-  const router = useRouter();
-  const region: string = Cookies.get("region") || MainRegionName;
+  // const router = useRouter();
+  // const region: string = Cookies.get("region") || MainRegionName;
 
   return (
     <div className={styles.brandsBannerSection}>
@@ -47,7 +39,7 @@ export default function BrandsBanner({ brand }: { brand: Brand }) {
             </div>
           </nav>
         </div>
-        <Swiper
+        {/* <Swiper
           modules={[Autoplay]}
           autoplay={{
             delay: 2500,
@@ -88,7 +80,7 @@ export default function BrandsBanner({ brand }: { brand: Brand }) {
               </div>
             </SwiperSlide>
           ))}
-        </Swiper>
+        </Swiper> */}
       </div>
     </div>
   );

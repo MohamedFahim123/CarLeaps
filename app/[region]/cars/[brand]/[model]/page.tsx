@@ -1,8 +1,8 @@
-import BrandsBlogs from "@/components/Homes/Brands/BrandsBlogs";
+import { Models } from "@/app/store/allModels";
+import { baseUrl } from "@/app/utils/mainData";
 import BrandsSpecialSection from "@/components/Homes/Brands/BrandsSpecialSection";
 import IncentivesSection from "@/components/Homes/Brands/IncentivesSection";
-import { MODEL, Models } from "@/components/Homes/Model/data";
-import FactoryWranties from "@/components/Homes/Model/FactoryWranties";
+import Blogs from "@/components/Homes/Home/Blogs";
 import GallerySection from "@/components/Homes/Model/GallerySection";
 import KeySpecifications from "@/components/Homes/Model/KeySpecifications";
 import ModelHeroSection from "@/components/Homes/Model/ModelHeroSection";
@@ -20,9 +20,18 @@ export default async function ModelPage({
 }) {
   const { model } = await params;
 
-  const selectedModel: MODEL | undefined = Models.find(
-    (el) => el.model.toLowerCase() === model.toLowerCase()
-  );
+  const selectedModelReq = await fetch(`${baseUrl}/show-model`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify({
+      model_id: model,
+    }),
+  });
+  const selectedModelRes = await selectedModelReq.json();
+  const selectedModel: Models = selectedModelRes?.data;
 
   return (
     <>
@@ -31,11 +40,11 @@ export default async function ModelPage({
           <ModelHeroSection model={selectedModel} />
           <KeySpecifications />
           <GallerySection model={selectedModel} />
-          <IncentivesSection incentives={selectedModel.incentives} />
+          <IncentivesSection />
           <TrimView model={selectedModel} />
           <BrandsSpecialSection />
-          <BrandsBlogs blogPosts={selectedModel.blogPosts} />
-          <FactoryWranties factoryWranties={selectedModel.factoryWranties} />
+          <Blogs />
+          {/* <FactoryWranties factoryWranties={selectedModel.factoryWranties} /> */}
         </>
       ) : (
         <div>No Model Found</div>

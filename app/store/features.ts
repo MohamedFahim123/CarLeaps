@@ -11,7 +11,7 @@ export interface Feature {
 export interface Features {
   comfort?: Feature[];
   seats?: Feature[];
-  safty?: Feature[]; // Keep the typo as "safty" to match the API response
+  safety?: Feature[];
   entertainment?: Feature[];
 }
 

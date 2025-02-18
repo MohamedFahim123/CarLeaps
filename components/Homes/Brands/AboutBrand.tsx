@@ -1,13 +1,9 @@
 "use client";
 
-import React from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Autoplay } from "swiper/modules";
-import Image from "next/image";
-import { Brand } from "./Data";
+import { MakesCars } from "@/app/store/makeCars";
 import styles from "./Brands.module.css";
 
-export default function AboutBrand({ brand }: { brand: Brand }) {
+export default function AboutBrand({ brand }:{brand: MakesCars}) {
   return (
     <div className={`${styles.bgBlack} text-white py-5`}>
       <div className="container">
@@ -15,7 +11,7 @@ export default function AboutBrand({ brand }: { brand: Brand }) {
         <h2 className="text-light mb-4">
           Master the road with driving pleasure
         </h2>
-        <Swiper
+        {/* <Swiper
           modules={[Pagination, Autoplay]}
           pagination={{ clickable: true }}
           autoplay={{ delay: 3000, disableOnInteraction: false }}
@@ -45,7 +41,7 @@ export default function AboutBrand({ brand }: { brand: Brand }) {
               </div>
             </SwiperSlide>
           ))}
-        </Swiper>
+        </Swiper> */}
         <div className="d-flex justify-content-center mt-4">
           <button className="btn btn-light me-3">Build & price →</button>
           <button className="btn btn-outline-light">Learn more →</button>

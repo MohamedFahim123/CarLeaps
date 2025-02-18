@@ -41,7 +41,7 @@ export type IFormInput = {
   main_image?: File;
   comfort?: string[];
   entertainment?: string[];
-  safty?: string[];
+  safety?: string[];
   seats?: string[];
   image?: File[];
   video_link?: string;
@@ -53,6 +53,7 @@ export type IFormInput = {
   history?: File;
   ad_state_id?: string;
 };
+
 export default function AddListing() {
   const [activeTab, setActiveTab] = useState<string>("car_details");
   const { makesCars } = useMakesCarsStore();
@@ -67,7 +68,6 @@ export default function AddListing() {
   const { features } = useFeaturesStore();
   const { adStates } = useAdStatesStore();
   const { token } = useTokenStore();
-  console.log(token);
 
   const {
     register,
@@ -76,6 +76,7 @@ export default function AddListing() {
     setError,
     setValue,
     clearErrors,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm<IFormInput>();
 
@@ -115,12 +116,12 @@ export default function AddListing() {
       toast.success(response?.data?.message || "Adding Successful!", {
         autoClose: 1500,
       });
+      reset();
     } catch (error) {
       toast.dismiss(toastId);
 
       if (axios.isAxiosError(error)) {
         const errorResponse = error.response?.data;
-        console.log("error", error);
 
         if (errorResponse?.errors) {
           let firstErrorMessage = "";

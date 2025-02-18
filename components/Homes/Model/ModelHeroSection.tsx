@@ -1,20 +1,19 @@
 "use client";
-import React from "react";
+import { Models } from "@/app/store/allModels";
+import { MainRegionName } from "@/app/utils/mainData";
+import Cookies from "js-cookie";
 import Image from "next/image";
 import Link from "next/link";
-import Cookies from "js-cookie";
 import styles from "./Models.module.css";
-import { MODEL } from "./data";
-import { MainRegionName } from "@/app/utils/mainData";
 
-export default function ModelHeroSection({ model }: { model: MODEL }) {
+export default function ModelHeroSection({ model }: { model: Models }) {
   const region: string = Cookies.get("region") || MainRegionName;
 
   return (
     <section className={`${styles.hero_section} position-relative`}>
       <div className={`${styles.hero_bg}`}>
         <Image
-          src="/images/brands/bgSection.webp"
+          src={model.cover}
           alt="Car Background"
           fill
           className="img-fluid object-fit-cover"
@@ -30,16 +29,16 @@ export default function ModelHeroSection({ model }: { model: MODEL }) {
             Home /
           </Link>
           <Link
-            href={`/${region}/cars/${model.makeSlug}`}
+            href={`/${region}/cars/${model.make_id}`}
             className="breadcrumb-item active ms-1"
           >
             {model.make} /
           </Link>
           <Link
-            href={`/${region}/cars/${model.makeSlug}/${model.model}`}
+            href={`/${region}/cars/${model.make_id}/${model.id}`}
             className="breadcrumb-item active ms-1"
           >
-            {model.model}
+            {model.name}
           </Link>
         </nav>
         <div
@@ -48,7 +47,7 @@ export default function ModelHeroSection({ model }: { model: MODEL }) {
           <h1 className="fw-bold mb-5">Alfa Romeo Tonale</h1>
           <p className="text-muted fs-5 mb-5">
             <Image
-              src="/images/brands/logo.svg"
+              src={model.image}
               alt={`${model.make} Logo`}
               width={30}
               height={30}

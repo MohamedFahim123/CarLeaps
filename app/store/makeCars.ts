@@ -3,6 +3,16 @@ import { toast } from "react-toastify";
 import { create } from "zustand";
 import { baseUrl } from "../utils/mainData";
 
+export interface Incentive {
+  id: number;
+  name: string;
+  title: string;
+  description: string;
+  image: string;
+  type: string;
+  expires: string;
+}
+
 export interface MakesCars {
   id: number;
   name: string;
@@ -10,6 +20,7 @@ export interface MakesCars {
   image: string;
   cover: string;
   status: string;
+  incentives: Incentive[]
 }
 
 export interface UseMakesCarsStoreIterface {

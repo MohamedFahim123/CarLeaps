@@ -1,4 +1,5 @@
 "use client";
+
 import { useTokenStore } from "@/app/store/Token";
 import { useCountriesStore } from "@/app/store/countries";
 import { useProfileStore } from "@/app/store/profile";
@@ -14,6 +15,8 @@ import styles from "./headerStyles.module.css";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { useMakesCarsStore } from "@/app/store/makeCars";
+import { useModelsStore } from "@/app/store/allModels";
+import { useTrimsStore } from "@/app/store/allTirms";
 
 interface Header1Props {
   headerClass?: string;
@@ -30,6 +33,8 @@ export default function Header1({
   const { token, clearToken, getToken, tokenLoading } = useTokenStore();
   const { profile, getProfile, profileLoading } = useProfileStore();
   const { makesCars, getMakesCars, makesCarsLoading } = useMakesCarsStore();
+  const { models, getModels, modelsLoading } = useModelsStore();
+  const { trims, getTrims, trimsLoading } = useTrimsStore();
 
   const getAllMakesCars = useCallback(() => {
     if (makesCars.length === 0 && !makesCarsLoading) {
@@ -55,12 +60,33 @@ export default function Header1({
     }
   }, [profile, getProfile, profileLoading]);
 
+  const getAllModels = useCallback(() => {
+    if (models.length === 0 && !modelsLoading) {
+      getModels();
+    }
+  }, [getModels, modelsLoading, models.length]);
+
+  const getAllTrims = useCallback(() => {
+    if (trims.length === 0 && !trimsLoading) {
+      getTrims();
+    }
+  }, [getTrims, trimsLoading, trims.length]);
+
   useEffect(() => {
     getAllCountries();
     getTheToken();
     getTheProfile();
     getAllMakesCars();
-  }, [getAllCountries, getAllMakesCars, getTheToken, getTheProfile]);
+    getAllModels();
+    getAllTrims();
+  }, [
+    getAllCountries,
+    getAllMakesCars,
+    getTheToken,
+    getTheProfile,
+    getAllModels,
+    getAllTrims,
+  ]);
 
   useEffect(() => {
     const region: string = Cookies.get("region") || MainRegionName;

@@ -11,10 +11,6 @@ export default function ResearchCarsBrands() {
   const Region: string = Cookies.get("region") || MainRegionName;
   const { makesCars } = useMakesCarsStore();
 
-  const handleNavigateToBrnad = (slug: string) => {
-    const newSlug = slug?.toLowerCase()?.replace(/\s+/g, "-");
-    router.push(`/${Region}/cars/${newSlug}`);
-  };
 
   return (
     <section className="boxcar-brand-section-five pt-0">
@@ -27,7 +23,7 @@ export default function ResearchCarsBrands() {
             <div
               className={`${styles.carMake} cars-block-five`}
               key={make?.id}
-              onClick={() => handleNavigateToBrnad(make.name)}
+              onClick={() => router.push(`/${Region}/cars/${make.id}`)}
             >
               <div className={`inner-box wow fadeInUp`}>
                 <div className="image-box">

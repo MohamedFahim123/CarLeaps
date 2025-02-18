@@ -1,13 +1,13 @@
 "use client";
 
+import { Models } from "@/app/store/allModels";
 import Image from "next/image";
-import React, { useState } from "react";
-import { Gallery, Item } from "react-photoswipe-gallery";
-import { MODEL } from "./data";
+import { useState } from "react";
 import ModalVideo from "react-modal-video";
+import { Gallery, Item } from "react-photoswipe-gallery";
 import styles from "./Models.module.css";
 
-export default function GallerySection({ model }: { model: MODEL }) {
+export default function GallerySection({ model }: { model: Models }) {
   const [isOpen, setOpen] = useState<boolean>(false);
 
   return (
@@ -15,7 +15,7 @@ export default function GallerySection({ model }: { model: MODEL }) {
       <div className="boxcar-container">
         <div className="row">
           <div className="col-12">
-            <h2 className="mb-4">Photo & video gallery for {model.model}</h2>
+            <h2 className="mb-4">Photo & video gallery for {model.name}</h2>
             <Gallery>
               <div className="gallery-sec">
                 <div className="row">

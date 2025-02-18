@@ -1,9 +1,9 @@
 
 import Image from "next/image";
 import styles from "./Brands.module.css";
-import { Brand } from "./Data";
+import { MakesCars } from "@/app/store/makeCars";
 
-export default function BrandsHeroSection({ brand }: { brand: Brand }) {
+export default function BrandsHeroSection({ brand }: {brand: MakesCars}) {
   return (
     <div className={`boxcar-banner-section-nine ${styles.heroSection}`}>
       <div className="container h-100">
@@ -13,7 +13,7 @@ export default function BrandsHeroSection({ brand }: { brand: Brand }) {
               <h2 className={`title ${styles.title} position-relative`}>{brand.name}</h2>
               <div className={`brand-logo my-3 position-relative`}>
                 <Image
-                  src={brand.logo}
+                  src={brand.image}
                   alt={brand.name}
                   width={50}
                   height={50}

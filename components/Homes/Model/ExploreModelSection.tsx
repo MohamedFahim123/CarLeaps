@@ -1,16 +1,17 @@
 "use client";
 
+import { Models } from "@/app/store/allModels";
+import { Trims } from "@/app/store/allTirms";
+import Image from "next/image";
 import React, { useState } from "react";
 import styles from "./Models.module.css";
-import { ExploreModel, TrimInteface } from "./data";
-import Image from "next/image";
 
 const ExploreModelSection = ({
-  exploreModel,
+  model,
   trim,
 }: {
-  exploreModel: ExploreModel[];
-  trim: TrimInteface;
+  model: Models;
+  trim: Trims;
 }) => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
@@ -21,7 +22,7 @@ const ExploreModelSection = ({
   return (
     <>
       <div className="col-lg-6 py-5">
-        <Image width={600} height={700} alt={trim.trim} src={trim.image} />
+        <Image width={600} height={700} alt={trim.name} src={trim.image} />
         <div className="price-section ps-5 mb-5 d-flex align-items-center gap-3">
           <p className="fw-bold fs-4">Starts at:</p>
           <h4 className="text-primary fs-3 fw-bold">$43,845</h4>
@@ -30,7 +31,7 @@ const ExploreModelSection = ({
       <div className="col-lg-6 py-5">
         <h2>Specifications</h2>
         <div className="accordion" id="accordionExample">
-          {exploreModel.map((model, index) => (
+          {model?.specifications?.map((model, index) => (
             <div
               key={index}
               className={`accordion-item ${styles.accordion} ${
@@ -47,7 +48,7 @@ const ExploreModelSection = ({
                   aria-expanded={activeIndex === index}
                   aria-controls={`collapse${index}`}
                 >
-                  {model.title.toUpperCase() || "Unknown Model Name"}
+                  {model?.title.toUpperCase() || "Unknown Model Name"}
                 </button>
               </h2>
               <div
