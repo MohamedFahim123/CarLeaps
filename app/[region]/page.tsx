@@ -7,19 +7,12 @@ export default async function RegionPage({
 }: {
   params: { region?: string };
 }) {
+  const cookieStore = await cookies();
   const regionFromUrl = params?.region?.toLowerCase();
   const regionFromCookie =
-    (await cookies()).get("region")?.value?.toLowerCase() || MainRegionName;
+    cookieStore.get("region")?.value?.toLowerCase() || MainRegionName;
 
   const finalRegion = regionFromUrl || regionFromCookie;
-
-  if (regionFromCookie !== finalRegion) {
-    (await cookies()).set("region", finalRegion, {
-      path: "/",
-      maxAge: 60 * 60 * 24 * 30,
-      secure: true,
-    });
-  }
 
   redirect(`/${finalRegion}/cars/home`);
 }

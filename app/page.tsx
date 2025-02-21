@@ -1,21 +1,18 @@
 import { Metadata } from "next";
 import { cookies } from "next/headers";
-import RegionPage from "./[region]/page";
+import { redirect } from "next/navigation";
+import { MainRegionName } from "./utils/mainData";
 
 export const metadata: Metadata = {
   title: "Select Your Current Region",
-  description:
-    "Select your current region to get personalized recommendations and offers.",
+  description: "Select your current region to get personalized recommendations and offers.",
 };
 
 export default async function MainHome() {
-  const regionFromCookie =
-    (await cookies()).get("region")?.value || "default-region";
+  const cookieStore = await cookies();
+  const regionFromCookie = cookieStore.get("region")?.value?.toLowerCase();
 
-  return (
-    <RegionPage
-      params={Promise.resolve({ region: "some-region" })}
-      regionFromCookie={regionFromCookie}
-    />
-  );
+  const finalRegion = regionFromCookie || MainRegionName;
+
+  redirect(`/${finalRegion}/cars/home`);
 }
