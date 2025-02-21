@@ -126,6 +126,7 @@ export default function Header1({
       });
       if (res.status === 200) {
         clearToken();
+        Cookies.remove("region");
         axios.post("/api/logout", { token: "" });
         window.location.reload();
       }
@@ -197,7 +198,7 @@ export default function Header1({
             </div>
             <div className="right-box ms-auto">
               {countries.length > 0 && (
-                <div className="region-selector me-2">
+                <div className="region-selector me-3">
                   <select
                     className="form-select"
                     value={currRegion}
