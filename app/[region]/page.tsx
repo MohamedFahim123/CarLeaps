@@ -1,30 +1,25 @@
-"use client";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+import { MainRegionName } from "../utils/mainData";
 
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { use } from "react";
-import { setRegionCookie } from "../utils/setRegionCookie";
-
-export default function RegionPage({
+export default async function RegionPage({
   params,
-  regionFromCookie,
 }: {
-  params: Promise<{ region?: string }>;
-  regionFromCookie: string;
+  params: { region?: string };
 }) {
-  const router = useRouter();
+  const regionFromUrl = params?.region?.toLowerCase();
+  const regionFromCookie =
+    (await cookies()).get("region")?.value?.toLowerCase() || MainRegionName;
 
-  const resolvedParams = use(params);
-  const regionFromUrl = resolvedParams?.region?.toLowerCase();
   const finalRegion = regionFromUrl || regionFromCookie;
 
-  useEffect(() => {
-    if (regionFromCookie !== finalRegion) {
-      setRegionCookie(finalRegion);
-    }
+  if (regionFromCookie !== finalRegion) {
+    (await cookies()).set("region", finalRegion, {
+      path: "/",
+      maxAge: 60 * 60 * 24 * 30,
+      secure: true,
+    });
+  }
 
-    router.replace(`/${finalRegion}/cars/home`);
-  }, [finalRegion, regionFromCookie, router]);
-
-  return null;
+  redirect(`/${finalRegion}/cars/home`);
 }

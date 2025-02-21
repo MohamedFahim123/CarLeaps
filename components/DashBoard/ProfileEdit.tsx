@@ -83,17 +83,20 @@ export default function ProfileEdit({ profile }: { profile: Profile | null }) {
     }
   }, [profile, setValue]);
 
-  useEffect(() => {
-    if (watch("image") && errors.image) {
-      clearErrors("image");
-    }
-  }, [clearErrors, errors.image, watch("image")]);
+  const coverValue = watch("cover");
+  const imageValue = watch("image");
 
   useEffect(() => {
-    if (watch("cover") && errors.cover) {
+    if (imageValue && errors.image) {
+      clearErrors("image");
+    }
+  }, [clearErrors, errors.image, imageValue]);
+
+  useEffect(() => {
+    if (coverValue && errors.cover) {
       clearErrors("cover");
     }
-  }, [clearErrors, errors.cover, watch("cover")]);
+  }, [clearErrors, errors.cover, coverValue]);
 
   const onSubmit: SubmitHandler<ProfileFormInputs> = async (
     data: ProfileFormInputs
