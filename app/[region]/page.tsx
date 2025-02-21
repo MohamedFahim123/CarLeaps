@@ -1,14 +1,11 @@
+"use client";
+
 import { redirect } from "next/navigation";
 import { MainRegionName } from "../utils/mainData";
+import Cookies from "js-cookie";
 
-export default async function RegionPage({
-  params,
-}: {
-  params: { region?: string | undefined };
-}) {
-  const regionFromUrl = params?.region?.toLowerCase();
+export default function RegionPage() {
+  const Region = Cookies.get("region") || MainRegionName;
 
-  const finalRegion = regionFromUrl || MainRegionName;
-
-  return redirect(`/${finalRegion}/cars/home`);
+  return redirect(`/${Region}/cars/home`);
 }
