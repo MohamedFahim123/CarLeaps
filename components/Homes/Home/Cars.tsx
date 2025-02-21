@@ -1,6 +1,5 @@
 "use client";
 
-import { useCarsForSaleStore } from "@/app/store/CarsForSale";
 import { Car, carData } from "@/data/cars";
 import Image from "next/image";
 import Link from "next/link";
@@ -23,8 +22,7 @@ export default function Cars() {
   }>(buttons[0]);
   const [sortedItems, setSortedItems] = useState<Car[]>([...carData]);
 
-  const { carsForSale } = useCarsForSaleStore();
-  console.log(carsForSale)
+  // const { carsForSale } = useCarsForSaleStore();
 
   useEffect(() => {
     setSortedItems([
