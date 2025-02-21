@@ -4,7 +4,7 @@ import { Models } from "@/app/store/allModels";
 import { Trims } from "@/app/store/allTirms";
 import Image from "next/image";
 import React, { useState } from "react";
-import styles from "./models.module.css";
+import styles from "./modelStyle.module.css";
 
 const ExploreModelSection = ({
   model,

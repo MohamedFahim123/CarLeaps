@@ -100,3 +100,6 @@ img {
 .pointer {
   cursor: pointer !important;
 }
+.region-selector{
+  max-width: 80px;
+}

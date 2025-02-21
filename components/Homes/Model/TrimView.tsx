@@ -3,7 +3,7 @@
 import { Models } from "@/app/store/allModels";
 import { useState } from "react";
 import ExploreModelSection from "./ExploreModelSection";
-import styles from "./models.module.css";
+import styles from "./modelStyle.module.css";
 import { Trims, useTrimsStore } from "@/app/store/allTirms";
 
 const buttons: { label: string; isActive: boolean }[] = [

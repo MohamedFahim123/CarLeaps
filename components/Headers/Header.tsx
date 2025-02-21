@@ -163,7 +163,7 @@ export default function Header1({
       } ${headerClass}`}
     >
       <div className="header-inner py-3">
-        <div className="inner-container">
+        <div className="container">
           <div className="c-box">
             <div className="logo-inner">
               <div className="logo">
@@ -195,20 +195,22 @@ export default function Header1({
                 </ul>
               </nav>
             </div>
-            <div className="region-selector ms-auto">
-              <select
-                className="form-select"
-                value={currRegion}
-                onChange={handleRegionChange}
-              >
-                {countries?.map((country) => (
-                  <option key={country.id} value={country.code}>
-                    {country.name.toUpperCase()}
-                  </option>
-                ))}
-              </select>
-            </div>
             <div className="right-box ms-auto">
+              {countries.length > 0 && (
+                <div className="region-selector me-2">
+                  <select
+                    className="form-select"
+                    value={currRegion}
+                    onChange={handleRegionChange}
+                  >
+                    {countries?.map((country) => (
+                      <option key={country.id} value={country.code}>
+                        {country.code.toUpperCase()}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
               {!token ? (
                 <Link
                   href={`/${currRegion}/auth/login`}
@@ -244,14 +246,6 @@ export default function Header1({
                 </Link>
               ) : (
                 <>
-                  <button
-                    className={`btn text-white ${styles.logoutBtn}`}
-                    type="button"
-                    title="Logout"
-                    onClick={logoutHandler}
-                  >
-                    <CiLogout size={30} />
-                  </button>
                   <div className="btn">
                     <Link
                       href={`/${currRegion}/dashboard/profile`}
@@ -260,6 +254,14 @@ export default function Header1({
                       Car Portal
                     </Link>
                   </div>
+                  <button
+                    className={`btn text-white ${styles.logoutBtn}`}
+                    type="button"
+                    title="Logout"
+                    onClick={logoutHandler}
+                  >
+                    <CiLogout size={30} />
+                  </button>
                 </>
               )}
               <div className="mobile-navigation">

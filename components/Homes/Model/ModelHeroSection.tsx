@@ -4,7 +4,7 @@ import { MainRegionName } from "@/app/utils/mainData";
 import Cookies from "js-cookie";
 import Image from "next/image";
 import Link from "next/link";
-import styles from "./models.module.css";
+import styles from "./modelStyle.module.css";
 
 export default function ModelHeroSection({ model }: { model: Models }) {
   const region: string = Cookies.get("region") || MainRegionName;
