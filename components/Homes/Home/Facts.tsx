@@ -7,7 +7,6 @@ export default function Facts() {
       <div className="large-container">
         <div className="fact-counter">
           <div className="row">
-            {/* Counter block Two*/}
             {counters.map((counter, index) => (
               <div
                 className="counter-block col-lg-3 col-md-3 col-sm-4 wow fadeInUp"

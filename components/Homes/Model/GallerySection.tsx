@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useState } from "react";
 import ModalVideo from "react-modal-video";
 import { Gallery, Item } from "react-photoswipe-gallery";
-import styles from "./Models.module.css";
+import styles from "./models.module.css";
 
 export default function GallerySection({ model }: { model: Models }) {
   const [isOpen, setOpen] = useState<boolean>(false);

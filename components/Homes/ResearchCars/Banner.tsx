@@ -5,7 +5,6 @@ export default function Banner() {
     <section className="blog-section-three">
       <div className="boxcar-container">
         <div className="row">
-          {/* blog-blockt-three */}
           <div className="blog-blockt-three home9 col-lg-6 col-md-6 col-sm-12">
             <div className="inner-box wow fadeInUp">
               <div className="hover-img">

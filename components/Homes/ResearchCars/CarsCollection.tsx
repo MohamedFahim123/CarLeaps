@@ -6,7 +6,6 @@ export default function CarsCollection() {
     <section className="boxcar-pricing-section-four v9 pb-0">
       <div className="boxcar-container">
         <div className="row">
-          {/* image-column */}
           <div className="image-column col-lg-6 col-md-6 col-sm-12">
             <div className="inner-column">
               <div className="image-box">

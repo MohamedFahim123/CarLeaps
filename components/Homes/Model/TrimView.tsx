@@ -3,7 +3,7 @@
 import { Models } from "@/app/store/allModels";
 import { useState } from "react";
 import ExploreModelSection from "./ExploreModelSection";
-import styles from "./Models.module.css";
+import styles from "./models.module.css";
 import { Trims, useTrimsStore } from "@/app/store/allTirms";
 
 const buttons: { label: string; isActive: boolean }[] = [
@@ -43,10 +43,7 @@ export default function TrimView({ model }: { model: Models }) {
             </div>
             {currTrims?.map((trim, idx) => (
               <div className="row" key={idx}>
-                <ExploreModelSection
-                  trim={trim}
-                  model={model}
-                />
+                <ExploreModelSection trim={trim} model={model} />
               </div>
             ))}
           </div>

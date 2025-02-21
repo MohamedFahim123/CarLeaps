@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Models.module.css";
+import styles from "./models.module.css";
 
 function FactoryWranties() {
   return (

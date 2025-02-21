@@ -10,7 +10,6 @@ export default function Features() {
       <section className="boxcar-pricing-section pb-0 pt-0">
         <div className="large-container">
           <div className="row g-0">
-            {/* image-column */}
             <div className="image-column col-lg-6 col-md-12 col-sm-12">
               <div className="inner-column">
                 <div className="image-box">
