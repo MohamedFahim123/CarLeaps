@@ -1,11 +1,6 @@
 import { Metadata } from "next";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
-import "swiper/css";
-import "swiper/css/autoplay";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-import { MainRegionName } from "./utils/mainData";
+import RegionPage from "./[region]/page";
 
 export const metadata: Metadata = {
   title: "Select Your Current Region",
@@ -14,20 +9,13 @@ export const metadata: Metadata = {
 };
 
 export default async function MainHome() {
-  const cookieStore = await cookies();
-  const region: string | undefined = cookieStore.get("region")?.value;
+  const regionFromCookie =
+    (await cookies()).get("region")?.value || "default-region";
 
-  if (region) {
-    return redirect(`/${region}`);
-  }
-
-  const headers = new Headers();
-  headers.append(
-    "Set-Cookie",
-    `region=${MainRegionName}; Path=/; Max-Age=${
-      60 * 60 * 24 * 30
-    }; Secure; HttpOnly`
+  return (
+    <RegionPage
+      params={Promise.resolve({ region: "some-region" })}
+      regionFromCookie={regionFromCookie}
+    />
   );
-
-  return redirect(`/${MainRegionName}`);
 }

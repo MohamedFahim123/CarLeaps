@@ -7,7 +7,7 @@ import { baseUrl, MainRegionName } from "@/app/utils/mainData";
 import Cookies from "js-cookie";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import Nav from "./Nav";
 import { CiLogout } from "react-icons/ci";
@@ -17,6 +17,8 @@ import axios from "axios";
 import { useMakesCarsStore } from "@/app/store/makeCars";
 import { useModelsStore } from "@/app/store/allModels";
 import { useTrimsStore } from "@/app/store/allTirms";
+import { useCarsForSaleStore } from "@/app/store/CarsForSale";
+import { setRegionCookie } from "@/app/utils/setRegionCookie";
 
 interface Header1Props {
   headerClass?: string;
@@ -28,6 +30,7 @@ export default function Header1({
   white = false,
 }: Header1Props) {
   const pathName = usePathname();
+  const router = useRouter();
   const [currRegion, setCurrRegion] = useState<string>(MainRegionName);
   const { countries, getCountries, countriesLoading } = useCountriesStore();
   const { token, clearToken, getToken, tokenLoading } = useTokenStore();
@@ -35,6 +38,14 @@ export default function Header1({
   const { makesCars, getMakesCars, makesCarsLoading } = useMakesCarsStore();
   const { models, getModels, modelsLoading } = useModelsStore();
   const { trims, getTrims, trimsLoading } = useTrimsStore();
+  const { carsForSale, getCarsForSale, carsForSaleLoading } =
+    useCarsForSaleStore();
+
+  const getAllCarsForSale = useCallback(() => {
+    if (carsForSale.length === 0 && !carsForSaleLoading) {
+      getCarsForSale();
+    }
+  }, [getCarsForSale, carsForSaleLoading, carsForSale.length]);
 
   const getAllMakesCars = useCallback(() => {
     if (makesCars.length === 0 && !makesCarsLoading) {
@@ -79,6 +90,7 @@ export default function Header1({
     getAllMakesCars();
     getAllModels();
     getAllTrims();
+    getAllCarsForSale();
   }, [
     getAllCountries,
     getAllMakesCars,
@@ -86,6 +98,7 @@ export default function Header1({
     getTheProfile,
     getAllModels,
     getAllTrims,
+    getAllCarsForSale,
   ]);
 
   useEffect(() => {
@@ -125,6 +138,18 @@ export default function Header1({
       }
     }
   }, [clearToken, token]);
+
+  useEffect(() => {
+    const region: string = Cookies.get("region") || MainRegionName;
+    setCurrRegion(region);
+  }, []);
+
+  const handleRegionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const newRegion = event.target.value;
+    setRegionCookie(newRegion);
+    setCurrRegion(newRegion);
+    router.replace(`/${newRegion}/cars/home`);
+  };
 
   const condition: boolean =
     pathName.includes(`/${currRegion}/cars/cars-for-sale/search`) ||
@@ -169,6 +194,19 @@ export default function Header1({
                   <Nav />
                 </ul>
               </nav>
+            </div>
+            <div className="region-selector ms-auto">
+              <select
+                className="form-select"
+                value={currRegion}
+                onChange={handleRegionChange}
+              >
+                {countries?.map((country) => (
+                  <option key={country.id} value={country.code}>
+                    {country.name.toUpperCase()}
+                  </option>
+                ))}
+              </select>
             </div>
             <div className="right-box ms-auto">
               {!token ? (
