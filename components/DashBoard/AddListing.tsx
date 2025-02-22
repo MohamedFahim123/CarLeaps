@@ -100,17 +100,13 @@ export default function AddListing() {
         }
       });
 
-      const response = await axios.post(
-        `${baseUrl}/dealer/store-car`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Accept: "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await axios.post(`${baseUrl}/dealer/store-car`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Accept: "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       toast.dismiss(toastId);
       toast.success(response?.data?.message || "Adding Successful!", {
@@ -164,66 +160,32 @@ export default function AddListing() {
           <div className="inner-column">
             <div className="list-title">
               <h3 className="title">Add Listings</h3>
-              <div className="text">
-                Lorem ipsum dolor sit amet, consectetur.
-              </div>
+              <div className="text">Lorem ipsum dolor sit amet, consectetur.</div>
             </div>
             <div className="form-box">
               <ul className="nav nav-tabs" id="myTab" role="tablist">
                 <li className="nav-item" role="presentation">
-                  <button
-                    className={`nav-link ${
-                      activeTab === "car_details" ? "active" : ""
-                    }`}
-                    id="car_details_tab"
-                    type="button"
-                    onClick={() => handleTabChange("car_details")}
-                  >
+                  <button className={`nav-link ${activeTab === "car_details" ? "active" : ""}`} id="car_details_tab" type="button" onClick={() => handleTabChange("car_details")}>
                     Car Details
                   </button>
                 </li>
                 <li className="nav-item" role="presentation">
-                  <button
-                    className={`nav-link ${
-                      activeTab === "price" ? "active" : ""
-                    }`}
-                    id="price_tab"
-                    type="button"
-                    onClick={() => handleTabChange("price")}
-                  >
+                  <button className={`nav-link ${activeTab === "price" ? "active" : ""}`} id="price_tab" type="button" onClick={() => handleTabChange("price")}>
                     Price
                   </button>
                 </li>
                 <li className="nav-item" role="presentation">
-                  <button
-                    className={`nav-link ${
-                      activeTab === "features" ? "active" : ""
-                    }`}
-                    id="features_tab"
-                    type="button"
-                    onClick={() => handleTabChange("features")}
-                  >
+                  <button className={`nav-link ${activeTab === "features" ? "active" : ""}`} id="features_tab" type="button" onClick={() => handleTabChange("features")}>
                     Features
                   </button>
                 </li>
                 <li className="nav-item" role="presentation">
-                  <button
-                    className={`nav-link ${
-                      activeTab === "media" ? "active" : ""
-                    }`}
-                    id="media_tab"
-                    type="button"
-                    onClick={() => handleTabChange("media")}
-                  >
+                  <button className={`nav-link ${activeTab === "media" ? "active" : ""}`} id="media_tab" type="button" onClick={() => handleTabChange("media")}>
                     Media
                   </button>
                 </li>
               </ul>
-              <form
-                onSubmit={handleSubmit(onSubmit)}
-                className="tab-content"
-                id="myTabContent"
-              >
+              <form onSubmit={handleSubmit(onSubmit)} className="tab-content" id="myTabContent">
                 <AddListingCarDetails
                   register={register}
                   clearErrors={clearErrors}
@@ -245,19 +207,8 @@ export default function AddListing() {
                   tab={activeTab}
                   handleTabChange={handleTabChange}
                 />
-                <AddListingPrice
-                  register={register}
-                  errors={errors}
-                  tab={activeTab}
-                  handleTabChange={handleTabChange}
-                />
-                <AddListingFeatures
-                  register={register}
-                  errors={errors}
-                  store={{ features }}
-                  tab={activeTab}
-                  handleTabChange={handleTabChange}
-                />
+                <AddListingPrice register={register} errors={errors} tab={activeTab} handleTabChange={handleTabChange} />
+                <AddListingFeatures register={register} errors={errors} store={{ features }} tab={activeTab} handleTabChange={handleTabChange} />
                 <AddListingMedia
                   register={register}
                   clearErrors={clearErrors}
