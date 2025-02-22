@@ -17,6 +17,9 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useCallback, useEffect } from "react";
 import Nav from "./Nav";
+import { useActiveCars } from "@/app/store/activecars";
+import { usePendingCars } from "@/app/store/pendingCars";
+import { useDeactiveCars } from "@/app/store/deactiveCars";
 
 function HeaderDashboard() {
   const { makesCars, getMakesCars, makesCarsLoading } = useMakesCarsStore();
@@ -27,12 +30,14 @@ function HeaderDashboard() {
   const { condition, getCondition, conditionLoading } = useConditionStore();
   const { getFeatures, featuresLoading } = useFeaturesStore();
   const { fuelTypes, getFuelTypes, fuelTypesLoading } = useFuelTypesStore();
-  const { transmissions, getTransmissions, transmissionsLoading } =
-    useTransmissionsStore();
+  const { transmissions, getTransmissions, transmissionsLoading } = useTransmissionsStore();
   const { years, getYears, yearsLoading } = useYearsStore();
   const { countries, getCountries, countriesLoading } = useCountriesStore();
   const { token, getToken, tokenLoading } = useTokenStore();
   const { profile, getProfile, profileLoading } = useProfileStore();
+  const { activeCars, getActiveCars, activeCarsLoading } = useActiveCars();
+  const { pendingCars, getPendingCars, pendingCarsLoading } = usePendingCars();
+  const { deactiveCars, getDeactiveCars, deactiveCarsLoading } = useDeactiveCars();
 
   const getAllMakesCars = useCallback(() => {
     if (makesCars.length === 0 && !makesCarsLoading) {
@@ -112,6 +117,24 @@ function HeaderDashboard() {
     }
   }, [profile, getProfile, profileLoading]);
 
+  const getAllActiveCars = useCallback(() => {
+    if (!activeCars && !activeCarsLoading) {
+      getActiveCars();
+    }
+  }, [getActiveCars, activeCarsLoading, activeCars]);
+
+  const getAllPendingCars = useCallback(() => {
+    if (!pendingCars && !pendingCarsLoading) {
+      getPendingCars();
+    }
+  }, [getPendingCars, pendingCarsLoading, pendingCars]);
+
+  const getAllDeactiveCars = useCallback(() => {
+    if (!deactiveCars && !deactiveCarsLoading) {
+      getDeactiveCars();
+    }
+  }, [getDeactiveCars, deactiveCarsLoading, deactiveCars]);
+
   useEffect(() => {
     getAllModels();
     getAllTrims();
@@ -126,6 +149,9 @@ function HeaderDashboard() {
     getAllCountries();
     getTheToken();
     getTheProfile();
+    getAllActiveCars();
+    getAllPendingCars();
+    getAllDeactiveCars();
   }, [
     getAllModels,
     getAllTrims,
@@ -140,6 +166,9 @@ function HeaderDashboard() {
     getAllCountries,
     getTheToken,
     getTheProfile,
+    getAllActiveCars,
+    getAllPendingCars,
+    getAllDeactiveCars,
   ]);
 
   return (
@@ -150,13 +179,7 @@ function HeaderDashboard() {
             <div className="logo-inner">
               <div className="logo">
                 <Link href={`/`}>
-                  <Image
-                    alt=""
-                    title="Boxcar"
-                    width={108}
-                    height={26}
-                    src="/images/logo.svg"
-                  />
+                  <Image alt="" title="Boxcar" width={108} height={26} src="/images/logo.svg" />
                 </Link>
               </div>
             </div>
@@ -172,26 +195,14 @@ function HeaderDashboard() {
                 <Image
                   width={50}
                   height={50}
-                  src={
-                    profile?.image === "N/A"
-                      ? "/images/resource/header-img.png"
-                      : profile?.image
-                      ? profile?.image
-                      : "/images/resource/header-img.png"
-                  }
+                  src={profile?.image === "N/A" ? "/images/resource/header-img.png" : profile?.image ? profile?.image : "/images/resource/header-img.png"}
                   alt={"Profile Image"}
                   className="object-fit-cover rounded-circle"
                 />
               </a>
               <div className="mobile-navigation">
                 <a href="#nav-mobile" title="">
-                  <svg
-                    width={22}
-                    height={11}
-                    viewBox="0 0 22 11"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg width={22} height={11} viewBox="0 0 22 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect width={22} height={2} fill="white" />
                     <rect y={9} width={22} height={2} fill="white" />
                   </svg>
