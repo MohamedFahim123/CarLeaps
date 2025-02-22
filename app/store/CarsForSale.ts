@@ -1,8 +1,8 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 import { create } from "zustand";
-import { baseUrl } from "../utils/mainData";
-import Cookies from "js-cookie";
+import { baseUrl, MainRegionName } from "../utils/mainData";
 
 export interface CarDealerInterface {
   id: number;
@@ -79,6 +79,8 @@ export interface UseCarsForSaleStoreIterface {
   carsForSale: Car[];
   carsForSaleError: unknown;
   carsForSaleLoading: boolean;
+  currentRegion: string;
+  setRegion: (region: string) => void;
   getCarsForSale: () => Promise<void>;
 }
 
@@ -86,14 +88,26 @@ let lastFetchedTime: number = 0;
 const CACHE_EXPIRATION_TIME: number = 15 * 60 * 1000;
 
 export const useCarsForSaleStore = create<UseCarsForSaleStoreIterface>(
-  (set) => ({
+  (set, get) => ({
     carsForSale: [],
     carsForSaleError: null,
     carsForSaleLoading: false,
+    currentRegion: Cookies.get("region") || MainRegionName,
+
+    setRegion: (region: string) => {
+      set({ currentRegion: region });
+      lastFetchedTime = 0;
+      get().getCarsForSale();
+    },
+
     getCarsForSale: async () => {
       const currentTime: number = new Date().getTime();
-      const regionCode = Cookies.get("region");
-      if (currentTime - lastFetchedTime < CACHE_EXPIRATION_TIME) {
+      const regionCode = get().currentRegion;
+
+      if (
+        lastFetchedTime !== 0 &&
+        currentTime - lastFetchedTime < CACHE_EXPIRATION_TIME
+      ) {
         return;
       }
 
@@ -120,8 +134,8 @@ export const useCarsForSaleStore = create<UseCarsForSaleStoreIterface>(
         set({
           carsForSale: [],
           carsForSaleError: axios.isAxiosError(err)
-            ? err?.response?.data?.message || "Error fetching carsForSale"
-            : "Unexpected error occurred!",
+            ? err?.response?.data?.message
+            : "Error fetching carsForSale",
           carsForSaleLoading: false,
         });
 

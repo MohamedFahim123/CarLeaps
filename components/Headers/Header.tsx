@@ -38,7 +38,7 @@ export default function Header1({
   const { makesCars, getMakesCars, makesCarsLoading } = useMakesCarsStore();
   const { models, getModels, modelsLoading } = useModelsStore();
   const { trims, getTrims, trimsLoading } = useTrimsStore();
-  const { carsForSale, getCarsForSale, carsForSaleLoading } =
+  const { carsForSale, getCarsForSale, setRegion, carsForSaleLoading } =
     useCarsForSaleStore();
 
   const getAllCarsForSale = useCallback(() => {
@@ -149,6 +149,7 @@ export default function Header1({
     const newRegion = event.target.value;
     setRegionCookie(newRegion);
     setCurrRegion(newRegion);
+    setRegion(newRegion);
     router.replace(`/${newRegion}/cars/home`);
   };
 
