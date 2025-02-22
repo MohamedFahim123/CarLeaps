@@ -33,28 +33,6 @@ export default function SidebarSearch() {
             <div className="row">
               <div className="col-lg-12">
                 <div className="form_boxes">
-                  <label>Location</label>
-                  <SelectComponent
-                    options={["New York", "Los Vegas", "California"]}
-                  />
-                </div>
-              </div>
-              <div className="col-lg-7">
-                <div className="form_boxes">
-                  <label>Search within</label>
-                  <SelectComponent options={["200 miles", "", "200 miles"]} />
-                </div>
-              </div>
-              <div className="col-lg-5">
-                <div className="form_boxes">
-                  <label>Zip Code</label>
-                  <SelectComponent
-                    options={["02111", "02111", "02111", "02111"]}
-                  />
-                </div>
-              </div>
-              <div className="col-lg-12">
-                <div className="form_boxes">
                   <label>Condition</label>
                   <SelectComponent
                     options={[

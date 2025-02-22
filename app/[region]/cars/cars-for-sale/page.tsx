@@ -1,9 +1,8 @@
-import Cars2 from "@/components/Homes/CarsForSale/Cars2";
 import CarType from "@/components/Homes/CarsForSale/CarType";
 import Features from "@/components/Homes/CarsForSale/Features";
 import Hero from "@/components/Homes/CarsForSale/Hero";
-import Brands from "@/components/Homes/Home/Brands";
 import Cars from "@/components/Homes/Home/Cars";
+import ResearchCarsBrands from "@/components/Homes/ResearchCars/ResearchCarsBrands";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -16,10 +15,9 @@ export default function CarsForSalePage() {
     <>
       <Hero />
       <CarType />
-      <Brands currPage="carsForSale" />
+      <ResearchCarsBrands />
       <Cars />
       <Features />
-      <Cars2 />
     </>
   );
 }

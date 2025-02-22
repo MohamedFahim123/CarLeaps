@@ -1,6 +1,6 @@
 "use client";
 
-import { Car, carData } from "@/data/cars";
+import { useCarsForSaleStore } from "@/app/store/CarsForSale";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -9,35 +9,32 @@ import "swiper/css";
 import { Autoplay, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-const buttons: { label: string; isActive: boolean }[] = [
-  { label: "New cars", isActive: true },
-  { label: "Used Cars", isActive: false },
-  { label: "In Stock", isActive: false },
+const icons: { icon: string }[] = [
+  { icon: "flaticon-gasoline-pump" },
+  { icon: "flaticon-speedometer" },
+  { icon: "flaticon-gearbox" },
 ];
 
 export default function Cars() {
-  const [selectedCategory, setSelectedCategory] = useState<{
-    label: string;
-    isActive: boolean;
-  }>(buttons[0]);
-  const [sortedItems, setSortedItems] = useState<Car[]>([...carData]);
+  const [mounted, setMounted] = useState(false);
 
-  // const { carsForSale } = useCarsForSaleStore();
+  const { carsForSale, currentRegion } = useCarsForSaleStore();
 
   useEffect(() => {
-    setSortedItems([
-      ...carData.filter((elm) =>
-        elm.filterCategories.includes(selectedCategory.label)
-      ),
-    ]);
-  }, [selectedCategory]);
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
 
   return (
     <section className="cars-section-three">
       <div className="boxcar-container">
         <div className="boxcar-title wow fadeInUp">
           <h2>Explore All Vehicles</h2>
-          <Link href={`/inventory-list-01`} className="btn-title">
+          <Link
+            href={`/${currentRegion}/cars/cars-for-sale/search`}
+            className="btn-title"
+          >
             View All
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -60,21 +57,6 @@ export default function Cars() {
             </svg>
           </Link>
         </div>
-        <nav className="wow fadeInUp" data-wow-delay="100ms">
-          <div className="nav nav-tabs">
-            {buttons.map((button, index) => (
-              <button
-                key={index}
-                onClick={() => setSelectedCategory(button)}
-                className={`nav-link ${
-                  selectedCategory === button ? "active" : ""
-                }`}
-              >
-                {button.label}
-              </button>
-            ))}
-          </div>
-        </nav>
         <div
           className="tab-content wow fadeInUp"
           data-wow-delay="200ms"
@@ -101,7 +83,7 @@ export default function Cars() {
               modules={[Pagination, Autoplay]}
               className="car-slider-three slider-layout-1 row"
             >
-              {[...sortedItems].map((car, index) => (
+              {carsForSale.map((car, index) => (
                 <SwiperSlide
                   key={index}
                   className="box-car car-block-three col-lg-3 col-md-6 col-sm-12"
@@ -111,23 +93,19 @@ export default function Cars() {
                   }}
                 >
                   <div className="inner-box mx-2">
-                    <div
-                      className={`image-box ${
-                        car.badge === "Great Price" ? "two" : ""
-                      }`}
-                    >
+                    <div className={`image-box`}>
                       <Slider
                         dots
                         slidesToShow={1}
                         key={car.id}
                         className="slider-thumb"
                       >
-                        {car.images.map((image, i) => (
+                        {car.carImages.slice(0, 5).map((image, i) => (
                           <div key={i} className="image d-block">
                             <Link href={`/inventory-page-single-v1/${car.id}`}>
                               <Image
-                                alt={car.title}
-                                src={image}
+                                alt={car.name}
+                                src={image.image}
                                 width={329}
                                 height={220}
                               />
@@ -135,7 +113,7 @@ export default function Cars() {
                           </div>
                         ))}
                       </Slider>
-                      {car.badge && <span>{car.badge}</span>}
+                      {car.status && <span>{car.status}</span>}
                       <Link
                         href={`/inventory-page-single-v1/${car.id}`}
                         title=""
@@ -163,22 +141,38 @@ export default function Cars() {
                       </Link>
                     </div>
                     <div className="content-box">
-                      <h6 className="title">
-                        <Link href={`/inventory-page-single-v1/${car.id}`}>
-                          {car.title}
+                      <h6 className="title fw-bold text-capitalize fs-4 mb-2">
+                        <Link href={`/${car.id}`}>
+                          {car.year} {car.make}
                         </Link>
+                        <span className="d-block mt-2">{car.model}</span>
                       </h6>
-                      <div className="text">{car.description}</div>
-                      <ul>
-                        {car.specs.map((spec, i) => (
-                          <li key={i}>
-                            <i className={spec.icon} /> {spec.text}
-                          </li>
-                        ))}
+                      <div className="text">
+                        {car.description.slice(0, 30)}...
+                      </div>
+                      <ul className="d-flex justify-content-between">
+                        <li>
+                          <i className={`${icons[0].icon}`} />
+                          {car.fuel_type}
+                        </li>
+                        <li>
+                          <i className={`${icons[1].icon}`} />
+                          {car.mileage}
+                        </li>
+                        <li>
+                          <i className={`${icons[2].icon}`} />
+                          {car.transmission}
+                        </li>
                       </ul>
                       <div className="btn-box">
-                        <span>{car.price}</span>
-                        <small>{car.oldPrice}</small>
+                        {car?.offer_price && (
+                          <span>
+                            <del>{car.price}$</del>
+                          </span>
+                        )}
+                        <small>
+                          {car.offer_price ? car.offer_price : car.price}$
+                        </small>
                         <Link
                           href={`/inventory-page-single-v1/${car.id}`}
                           className="details"

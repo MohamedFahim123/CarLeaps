@@ -1,10 +1,12 @@
 "use client";
 
+import { useModelsStore } from "@/app/store/allModels";
+import { useMakesCarsStore } from "@/app/store/makeCars";
 import { MainRegionName } from "@/app/utils/mainData";
-import SelectComponent from "@/components/Common/SelectComponent";
 import Cookies from "js-cookie";
-import Link from "next/link";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 
 interface VihicleTab {
   label: string;
@@ -17,11 +19,36 @@ const vehicleTabs: VihicleTab[] = [
   { label: "Used", tab: "tab-2", isActive: false },
 ];
 
+interface SearchFormInputs {
+  condition: string;
+  make: string;
+  model: string;
+}
+
 export default function Hero() {
+  const {
+    register,
+    setValue,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<SearchFormInputs>();
+  const router = useRouter();
   const currRegion: string = Cookies.get("region") || MainRegionName;
   const [activeVehiclesTab, setactiveVehiclesTab] = useState<string>(
     vehicleTabs[0].label
   );
+  const { makesCars } = useMakesCarsStore();
+  const { models } = useModelsStore();
+
+  useEffect(() => {
+    setValue("condition", activeVehiclesTab.toLowerCase());
+  }, [activeVehiclesTab, setValue]);
+
+  const onSubmit = (data: SearchFormInputs) => {
+    const newData = { ...data, condition: data.condition.toLowerCase() };
+    const queryString = new URLSearchParams(newData).toString();
+    router.push(`/${currRegion}/cars/cars-for-sale/search?${queryString}`);
+  };
 
   return (
     <section className="boxcar-banner-section-v8">
@@ -33,7 +60,9 @@ export default function Hero() {
               {vehicleTabs.map(({ label, tab }) => (
                 <li
                   key={tab}
-                  onClick={() => setactiveVehiclesTab(label)}
+                  onClick={() => {
+                    setactiveVehiclesTab(label);
+                  }}
                   className={activeVehiclesTab == label ? "current" : ""}
                   data-tab={tab}
                 >
@@ -43,25 +72,66 @@ export default function Hero() {
             </ul>
             <div className="form-tab-content">
               <div className="form-tab-pane current" id="tab-1">
-                <form onSubmit={(e) => e.preventDefault()}>
-                  <div className="form_boxes">
-                    <SelectComponent options={["Any Makes", "Audi", "Honda"]} />
+                <form onSubmit={handleSubmit(onSubmit)}>
+                  <div className="form_boxes border border-1 rounded">
+                    <select
+                      className="form-select"
+                      defaultValue={""}
+                      {...register("make", {
+                        required: "required",
+                      })}
+                      id="searchMake"
+                    >
+                      <option value="" disabled>
+                        Select Make
+                      </option>
+                      {makesCars.map((make) => (
+                        <option key={make.id} value={make.id}>
+                          {make.name}
+                        </option>
+                      ))}
+                    </select>
+                    {errors.make && (
+                      <div className="text-danger text-small">
+                        {errors.make.message}
+                      </div>
+                    )}
                   </div>
-                  <div className="form_boxes">
-                    <SelectComponent options={["Any Models", "A3", "Accord"]} />
+                  <div className="form_boxes border border-1 rounded">
+                    <select
+                      className="form-select"
+                      defaultValue={""}
+                      {...register("model", {
+                        required: "required",
+                      })}
+                      id="searchModels"
+                    >
+                      <option value="" disabled>
+                        Select Model
+                      </option>
+                      {models.map((model) => (
+                        <option key={model.id} value={model.id}>
+                          {model.name}
+                        </option>
+                      ))}
+                    </select>
+                    {errors.model && (
+                      <div className="text-danger text-small">
+                        {errors.model.message}
+                      </div>
+                    )}
                   </div>
-                  <div className="form_boxes">
-                    <SelectComponent options={["Any Price", "200$", "300$"]} />
-                  </div>
-                  <Link
-                    href={`/${currRegion}/cars/cars-for-sale/search`}
-                    className="form-submit"
-                  >
-                    <button type="submit" className="theme-btn">
+
+                  <div className="form-submit">
+                    <button
+                      disabled={isSubmitting}
+                      type="submit"
+                      className="theme-btn"
+                    >
                       <i className="flaticon-search" />
                       Search 9451 Cars
                     </button>
-                  </Link>
+                  </div>
                 </form>
               </div>
             </div>

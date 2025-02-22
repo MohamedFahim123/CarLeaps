@@ -19,6 +19,9 @@ import { useModelsStore } from "@/app/store/allModels";
 import { useTrimsStore } from "@/app/store/allTirms";
 import { useCarsForSaleStore } from "@/app/store/CarsForSale";
 import { setRegionCookie } from "@/app/utils/setRegionCookie";
+import { useBodiesStore } from "@/app/store/bodies";
+import { useConditionStore } from "@/app/store/conditions";
+import { useFuelTypesStore } from "@/app/store/fuel-types";
 
 interface Header1Props {
   headerClass?: string;
@@ -38,14 +41,35 @@ export default function Header1({
   const { makesCars, getMakesCars, makesCarsLoading } = useMakesCarsStore();
   const { models, getModels, modelsLoading } = useModelsStore();
   const { trims, getTrims, trimsLoading } = useTrimsStore();
+  const { bodies, getBodies, bodiesLoading } = useBodiesStore();
+  const { condition, getCondition, conditionLoading } = useConditionStore();
+
+  const { fuelTypes, getFuelTypes, fuelTypesLoading } = useFuelTypesStore();
   const { carsForSale, getCarsForSale, setRegion, carsForSaleLoading } =
     useCarsForSaleStore();
+
+  const getAllFuelTypes = useCallback(() => {
+    if (fuelTypes.length === 0 && !fuelTypesLoading) {
+      getFuelTypes();
+    }
+  }, [getFuelTypes, fuelTypesLoading, fuelTypes.length]);
 
   const getAllCarsForSale = useCallback(() => {
     if (carsForSale.length === 0 && !carsForSaleLoading) {
       getCarsForSale();
     }
   }, [getCarsForSale, carsForSaleLoading, carsForSale.length]);
+  const getAllConditions = useCallback(() => {
+    if (condition.length === 0 && !conditionLoading) {
+      getCondition();
+    }
+  }, [getCondition, conditionLoading, condition]);
+
+  const getAllBodiesCars = useCallback(() => {
+    if (bodies.length === 0 && !bodiesLoading) {
+      getBodies();
+    }
+  }, [getBodies, bodiesLoading, bodies.length]);
 
   const getAllMakesCars = useCallback(() => {
     if (makesCars.length === 0 && !makesCarsLoading) {
@@ -91,7 +115,13 @@ export default function Header1({
     getAllModels();
     getAllTrims();
     getAllCarsForSale();
+    getAllBodiesCars();
+    getAllConditions();
+    getAllFuelTypes();
   }, [
+    getAllBodiesCars,
+    getAllFuelTypes,
+    getAllConditions,
     getAllCountries,
     getAllMakesCars,
     getTheToken,
@@ -126,7 +156,6 @@ export default function Header1({
       });
       if (res.status === 200) {
         clearToken();
-        Cookies.remove("region");
         axios.post("/api/logout", { token: "" });
         window.location.reload();
       }
@@ -153,7 +182,7 @@ export default function Header1({
     router.replace(`/${newRegion}/cars/home`);
   };
 
-  const condition: boolean =
+  const RenderCondition: boolean =
     pathName.includes(`/${currRegion}/cars/cars-for-sale/search`) ||
     pathName.includes(`/${currRegion}/cars/car-details`) ||
     pathName.includes(`/${currRegion}/cars/perfect-match`);
@@ -161,7 +190,7 @@ export default function Header1({
   return (
     <header
       className={`boxcar-header ${styles.backGroundBlack} ${
-        !condition && styles.mainPadding
+        !RenderCondition && styles.mainPadding
       } ${headerClass}`}
     >
       <div className="header-inner py-3">

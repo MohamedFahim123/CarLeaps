@@ -79,7 +79,7 @@ export interface UseCarsForSaleStoreIterface {
   carsForSale: Car[];
   carsForSaleError: unknown;
   carsForSaleLoading: boolean;
-  currentRegion: string;
+  currentRegion?: string;
   setRegion: (region: string) => void;
   getCarsForSale: () => Promise<void>;
 }
@@ -92,7 +92,7 @@ export const useCarsForSaleStore = create<UseCarsForSaleStoreIterface>(
     carsForSale: [],
     carsForSaleError: null,
     carsForSaleLoading: false,
-    currentRegion: Cookies.get("region") || MainRegionName,
+    currentRegion: Cookies.get("region"),
 
     setRegion: (region: string) => {
       set({ currentRegion: region });
@@ -103,6 +103,10 @@ export const useCarsForSaleStore = create<UseCarsForSaleStoreIterface>(
     getCarsForSale: async () => {
       const currentTime: number = new Date().getTime();
       const regionCode = get().currentRegion;
+
+      if (!regionCode) {
+        Cookies.set("region", MainRegionName);
+      }
 
       if (
         lastFetchedTime !== 0 &&
@@ -118,7 +122,7 @@ export const useCarsForSaleStore = create<UseCarsForSaleStoreIterface>(
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
-            code: regionCode,
+            code: regionCode || MainRegionName,
           },
         });
 

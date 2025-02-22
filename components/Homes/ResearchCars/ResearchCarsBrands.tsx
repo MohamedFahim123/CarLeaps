@@ -14,11 +14,12 @@ export default function ResearchCarsBrands() {
 
   return (
     <section className="boxcar-brand-section-five pt-0">
-      <div className="container">
+      <div className="boxcar-container">
         <div className="boxcar-title">
           <h2 className="wow fadeInUp">Explore Our Premium Brands</h2>
         </div>
         <div className={`${styles.carMakeContainer} right-box`}>
+
           {makesCars?.map((make: MakesCars) => (
             <div
               className={`${styles.carMake} cars-block-five`}

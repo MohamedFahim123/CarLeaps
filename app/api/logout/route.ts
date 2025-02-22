@@ -1,13 +1,10 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
-export async function POST(req: NextRequest) {
+export async function POST() {
   try {
-    const body = await req.json();
-    const token = body?.token;
-
     const response = NextResponse.json({ message: "Logged out successfully" });
 
-    response.cookies.set("CARS_TOKEN", token, {
+    response.cookies.set("CARS_TOKEN", '', {
       httpOnly: true,
       secure: true,
       sameSite: "lax",
