@@ -46,8 +46,18 @@ export default function Hero() {
 
   const onSubmit = (data: SearchFormInputs) => {
     const newData = { ...data, condition: data.condition.toLowerCase() };
-    const queryString = new URLSearchParams(newData).toString();
-    router.push(`/${currRegion}/cars/cars-for-sale/search?${queryString}`);
+
+    const filteredData = Object.fromEntries(
+      Object.entries(newData).filter(([, value]) => value !== "")
+    );
+
+    const queryString = new URLSearchParams(filteredData).toString();
+
+    router.push(
+      `/${currRegion}/cars/cars-for-sale/search${
+        queryString ? `?${queryString}` : ""
+      }`
+    );
   };
 
   return (
@@ -77,9 +87,7 @@ export default function Hero() {
                     <select
                       className="form-select"
                       defaultValue={""}
-                      {...register("make", {
-                        required: "required",
-                      })}
+                      {...register("make")}
                       id="searchMake"
                     >
                       <option value="" disabled>
@@ -101,9 +109,7 @@ export default function Hero() {
                     <select
                       className="form-select"
                       defaultValue={""}
-                      {...register("model", {
-                        required: "required",
-                      })}
+                      {...register("model")}
                       id="searchModels"
                     >
                       <option value="" disabled>

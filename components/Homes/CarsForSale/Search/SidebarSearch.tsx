@@ -1,16 +1,73 @@
-'use client'
-import SelectComponent from "@/components/Common/SelectComponent";
+"use client";
+import { useModelsStore } from "@/app/store/allModels";
+import { useBodiesStore } from "@/app/store/bodies";
+import { useSearchCarsStore } from "@/app/store/carSearch";
+import { useConditionStore } from "@/app/store/conditions";
+import { useFuelTypesStore } from "@/app/store/fuel-types";
+import { useMakesCarsStore } from "@/app/store/makeCars";
 import Image from "next/image";
-import Slider from "rc-slider";
-import { useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import { DefaultValues } from "./SearchedListings";
 
 export default function SidebarSearch() {
-  const [price, setPrice] = useState<number[]>([5000, 35000]);
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+  const [defaultValues, setDefaultValues] = useState<DefaultValues>({
+    condition: "",
+    make: "",
+    model: "",
+    fuel_type: "",
+    body: "",
+  });
 
-  const handlePrice = (value: number | number[]) => {
-    if (Array.isArray(value)) {
-      setPrice(value);
+  const { condition } = useConditionStore();
+  const { bodies } = useBodiesStore();
+  const { makesCars } = useMakesCarsStore();
+  const { models } = useModelsStore();
+  const { fuelTypes } = useFuelTypesStore();
+
+  useEffect(() => {
+    const make = searchParams.get("make");
+    const model = searchParams.get("model");
+    const condition = searchParams.get("condition");
+    const fuel_type = searchParams.get("fuel_type");
+    const body = searchParams.get("body");
+
+    setDefaultValues({
+      make: make || "",
+      model: model || "",
+      condition: condition || "",
+      fuel_type: fuel_type || "",
+      body: body || "",
+    });
+
+    useSearchCarsStore.getState().getCarsSearch({
+      condition: condition || "",
+      make: make || "",
+      model: model || "",
+      fuel_type: fuel_type ? [fuel_type] : undefined,
+      body: body ? [body] : undefined,
+    });
+  }, [searchParams]);
+
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = e.target;
+
+    setDefaultValues((prevValues) => ({
+      ...prevValues,
+      [name]: value,
+    }));
+
+    const newParams = new URLSearchParams(searchParams);
+    if (value) {
+      newParams.set(name, value);
+    } else {
+      newParams.delete(name);
     }
+
+    router.replace(`${pathname}?${newParams.toString()}`);
   };
 
   return (
@@ -33,264 +90,111 @@ export default function SidebarSearch() {
             <div className="row">
               <div className="col-lg-12">
                 <div className="form_boxes">
-                  <label>Condition</label>
-                  <SelectComponent
-                    options={[
-                      "New and Used",
-                      "New York",
-                      "Los Vegas",
-                      "California",
-                    ]}
-                  />
+                  <label htmlFor="SearchCondition">Condition</label>
+                  <select
+                    value={defaultValues.condition}
+                    className="form-select"
+                    name="condition"
+                    onChange={handleChange}
+                    id="SearchCondition"
+                  >
+                    <option value="" disabled>
+                      Select Condition
+                    </option>
+                    {condition.map((item: string, index: number) => (
+                      <option key={index} value={item}>
+                        {item}
+                      </option>
+                    ))}
+                  </select>
                 </div>
               </div>
               <div className="col-lg-12">
                 <div className="categories-box">
-                  <h6 className="title">Type</h6>
-                  <div className="cheak-box">
-                    <label className="contain">
-                      SUV (1,456)
-                      <input type="checkbox" defaultChecked={true} />
-                      <span className="checkmark" />
-                    </label>
-                    <label className="contain">
-                      Sedan (1,456)
-                      <input type="checkbox" />
-                      <span className="checkmark" />
-                    </label>
-                    <label className="contain">
-                      Hatchback (1,456)
-                      <input type="checkbox" />
-                      <span className="checkmark" />
-                    </label>
-                    <label className="contain">
-                      Coupe (1,456)
-                      <input type="checkbox" />
-                      <span className="checkmark" />
-                    </label>
-                    <label className="contain">
-                      Convertible (1,456)
-                      <input type="checkbox" defaultChecked={true} />
-                      <span className="checkmark" />
-                    </label>
+                  <div className="form_boxes">
+                    <label htmlFor="SearchBody">Body Type</label>
+                    <select
+                      value={defaultValues.body}
+                      className="form-select"
+                      name="body"
+                      onChange={handleChange}
+                      id="SearchBody"
+                    >
+                      <option value="" disabled>
+                        Select Body
+                      </option>
+                      {bodies.map((body) => (
+                        <option key={body.id} value={body.id}>
+                          {body.name}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                 </div>
               </div>
               <div className="col-lg-12">
                 <div className="form_boxes">
-                  <label>Make</label>
-                  <SelectComponent
-                    options={["New York", "Los Vegas", "California"]}
-                  />
-                </div>
-              </div>
-              <div className="col-lg-12">
-                <div className="form_boxes">
-                  <label>Model</label>
-                  <SelectComponent
-                    options={[
-                      "Add Model",
-                      "New York",
-                      "Los Vegas",
-                      "California",
-                    ]}
-                  />
-                </div>
-              </div>
-              <div className="col-lg-6">
-                <div className="form_boxes">
-                  <label>Min year</label>
-                  <SelectComponent options={["2019", "2020", "2021", "2022"]} />
-                </div>
-              </div>
-              <div className="col-lg-6">
-                <div className="form_boxes">
-                  <label>Max year</label>
-                  <SelectComponent options={["2023", "2020", "2021", "2022"]} />
-                </div>
-              </div>
-              <div className="col-lg-12">
-                <div className="form_boxes">
-                  <label>Mileage</label>
-                  <SelectComponent
-                    options={[
-                      "Any Mileage",
-                      "New York",
-                      "Los Vegas",
-                      "California",
-                    ]}
-                  />
-                </div>
-              </div>
-              <div className="col-lg-12">
-                <div className="form_boxes">
-                  <label>Drive Type</label>
-                  <SelectComponent
-                    options={[
-                      "Any Type",
-                      "New York",
-                      "Los Vegas",
-                      "California",
-                    ]}
-                  />
-                </div>
-              </div>
-              <div className="col-lg-12">
-                <div className="price-box">
-                  <h6 className="title">Price</h6>
-                  <form
-                    onSubmit={(e) => e.preventDefault()}
-                    className="row g-0"
+                  <label htmlFor="SearchMakes">Make</label>
+                  <select
+                    value={defaultValues.make}
+                    className="form-select"
+                    name="make"
+                    onChange={handleChange}
+                    id="SearchMakes"
                   >
-                    <div className="form-column col-lg-6">
-                      <div className="form_boxes">
-                        <label>Min price</label>
-                        <div className="drop-menu">${price[0]}</div>
-                      </div>
-                    </div>
-                    <div className="form-column v2 col-lg-6">
-                      <div className="form_boxes">
-                        <label>Max price</label>
-                        <div className="drop-menu">${price[1]}</div>
-                      </div>
-                    </div>
-                  </form>
-                  <div className="widget-price">
-                    <Slider
-                      range
-                      max={50000}
-                      min={0}
-                      defaultValue={price}
-                      onChange={handlePrice}
-                      id="slider"
-                    />
-                  </div>
+                    <option value="" disabled>
+                      Select Make
+                    </option>
+                    {makesCars.map((make) => (
+                      <option key={make.id} value={make.id}>
+                        {make.name}
+                      </option>
+                    ))}
+                  </select>
                 </div>
               </div>
               <div className="col-lg-12">
-                <div className="categories-box border-none-bottom">
-                  <h6 className="title">Transmission</h6>
-                  <div className="cheak-box">
-                    <label className="contain">
-                      Automatic (1,456)
-                      <input type="checkbox" defaultChecked={true} />
-                      <span className="checkmark" />
-                    </label>
-                    <label className="contain">
-                      Manual (1,456)
-                      <input type="checkbox" />
-                      <span className="checkmark" />
-                    </label>
-                    <label className="contain">
-                      CVT (1,456)
-                      <input type="checkbox" />
-                      <span className="checkmark" />
-                    </label>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-12">
-                <div className="categories-box border-none-bottom">
-                  <h6 className="title">Fuel Type</h6>
-                  <div className="cheak-box">
-                    <label className="contain">
-                      Diesel (1,456)
-                      <input type="checkbox" defaultChecked={true} />
-                      <span className="checkmark" />
-                    </label>
-                    <label className="contain">
-                      Petrol (1,456)
-                      <input type="checkbox" />
-                      <span className="checkmark" />
-                    </label>
-                    <label className="contain">
-                      Hybrid (1,456)
-                      <input type="checkbox" />
-                      <span className="checkmark" />
-                    </label>
-                    <label className="contain">
-                      Electric (1,456)
-                      <input type="checkbox" />
-                      <span className="checkmark" />
-                    </label>
+                <div className="categories-box">
+                  <div className="form_boxes">
+                    <label htmlFor="Searchmodels">model</label>
+                    <select
+                      value={defaultValues.model}
+                      className="form-select"
+                      name="model"
+                      onChange={handleChange}
+                      id="Searchmodels"
+                    >
+                      <option value="" disabled>
+                        Select model
+                      </option>
+                      {models.map((model) => (
+                        <option key={model.id} value={model.id}>
+                          {model.name}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                 </div>
               </div>
               <div className="col-lg-12">
                 <div className="form_boxes">
-                  <label>Exterior Color</label>
-                  <SelectComponent
-                    options={["Blue", "New York", "Los Vegas", "California"]}
-                  />
-                </div>
-              </div>
-              <div className="col-lg-12">
-                <div className="form_boxes">
-                  <label>Interior Color</label>
-                  <SelectComponent
-                    options={["Black", "New York", "Los Vegas", "California"]}
-                  />
-                </div>
-              </div>
-              <div className="col-lg-12">
-                <div className="form_boxes">
-                  <label>Doors</label>
-                  <SelectComponent
-                    options={["3", "New York", "Los Vegas", "California"]}
-                  />
-                </div>
-              </div>
-              <div className="col-lg-12">
-                <div className="form_boxes">
-                  <label>Cylinders</label>
-                  <SelectComponent
-                    options={["6", "New York", "Los Vegas", "California"]}
-                  />
-                </div>
-              </div>
-              <div className="col-lg-12">
-                <div className="categories-box border-none-bottom m-0">
-                  <h6 className="title">Key Features</h6>
-                  <div className="cheak-box">
-                    <label className="contain">
-                      360-degree camera (1,456)
-                      <input type="checkbox" defaultChecked={true} />
-                      <span className="checkmark" />
-                    </label>
-                    <label className="contain">
-                      Bluetooth (1,456)
-                      <input type="checkbox" />
-                      <span className="checkmark" />
-                    </label>
-                    <label className="contain">
-                      Keyless start (1,456)
-                      <input type="checkbox" />
-                      <span className="checkmark" />
-                    </label>
-                    <label className="contain">
-                      Navigation System (1,456)
-                      <input type="checkbox" />
-                      <span className="checkmark" />
-                    </label>
-                    <label className="contain">
-                      Active head restraints (1,456)
-                      <input type="checkbox" />
-                      <span className="checkmark" />
-                    </label>
-                    <label className="contain">
-                      Brake assist (1,456)
-                      <input type="checkbox" />
-                      <span className="checkmark" />
-                    </label>
-                    <label className="contain">
-                      Parking assist systems (1,456)
-                      <input type="checkbox" />
-                      <span className="checkmark" />
-                    </label>
-                  </div>
-                  <a href="#" title="" className="show-more">
-                    Show 8 more
-                  </a>
+                  <label htmlFor="Searchfuel_types">Fuel Type</label>
+                  <select
+                    value={defaultValues.fuel_type}
+                    className="form-select"
+                    name="fuel_type"
+                    onChange={handleChange}
+                    id="Searchfuel_types"
+                  >
+                    <option value="" disabled>
+                      Select fuel_type
+                    </option>
+                    {fuelTypes.map((fuel_type) => (
+                      <option key={fuel_type.id} value={fuel_type.id}>
+                        {fuel_type.name}
+                      </option>
+                    ))}
+                  </select>
                 </div>
               </div>
             </div>

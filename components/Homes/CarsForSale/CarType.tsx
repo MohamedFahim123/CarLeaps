@@ -5,10 +5,12 @@ import { MainRegionName } from "@/app/utils/mainData";
 import Image from "next/image";
 import Link from "next/link";
 import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
 export default function CarType() {
   const region: string = Cookies.get("region") || MainRegionName;
   const { bodies } = useBodiesStore();
+  const router = useRouter();
 
   return (
     <section className="boxcar-brand-section-six">
@@ -18,7 +20,15 @@ export default function CarType() {
         </div>
         <div className="right-box">
           {bodies.map((body) => (
-            <div key={body.id} className="cars-block-six home-8">
+            <div
+              key={body.id}
+              className="cars-block-six home-8 cursor-pointer"
+              onClick={() =>
+                router.push(
+                  `/${region}/cars/cars-for-sale/search?body=${body.id}`
+                )
+              }
+            >
               <div className="inner-box wow fadeInUp">
                 <div className="image-box">
                   <Image
@@ -30,7 +40,9 @@ export default function CarType() {
                 </div>
                 <div className="content-box">
                   <h6 className="title">
-                    <Link href={`/${region}/cars/search?body=${body.id}`}>
+                    <Link
+                      href={`/${region}/cars/cars-for-sale/search?body=${body.id}`}
+                    >
                       {body.name}
                     </Link>
                   </h6>
