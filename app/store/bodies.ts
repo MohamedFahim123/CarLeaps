@@ -13,18 +13,28 @@ export interface UseBodiesStoreIterface {
   bodies: Bodies[];
   bodiesError: unknown;
   bodiesLoading: boolean;
+  hasFetchError: boolean;
   getBodies: () => Promise<void>;
 }
 
 let lastFetchedTime: number = 0;
 const CACHE_EXPIRATION_TIME: number = 15 * 60 * 1000;
 
-export const useBodiesStore = create<UseBodiesStoreIterface>((set) => ({
+export const useBodiesStore = create<UseBodiesStoreIterface>((set, get) => ({
   bodies: [],
   bodiesError: null,
   bodiesLoading: false,
+  hasFetchError: false,
+
   getBodies: async () => {
+    const { hasFetchError } = get();
     const currentTime: number = new Date().getTime();
+
+    if (hasFetchError) {
+      console.warn("Skipping fetch due to previous error.");
+      return;
+    }
+
     if (currentTime - lastFetchedTime < CACHE_EXPIRATION_TIME) {
       return;
     }
@@ -46,12 +56,16 @@ export const useBodiesStore = create<UseBodiesStoreIterface>((set) => ({
         bodies,
         bodiesError: null,
         bodiesLoading: false,
+        hasFetchError: false,
       });
     } catch (err) {
       set({
         bodies: [],
-        bodiesError: axios.isAxiosError(err) ? err?.response?.data?.message || "Error fetching bodies" : "Unexpected error occurred!",
+        bodiesError: axios.isAxiosError(err)
+          ? err?.response?.data?.message || "Error fetching bodies"
+          : "Unexpected error occurred!",
         bodiesLoading: false,
+        hasFetchError: true,
       });
 
       if (!axios.isAxiosError(err)) {

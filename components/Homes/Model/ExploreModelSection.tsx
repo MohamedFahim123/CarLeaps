@@ -1,76 +1,80 @@
-"use client";
-
-import { Models } from "@/app/store/allModels";
 import { Trims } from "@/app/store/allTirms";
 import Image from "next/image";
 import React, { useState } from "react";
 import styles from "./modelStyle.module.css";
+import { Features } from "@/app/store/features";
 
-const ExploreModelSection = ({
-  model,
-  trim,
-}: {
-  model: Models;
-  trim: Trims;
-}) => {
-  const [activeIndex, setActiveIndex] = useState<number>(0);
+const ExploreModelSection = ({ trim }: { trim: Trims }) => {
+  const features = trim?.features || {};
+  const [activeIndex, setActive] = useState<number>(0);
 
-  const handleToggle = (index: number) => {
-    setActiveIndex(activeIndex === index ? 0 : index);
+  const handleToggle = (idx: number) => {
+    setActive(idx);
   };
 
   return (
     <>
       <div className="col-lg-6 py-5">
-        <Image width={600} height={700} alt={trim.name} src={trim.image} />
+        <Image
+          width={600}
+          height={700}
+          alt={trim?.name || "Default Trim"}
+          src={trim?.image || "/default-image.jpg"}
+        />
         <div className="price-section ps-5 mb-5 d-flex align-items-center gap-3">
           <p className="fw-bold fs-4">Starts at:</p>
           <h4 className="text-primary fs-3 fw-bold">$43,845</h4>
         </div>
       </div>
       <div className="col-lg-6 py-5">
-        <h2>Specifications</h2>
+        <h2>Features</h2>
         <div className="accordion" id="accordionExample">
-          {model?.specifications?.map((model, index) => (
-            <div
-              key={index}
-              className={`accordion-item ${styles.accordion} ${
-                activeIndex === index ? styles.activeAccordion : ""
-              }`}
-            >
-              <h2 className="accordion-header" id={`heading${index}`}>
-                <button
-                  className={`accordion-button ${
-                    activeIndex === index ? "" : "collapsed"
+          {Object.keys(features).map((key, index) => {
+            const featureCategory = features[key as keyof Features];
+            if (Array.isArray(featureCategory) && featureCategory.length > 0) {
+              return (
+                <div
+                  className={`accordion-item ${styles.accordion} ${
+                    activeIndex === index + 1 ? "" : "collapsed"
                   }`}
-                  type="button"
-                  onClick={() => handleToggle(index)}
-                  aria-expanded={activeIndex === index}
-                  aria-controls={`collapse${index}`}
+                  key={key}
                 >
-                  {model?.title.toUpperCase() || "Unknown Model Name"}
-                </button>
-              </h2>
-              <div
-                id={`collapse${index}`}
-                className={`accordion-collapse collapse ${
-                  activeIndex === index ? "show" : ""
-                }`}
-                aria-labelledby={`heading${index}`}
-                data-bs-parent="#accordionExample"
-              >
-                <div className="accordion-body">
-                  <strong>
-                    {model.subtitle.toUpperCase() || "Unknown Model Name"}
-                  </strong>
-                  <p>
-                    {model.description.toUpperCase() ||
-                      "Unknown Model Description"}
-                  </p>
+                  <h2 className="accordion-header" id={`heading${key}`}>
+                    <button
+                      className={`accordion-button`}
+                      type="button"
+                      onClick={() => handleToggle(index + 1)}
+                      aria-expanded={activeIndex === index + 1}
+                      aria-controls={`collapse${key}`}
+                    >
+                      {key.charAt(0).toUpperCase() + key.slice(1)}
+                    </button>
+                  </h2>
+                  <div
+                    id={`collapse${key}`}
+                    className={`accordion-collapse collapse ${
+                      activeIndex === index + 1 ? "show" : ""
+                    }`}
+                    aria-labelledby={`heading${key}`}
+                    data-bs-parent="#accordionExample"
+                  >
+                    <div className="accordion-body">
+                      {featureCategory.map(
+                        (feature: { type: string; name: string }, featureIndex: React.Key | null | undefined) => (
+                          <div key={featureIndex}>
+                            <strong className="fw-bold fs-6">{feature.type?.toUpperCase()}</strong>
+                            <p>{feature.name}</p>
+                          </div>
+                        )
+                      )}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          ))}
+              );
+            } else {
+              return null;
+            }
+          })}
         </div>
       </div>
     </>

@@ -16,18 +16,28 @@ export interface UseCitiesStoreIterface {
   cities: Cities[];
   citiesError: unknown;
   citiesLoading: boolean;
+  hasFetchError: boolean;
   getCities: () => Promise<void>;
 }
 
 let lastFetchedTime: number = 0;
 const CACHE_EXPIRATION_TIME: number = 15 * 60 * 1000;
 
-export const useCitiesStore = create<UseCitiesStoreIterface>((set) => ({
+export const useCitiesStore = create<UseCitiesStoreIterface>((set, get) => ({
   cities: [],
   citiesError: null,
   citiesLoading: false,
+  hasFetchError: false,
+
   getCities: async () => {
+    const { hasFetchError } = get();
     const currentTime: number = new Date().getTime();
+
+    if (hasFetchError) {
+      console.warn("Skipping fetch due to previous error.");
+      return;
+    }
+
     if (currentTime - lastFetchedTime < CACHE_EXPIRATION_TIME) {
       return;
     }
@@ -49,12 +59,16 @@ export const useCitiesStore = create<UseCitiesStoreIterface>((set) => ({
         cities,
         citiesError: null,
         citiesLoading: false,
+        hasFetchError: false,
       });
     } catch (err) {
       set({
         cities: [],
-        citiesError: axios.isAxiosError(err) ? err?.response?.data?.message || "Error fetching cities" : "Unexpected error occurred!",
+        citiesError: axios.isAxiosError(err)
+          ? err?.response?.data?.message || "Error fetching cities"
+          : "Unexpected error occurred!",
         citiesLoading: false,
+        hasFetchError: true,
       });
 
       if (!axios.isAxiosError(err)) {

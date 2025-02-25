@@ -1,4 +1,5 @@
 "use client";
+import { useBodiesStore } from "@/app/store/bodies";
 import { cars } from "@/data/categories";
 import Image from "next/image";
 import Link from "next/link";
@@ -59,39 +60,18 @@ export default function Categories() {
       },
     ],
   };
+  const { bodies } = useBodiesStore();
 
   return (
     <section className="category-section">
       <div className="large-container">
         <h2 className="title">A Vehicle For Every Lifestyle</h2>
         <div className="nav nav-tabs cate-nav-tab">
-          <button title="Truck" className="nav-link">
-            Truck
-          </button>
-          <button title="Sedan" className="nav-link">
-            Sedan
-          </button>
-          <button title="Coupe" className="nav-link">
-            Coupe
-          </button>
-          <button title="Convertible" className="nav-link">
-            Convertible
-          </button>
-          <button title="SUV" className="nav-link ">
-            SUV
-          </button>
-          <button title="VAN" className="nav-link">
-            VAN
-          </button>
-          <button title="Hatchback" className="nav-link">
-            Hatchback
-          </button>
-          <button title="Wagon" className="nav-link">
-            Wagon
-          </button>
-          <button title="Hybird" className="nav-link">
-            Hybird
-          </button>
+          {bodies?.map((body) => (
+            <button title={body.name} className="nav-link" key={body?.id}>
+              {body.name}
+            </button>
+          ))}
         </div>
         <div className="tab-content wow fadeInUp">
           <div className="tab-pane fade show" style={{ display: "block" }}>

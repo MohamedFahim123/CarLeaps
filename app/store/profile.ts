@@ -27,22 +27,25 @@ export interface UseProfileStoreIterface {
   profile: Profile | null;
   profileError: unknown;
   profileLoading: boolean;
+  hasFetchError: boolean;
   getProfile: () => Promise<void>;
 }
 
 let lastFetchedTime: number = 0;
 const CACHE_EXPIRATION_TIME: number = 15 * 60 * 1000;
 
-export const useProfileStore = create<UseProfileStoreIterface>((set) => ({
+export const useProfileStore = create<UseProfileStoreIterface>((set, get) => ({
   profile: null,
   profileError: null,
   profileLoading: false,
+  hasFetchError: false,
 
   getProfile: async () => {
+    const { hasFetchError } = get();
     const currentTime: number = new Date().getTime();
     const { token } = useTokenStore.getState();
 
-    if (!token) {
+    if (!token || hasFetchError) {
       return;
     }
 
@@ -54,13 +57,16 @@ export const useProfileStore = create<UseProfileStoreIterface>((set) => ({
     set({ profileLoading: true });
 
     try {
-      const res = await axios.get(`${baseUrl}/dealer/profile?t=${currentTime}`, {
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const res = await axios.get(
+        `${baseUrl}/dealer/profile?t=${currentTime}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       const profile = res?.data?.data?.dealer || null;
       lastFetchedTime = currentTime;
@@ -69,12 +75,16 @@ export const useProfileStore = create<UseProfileStoreIterface>((set) => ({
         profile,
         profileError: null,
         profileLoading: false,
+        hasFetchError: false,
       });
     } catch (err) {
       set({
         profile: null,
-        profileError: axios.isAxiosError(err) ? err?.response?.data?.message || "Error fetching profile" : "Unexpected error occurred!",
+        profileError: axios.isAxiosError(err)
+          ? err?.response?.data?.message || "Error fetching profile"
+          : "Unexpected error occurred!",
         profileLoading: false,
+        hasFetchError: true,
       });
 
       if (!axios.isAxiosError(err)) {

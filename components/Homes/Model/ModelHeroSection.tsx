@@ -44,7 +44,7 @@ export default function ModelHeroSection({ model }: { model: Models }) {
         <div
           className={`${styles.hero_content} bg-light p-4 rounded shadow-sm`}
         >
-          <h1 className="fw-bold mb-5">Alfa Romeo Tonale</h1>
+          <h1 className="fw-bold mb-5">{model.make} - {model.name}</h1>
           <p className="text-muted fs-5 mb-5">
             <Image
               src={model.image}
@@ -53,7 +53,7 @@ export default function ModelHeroSection({ model }: { model: Models }) {
               height={30}
               className="me-2"
             />
-            Alfa Romeo
+            {model.name}
           </p>
           <div className="price-section mb-5 d-flex align-items-center gap-3">
             <p className="fw-bold fs-4">Starts at:</p>

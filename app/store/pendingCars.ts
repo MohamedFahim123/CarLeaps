@@ -16,6 +16,7 @@ export interface UsePendingCarsStoreInterface {
   pendingCars: PendingCars | null;
   pendingCarsError: unknown;
   pendingCarsLoading: boolean;
+  hasFetchError: boolean;
   getPendingCars: () => Promise<void>;
   searchCars: (params: string) => Promise<void>;
 }
@@ -23,17 +24,26 @@ export interface UsePendingCarsStoreInterface {
 let lastFetchedTime: number = 0;
 const CACHE_EXPIRATION_TIME: number = 15 * 60 * 1000;
 
-export const usePendingCars = create<UsePendingCarsStoreInterface>((set) => ({
+export const usePendingCars = create<UsePendingCarsStoreInterface>((set, get) => ({
   pendingCars: null,
   pendingCarsError: null,
   pendingCarsLoading: false,
+  hasFetchError: false,
+
   getPendingCars: async () => {
+    const { hasFetchError } = get();
     const currentTime: number = new Date().getTime();
     const { token } = useTokenStore.getState();
 
     if (!token) {
       return;
     }
+
+    if (hasFetchError) {
+      console.warn("Skipping fetch due to previous error.");
+      return;
+    }
+
     if (currentTime - lastFetchedTime < CACHE_EXPIRATION_TIME) {
       return;
     }
@@ -57,12 +67,14 @@ export const usePendingCars = create<UsePendingCarsStoreInterface>((set) => ({
         pendingCars,
         pendingCarsError: null,
         pendingCarsLoading: false,
+        hasFetchError: false,
       });
     } catch (err) {
       set({
         pendingCars: null,
         pendingCarsError: axios.isAxiosError(err) ? err?.response?.data?.message || "Error fetching PendingCars" : "Unexpected error occurred!",
         pendingCarsLoading: false,
+        hasFetchError: true,
       });
 
       if (!axios.isAxiosError(err)) {
@@ -70,6 +82,7 @@ export const usePendingCars = create<UsePendingCarsStoreInterface>((set) => ({
       }
     }
   },
+
   searchCars: async (params) => {
     const { token } = useTokenStore.getState();
     try {
@@ -88,6 +101,7 @@ export const usePendingCars = create<UsePendingCarsStoreInterface>((set) => ({
         pendingCars,
         pendingCarsError: null,
         pendingCarsLoading: false,
+        hasFetchError: false,
       });
     } catch (error) {
       toast.error("Failed to search car");

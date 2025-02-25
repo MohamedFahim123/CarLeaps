@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 export default async function MainHome() {
   const cookieStore = await cookies();
   const regionFromCookie = cookieStore.get("region")?.value?.toLowerCase();
+  console.log(regionFromCookie)
 
   const finalRegion = regionFromCookie || MainRegionName;
 

@@ -12,19 +12,29 @@ export interface UseYearsStoreIterface {
   years: Years[];
   yearsError: unknown;
   yearsLoading: boolean;
+  hasFetchError: boolean;
   getYears: () => Promise<void>;
 }
 
 let lastFetchedTime: number = 0;
 const CACHE_EXPIRATION_TIME: number = 15 * 60 * 1000;
 
-export const useYearsStore = create<UseYearsStoreIterface>((set) => ({
+export const useYearsStore = create<UseYearsStoreIterface>((set, get) => ({
   years: [],
   yearsError: null,
   yearsLoading: false,
+  hasFetchError: false,
+
   getYears: async () => {
+    const { hasFetchError } = get();
     const currentTime: number = new Date().getTime();
+
+    if (hasFetchError) {
+      return;
+    }
+
     if (currentTime - lastFetchedTime < CACHE_EXPIRATION_TIME) {
+      set({ yearsLoading: false });
       return;
     }
 
@@ -45,12 +55,14 @@ export const useYearsStore = create<UseYearsStoreIterface>((set) => ({
         years,
         yearsError: null,
         yearsLoading: false,
+        hasFetchError: false,
       });
     } catch (err) {
       set({
         years: [],
         yearsError: axios.isAxiosError(err) ? err?.response?.data?.message || "Error fetching years" : "Unexpected error occurred!",
         yearsLoading: false,
+        hasFetchError: true,
       });
 
       if (!axios.isAxiosError(err)) {

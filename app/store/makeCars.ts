@@ -20,25 +20,35 @@ export interface MakesCars {
   image: string;
   cover: string;
   status: string;
-  incentives: Incentive[]
+  incentives: Incentive[];
 }
 
 export interface UseMakesCarsStoreIterface {
   makesCars: MakesCars[];
   makesCarsError: unknown;
   makesCarsLoading: boolean;
+  hasFetchError: boolean;
   getMakesCars: () => Promise<void>;
 }
 
 let lastFetchedTime: number = 0;
 const CACHE_EXPIRATION_TIME: number = 15 * 60 * 1000;
 
-export const useMakesCarsStore = create<UseMakesCarsStoreIterface>((set) => ({
+export const useMakesCarsStore = create<UseMakesCarsStoreIterface>((set, get) => ({
   makesCars: [],
   makesCarsError: null,
   makesCarsLoading: false,
+  hasFetchError: false,
+
   getMakesCars: async () => {
+    const { hasFetchError } = get();
     const currentTime: number = new Date().getTime();
+
+    if (hasFetchError) {
+      console.warn("Skipping fetch due to previous error.");
+      return;
+    }
+
     if (currentTime - lastFetchedTime < CACHE_EXPIRATION_TIME) {
       return;
     }
@@ -60,6 +70,7 @@ export const useMakesCarsStore = create<UseMakesCarsStoreIterface>((set) => ({
         makesCars,
         makesCarsError: null,
         makesCarsLoading: false,
+        hasFetchError: false,
       });
     } catch (err) {
       set({
@@ -68,6 +79,7 @@ export const useMakesCarsStore = create<UseMakesCarsStoreIterface>((set) => ({
           ? err?.response?.data?.message || "Error fetching makesCars"
           : "Unexpected error occurred!",
         makesCarsLoading: false,
+        hasFetchError: true,
       });
 
       if (!axios.isAxiosError(err)) {

@@ -7,12 +7,14 @@ import { useTokenStore } from "./Token";
 export interface ImagesTypes {
   image: string;
 }
+
 export interface FeaturesTypes {
   id: number;
   name: string;
   type: string;
   status: string;
 }
+
 export interface CarsTypes {
   id: number;
   name: string;
@@ -53,6 +55,7 @@ export interface CarsTypes {
   carImagesCount: number;
   carImages: ImagesTypes[];
 }
+
 export interface Meta {
   total: number;
   per_page: number;
@@ -66,6 +69,7 @@ export interface Links {
   prev: string | null;
   next: string | null;
 }
+
 export interface ActiveCars {
   cars: CarsTypes[];
   meta: Meta;
@@ -77,6 +81,7 @@ export interface UseActiveCarsStoreInterface {
   activeCars: ActiveCars | null;
   activeCarsError: unknown;
   activeCarsLoading: boolean;
+  hasFetchError: boolean;
   getActiveCars: () => Promise<void>;
   searchCars: (params: string) => Promise<void>;
 }
@@ -84,76 +89,90 @@ export interface UseActiveCarsStoreInterface {
 let lastFetchedTime: number = 0;
 const CACHE_EXPIRATION_TIME: number = 15 * 60 * 1000;
 
-export const useActiveCars = create<UseActiveCarsStoreInterface>((set) => ({
-  activeCars: null,
-  activeCarsError: null,
-  activeCarsLoading: false,
-  getActiveCars: async () => {
-    const currentTime: number = new Date().getTime();
-    const { token } = useTokenStore.getState();
+export const useActiveCars = create<UseActiveCarsStoreInterface>(
+  (set, get) => ({
+    activeCars: null,
+    activeCarsError: null,
+    activeCarsLoading: false,
+    hasFetchError: false,
 
-    if (!token) {
-      return;
-    }
-    if (currentTime - lastFetchedTime < CACHE_EXPIRATION_TIME) {
-      return;
-    }
+    getActiveCars: async () => {
+      const currentTime: number = new Date().getTime();
+      const { token } = useTokenStore.getState();
 
-    set({ activeCarsLoading: true });
-
-    try {
-      const res = await axios.get(`${baseUrl}/dealer/active-cars?t=${currentTime}`, {
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      const activeCars = res?.data?.data || [];
-
-      lastFetchedTime = currentTime;
-
-      set({
-        activeCars,
-        activeCarsError: null,
-        activeCarsLoading: false,
-      });
-    } catch (err) {
-      set({
-        activeCars: null,
-        activeCarsError: axios.isAxiosError(err) ? err?.response?.data?.message || "Error fetching activeCars" : "Unexpected error occurred!",
-        activeCarsLoading: false,
-      });
-
-      if (!axios.isAxiosError(err)) {
-        toast.error("Unexpected error occurred!");
+      if (get().hasFetchError) {
+        console.warn("Skipping fetch due to previous error.");
+        return;
       }
-    }
-  },
-  searchCars: async (params) => {
-    const { token } = useTokenStore.getState();
-    try {
-      const response = await axios.post(
-        `${baseUrl}/dealer/search-active-cars`,
-        { name: params },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      const activeCars = response?.data?.data || [];
 
-      set({
-        activeCars,
-        activeCarsError: null,
-        activeCarsLoading: false,
-      });
-    } catch (error) {
-      toast.error("Failed to search car");
-      console.error(error);
-    }
-  },
-}));
+      if (currentTime - lastFetchedTime < CACHE_EXPIRATION_TIME) {
+        return;
+      }
+
+      set({ activeCarsLoading: true });
+
+      try {
+        const res = await axios.get(
+          `${baseUrl}/dealer/active-cars?t=${currentTime}`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        const activeCars = res?.data?.data || [];
+        lastFetchedTime = currentTime;
+
+        set({
+          activeCars,
+          activeCarsError: null,
+          activeCarsLoading: false,
+          hasFetchError: false,
+        });
+      } catch (err) {
+        set({
+          activeCars: null,
+          activeCarsError: axios.isAxiosError(err)
+            ? err?.response?.data?.message || "Error fetching activeCars"
+            : "Unexpected error occurred!",
+          activeCarsLoading: false,
+          hasFetchError: true,
+        });
+
+        if (!axios.isAxiosError(err)) {
+          toast.error("Unexpected error occurred!");
+        }
+      }
+    },
+
+    searchCars: async (params) => {
+      const { token } = useTokenStore.getState();
+      try {
+        const response = await axios.post(
+          `${baseUrl}/dealer/search-active-cars`,
+          { name: params },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        const activeCars = response?.data?.data || [];
+
+        set({
+          activeCars,
+          activeCarsError: null,
+          activeCarsLoading: false,
+          hasFetchError: false,
+        });
+      } catch (error) {
+        toast.error("Failed to search car");
+        console.error(error);
+      }
+    },
+  })
+);

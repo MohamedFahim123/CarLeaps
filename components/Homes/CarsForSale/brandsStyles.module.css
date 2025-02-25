@@ -1,0 +1,11 @@
+.carMakeContainer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 0;
+}
+.carMake {
+  width: calc(100% / 8);
+  margin: 0 !important;
+  cursor: pointer;
+}

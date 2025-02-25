@@ -35,6 +35,7 @@ export default async function BrandsPage({
   const selectedBrandRes = await selectedBrandReq.json();
   const selectedBrand = selectedBrandRes?.data;
 
+
   return (
     <>
       {selectedBrand ? (

@@ -22,6 +22,7 @@ export interface CarDealerInterface {
   image: string;
   documents: string[];
 }
+
 export interface CarFeatures {
   id: number;
   name: string;
@@ -75,11 +76,12 @@ export interface Car {
   carImages: { image: string }[];
 }
 
-export interface UseCarsForSaleStoreIterface {
+export interface UseCarsForSaleStoreInterface {
   carsForSale: Car[];
   carsForSaleError: unknown;
   carsForSaleLoading: boolean;
   currentRegion?: string;
+  hasFetchError: boolean;
   setRegion: (region: string) => void;
   getCarsForSale: () => Promise<void>;
 }
@@ -87,15 +89,16 @@ export interface UseCarsForSaleStoreIterface {
 let lastFetchedTime: number = 0;
 const CACHE_EXPIRATION_TIME: number = 15 * 60 * 1000;
 
-export const useCarsForSaleStore = create<UseCarsForSaleStoreIterface>(
+export const useCarsForSaleStore = create<UseCarsForSaleStoreInterface>(
   (set, get) => ({
     carsForSale: [],
     carsForSaleError: null,
     carsForSaleLoading: false,
     currentRegion: Cookies.get("region"),
+    hasFetchError: false,
 
     setRegion: (region: string) => {
-      set({ currentRegion: region });
+      set({ currentRegion: region, hasFetchError: false });
       lastFetchedTime = 0;
       get().getCarsForSale();
     },
@@ -106,6 +109,11 @@ export const useCarsForSaleStore = create<UseCarsForSaleStoreIterface>(
 
       if (!regionCode) {
         Cookies.set("region", MainRegionName);
+      }
+
+      if (get().hasFetchError) {
+        console.warn("Skipping fetch due to previous error.");
+        return;
       }
 
       if (
@@ -133,6 +141,7 @@ export const useCarsForSaleStore = create<UseCarsForSaleStoreIterface>(
           carsForSale,
           carsForSaleError: null,
           carsForSaleLoading: false,
+          hasFetchError: false
         });
       } catch (err) {
         set({
@@ -141,6 +150,7 @@ export const useCarsForSaleStore = create<UseCarsForSaleStoreIterface>(
             ? err?.response?.data?.message
             : "Error fetching carsForSale",
           carsForSaleLoading: false,
+          hasFetchError: true,
         });
 
         if (!axios.isAxiosError(err)) {

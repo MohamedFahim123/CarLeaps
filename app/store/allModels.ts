@@ -2,6 +2,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { create } from "zustand";
 import { baseUrl } from "../utils/mainData";
+import { Features } from "./features";
 
 export interface ModelGallery {
   id: number;
@@ -9,6 +10,7 @@ export interface ModelGallery {
   image: string;
   description: string;
 }
+
 export interface ModelSpecification {
   id: number;
   name: string;
@@ -27,6 +29,7 @@ export interface Models {
   cover: string;
   status: string;
   specifications: ModelSpecification[];
+  features: Features[];
   gallery: ModelGallery[];
 }
 
@@ -34,18 +37,28 @@ export interface UseModelsStoreIterface {
   models: Models[];
   modelsError: unknown;
   modelsLoading: boolean;
+  hasFetchError: boolean;
   getModels: () => Promise<void>;
 }
 
 let lastFetchedTime: number = 0;
 const CACHE_EXPIRATION_TIME: number = 15 * 60 * 1000;
 
-export const useModelsStore = create<UseModelsStoreIterface>((set) => ({
+export const useModelsStore = create<UseModelsStoreIterface>((set, get) => ({
   models: [],
   modelsError: null,
   modelsLoading: false,
+  hasFetchError: false,
+
   getModels: async () => {
+    const { hasFetchError } = get();
     const currentTime: number = new Date().getTime();
+
+    if (hasFetchError) {
+      console.warn("Skipping fetch due to previous error.");
+      return;
+    }
+
     if (currentTime - lastFetchedTime < CACHE_EXPIRATION_TIME) {
       return;
     }
@@ -67,6 +80,7 @@ export const useModelsStore = create<UseModelsStoreIterface>((set) => ({
         models,
         modelsError: null,
         modelsLoading: false,
+        hasFetchError: false,
       });
     } catch (err) {
       set({
@@ -75,6 +89,7 @@ export const useModelsStore = create<UseModelsStoreIterface>((set) => ({
           ? err?.response?.data?.message || "Error fetching Models"
           : "Unexpected error occurred!",
         modelsLoading: false,
+        hasFetchError: true,
       });
 
       if (!axios.isAxiosError(err)) {

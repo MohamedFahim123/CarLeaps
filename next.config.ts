@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "validcars.valureach.com",
-        pathname: "/storage/dealers/**",
+        pathname: "/storage/**",
       },
       {
         protocol: "https",

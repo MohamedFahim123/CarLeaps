@@ -1,4 +1,11 @@
+"use client";
+
+import { useCarsForSaleStore } from "@/app/store/CarsForSale";
+import Link from "next/link";
+
 export default function Hero() {
+  const { currentRegion } = useCarsForSaleStore();
+
   return (
     <section className="boxcar-banner-section-nine">
       <div className="container">
@@ -37,8 +44,8 @@ export default function Hero() {
                   </defs>
                 </svg>
               </a>
-              <a
-                href="#"
+              <Link
+                href={`/${currentRegion}/cars/perfect-match`}
                 className="read-more wow fadeInUp"
                 data-wow-delay="200ms"
               >
@@ -62,7 +69,7 @@ export default function Hero() {
                     </clipPath>
                   </defs>
                 </svg>
-              </a>
+              </Link>
             </div>
           </div>
         </div>

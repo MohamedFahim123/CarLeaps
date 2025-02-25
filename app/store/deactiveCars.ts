@@ -16,6 +16,7 @@ export interface UseDeactiveCarsStoreInterface {
   deactiveCars: DeactiveCars | null;
   deactiveCarsError: unknown;
   deactiveCarsLoading: boolean;
+  hasFetchError: boolean;
   getDeactiveCars: () => Promise<void>;
   searchCars: (params: string) => Promise<void>;
 }
@@ -23,15 +24,23 @@ export interface UseDeactiveCarsStoreInterface {
 let lastFetchedTime: number = 0;
 const CACHE_EXPIRATION_TIME: number = 15 * 60 * 1000;
 
-export const useDeactiveCars = create<UseDeactiveCarsStoreInterface>((set) => ({
+export const useDeactiveCars = create<UseDeactiveCarsStoreInterface>((set, get) => ({
   deactiveCars: null,
   deactiveCarsError: null,
   deactiveCarsLoading: false,
+  hasFetchError: false,
+
   getDeactiveCars: async () => {
+    const { hasFetchError } = get();
     const currentTime: number = new Date().getTime();
     const { token } = useTokenStore.getState();
 
     if (!token) {
+      return;
+    }
+
+    if (hasFetchError) {
+      console.warn("Skipping fetch due to previous error.");
       return;
     }
 
@@ -51,19 +60,22 @@ export const useDeactiveCars = create<UseDeactiveCarsStoreInterface>((set) => ({
       });
 
       const deactiveCars = res?.data?.data || [];
-
       lastFetchedTime = currentTime;
 
       set({
         deactiveCars,
         deactiveCarsError: null,
         deactiveCarsLoading: false,
+        hasFetchError: false,
       });
     } catch (err) {
       set({
         deactiveCars: null,
-        deactiveCarsError: axios.isAxiosError(err) ? err?.response?.data?.message || "Error fetching DeactiveCars" : "Unexpected error occurred!",
+        deactiveCarsError: axios.isAxiosError(err)
+          ? err?.response?.data?.message || "Error fetching DeactiveCars"
+          : "Unexpected error occurred!",
         deactiveCarsLoading: false,
+        hasFetchError: true,
       });
 
       if (!axios.isAxiosError(err)) {
@@ -71,6 +83,7 @@ export const useDeactiveCars = create<UseDeactiveCarsStoreInterface>((set) => ({
       }
     }
   },
+
   searchCars: async (params) => {
     const { token } = useTokenStore.getState();
     try {
@@ -90,6 +103,7 @@ export const useDeactiveCars = create<UseDeactiveCarsStoreInterface>((set) => ({
         deactiveCars,
         deactiveCarsError: null,
         deactiveCarsLoading: false,
+        hasFetchError: false,
       });
     } catch (error) {
       toast.error("Failed to search car");

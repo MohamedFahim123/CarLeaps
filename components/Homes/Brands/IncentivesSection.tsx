@@ -11,7 +11,7 @@ export default function IncentivesSection({ brand }: { brand?: MakesCars }) {
     <>
       {brand && brand?.incentives?.length > 0 && (
         <div className="boxcar-container py-5">
-          <h3 className="mb-4">Alfa Romeo Incentives</h3>
+          <h3 className="mb-4">{brand.name} Incentives</h3>
           <Swiper
             modules={[Autoplay]}
             autoplay={{
