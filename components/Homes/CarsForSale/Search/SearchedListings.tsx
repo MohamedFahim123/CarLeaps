@@ -2,6 +2,8 @@
 import { useModelsStore } from "@/app/store/allModels";
 import { useBodiesStore } from "@/app/store/bodies";
 import { useSearchCarsStore } from "@/app/store/carSearch";
+import { useCarsForSaleStore } from "@/app/store/CarsForSale";
+import { useCitiesStore } from "@/app/store/Cities";
 import { useConditionStore } from "@/app/store/conditions";
 import { useFuelTypesStore } from "@/app/store/fuel-types";
 import { useMakesCarsStore } from "@/app/store/makeCars";
@@ -25,6 +27,10 @@ export default function SearchedListings() {
   const router = useRouter();
   const pathname = usePathname();
   const currRegion: string = Cookies.get("region") || MainRegionName;
+  const { currentRegion } = useCarsForSaleStore();
+  const { cities } = useCitiesStore();
+  const currentCurrency =
+    cities.find((city) => city.code === currentRegion)?.currency || "";
 
   const [defaultValues, setDefaultValues] = useState<DefaultValues>({
     condition: "",
@@ -441,7 +447,7 @@ export default function SearchedListings() {
                             </div>
                           </a>
                           <h4 className="title">
-                            {elm.offer_price ? elm.offer_price : elm.price}
+                            {elm.offer_price ? elm.offer_price : elm.price} {currentCurrency}
                           </h4>
                         </div>
                       </div>

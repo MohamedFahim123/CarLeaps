@@ -10,7 +10,7 @@ export default function AddListingPrice({ tab, handleTabChange, register, errors
         </div>
         <div className="col-lg-12">
           <div className="inner-box">
-            <InputField label="Office Price ($)" className="v2" name="office_price" register={register} errors={errors} />
+            <InputField label="Office Price ($)" className="v2" name="offer_price" register={register} errors={errors} />
             <div className="text">Any text shown before price (for example: from).</div>
           </div>
         </div>

@@ -43,7 +43,7 @@ const ExploreModelSection = ({ trim }: { trim: Trims }) => {
                     <button
                       className={`accordion-button`}
                       type="button"
-                      onClick={() => handleToggle(index + 1)}
+                      onClick={() => handleToggle(index + 1)} style={{backgroundColor: "#EDDFFF"}}
                       aria-expanded={activeIndex === index + 1}
                       aria-controls={`collapse${key}`}
                     >

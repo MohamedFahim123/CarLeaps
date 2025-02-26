@@ -100,6 +100,10 @@ export const useActiveCars = create<UseActiveCarsStoreInterface>(
       const currentTime: number = new Date().getTime();
       const { token } = useTokenStore.getState();
 
+      if (!token) {
+        return;
+      }
+
       if (get().hasFetchError) {
         console.warn("Skipping fetch due to previous error.");
         return;

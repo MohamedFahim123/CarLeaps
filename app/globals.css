@@ -100,9 +100,62 @@ img {
 .pointer {
   cursor: pointer !important;
 }
-.region-selector{
+.region-selector {
   max-width: 120px;
 }
 .cursor-pointer {
   cursor: pointer !important;
+}
+
+.accordion-container {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.accordion-item {
+  border-bottom: 1px solid #ddd;
+}
+
+.accordion-header {
+  cursor: pointer;
+  padding: 15px;
+  background: rgb(237, 223, 255);
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.3s;
+}
+
+.accordion-header.open {
+  background: #6e499f;
+  color: white;
+}
+
+.accordion-content {
+  padding: 10px 15px;
+  display: none;
+}
+
+.accordion-content.show {
+  display: block;
+}
+
+.features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.features-list li {
+  padding: 5px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.features-list li:last-child {
+  border-bottom: none;
+}
+
+.icon {
+  font-size: 14px;
 }

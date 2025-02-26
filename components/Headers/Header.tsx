@@ -1,35 +1,38 @@
 "use client";
 
-import { useTokenStore } from "@/app/store/Token";
+import { useModelsStore } from "@/app/store/allModels";
+import { useTrimsStore } from "@/app/store/allTirms";
+import { useBodiesStore } from "@/app/store/bodies";
+import { useCarsForSaleStore } from "@/app/store/CarsForSale";
+import { useCitiesStore } from "@/app/store/Cities";
+import { useConditionStore } from "@/app/store/conditions";
 import { useCountriesStore } from "@/app/store/countries";
+import { useFuelTypesStore } from "@/app/store/fuel-types";
+import { useMakesCarsStore } from "@/app/store/makeCars";
 import { useProfileStore } from "@/app/store/profile";
+import { useTokenStore } from "@/app/store/Token";
 import { baseUrl, MainRegionName } from "@/app/utils/mainData";
+import { setRegionCookie } from "@/app/utils/setRegionCookie";
+import axios from "axios";
 import Cookies from "js-cookie";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
-import Nav from "./Nav";
 import { CiLogout } from "react-icons/ci";
-import styles from "./headerStyles.module.css";
 import { toast } from "react-toastify";
-import axios from "axios";
-import { useMakesCarsStore } from "@/app/store/makeCars";
-import { useModelsStore } from "@/app/store/allModels";
-import { useTrimsStore } from "@/app/store/allTirms";
-import { useCarsForSaleStore } from "@/app/store/CarsForSale";
-import { setRegionCookie } from "@/app/utils/setRegionCookie";
-import { useBodiesStore } from "@/app/store/bodies";
-import { useConditionStore } from "@/app/store/conditions";
-import { useFuelTypesStore } from "@/app/store/fuel-types";
-import { useCitiesStore } from "@/app/store/Cities";
+import styles from "./headerStyles.module.css";
+import Nav from "./Nav";
 
 interface Header1Props {
   headerClass?: string;
   white?: boolean;
 }
 
-export default function Header1({ headerClass = "header-style-v1 header-default", white = false }: Header1Props) {
+export default function Header1({
+  headerClass = "header-style-v1 header-default",
+  white = false,
+}: Header1Props) {
   const pathName = usePathname();
   const router = useRouter();
   const [currRegion, setCurrRegion] = useState<string>(MainRegionName);
@@ -44,7 +47,8 @@ export default function Header1({ headerClass = "header-style-v1 header-default"
   const { cities, getCities, citiesLoading } = useCitiesStore();
 
   const { fuelTypes, getFuelTypes, fuelTypesLoading } = useFuelTypesStore();
-  const { carsForSale, getCarsForSale, setRegion, carsForSaleLoading } = useCarsForSaleStore();
+  const { carsForSale, getCarsForSale, setRegion, carsForSaleLoading } =
+    useCarsForSaleStore();
 
   const getAllFuelTypes = useCallback(() => {
     if (fuelTypes.length === 0 && !fuelTypesLoading) {
@@ -57,7 +61,7 @@ export default function Header1({ headerClass = "header-style-v1 header-default"
       getCarsForSale();
     }
   }, [getCarsForSale, carsForSaleLoading, carsForSale.length]);
-  
+
   const getAllConditions = useCallback(() => {
     if (condition.length === 0 && !conditionLoading) {
       getCondition();
@@ -124,7 +128,19 @@ export default function Header1({ headerClass = "header-style-v1 header-default"
     getAllConditions();
     getAllFuelTypes();
     getAllCities();
-  }, [getAllBodiesCars, getAllFuelTypes, getAllConditions, getAllCountries, getAllMakesCars, getTheToken, getTheProfile, getAllModels, getAllTrims, getAllCarsForSale, getAllCities]);
+  }, [
+    getAllBodiesCars,
+    getAllFuelTypes,
+    getAllConditions,
+    getAllCountries,
+    getAllMakesCars,
+    getTheToken,
+    getTheProfile,
+    getAllModels,
+    getAllTrims,
+    getAllCarsForSale,
+    getAllCities,
+  ]);
 
   useEffect(() => {
     const region: string = Cookies.get("region") || MainRegionName;
@@ -178,10 +194,16 @@ export default function Header1({ headerClass = "header-style-v1 header-default"
   };
 
   const RenderCondition: boolean =
-    pathName.includes(`/${currRegion}/cars/cars-for-sale/search`) || pathName.includes(`/${currRegion}/cars/car-details`) || pathName.includes(`/${currRegion}/cars/perfect-match`);
+    pathName.includes(`/${currRegion}/cars/cars-for-sale/search`) ||
+    pathName.includes(`/${currRegion}/cars/car-details`) ||
+    pathName.includes(`/${currRegion}/cars/perfect-match`);
 
   return (
-    <header className={`boxcar-header ${styles.backGroundBlack} ${!RenderCondition && styles.mainPadding} ${headerClass}`}>
+    <header
+      className={`boxcar-header ${styles.backGroundBlack} ${
+        !RenderCondition && styles.mainPadding
+      } ${headerClass}`}
+    >
       <div className="header-inner py-3">
         <div className="container">
           <div className="c-box">
@@ -189,9 +211,21 @@ export default function Header1({ headerClass = "header-style-v1 header-default"
               <div className="logo">
                 <Link href={`/${currRegion}/cars/home`}>
                   {white ? (
-                    <Image alt="Valid Cars logo" title="Valid Cars" src="/images/weblogo.png" width={108} height={26} />
+                    <Image
+                      alt="CarLeaps logo"
+                      title="CarLeaps"
+                      src="/images/lightlogo.svg"
+                      width={115}
+                      height={28}
+                    />
                   ) : (
-                    <Image alt="Valid Cars logo" title="Valid Cars" src="/images/weblogo.png" width={108} height={26} />
+                    <Image
+                      alt="CarLeaps logo"
+                      title="CarLeaps"
+                      src="/images/logo.svg"
+                      width={115}
+                      height={28}
+                    />
                   )}
                 </Link>
               </div>
@@ -206,7 +240,11 @@ export default function Header1({ headerClass = "header-style-v1 header-default"
             <div className="right-box ms-auto">
               {cities.length > 0 && (
                 <div className="region-selector me-3">
-                  <select className="form-select" value={currRegion} onChange={handleRegionChange}>
+                  <select
+                    className="form-select"
+                    value={currRegion}
+                    onChange={handleRegionChange}
+                  >
                     {cities?.map((city) => (
                       <option key={city.id} value={city.code}>
                         {city.code.toUpperCase()}
@@ -216,9 +254,19 @@ export default function Header1({ headerClass = "header-style-v1 header-default"
                 </div>
               )}
               {!token ? (
-                <Link href={`/${currRegion}/auth/login`} title="" className="box-account">
+                <Link
+                  href={`/${currRegion}/auth/login`}
+                  title=""
+                  className="box-account"
+                >
                   <span className="icon">
-                    <svg width={16} height={16} viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg
+                      width={16}
+                      height={16}
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
                       <g clipPath="url(#clip0_147_6490)">
                         <path
                           d="M7.99998 9.01221C3.19258 9.01221 0.544983 11.2865 0.544983 15.4161C0.544983 15.7386 0.806389 16.0001 1.12892 16.0001H14.871C15.1935 16.0001 15.455 15.7386 15.455 15.4161C15.455 11.2867 12.8074 9.01221 7.99998 9.01221ZM1.73411 14.8322C1.9638 11.7445 4.06889 10.1801 7.99998 10.1801C11.9311 10.1801 14.0362 11.7445 14.2661 14.8322H1.73411Z"
@@ -241,11 +289,19 @@ export default function Header1({ headerClass = "header-style-v1 header-default"
               ) : (
                 <>
                   <div className="btn">
-                    <Link href={`/${currRegion}/dashboard/profile`} className="btn btn-light px-3">
-                      Car Portal
+                    <Link
+                      href={`/${currRegion}/dashboard/profile`}
+                      className={`btn ${styles.btnCarPortal} px-3`}
+                    >
+                      Dealer Portal
                     </Link>
                   </div>
-                  <button className={`btn text-white ${styles.logoutBtn}`} type="button" title="Logout" onClick={logoutHandler}>
+                  <button
+                    className={`btn text-white ${styles.logoutBtn}`}
+                    type="button"
+                    title="Logout"
+                    onClick={logoutHandler}
+                  >
                     <CiLogout size={30} />
                   </button>
                 </>
@@ -253,14 +309,26 @@ export default function Header1({ headerClass = "header-style-v1 header-default"
               <div className="mobile-navigation">
                 {white ? (
                   <a href="#nav-mobile" title="">
-                    <svg width={22} height={11} viewBox="0 0 22 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg
+                      width={22}
+                      height={11}
+                      viewBox="0 0 22 11"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
                       <rect width={22} height={2} fill="#050B20" />
                       <rect y={9} width={22} height={2} fill="#050B20" />
                     </svg>
                   </a>
                 ) : (
                   <a href="#nav-mobile" title="">
-                    <svg width={22} height={11} viewBox="0 0 22 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg
+                      width={22}
+                      height={11}
+                      viewBox="0 0 22 11"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
                       <rect width={22} height={2} fill="white" />
                       <rect y={9} width={22} height={2} fill="white" />
                     </svg>

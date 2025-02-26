@@ -1,10 +1,10 @@
 "use client";
 
 import { useCarsForSaleStore } from "@/app/store/CarsForSale";
+import { useCitiesStore } from "@/app/store/Cities";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import Slider from "react-slick";
 import "swiper/css";
 import { Autoplay, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -17,8 +17,10 @@ const icons: { icon: string }[] = [
 
 export default function Cars() {
   const [mounted, setMounted] = useState(false);
-
   const { carsForSale, currentRegion } = useCarsForSaleStore();
+  const { cities } = useCitiesStore();
+  const currentCurrency =
+    cities.find((city) => city.code === currentRegion)?.currency || "";
 
   useEffect(() => {
     setMounted(true);
@@ -94,28 +96,21 @@ export default function Cars() {
                 >
                   <div className="inner-box mx-2">
                     <div className={`image-box`}>
-                      <Slider
-                        dots
-                        slidesToShow={1}
-                        key={car.id}
-                        className="slider-thumb"
-                      >
-                        {car.carImages.slice(0, 5).map((image, i) => (
-                          <div key={i} className="image d-block">
-                            <Link href={`/inventory-page-single-v1/${car.id}`}>
-                              <Image
-                                alt={car.name}
-                                src={image.image}
-                                width={329}
-                                height={220}
-                              />
-                            </Link>
-                          </div>
-                        ))}
-                      </Slider>
+                      <div className="image d-block">
+                        <Link
+                          href={`/${currentRegion}/cars/car-details/${car.name}`}
+                        >
+                          <Image
+                            alt={car.name}
+                            src={car.main_image}
+                            width={329}
+                            height={220}
+                          />
+                        </Link>
+                      </div>
                       {car.status && <span>{car.status}</span>}
                       <Link
-                        href={`/inventory-page-single-v1/${car.id}`}
+                        href={`/${currentRegion}/cars/car-details/${car.name}`}
                         title=""
                         className="icon-box"
                       >
@@ -142,10 +137,11 @@ export default function Cars() {
                     </div>
                     <div className="content-box">
                       <h6 className="title fw-bold text-capitalize fs-4 mb-2">
-                        <Link href={`/${car.id}`}>
-                          {car.year} {car.make}
+                        <Link
+                          href={`/${currentRegion}/cars/car-details/${car.name}`}
+                        >
+                          {car.name.replaceAll("-", " ")}
                         </Link>
-                        <span className="d-block mt-2">{car.model}</span>
                       </h6>
                       <div className="text">
                         {car.description.slice(0, 30)}...
@@ -167,15 +163,16 @@ export default function Cars() {
                       <div className="btn-box">
                         {car?.offer_price && (
                           <span>
-                            <del>{car.price}$</del>
+                            <del>{car.price} {currentCurrency}</del>
                           </span>
                         )}
                         <small>
-                          {car.offer_price ? car.offer_price : car.price}$
+                          {car.offer_price ? car.offer_price : car.price} {currentCurrency}
                         </small>
                         <Link
-                          href={`/inventory-page-single-v1/${car.id}`}
+                          href={`/${currentRegion}/cars/car-details/${car.name}`}
                           className="details"
+                          title="Car Details"
                         >
                           View Details
                         </Link>

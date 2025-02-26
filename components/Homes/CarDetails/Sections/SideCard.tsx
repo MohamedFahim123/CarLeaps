@@ -1,23 +1,24 @@
+import { Car } from "@/app/store/CarsForSale";
 import Image from "next/image";
+import Link from "next/link";
 
-export default function SideCard() {
+export default function SideCard({ carItem }: { carItem: Car }) {
   return (
     <div className="side-bar-column style-1 col-lg-4 col-md-12 col-sm-12">
       <div className="inner-column">
         <div className="contact-box">
           <div className="icon-box">
             <Image
-              src="/images/resource/volvo.svg"
+              src={carItem.dealer.image}
               width={55}
               height={54}
-              alt=""
+              alt={`${carItem.dealer.name} image`}
+              className="rounded-circle object-fit-contain w-100 h-100"
             />
           </div>
           <div className="content-box">
-            <h6 className="title">Volvo Cars Marin</h6>
-            <div className="text">
-              619 Francisco Blvd E, San Rafael, CA 94901
-            </div>
+            <h6 className="title">{carItem.dealer.name}</h6>
+            <div className="text">{carItem.dealer.address}</div>
             <ul className="contact-list">
               <li>
                 <a href="#">
@@ -33,17 +34,19 @@ export default function SideCard() {
                 </a>
               </li>
               <li>
-                <a href="#">
+                <Link href={`tel:${carItem.dealer.phone}`}>
                   <div className="image-box">
                     <Image
                       src="/images/resource/phone1-2.svg"
                       width={18}
                       height={18}
-                      alt=""
+                      alt="phone icon"
                     />
                   </div>
-                  +76 956 039 967
-                </a>
+                  <span>
+                    {carItem.dealer.phone}
+                  </span>
+                </Link>
               </li>
             </ul>
             <div className="btn-box">

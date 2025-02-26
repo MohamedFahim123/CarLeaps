@@ -48,7 +48,7 @@ export type IFormInput = {
   drive?: string;
   vin?: string;
   engine?: number;
-  office_price?: number;
+  offer_price?: number;
   stock_id?: string;
   history?: File;
   ad_state_id?: string;
@@ -148,6 +148,7 @@ export default function AddListing() {
       }
     }
   };
+
   const handleTabChange = (tabId: string) => {
     setActiveTab(tabId);
   };

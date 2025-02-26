@@ -20,6 +20,7 @@ import Nav from "./Nav";
 import { useActiveCars } from "@/app/store/activecars";
 import { usePendingCars } from "@/app/store/pendingCars";
 import { useDeactiveCars } from "@/app/store/deactiveCars";
+import { useCitiesStore } from "@/app/store/Cities";
 
 function HeaderDashboard() {
   const { makesCars, getMakesCars, makesCarsLoading } = useMakesCarsStore();
@@ -30,20 +31,29 @@ function HeaderDashboard() {
   const { condition, getCondition, conditionLoading } = useConditionStore();
   const { getFeatures, featuresLoading } = useFeaturesStore();
   const { fuelTypes, getFuelTypes, fuelTypesLoading } = useFuelTypesStore();
-  const { transmissions, getTransmissions, transmissionsLoading } = useTransmissionsStore();
+  const { transmissions, getTransmissions, transmissionsLoading } =
+    useTransmissionsStore();
   const { years, getYears, yearsLoading } = useYearsStore();
   const { countries, getCountries, countriesLoading } = useCountriesStore();
   const { token, getToken, tokenLoading } = useTokenStore();
   const { profile, getProfile, profileLoading } = useProfileStore();
   const { activeCars, getActiveCars, activeCarsLoading } = useActiveCars();
   const { pendingCars, getPendingCars, pendingCarsLoading } = usePendingCars();
-  const { deactiveCars, getDeactiveCars, deactiveCarsLoading } = useDeactiveCars();
+  const { deactiveCars, getDeactiveCars, deactiveCarsLoading } =
+    useDeactiveCars();
+  const { cities, getCities, citiesLoading } = useCitiesStore();
 
   const getAllMakesCars = useCallback(() => {
     if (makesCars.length === 0 && !makesCarsLoading) {
       getMakesCars();
     }
   }, [getMakesCars, makesCarsLoading, makesCars.length]);
+
+  const getAllCities = useCallback(() => {
+    if (cities.length === 0 && !citiesLoading) {
+      getCities();
+    }
+  }, [getCities, citiesLoading, cities.length]);
 
   const getAllModels = useCallback(() => {
     if (models.length === 0 && !modelsLoading) {
@@ -136,6 +146,8 @@ function HeaderDashboard() {
   }, [getDeactiveCars, deactiveCarsLoading, deactiveCars]);
 
   useEffect(() => {
+    getTheToken();
+    getAllCities();
     getAllModels();
     getAllTrims();
     getAllMakesCars();
@@ -147,7 +159,6 @@ function HeaderDashboard() {
     getAllFuelTypes();
     getAllYears();
     getAllCountries();
-    getTheToken();
     getTheProfile();
     getAllActiveCars();
     getAllPendingCars();
@@ -155,6 +166,7 @@ function HeaderDashboard() {
   }, [
     getAllModels,
     getAllTrims,
+    getAllCities,
     getAllMakesCars,
     getAllAdStates,
     getAllBodies,
@@ -179,7 +191,13 @@ function HeaderDashboard() {
             <div className="logo-inner">
               <div className="logo">
                 <Link href={`/`}>
-                  <Image alt="" title="Boxcar" width={108} height={26} src="/images/logo.svg" />
+                  <Image
+                    alt=""
+                    title="Boxcar"
+                    width={108}
+                    height={26}
+                    src="/images/logo.svg"
+                  />
                 </Link>
               </div>
             </div>
@@ -195,14 +213,26 @@ function HeaderDashboard() {
                 <Image
                   width={50}
                   height={50}
-                  src={profile?.image === "N/A" ? "/images/resource/header-img.png" : profile?.image ? profile?.image : "/images/resource/header-img.png"}
+                  src={
+                    profile?.image === "N/A"
+                      ? "/images/resource/header-img.png"
+                      : profile?.image
+                      ? profile?.image
+                      : "/images/resource/header-img.png"
+                  }
                   alt={"Profile Image"}
                   className="object-fit-cover rounded-circle"
                 />
               </a>
               <div className="mobile-navigation">
                 <a href="#nav-mobile" title="">
-                  <svg width={22} height={11} viewBox="0 0 22 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <svg
+                    width={22}
+                    height={11}
+                    viewBox="0 0 22 11"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
                     <rect width={22} height={2} fill="white" />
                     <rect y={9} width={22} height={2} fill="white" />
                   </svg>

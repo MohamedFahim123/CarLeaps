@@ -63,6 +63,7 @@ export interface Car {
   ad_state: string;
   added_at: string;
   description: string;
+  video_link: string;
   status: string;
   main_image: string;
   history: string;

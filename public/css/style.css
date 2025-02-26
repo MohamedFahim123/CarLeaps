@@ -1,38 +1,4 @@
-/* Boxcar | Boxcar HTML Template
-
-Template Name: Boxcar
-Version: 1.0.0
-License: copyright commercial
-/************ TABLE OF CONTENTS ***************
-1. Fonts
-2. Reset
-3. Global Settings
-4. Main Header / TwO
-5. Sticky Header 
-6. Mobile Menu
-7. Section Title
-8. Main Slider
-9. Banner Section
-10. Project Section
-11. Features Section / TwO / Three / Four / Five
-12. About Section / Two
-13. Services Section / Two
-14. Call To Action / Two
-15. FAQ's Sectiom
-16.  Marquee Section
-17. Fun Fact Section
-18. Testimonial Section / Two
-19. team Section 
-20, Contact Section / Two
-21. Why Choose Us / Two
-22. News Section / Two
-23. Video Section
-24. Map Section
-25. Clients Section
-26. Main Footer
-**********************************************/
-
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 @import url("animate.css");
 @import url("owl.css");
 @import url("jquery.fancybox.min.css");
@@ -42,9 +8,9 @@ License: copyright commercial
 
 :root {
   --theme-color-light: #ffffff;
-  --theme-color-dark: #000000;
+  --theme-color-dark: #161616;
   --theme-color-gray: #f6f6f6;
-  --theme-color1: #2C25EB;
+  --theme-color1: #6E499F;
   --theme-color2: #00b67a;
   --theme-color3: #faf7f2;
   --bg-theme-color1: var(--theme-color1);
@@ -55,9 +21,9 @@ License: copyright commercial
   --headings-color: #050b20;
   --link-color: var(--headings-color);
   --link-hover-color: var(--headings-color);
-  --title-font: "DM Sans", sans-serif;
-  --text-font: "DM Sans", sans-serif;
-  --title-font2: "Bebas Neue", sans-serif;
+  --title-font: "Outfit", serif;
+  --text-font: "Outfit", serif;
+  --title-font2: "Outfit", serif;
   --body-font-size: 16px;
   --body-line-height: 28px;
   --body-font-weight: 400;
@@ -1276,7 +1242,7 @@ Scroll To Top style
 }
 
 .theme-btn:hover {
-  background: #0146a6 !important;
+  background: #5318a0!important;
   border-color: transparent !important;
 }
 
@@ -1387,7 +1353,7 @@ Scroll To Top style
   .contact-box-two
   .btn-box
   .side-btn:hover {
-  background: #0146a6 !important;
+  background: #5318a0!important;
   border-color: transparent;
   color: #fff;
 }
@@ -5007,7 +4973,7 @@ Sticky Header
 }
 
 .mega-menu .mega-column ul li a:hover {
-  color: #405ff2;
+  color: #6E499F;
 }
 
 .main-menu .navigation > li:hover > .mega-menu {
@@ -5180,7 +5146,7 @@ Sticky Header
   color: #ffffff;
   background-color: #e9f2ff;
   border-radius: 16px;
-  color: #405ff2;
+  color: #6E499F;
 }
 
 .mm-btn:after,
@@ -5745,7 +5711,7 @@ Section Title
   line-height: 56px;
   padding: 0 30px;
   border-radius: 30px;
-  background-color: #405ff2;
+  background-color: #6E499F;
 }
 
 .boxcar-banner-section-v1 .banner-content .form-submit button i {
@@ -6667,7 +6633,7 @@ Section Title
   line-height: 60px;
   text-align: center;
   border-radius: 50%;
-  background-color: #405ff2;
+  background-color: #6E499F;
   padding-top: 3px;
 }
 
@@ -7329,7 +7295,7 @@ Section Title
   padding: 0 30px;
   width: 100%;
   border-radius: 30px;
-  background-color: #405ff2;
+  background-color: #6E499F;
 }
 
 .boxcar-banner-section-v8
@@ -8650,7 +8616,7 @@ Section Title
   left: 0;
   width: 100%;
   height: 100%;
-  border: 1px solid #405ff2;
+  border: 1px solid #6E499F;
   border-radius: 50%;
   opacity: 0;
   visibility: hidden;
@@ -9712,7 +9678,7 @@ Section Title
   font-weight: 500;
   color: var(--theme-color1);
   border-radius: 8px;
-  border: 1px solid #405ff2;
+  border: 1px solid #6E499F;
   background: var(--theme-color-light);
   width: 100%;
   height: 54px;
@@ -12737,7 +12703,7 @@ Section Title
   font-weight: 500;
   color: var(--theme-color1);
   border-radius: 8px;
-  border: 1px solid var(--color-secondary, #405ff2);
+  border: 1px solid var(--color-secondary, #6E499F);
   background: var(--theme-color-light);
   height: 54px;
   line-height: 54px;
@@ -12886,7 +12852,7 @@ Section Title
   font-weight: 500;
   color: var(--theme-color-light);
   border-radius: 8px;
-  border: 1px solid var(--color-secondary, #405ff2);
+  border: 1px solid var(--color-secondary, #6E499F);
   background: var(--theme-color1);
   height: 54px;
   line-height: 54px;
@@ -13267,7 +13233,7 @@ Section Title
   line-height: 54px;
   padding: 0 38px;
   border-radius: 12px;
-  border: 1px solid var(--color-secondary, #405ff2);
+  border: 1px solid var(--color-secondary, #6E499F);
   background: var(--White, #fff);
   display: inline-block;
   margin-top: 30px;
@@ -13555,7 +13521,7 @@ Section Title
   .inner-column
   form
   .theme-btn {
-  background: #405ff2;
+  background: #6E499F;
   color: #fff;
   height: 54px;
   line-height: 54px;
@@ -14050,7 +14016,7 @@ Section Title
 }
 
 .form-submit .theme-btn {
-  background: #405ff2;
+  background: #6E499F;
   color: #fff;
   height: 54px;
   line-height: 54px;
@@ -14081,7 +14047,7 @@ Section Title
 }
 
 .order_complete_message .icon span {
-  color: #405ff2;
+  color: #6E499F;
 }
 
 .order_complete_message .title {
@@ -14239,7 +14205,7 @@ Section Title
 }
 
 .order_complete_message .list_last_content .para {
-  color: #000000;
+  color: #161616;
   font-family: Jost;
   font-size: 15px;
   font-weight: 500;
@@ -14249,7 +14215,7 @@ Section Title
 
 .order_list_raw {
   background: #e9f2ff;
-  border: 2px dashed #405ff2;
+  border: 2px dashed #6E499F;
   padding: 36px 100px;
   border-radius: 8px;
 }
@@ -14329,7 +14295,7 @@ Section Title
 
 .order_details .od_content ul li p a {
   display: inline-block;
-  color: #405ff2;
+  color: #6E499F;
   font-size: 14px;
   font-weight: 400;
 }
@@ -14360,7 +14326,7 @@ Section Title
   padding: 20px 20px;
   font-size: 16px;
   font-weight: 500;
-  color: #405ff2;
+  color: #6E499F;
 }
 
 .cart-table table thead th:first-child {
@@ -14458,7 +14424,7 @@ Section Title
 }
 
 .theme-btn-web {
-  background: #405ff2;
+  background: #6E499F;
   color: #fff;
   height: 54px;
   line-height: 54px;
@@ -15722,7 +15688,7 @@ Section Title
 }
 
 .services-inner-section .calculater-sec .content-column form .theme-btn {
-  background: #405ff2;
+  background: #6E499F;
   color: #fff;
   height: 54px;
   line-height: 54px;
@@ -18273,7 +18239,7 @@ Section Title
   line-height: 54px;
   padding: 0 38px;
   border-radius: 12px;
-  border: 1px solid var(--color-secondary, #405ff2);
+  border: 1px solid var(--color-secondary, #6E499F);
   background: var(--White, #fff);
   display: inline-block;
   margin-top: 30px;
@@ -18453,7 +18419,7 @@ Section Title
 }
 
 .blog-section-five .right-box-two form .theme-btn {
-  background: #405ff2;
+  background: #6E499F;
   color: #fff;
   height: 54px;
   line-height: 54px;
@@ -19557,7 +19523,7 @@ Section Title
   .uplode-box {
   position: relative;
   border-radius: 8px;
-  border: 1px dashed var(--color-secondary, #405ff2);
+  border: 1px dashed var(--color-secondary, #6E499F);
   background: var(--bg-3, #e9f2ff);
   width: 190px;
   height: 167px;
@@ -20593,7 +20559,7 @@ Section Title
   .uplode-box {
   position: relative;
   border-radius: 8px;
-  border: 1px dashed var(--color-secondary, #405ff2);
+  border: 1px dashed var(--color-secondary, #6E499F);
   background: var(--bg-3, #e9f2ff);
   width: 190px;
   height: 167px;
@@ -21459,7 +21425,7 @@ Section Title
   padding: 30px 20px;
   font-size: 16px;
   font-weight: 500;
-  color: #405ff2;
+  color: #6E499F;
 }
 
 .search-table table thead th:first-child {
@@ -21639,7 +21605,7 @@ Chat Widget
   right: 10px;
   top: 0;
   border-radius: 12px;
-  background: #405ff2;
+  background: #6E499F;
   color: #fff;
   border: 0;
   font-size: 15px;
@@ -21953,7 +21919,7 @@ Chat Widget
   font-size: 14px;
   line-height: 19px;
   text-decoration-line: underline;
-  color: #405ff2;
+  color: #6E499F;
   background: transparent;
 }
 
@@ -22336,7 +22302,7 @@ Chat Widget
 
 .dash-btn {
   display: block;
-  border: 1px solid #405ff2;
+  border: 1px solid #6E499F;
   border-radius: 12px;
   width: 100%;
   text-align: center;
@@ -22345,7 +22311,7 @@ Chat Widget
   text-transform: capitalize;
   height: 54px;
   line-height: 54px;
-  color: #405ff2;
+  color: #6E499F;
 }
 
 .dash-btn svg {
@@ -22353,11 +22319,11 @@ Chat Widget
 }
 
 .dash-btn svg path {
-  fill: #405ff2;
+  fill: #6E499F;
 }
 
 .dash-btn:hover {
-  background-color: #405ff2;
+  background-color: #6E499F;
   color: #fff;
   border-color: transparent;
 }
@@ -22526,7 +22492,7 @@ Chat Widget
 }
 
 .contact-us-section .calculater-sec .content-column form .theme-btn {
-  background: #405ff2;
+  background: #6E499F;
   color: #fff;
   height: 54px;
   line-height: 54px;
@@ -24561,7 +24527,7 @@ Chat Widget
   line-height: 54px;
   padding: 0 38px;
   border-radius: 12px;
-  border: 1px solid var(--color-secondary, #405ff2);
+  border: 1px solid var(--color-secondary, #6E499F);
   background: var(--White, #fff);
   display: inline-block;
   margin-top: 30px;
@@ -24796,7 +24762,7 @@ Chat Widget
 }
 
 .inventory-section .inspection-column .inner-column form .theme-btn {
-  background: #405ff2;
+  background: #6E499F;
   color: #fff;
   height: 54px;
   line-height: 54px;
@@ -25486,7 +25452,7 @@ Chat Widget
 
 .inventory-sidebar .show-more {
   display: inline-block;
-  color: #405ff2;
+  color: #6E499F;
   font-size: 15px;
 }
 
@@ -26099,7 +26065,7 @@ Chat Widget
   font-weight: 500;
   color: var(--theme-color1);
   border-radius: 12px;
-  border: 1px solid var(--color-secondary, #405ff2);
+  border: 1px solid var(--color-secondary, #6E499F);
   background: var(--White, #fff);
   height: 54px;
   line-height: 54px;
@@ -26550,7 +26516,7 @@ Chat Widget
   line-height: 54px;
   padding: 0 38px;
   border-radius: 12px;
-  border: 1px solid var(--color-secondary, #405ff2);
+  border: 1px solid var(--color-secondary, #6E499F);
   background: var(--White, #fff);
   display: inline-block;
   margin-top: 30px;
@@ -26739,7 +26705,7 @@ Chat Widget
 }
 
 .dealer-ship-section-two .inner-column form .theme-btn {
-  background: #405ff2;
+  background: #6E499F;
   color: #fff;
   height: 54px;
   line-height: 54px;
@@ -28668,7 +28634,7 @@ Chat Widget
 }
 
 .calculater-section .content-column form .theme-btn {
-  background: #405ff2;
+  background: #6E499F;
   width: 100%;
   color: #fff;
   height: 54px;
@@ -28812,7 +28778,7 @@ Chat Widget
 }
 
 .login-section form .theme-btn {
-  background: #405ff2;
+  background: #6E499F;
   color: #fff;
   width: 100%;
   height: 54px;

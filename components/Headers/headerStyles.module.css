@@ -1,5 +1,5 @@
 .backGroundBlack {
-  background-color: black !important;
+  background-color: #161616 !important;
 }
 .mainPadding {
   padding-block: 20px !important;
@@ -14,4 +14,11 @@
 }
 .logoutBtn:hover {
   color: red !important;
+}
+.btnCarPortal {
+  background-color: #6E499F !important;
+  color: #fff !important;
+}
+.btnCarPortal:hover {
+  background-color: #4c1299 !important;
 }
