@@ -20,13 +20,10 @@ export default function ImagesSection({
             <Link href={`/`}>Home</Link>
           </li>
           <li>
-            <Link href={`/${region}/CARS/cars-for-sale`}>Cars for Sale</Link>
-          </li>
-          <li>
-            <span>{carItem.name}</span>
+            <Link href={`/${region}/cars/cars-for-sale`}>Cars for Sale</Link>
           </li>
         </ul>
-        <h2>{carItem?.name}</h2>
+        <h2 className="mb-4 text-capitalize">{carItem?.name?.replaceAll("-", " ")}</h2>
         <ul className="spectes-list">
           <li>
             <span>

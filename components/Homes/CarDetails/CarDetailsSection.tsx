@@ -1,17 +1,16 @@
 "use client";
+import { Car } from "@/app/store/CarsForSale";
+import { useCitiesStore } from "@/app/store/Cities";
 import { useState } from "react";
 import ModalVideo from "react-modal-video";
-import Features from "../CarsForSale/Features";
 import RelatedCars from "./RelatedCars";
 import Description from "./Sections/Description";
 import Faqs from "./Sections/Faqs";
 import Financing from "./Sections/Financing";
+import ImagesSection from "./Sections/ImagesSection";
 import Location from "./Sections/Location";
 import Overview from "./Sections/Overview";
 import SideCard from "./Sections/SideCard";
-import ImagesSection from "./Sections/ImagesSection";
-import { Car } from "@/app/store/CarsForSale";
-import { useCitiesStore } from "@/app/store/Cities";
 
 export default function CarDetailsSection({
   carItem,
@@ -47,9 +46,6 @@ export default function CarDetailsSection({
             <SideCard carItem={carItem} />
             <div className="inspection-column col-lg-12">
               <div className="inner-column">
-                <div className="features-sec">
-                  <Features />
-                </div>
                 <div className="faqs-section pt-0">
                   <div className="inner-container">
                     <Faqs carItem={carItem} />

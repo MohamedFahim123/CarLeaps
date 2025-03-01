@@ -4,6 +4,9 @@ import { useModelsStore } from "@/app/store/allModels";
 import { useTrimsStore } from "@/app/store/allTirms";
 import { useBodiesStore } from "@/app/store/bodies";
 import { useCarsForSaleStore } from "@/app/store/CarsForSale";
+import { useCarsForSaleBoodiesStore } from "@/app/store/carsForSaleBodies";
+import { useCarsForSaleMakesCarsStore } from "@/app/store/carsForSaleMakes";
+import { useCarsForSaleModelsStore } from "@/app/store/carsForSaleModels";
 import { useCitiesStore } from "@/app/store/Cities";
 import { useConditionStore } from "@/app/store/conditions";
 import { useCountriesStore } from "@/app/store/countries";
@@ -49,6 +52,9 @@ export default function Header1({
   const { fuelTypes, getFuelTypes, fuelTypesLoading } = useFuelTypesStore();
   const { carsForSale, getCarsForSale, setRegion, carsForSaleLoading } =
     useCarsForSaleStore();
+  const { setBoodiesRegion } = useCarsForSaleBoodiesStore();
+  const { setModelRegion } = useCarsForSaleModelsStore();
+  const { setMakeRegion } = useCarsForSaleMakesCarsStore();
 
   const getAllFuelTypes = useCallback(() => {
     if (fuelTypes.length === 0 && !fuelTypesLoading) {
@@ -190,6 +196,9 @@ export default function Header1({
     setRegionCookie(newRegion);
     setCurrRegion(newRegion);
     setRegion(newRegion);
+    setMakeRegion(newRegion);
+    setModelRegion(newRegion);
+    setBoodiesRegion(newRegion);
     router.replace(`/${newRegion}/cars/home`);
   };
 

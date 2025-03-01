@@ -1,15 +1,15 @@
 "use client";
 
-import { useBodiesStore } from "@/app/store/bodies";
 import { MainRegionName } from "@/app/utils/mainData";
 import Image from "next/image";
 import Link from "next/link";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+import { useCarsForSaleBoodiesStore } from "@/app/store/carsForSaleBodies";
 
 export default function CarType() {
   const region: string = Cookies.get("region") || MainRegionName;
-  const { bodies } = useBodiesStore();
+  const { carsForSaleBoodies } = useCarsForSaleBoodiesStore();
   const router = useRouter();
 
   return (
@@ -19,7 +19,7 @@ export default function CarType() {
           <h2>Browse by Type</h2>
         </div>
         <div className="right-box">
-          {bodies.map((body) => (
+          {carsForSaleBoodies.map((body) => (
             <div
               key={body.id}
               className="cars-block-six home-8 cursor-pointer"

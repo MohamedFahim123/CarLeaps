@@ -1,6 +1,6 @@
 "use client";
 
-import { MakesCars, useMakesCarsStore } from "@/app/store/makeCars";
+import { useCarsForSaleMakesCarsStore } from "@/app/store/carsForSaleMakes";
 import { MainRegionName } from "@/app/utils/mainData";
 import Cookies from "js-cookie";
 import Image from "next/image";
@@ -10,7 +10,7 @@ import styles from "./brandsStyles.module.css";
 export default function CarsForSaleBrands() {
   const router = useRouter();
   const Region: string = Cookies.get("region") || MainRegionName;
-  const { makesCars } = useMakesCarsStore();
+  const { carsForSalemakesCars } = useCarsForSaleMakesCarsStore();
 
   return (
     <section className="boxcar-brand-section-five">
@@ -19,11 +19,15 @@ export default function CarsForSaleBrands() {
           <h2 className="wow fadeInUp">Explore Our Premium Brands</h2>
         </div>
         <div className={`${styles.carMakeContainer} right-box`}>
-          {makesCars?.map((make: MakesCars) => (
+          {carsForSalemakesCars?.map((make) => (
             <div
               className={`${styles.carMake} cars-block-five`}
               key={make?.id}
-              onClick={() => router.push(`/${Region}/cars/cars-for-sale/search?make=${make.id}`)}
+              onClick={() =>
+                router.push(
+                  `/${Region}/cars/cars-for-sale/search?make=${make.id}`
+                )
+              }
             >
               <div className={`inner-box wow fadeInUp`}>
                 <div className="image-box">

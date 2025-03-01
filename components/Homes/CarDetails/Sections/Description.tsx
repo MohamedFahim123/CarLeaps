@@ -1,5 +1,6 @@
 import { Car } from "@/app/store/CarsForSale";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 export default function Description({ carItem }: { carItem: Car }) {
@@ -9,26 +10,15 @@ export default function Description({ carItem }: { carItem: Car }) {
       <div className="text two">{carItem.description}</div>
       <ul className="des-list">
         <li>
-          <span>
+          <Link href={carItem.history} target="_blank">
             <Image
               src="/images/resource/book1-1.svg"
               width={22}
               height={22}
               alt=""
             />
-            View Vin Report
-          </span>
-        </li>
-        <li className="two">
-          <span>
-            <Image
-              src="/images/resource/book1-2.svg"
-              width={22}
-              height={22}
-              alt=""
-            />
-            Car Brochure
-          </span>
+            View History Report
+          </Link>
         </li>
       </ul>
     </>

@@ -11,6 +11,8 @@ export default function TrimView({ model }: { model: Models }) {
   const currTrims: Trims[] = trims?.filter((trim) => +trim.id === +model.id);
   const [chosenTrim, setChosenTrim] = useState(currTrims[0]);
 
+  console.log(currTrims)
+
   return (
     <>
       {currTrims.length > 0 && (

@@ -4,14 +4,14 @@ import { Car } from "@/app/store/CarsForSale";
 import { useState } from "react";
 
 export default function Faqs({ carItem }: { carItem: Car }) {
-  const [openAccordions, setOpenAccordions] = useState<string[]>([]);
-
   const features = carItem.features;
 
-  // Extract unique feature types
   const featureTypes = [...new Set(features.map((feature) => feature.type))];
 
-  // Toggle accordion
+  const [openAccordions, setOpenAccordions] = useState<string[]>([
+    featureTypes[0],
+  ]);
+
   const toggleAccordion = (type: string) => {
     setOpenAccordions((prev) =>
       prev.includes(type) ? prev.filter((t) => t !== type) : [...prev, type]
@@ -53,7 +53,6 @@ export default function Faqs({ carItem }: { carItem: Car }) {
           </div>
         ))}
       </div>
-
     </div>
   );
 }

@@ -45,13 +45,6 @@ export default function Overview({ carItem }: { carItem: Car }) {
       width: 16,
       height: 16,
     },
-    {
-      icon: "/images/resource/insep1-6.svg",
-      label: "Drive Type",
-      value: carItem.drive_type,
-      width: 18,
-      height: 18,
-    },
   ];
 
   const vehicleAdditionalDetails = [
@@ -63,23 +56,16 @@ export default function Overview({ carItem }: { carItem: Car }) {
       height: 18,
     },
     {
+      icon: "/images/resource/insep1-6.svg",
+      label: "Drive Type",
+      value: carItem.drive_type,
+      width: 18,
+      height: 18,
+    },
+    {
       icon: "/images/resource/insep1-8.svg",
       label: "Engine Size",
       value: carItem.engine,
-      width: 18,
-      height: 18,
-    },
-    {
-      icon: "/images/resource/insep1-9.svg",
-      label: "Doors",
-      value: "5-door",
-      width: 18,
-      height: 18,
-    },
-    {
-      icon: "/images/resource/insep1-10.svg",
-      label: "Cylinders",
-      value: "6",
       width: 18,
       height: 18,
     },

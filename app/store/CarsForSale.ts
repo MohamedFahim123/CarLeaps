@@ -142,7 +142,7 @@ export const useCarsForSaleStore = create<UseCarsForSaleStoreInterface>(
           carsForSale,
           carsForSaleError: null,
           carsForSaleLoading: false,
-          hasFetchError: false
+          hasFetchError: false,
         });
       } catch (err) {
         set({
