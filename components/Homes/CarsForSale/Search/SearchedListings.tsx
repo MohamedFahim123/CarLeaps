@@ -1,12 +1,13 @@
 "use client";
-import { useModelsStore } from "@/app/store/allModels";
-import { useBodiesStore } from "@/app/store/bodies";
+
 import { useSearchCarsStore } from "@/app/store/carSearch";
 import { useCarsForSaleStore } from "@/app/store/CarsForSale";
+import { useCarsForSaleBoodiesStore } from "@/app/store/carsForSaleBodies";
+import { useCarsForSaleMakesCarsStore } from "@/app/store/carsForSaleMakes";
+import { useCarsForSaleModelsStore } from "@/app/store/carsForSaleModels";
 import { useCitiesStore } from "@/app/store/Cities";
 import { useConditionStore } from "@/app/store/conditions";
 import { useFuelTypesStore } from "@/app/store/fuel-types";
-import { useMakesCarsStore } from "@/app/store/makeCars";
 import { MainRegionName } from "@/app/utils/mainData";
 import Cookies from "js-cookie";
 import Image from "next/image";
@@ -41,9 +42,9 @@ export default function SearchedListings() {
   });
 
   const { condition } = useConditionStore();
-  const { bodies } = useBodiesStore();
-  const { makesCars } = useMakesCarsStore();
-  const { models } = useModelsStore();
+  const { carsForSalemakesCars } = useCarsForSaleMakesCarsStore();
+  const { carsForSaleBoodies } = useCarsForSaleBoodiesStore();
+  const { carsForSaleModels } = useCarsForSaleModelsStore();
   const { fuelTypes } = useFuelTypesStore();
   const { carsSearch, carsSearchLoading } = useSearchCarsStore();
 
@@ -170,7 +171,7 @@ export default function SearchedListings() {
                           <option value="" disabled>
                             Select Body
                           </option>
-                          {bodies.map((body) => (
+                          {carsForSaleBoodies.map((body) => (
                             <option key={body.id} value={body.id}>
                               {body.name}
                             </option>
@@ -192,7 +193,7 @@ export default function SearchedListings() {
                         <option value="" disabled>
                           Select Make
                         </option>
-                        {makesCars.map((make) => (
+                        {carsForSalemakesCars.map((make) => (
                           <option key={make.id} value={make.id}>
                             {make.name}
                           </option>
@@ -214,7 +215,7 @@ export default function SearchedListings() {
                           <option value="" disabled>
                             Select model
                           </option>
-                          {models.map((model) => (
+                          {carsForSaleModels.map((model) => (
                             <option key={model.id} value={model.id}>
                               {model.name}
                             </option>
@@ -447,7 +448,8 @@ export default function SearchedListings() {
                             </div>
                           </a>
                           <h4 className="title">
-                            {elm.offer_price ? elm.offer_price : elm.price} {currentCurrency}
+                            {elm.offer_price ? elm.offer_price : elm.price}{" "}
+                            {currentCurrency}
                           </h4>
                         </div>
                       </div>

@@ -1,10 +1,10 @@
 "use client";
-import { useModelsStore } from "@/app/store/allModels";
-import { useBodiesStore } from "@/app/store/bodies";
 import { useSearchCarsStore } from "@/app/store/carSearch";
+import { useCarsForSaleBoodiesStore } from "@/app/store/carsForSaleBodies";
+import { useCarsForSaleMakesCarsStore } from "@/app/store/carsForSaleMakes";
+import { useCarsForSaleModelsStore } from "@/app/store/carsForSaleModels";
 import { useConditionStore } from "@/app/store/conditions";
 import { useFuelTypesStore } from "@/app/store/fuel-types";
-import { useMakesCarsStore } from "@/app/store/makeCars";
 import Image from "next/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -23,10 +23,10 @@ export default function SidebarSearch() {
   });
 
   const { condition } = useConditionStore();
-  const { bodies } = useBodiesStore();
-  const { makesCars } = useMakesCarsStore();
-  const { models } = useModelsStore();
   const { fuelTypes } = useFuelTypesStore();
+  const { carsForSalemakesCars } = useCarsForSaleMakesCarsStore();
+  const { carsForSaleBoodies } = useCarsForSaleBoodiesStore();
+  const { carsForSaleModels } = useCarsForSaleModelsStore();
 
   useEffect(() => {
     const make = searchParams.get("make");
@@ -123,7 +123,7 @@ export default function SidebarSearch() {
                       <option value="" disabled>
                         Select Body
                       </option>
-                      {bodies.map((body) => (
+                      {carsForSaleBoodies.map((body) => (
                         <option key={body.id} value={body.id}>
                           {body.name}
                         </option>
@@ -145,7 +145,7 @@ export default function SidebarSearch() {
                     <option value="" disabled>
                       Select Make
                     </option>
-                    {makesCars.map((make) => (
+                    {carsForSalemakesCars.map((make) => (
                       <option key={make.id} value={make.id}>
                         {make.name}
                       </option>
@@ -167,7 +167,7 @@ export default function SidebarSearch() {
                       <option value="" disabled>
                         Select model
                       </option>
-                      {models.map((model) => (
+                      {carsForSaleModels.map((model) => (
                         <option key={model.id} value={model.id}>
                           {model.name}
                         </option>
