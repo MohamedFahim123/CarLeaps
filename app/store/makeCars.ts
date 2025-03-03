@@ -10,7 +10,8 @@ export interface Incentive {
   description: string;
   image: string;
   type: string;
-  expires: string;
+  expiry_date: string;
+  label: string;
 }
 
 export interface MakesCars {
