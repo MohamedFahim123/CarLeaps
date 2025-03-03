@@ -1,13 +1,13 @@
 "use client";
 
-import { Models } from "@/app/store/allModels";
+import { ModelsDetailsInterface } from "@/app/store/ResearchCarMakes";
 import Image from "next/image";
 import { useState } from "react";
 import ModalVideo from "react-modal-video";
 import { Gallery, Item } from "react-photoswipe-gallery";
 import styles from "./modelStyle.module.css";
 
-export default function GallerySection({ model }: { model: Models }) {
+export default function GallerySection({ model }: { model: ModelsDetailsInterface }) {
   const [isOpen, setOpen] = useState<boolean>(false);
 
   return (

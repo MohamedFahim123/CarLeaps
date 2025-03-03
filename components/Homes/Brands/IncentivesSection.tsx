@@ -1,12 +1,12 @@
 "use client";
 
-import { MakesCars } from "@/app/store/makeCars";
 import "swiper/css";
 import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./Brands.module.css";
+import { ResearchCarsMakes } from "@/app/store/ResearchCarMakes";
 
-export default function IncentivesSection({ brand }: { brand?: MakesCars }) {
+export default function IncentivesSection({ brand }: { brand?: ResearchCarsMakes }) {
   return (
     <>
       {brand && brand?.incentives?.length > 0 && (
@@ -39,16 +39,16 @@ export default function IncentivesSection({ brand }: { brand?: MakesCars }) {
                 <div className="card h-100 shadow-sm">
                   <div className="card-body d-flex flex-column justify-content-between">
                     <span
-                      className={`badge bg-success mb-2 ${styles.sliderBadge}`}
+                      className={`badge mb-2 ${styles.sliderBadge}`}
                     >
-                      {item.type}
+                      {item?.label}
                     </span>
                     <h5 className="card-title">{item.title}</h5>
                     <p className="card-text">{item.description}</p>
                     <div className="d-flex justify-content-between align-items-center mt-3">
                       <button className="btn btn-dark">See details</button>
                       <span className="text-danger">
-                        Expires {item.expires}
+                        Expires {item.expiry_date}
                       </span>
                     </div>
                   </div>

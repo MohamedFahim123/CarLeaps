@@ -12,7 +12,7 @@
 }
 
 img {
-  height: auto;
+  height: auto !important;
 }
 
 #nav-mobile.mm-menu_opened {
@@ -158,4 +158,29 @@ img {
 
 .icon {
   font-size: 14px;
+}
+.boxcar-banner-section-v8
+  .banner-content-v8
+  .banner-v8-form
+  .form-tab-pane
+  form
+  .form_boxes {
+  height: 3.75rem !important;
+}
+.service-block-thirteen .inner-box .right-box .content-box-two::before {
+  width: 0px !important;
+  height: 0px !important;
+}
+.linkPerfectMatch {
+  color: #6e499f;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+}
+
+.linkPerfectMatch:hover {
+  text-decoration: underline;
+  color: #6e499f;
 }

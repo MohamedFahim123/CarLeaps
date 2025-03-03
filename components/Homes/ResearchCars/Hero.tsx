@@ -1,10 +1,10 @@
 "use client";
 
-import { useCarsForSaleStore } from "@/app/store/CarsForSale";
+import { useResearchCarsMakesStore } from "@/app/store/ResearchCarMakes";
 import Link from "next/link";
 
 export default function Hero() {
-  const { currentRegion } = useCarsForSaleStore();
+  const { currRegion } = useResearchCarsMakesStore();
 
   return (
     <section className="boxcar-banner-section-nine">
@@ -45,7 +45,7 @@ export default function Hero() {
                 </svg>
               </a>
               <Link
-                href={`/${currentRegion}/cars/perfect-match`}
+                href={`/${currRegion}/cars/perfect-match`}
                 className="read-more wow fadeInUp"
                 data-wow-delay="200ms"
               >

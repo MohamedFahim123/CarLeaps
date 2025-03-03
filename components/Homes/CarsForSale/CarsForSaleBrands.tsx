@@ -1,16 +1,16 @@
 "use client";
 
-import { useCarsForSaleMakesCarsStore } from "@/app/store/carsForSaleMakes";
 import { MainRegionName } from "@/app/utils/mainData";
 import Cookies from "js-cookie";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import styles from "./brandsStyles.module.css";
+import { useCarsForSaleStore } from "@/app/store/CarsForSale";
 
 export default function CarsForSaleBrands() {
   const router = useRouter();
   const Region: string = Cookies.get("region") || MainRegionName;
-  const { carsForSalemakesCars } = useCarsForSaleMakesCarsStore();
+  const { makes } = useCarsForSaleStore();
 
   return (
     <section className="boxcar-brand-section-five">
@@ -19,7 +19,7 @@ export default function CarsForSaleBrands() {
           <h2 className="wow fadeInUp">Explore Our Premium Brands</h2>
         </div>
         <div className={`${styles.carMakeContainer} right-box`}>
-          {carsForSalemakesCars?.map((make) => (
+          {makes?.map((make) => (
             <div
               className={`${styles.carMake} cars-block-five`}
               key={make?.id}

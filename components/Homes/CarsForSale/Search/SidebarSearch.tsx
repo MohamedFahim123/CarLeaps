@@ -1,8 +1,6 @@
 "use client";
 import { useSearchCarsStore } from "@/app/store/carSearch";
-import { useCarsForSaleBoodiesStore } from "@/app/store/carsForSaleBodies";
-import { useCarsForSaleMakesCarsStore } from "@/app/store/carsForSaleMakes";
-import { useCarsForSaleModelsStore } from "@/app/store/carsForSaleModels";
+import { useCarsForSaleStore } from "@/app/store/CarsForSale";
 import { useConditionStore } from "@/app/store/conditions";
 import { useFuelTypesStore } from "@/app/store/fuel-types";
 import Image from "next/image";
@@ -24,9 +22,7 @@ export default function SidebarSearch() {
 
   const { condition } = useConditionStore();
   const { fuelTypes } = useFuelTypesStore();
-  const { carsForSalemakesCars } = useCarsForSaleMakesCarsStore();
-  const { carsForSaleBoodies } = useCarsForSaleBoodiesStore();
-  const { carsForSaleModels } = useCarsForSaleModelsStore();
+  const { makes, models, boodies } = useCarsForSaleStore();
 
   useEffect(() => {
     const make = searchParams.get("make");
@@ -44,11 +40,11 @@ export default function SidebarSearch() {
     });
 
     useSearchCarsStore.getState().getCarsSearch({
-      condition: condition || "",
-      make: make || "",
-      model: model || "",
-      fuel_type: fuel_type ? [fuel_type] : undefined,
-      body: body ? [body] : undefined,
+      condition: condition || undefined,
+      make: make || undefined,
+      model: model || undefined,
+      fuel_type: fuel_type || undefined,
+      body: body || undefined,
     });
   }, [searchParams]);
 
@@ -123,7 +119,7 @@ export default function SidebarSearch() {
                       <option value="" disabled>
                         Select Body
                       </option>
-                      {carsForSaleBoodies.map((body) => (
+                      {boodies.map((body) => (
                         <option key={body.id} value={body.id}>
                           {body.name}
                         </option>
@@ -145,7 +141,7 @@ export default function SidebarSearch() {
                     <option value="" disabled>
                       Select Make
                     </option>
-                    {carsForSalemakesCars.map((make) => (
+                    {makes.map((make) => (
                       <option key={make.id} value={make.id}>
                         {make.name}
                       </option>
@@ -167,7 +163,7 @@ export default function SidebarSearch() {
                       <option value="" disabled>
                         Select model
                       </option>
-                      {carsForSaleModels.map((model) => (
+                      {models.map((model) => (
                         <option key={model.id} value={model.id}>
                           {model.name}
                         </option>

@@ -1,12 +1,10 @@
 "use client";
 
-import { useCarsForSaleBoodiesStore } from "@/app/store/carsForSaleBodies";
-import { useCarsForSaleMakesCarsStore } from "@/app/store/carsForSaleMakes";
-import { useCarsForSaleModelsStore } from "@/app/store/carsForSaleModels";
+import { useCarsForSaleStore } from "@/app/store/CarsForSale";
 import { MainRegionName } from "@/app/utils/mainData";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 interface VihicleTab {
@@ -16,8 +14,8 @@ interface VihicleTab {
 }
 
 const vehicleTabs: VihicleTab[] = [
-  { label: "New", tab: "tab-1", isActive: true },
-  { label: "Used", tab: "tab-2", isActive: false },
+  { label: "Used", tab: "tab-2", isActive: true },
+  { label: "New", tab: "tab-1", isActive: false },
 ];
 
 interface SearchFormInputs {
@@ -59,56 +57,7 @@ export default function Hero() {
     );
   };
 
-  const {
-    carsForSalemakesCars,
-    getCarsForSaleMakesCars,
-    carsForSalemakesCarsLoading,
-  } = useCarsForSaleMakesCarsStore();
-  const { carsForSaleModels, getCarsForSaleModels, carsForSaleModelsLoading } =
-    useCarsForSaleModelsStore();
-  const {
-    carsForSaleBoodies,
-    getCarsForSaleBoodies,
-    carsForSaleBoodiesLoading,
-  } = useCarsForSaleBoodiesStore();
-
-  const getAllCarsForSalemakesCars = useCallback(() => {
-    if (carsForSalemakesCars.length === 0 && !carsForSalemakesCarsLoading) {
-      getCarsForSaleMakesCars();
-    }
-  }, [
-    getCarsForSaleMakesCars,
-    carsForSalemakesCarsLoading,
-    carsForSalemakesCars.length,
-  ]);
-  const getAllCarsForSaleModels = useCallback(() => {
-    if (carsForSaleModels.length === 0 && !carsForSaleModelsLoading) {
-      getCarsForSaleModels();
-    }
-  }, [
-    getCarsForSaleModels,
-    carsForSaleModelsLoading,
-    carsForSaleModels.length,
-  ]);
-  const getAllCarsForSaleBoodies = useCallback(() => {
-    if (carsForSaleBoodies.length === 0 && !carsForSaleBoodiesLoading) {
-      getCarsForSaleBoodies();
-    }
-  }, [
-    getCarsForSaleBoodies,
-    carsForSaleBoodiesLoading,
-    carsForSaleBoodies.length,
-  ]);
-
-  useEffect(() => {
-    getAllCarsForSalemakesCars();
-    getAllCarsForSaleModels();
-    getAllCarsForSaleBoodies();
-  }, [
-    getAllCarsForSalemakesCars,
-    getAllCarsForSaleModels,
-    getAllCarsForSaleBoodies,
-  ]);
+  const {makes,models} = useCarsForSaleStore();
 
   return (
     <section className="boxcar-banner-section-v8">
@@ -143,7 +92,7 @@ export default function Hero() {
                       <option value="" disabled>
                         Select Make
                       </option>
-                      {carsForSalemakesCars.map((make) => (
+                      {makes.map((make) => (
                         <option key={make.id} value={make.id}>
                           {make.name}
                         </option>
@@ -165,7 +114,7 @@ export default function Hero() {
                       <option value="" disabled>
                         Select Model
                       </option>
-                      {carsForSaleModels.map((model) => (
+                      {models?.map((model: { id: number; name: string }) => (
                         <option key={model.id} value={model.id}>
                           {model.name}
                         </option>

@@ -9,8 +9,8 @@ export interface SearchData {
   condition?: string;
   make?: string;
   model?: string;
-  fuel_type?: string[];
-  body?: string[];
+  fuel_type?: string;
+  body?: string;
 }
 
 export interface UseSearchCarsStoreIterface {
@@ -39,7 +39,7 @@ export const useSearchCarsStore = create<UseSearchCarsStoreIterface>(
 
       try {
         const res = await axios.post(
-          `${baseUrl}/cars/search?t=${currentTime}`,
+          `${baseUrl}/cars?t=${currentTime}`,
           data,
           {
             headers: {

@@ -4,9 +4,6 @@ import { useModelsStore } from "@/app/store/allModels";
 import { useTrimsStore } from "@/app/store/allTirms";
 import { useBodiesStore } from "@/app/store/bodies";
 import { useCarsForSaleStore } from "@/app/store/CarsForSale";
-import { useCarsForSaleBoodiesStore } from "@/app/store/carsForSaleBodies";
-import { useCarsForSaleMakesCarsStore } from "@/app/store/carsForSaleMakes";
-import { useCarsForSaleModelsStore } from "@/app/store/carsForSaleModels";
 import { useCitiesStore } from "@/app/store/Cities";
 import { useConditionStore } from "@/app/store/conditions";
 import { useCountriesStore } from "@/app/store/countries";
@@ -26,6 +23,7 @@ import { CiLogout } from "react-icons/ci";
 import { toast } from "react-toastify";
 import styles from "./headerStyles.module.css";
 import Nav from "./Nav";
+import { useResearchCarsMakesStore } from "@/app/store/ResearchCarMakes";
 
 interface Header1Props {
   headerClass?: string;
@@ -48,13 +46,25 @@ export default function Header1({
   const { bodies, getBodies, bodiesLoading } = useBodiesStore();
   const { condition, getCondition, conditionLoading } = useConditionStore();
   const { cities, getCities, citiesLoading } = useCitiesStore();
-
   const { fuelTypes, getFuelTypes, fuelTypesLoading } = useFuelTypesStore();
   const { carsForSale, getCarsForSale, setRegion, carsForSaleLoading } =
     useCarsForSaleStore();
-  const { setBoodiesRegion } = useCarsForSaleBoodiesStore();
-  const { setModelRegion } = useCarsForSaleModelsStore();
-  const { setMakeRegion } = useCarsForSaleMakesCarsStore();
+  const {
+    researchCarsMakes,
+    getResearchCarsMakes,
+    setResearchMakesRegion,
+    researchCarsMakesLoading,
+  } = useResearchCarsMakesStore();
+
+  const getAllResearchMakes = useCallback(() => {
+    if (researchCarsMakes.length === 0 && !researchCarsMakesLoading) {
+      getResearchCarsMakes();
+    }
+  }, [getResearchCarsMakes, researchCarsMakesLoading, researchCarsMakes]);
+
+  useEffect(() => {
+    getAllResearchMakes();
+  }, [getAllResearchMakes]);
 
   const getAllFuelTypes = useCallback(() => {
     if (fuelTypes.length === 0 && !fuelTypesLoading) {
@@ -196,9 +206,7 @@ export default function Header1({
     setRegionCookie(newRegion);
     setCurrRegion(newRegion);
     setRegion(newRegion);
-    setMakeRegion(newRegion);
-    setModelRegion(newRegion);
-    setBoodiesRegion(newRegion);
+    setResearchMakesRegion(newRegion);
     router.replace(`/${newRegion}/cars/home`);
   };
 

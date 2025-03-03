@@ -5,21 +5,21 @@ import Image from "next/image";
 import Link from "next/link";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
-import { useCarsForSaleBoodiesStore } from "@/app/store/carsForSaleBodies";
+import { useCarsForSaleStore } from "@/app/store/CarsForSale";
 
 export default function CarType() {
   const region: string = Cookies.get("region") || MainRegionName;
-  const { carsForSaleBoodies } = useCarsForSaleBoodiesStore();
+  const { boodies } = useCarsForSaleStore();
   const router = useRouter();
 
   return (
-    <section className="boxcar-brand-section-six">
+    <section className="boxcar-brand-section-six pb-0">
       <div className="boxcar-container">
         <div className="boxcar-title wow fadeInUp">
           <h2>Browse by Type</h2>
         </div>
         <div className="right-box">
-          {carsForSaleBoodies.map((body) => (
+          {boodies.map((body) => (
             <div
               key={body.id}
               className="cars-block-six home-8 cursor-pointer"

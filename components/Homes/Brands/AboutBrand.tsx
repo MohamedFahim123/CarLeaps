@@ -1,9 +1,9 @@
 "use client";
 
-import { MakesCars } from "@/app/store/makeCars";
+import { ResearchCarsMakes } from "@/app/store/ResearchCarMakes";
 import styles from "./Brands.module.css";
 
-export default function AboutBrand({ brand }:{brand: MakesCars}) {
+export default function AboutBrand({ brand }: { brand: ResearchCarsMakes }) {
   return (
     <div className={`${styles.bgBlack} text-white py-5`}>
       <div className="container">

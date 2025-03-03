@@ -53,6 +53,7 @@
 }
 .sliderBadge {
   width: fit-content !important;
+  background-color: #6e499f;
 }
 .bgBlack {
   background-color: #000 !important;

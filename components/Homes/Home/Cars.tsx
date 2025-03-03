@@ -85,7 +85,7 @@ export default function Cars() {
               modules={[Pagination, Autoplay]}
               className="car-slider-three slider-layout-1 row"
             >
-              {carsForSale.map((car, index) => (
+              {carsForSale?.map((car, index) => (
                 <SwiperSlide
                   key={index}
                   className="box-car car-block-three col-lg-3 col-md-6 col-sm-12"
@@ -144,7 +144,7 @@ export default function Cars() {
                         </Link>
                       </h6>
                       <div className="text">
-                        {car.description.slice(0, 30)}...
+                        {car?.description.slice(0, 30)}...
                       </div>
                       <ul className="d-flex justify-content-between">
                         <li>
@@ -160,14 +160,34 @@ export default function Cars() {
                           {car.transmission}
                         </li>
                       </ul>
+                      <ul className="d-flex gap-3">
+                        <li
+                          style={{ height: "50px", width: "50px", margin: 0 }}
+                        >
+                          <Image
+                            src={car?.dealer?.image}
+                            width={25}
+                            height={25}
+                            alt={car?.dealer?.name}
+                            className="rounded-circle object-fit-contain w-100 h-100 mb-0"
+                          />
+                        </li>
+                        <li className="d-flex flex-column justify-content-between align-items-start">
+                          <span>Sold By</span>
+                          <span className="fw-bold fs-6">{car?.dealer?.name}</span>
+                        </li>
+                      </ul>
                       <div className="btn-box">
                         {car?.offer_price && (
                           <span>
-                            <del>{car.price} {currentCurrency}</del>
+                            <del>
+                              {car.price} {currentCurrency}
+                            </del>
                           </span>
                         )}
                         <small>
-                          {car.offer_price ? car.offer_price : car.price} {currentCurrency}
+                          {car.offer_price ? car.offer_price : car.price}{" "}
+                          {currentCurrency}
                         </small>
                         <Link
                           href={`/${currentRegion}/cars/car-details/${car.name}`}

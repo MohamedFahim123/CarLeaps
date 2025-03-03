@@ -3,6 +3,7 @@ import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 import { create } from "zustand";
 import { baseUrl, MainRegionName } from "../utils/mainData";
+import { MakesCars } from "./makeCars";
 
 export interface CarDealerInterface {
   id: number;
@@ -77,8 +78,26 @@ export interface Car {
   carImages: { image: string }[];
 }
 
+export interface CarsForSaleBoodies {
+  id: number;
+  name: string;
+  image: string;
+}
+
+export interface CarsForSaleModels {
+  id: number;
+  name: string;
+  image: string;
+  make: string;
+  make_id: number;
+}
+
+
 export interface UseCarsForSaleStoreInterface {
   carsForSale: Car[];
+  boodies: CarsForSaleBoodies[];
+  models: CarsForSaleModels[];
+  makes: MakesCars[];
   carsForSaleError: unknown;
   carsForSaleLoading: boolean;
   currentRegion?: string;
@@ -93,6 +112,9 @@ const CACHE_EXPIRATION_TIME: number = 15 * 60 * 1000;
 export const useCarsForSaleStore = create<UseCarsForSaleStoreInterface>(
   (set, get) => ({
     carsForSale: [],
+    boodies: [],
+    models: [],
+    makes: [],
     carsForSaleError: null,
     carsForSaleLoading: false,
     currentRegion: Cookies.get("region"),
@@ -127,19 +149,30 @@ export const useCarsForSaleStore = create<UseCarsForSaleStoreInterface>(
       set({ carsForSaleLoading: true });
 
       try {
-        const res = await axios.get(`${baseUrl}/cars?t=${currentTime}`, {
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            code: regionCode || MainRegionName,
-          },
-        });
+        const res = await axios.post(
+          `${baseUrl}/cars?t=${currentTime}`,
+          {},
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              code: regionCode || MainRegionName,
+            },
+          }
+        );
 
-        const carsForSale = res?.data?.data?.cars || [];
+        const carsForSaleCars = res?.data?.data?.cars || [];
+        const carsForSaleBoodies = res?.data?.data?.bodies || [];
+        const carsForSalModels = res?.data?.data?.models || [];
+        const carsForSalMakes = res?.data?.data?.makes || [];
+
         lastFetchedTime = currentTime;
 
         set({
-          carsForSale,
+          carsForSale: carsForSaleCars,
+          boodies: carsForSaleBoodies,
+          models: carsForSalModels,
+          makes: carsForSalMakes,
           carsForSaleError: null,
           carsForSaleLoading: false,
           hasFetchError: false,
@@ -147,6 +180,9 @@ export const useCarsForSaleStore = create<UseCarsForSaleStoreInterface>(
       } catch (err) {
         set({
           carsForSale: [],
+          boodies: [],
+          models: [],
+          makes: [],
           carsForSaleError: axios.isAxiosError(err)
             ? err?.response?.data?.message
             : "Error fetching carsForSale",

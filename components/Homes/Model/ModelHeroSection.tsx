@@ -1,12 +1,21 @@
 "use client";
-import { Models } from "@/app/store/allModels";
+import {
+  ModelsDetailsInterface,
+  ResearchCarsMakes,
+} from "@/app/store/ResearchCarMakes";
 import { MainRegionName } from "@/app/utils/mainData";
 import Cookies from "js-cookie";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./modelStyle.module.css";
 
-export default function ModelHeroSection({ model }: { model: Models }) {
+export default function ModelHeroSection({
+  model,
+  selectedMake,
+}: {
+  selectedMake: ResearchCarsMakes;
+  model: ModelsDetailsInterface;
+}) {
   const region: string = Cookies.get("region") || MainRegionName;
 
   return (
@@ -44,13 +53,15 @@ export default function ModelHeroSection({ model }: { model: Models }) {
         <div
           className={`${styles.hero_content} bg-light p-4 rounded shadow-sm`}
         >
-          <h1 className="fw-bold mb-5">{model.make} - {model.name}</h1>
+          <h1 className="fw-bold mb-5">
+            {model.make} - {model.name}
+          </h1>
           <p className="text-muted fs-5 mb-5">
             <Image
-              src={model.image}
+              src={selectedMake.image}
               alt={`${model.make} Logo`}
-              width={30}
-              height={30}
+              width={50}
+              height={50}
               className="me-2"
             />
             {model.name}

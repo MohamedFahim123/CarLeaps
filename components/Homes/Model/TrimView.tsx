@@ -1,17 +1,13 @@
 "use client";
 
-import { Models } from "@/app/store/allModels";
+import { ModelsDetailsInterface } from "@/app/store/ResearchCarMakes";
+import { useState } from "react";
 import ExploreModelSection from "./ExploreModelSection";
 import styles from "./modelStyle.module.css";
-import { Trims, useTrimsStore } from "@/app/store/allTirms";
-import { useState } from "react";
 
-export default function TrimView({ model }: { model: Models }) {
-  const { trims } = useTrimsStore();
-  const currTrims: Trims[] = trims?.filter((trim) => +trim.id === +model.id);
+export default function TrimView({ model }: { model: ModelsDetailsInterface }) {
+  const currTrims = model?.trims;
   const [chosenTrim, setChosenTrim] = useState(currTrims[0]);
-
-  console.log(currTrims)
 
   return (
     <>
@@ -20,7 +16,9 @@ export default function TrimView({ model }: { model: Models }) {
           <div className="boxcar-container">
             <div className={`${styles.brandsBannerHead}`}>
               <p>Explore the full range</p>
-              <h3>Find the {model.name} that{"'"}s right for you</h3>
+              <h3>
+                Find the {model.name} that{"'"}s right for you
+              </h3>
               <nav className="wow fadeInUp" data-wow-delay="100ms">
                 <div className="nav nav-tabs">
                   {currTrims.map((trim) => (

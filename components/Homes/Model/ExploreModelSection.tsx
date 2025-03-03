@@ -1,12 +1,22 @@
-import { Trims } from "@/app/store/allTirms";
+"use client";
+
+import { Features } from "@/app/store/features";
+import {
+  TrimsDetailsInterface,
+  useResearchCarsMakesStore,
+} from "@/app/store/ResearchCarMakes";
 import Image from "next/image";
 import React, { useState } from "react";
 import styles from "./modelStyle.module.css";
-import { Features } from "@/app/store/features";
 
-const ExploreModelSection = ({ trim }: { trim: Trims }) => {
+const ExploreModelSection = ({ trim }: { trim: TrimsDetailsInterface }) => {
   const features = trim?.features || {};
   const [activeIndex, setActive] = useState<number>(0);
+  const { currRegion } = useResearchCarsMakesStore();
+
+  const selectedTrimPrice = trim?.cities?.find(
+    (city) => city.city === currRegion
+  )?.price;
 
   const handleToggle = (idx: number) => {
     setActive(idx);
@@ -22,8 +32,8 @@ const ExploreModelSection = ({ trim }: { trim: Trims }) => {
           src={trim?.image || "/default-image.jpg"}
         />
         <div className="price-section ps-5 mb-5 d-flex align-items-center gap-3">
-          <p className="fw-bold fs-4">Starts at:</p>
-          <h4 className="text-primary fs-3 fw-bold">$43,845</h4>
+          <p className="fw-bold fs-4 mt-3">Starts at: {selectedTrimPrice}</p>
+          <h4 className="text-primary fs-3 fw-bold"></h4>
         </div>
       </div>
       <div className="col-lg-6 py-5">
@@ -43,7 +53,8 @@ const ExploreModelSection = ({ trim }: { trim: Trims }) => {
                     <button
                       className={`accordion-button`}
                       type="button"
-                      onClick={() => handleToggle(index + 1)} style={{backgroundColor: "#EDDFFF"}}
+                      onClick={() => handleToggle(index + 1)}
+                      style={{ backgroundColor: "#EDDFFF" }}
                       aria-expanded={activeIndex === index + 1}
                       aria-controls={`collapse${key}`}
                     >
@@ -60,9 +71,14 @@ const ExploreModelSection = ({ trim }: { trim: Trims }) => {
                   >
                     <div className="accordion-body">
                       {featureCategory.map(
-                        (feature: { type: string; name: string }, featureIndex: React.Key | null | undefined) => (
+                        (
+                          feature: { type: string; name: string },
+                          featureIndex: React.Key | null | undefined
+                        ) => (
                           <div key={featureIndex}>
-                            <strong className="fw-bold fs-6">{feature.type?.toUpperCase()}</strong>
+                            <strong className="fw-bold fs-6">
+                              {feature.type?.toUpperCase()}
+                            </strong>
                             <p>{feature.name}</p>
                           </div>
                         )
