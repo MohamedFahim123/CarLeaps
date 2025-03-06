@@ -1,6 +1,8 @@
 "use client";
-
-import { useCarsForSaleStore } from "@/app/store/CarsForSale";
+import {
+    CarDealerInterface,
+    useCarsForSaleStore,
+} from "@/app/store/CarsForSale";
 import { useCitiesStore } from "@/app/store/Cities";
 import Image from "next/image";
 import Link from "next/link";
@@ -15,9 +17,9 @@ const icons: { icon: string }[] = [
   { icon: "flaticon-gearbox" },
 ];
 
-export default function Cars() {
+const OurCars = ({ dealerItem }: { dealerItem: CarDealerInterface }) => {
   const [mounted, setMounted] = useState(false);
-  const { carsForSale, currentRegion } = useCarsForSaleStore();
+  const { currentRegion } = useCarsForSaleStore();
   const { cities } = useCitiesStore();
   const currentCurrency =
     cities.find((city) => city.code === currentRegion)?.currency || "";
@@ -85,9 +87,9 @@ export default function Cars() {
               modules={[Pagination, Autoplay]}
               className="car-slider-three slider-layout-1 row"
             >
-              {carsForSale?.map((car, index) => (
+              {dealerItem?.cars?.map((car) => (
                 <SwiperSlide
-                  key={index}
+                  key={car.id}
                   className="box-car car-block-three col-lg-3 col-md-6 col-sm-12"
                   style={{
                     margin: "0 10px",
@@ -101,14 +103,14 @@ export default function Cars() {
                           href={`/${currentRegion}/cars/car-details/${car.name}`}
                         >
                           <Image
-                            alt={car.name}
-                            src={car.main_image}
+                            alt={car?.name}
+                            src={car?.main_image}
                             width={329}
                             height={220}
                           />
                         </Link>
                       </div>
-                      {car.status && <span>{car.status}</span>}
+                      {car?.status && <span>{car.status}</span>}
                       <Link
                         href={`/${currentRegion}/cars/car-details/${car.name}`}
                         title=""
@@ -165,17 +167,17 @@ export default function Cars() {
                           style={{ height: "50px", width: "50px", margin: 0 }}
                         >
                           <Image
-                            src={car?.dealer?.image}
+                            src={dealerItem?.image}
                             width={25}
                             height={25}
-                            alt={car?.dealer?.name}
+                            alt={dealerItem?.name}
                             className="rounded-circle object-fit-contain w-100 h-100 mb-0"
                           />
                         </li>
                         <li className="d-flex flex-column justify-content-between align-items-start">
                           <span>Sold By</span>
                           <span className="fw-bold fs-6">
-                            {car?.dealer?.name}
+                            {dealerItem?.name}
                           </span>
                         </li>
                       </ul>
@@ -209,4 +211,6 @@ export default function Cars() {
       </div>
     </section>
   );
-}
+};
+
+export default OurCars;

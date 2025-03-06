@@ -1,0 +1,10 @@
+.brandImage {
+  height: 140px !important;
+  object-fit: contain;
+  width: 140px;
+  border-radius: 50% !important;
+  -webkit-border-radius: 50% !important;
+  -moz-border-radius: 50% !important;
+  -ms-border-radius: 50% !important;
+  -o-border-radius: 50% !important;
+}

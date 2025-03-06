@@ -22,6 +22,7 @@ export interface CarDealerInterface {
   cover: string;
   image: string;
   documents: string[];
+  cars: Car[];
 }
 
 export interface CarFeatures {
@@ -91,7 +92,6 @@ export interface CarsForSaleModels {
   make: string;
   make_id: number;
 }
-
 
 export interface UseCarsForSaleStoreInterface {
   carsForSale: Car[];
