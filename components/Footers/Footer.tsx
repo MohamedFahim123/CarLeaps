@@ -11,50 +11,15 @@ import {
 import Link from "next/link";
 export default function Footer({
   parentClass = "boxcar-footer footer-style-one cus-st-1",
-}: { parentClass: string; }) {
+}: {
+  parentClass: string;
+}) {
   return (
     <footer className={parentClass}>
-      <div className="footer-top pt-5">
-        <div className="boxcar-container">
-          <div className="right-box">
-            <div className="top-left wow fadeInUp">
-              <h6 className="title">Join BoxCar</h6>
-              <div className="text">
-                Receive pricing updates, shopping tips &amp; more!
-              </div>
-            </div>
-            <div className="subscribe-form wow fadeInUp" data-wow-delay="100ms">
-              <form
-                onSubmit={(e) => e.preventDefault()}
-                method="post"
-                action="#"
-              >
-                <div className="form-group">
-                  <input
-                    type="email"
-                    name="email"
-                    className="email"
-                    defaultValue=""
-                    placeholder="Your e-mail address"
-                    required
-                  />
-                  <button
-                    type="button"
-                    className="theme-btn btn-style-one hover-light"
-                  >
-                    <span className="btn-title">Sign Up</span>
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
       <div className="widgets-section">
-        <div className="boxcar-container">
+        <div className="boxcar-container pt-5">
           <div className="row">
-            {/* Footer COlumn */}
-            <div className="footer-column-two col-lg-9 col-md-12 col-sm-12">
+            <div className="footer-column-two col-lg-9 col-md-12 col-sm-12 pt-5">
               <div className="row">
                 <div className="col-lg-3 col-md-6 col-sm-12">
                   <div className="footer-widget links-widget wow fadeInUp">
@@ -92,7 +57,7 @@ export default function Footer({
                     className="footer-widget links-widget wow fadeInUp"
                     data-wow-delay="200ms"
                   >
-                    <h4 className="widget-title">Our Brands</h4>
+                    <h4 className="widget-title">For Sale</h4>
                     <div className="widget-content">
                       <ul className="user-links style-two">
                         {carBrands.map((elm, i) => (
@@ -123,8 +88,7 @@ export default function Footer({
                 </div>
               </div>
             </div>
-            {/* footer column */}
-            <div className="footer-column col-lg-3 col-md-12 col-sm-12">
+            <div className="footer-column col-lg-3 col-md-12 col-sm-12 pt-5">
               <div
                 className="footer-widget social-widget wow fadeInUp"
                 data-wow-delay="400ms"
@@ -169,12 +133,15 @@ export default function Footer({
           </div>
         </div>
       </div>
-      {/*  Footer Bottom */}
       <div className="footer-bottom">
         <div className="boxcar-container">
           <div className="inner-container">
             <div className="copyright-text wow fadeInUp">
-              © <a href="#">2024 Boxcars.com. All rights reserved.</a>
+              ©{" "}
+              <span>
+                2025 CarLeaps.com. Managed By <strong style={{ color: "#b785fa" }}>VALKII LTD</strong>. All rights
+                reserved.
+              </span>
             </div>
             <ul className="footer-nav wow fadeInUp" data-wow-delay="200ms">
               <li>

@@ -57,7 +57,7 @@ export default function Hero() {
     );
   };
 
-  const {makes,models} = useCarsForSaleStore();
+  const { makes, models } = useCarsForSaleStore();
 
   return (
     <section className="boxcar-banner-section-v8">
@@ -134,7 +134,7 @@ export default function Hero() {
                       className="theme-btn"
                     >
                       <i className="flaticon-search" />
-                      Search 9451 Cars
+                      Search
                     </button>
                   </div>
                 </form>

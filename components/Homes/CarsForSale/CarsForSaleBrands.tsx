@@ -13,10 +13,10 @@ export default function CarsForSaleBrands() {
   const { makes } = useCarsForSaleStore();
 
   return (
-    <section className="boxcar-brand-section-five">
+    <section className="boxcar-brand-section-five pb-0">
       <div className="boxcar-container">
         <div className="boxcar-title">
-          <h2 className="wow fadeInUp">Explore Our Premium Brands</h2>
+          <h2 className="wow fadeInUp">Browse By Make</h2>
         </div>
         <div className={`${styles.carMakeContainer} right-box`}>
           {makes?.map((make) => (

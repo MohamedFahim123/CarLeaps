@@ -1,8 +1,8 @@
+import { CarDealerInterface } from "@/app/store/CarsForSale";
 import Image from "next/image";
 import Link from "next/link";
 import Location from "../CarDetails/Sections/Location";
 import OurCars from "./OurCars";
-import { CarDealerInterface } from "@/app/store/CarsForSale";
 import styles from "./ourCars.module.css";
 
 const DealerMainSection = ({
@@ -10,8 +10,7 @@ const DealerMainSection = ({
 }: {
   dealerItem: CarDealerInterface;
 }) => {
-
-    console.log(dealerItem)
+  console.log(dealerItem);
   return (
     <section className="dealer-ship-section-two layout-radius mt-1">
       <div className="barnd-box">
@@ -99,9 +98,7 @@ const DealerMainSection = ({
                 </div>
                 <div className="description-sec">
                   <h4 className="title">BIO</h4>
-                  <div className="text">
-                    {dealerItem.bio}
-                  </div>
+                  <div className="text">{dealerItem.bio}</div>
                 </div>
                 <div className="location-box">
                   <Location />
@@ -110,7 +107,10 @@ const DealerMainSection = ({
             </div>
             <div className="col-xl-4 col-lg-12 col-md-12 col-sm-12">
               <div className="side-bar">
-                <Link href={`https://wa.me/${dealerItem.phone}`} className="message">
+                <Link
+                  href={`https://wa.me/${dealerItem.phone}`}
+                  className="message"
+                >
                   Send WhatsApp Message
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

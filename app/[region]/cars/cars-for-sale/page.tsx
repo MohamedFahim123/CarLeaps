@@ -1,7 +1,5 @@
-
 import CarsForSaleBrands from "@/components/Homes/CarsForSale/CarsForSaleBrands";
 import CarType from "@/components/Homes/CarsForSale/CarType";
-import Features from "@/components/Homes/CarsForSale/Features";
 import Hero from "@/components/Homes/CarsForSale/Hero";
 import Cars from "@/components/Homes/Home/Cars";
 import { Metadata } from "next";
@@ -18,7 +16,7 @@ export default function CarsForSalePage() {
       <CarType />
       <CarsForSaleBrands />
       <Cars />
-      <Features />
+      {/* <Features /> */}
     </>
   );
 }

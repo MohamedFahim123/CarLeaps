@@ -42,7 +42,6 @@ export default function Features() {
           </div>
           <div className="col-lg-6 col-md-12 col-sm-12">
             <div className="row">
-              {/* choose-us-block */}
               <div className="choose-us-block col-lg-6 col-md-6 col-sm-12">
                 <div className="inner-box wow fadeInUp" data-wow-delay="100ms">
                   <div className="icon-box">
@@ -107,7 +106,6 @@ export default function Features() {
                   </div>
                 </div>
               </div>
-              {/* choose-us-block */}
               <div className="choose-us-block col-lg-6 col-md-6 col-sm-12">
                 <div className="inner-box wow fadeInUp" data-wow-delay="200ms">
                   <div className="icon-box">

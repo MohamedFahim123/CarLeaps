@@ -7114,13 +7114,17 @@ Section Title
 
 ***/
 .boxcar-banner-section-v8 {
-  background-image: url(../images/background/banner-v8.jpg);
+  background-image: url(../images/background/coverforlsale.jpg);
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100vh;
+  height: 80vh;
   position: relative;
   border-radius: 32px;
   margin: 30px 30px 0px;
+  -webkit-border-radius: 32px;
+  -moz-border-radius: 32px;
+  -ms-border-radius: 32px;
+  -o-border-radius: 32px;
 }
 
 @media (max-width: 1440px) {

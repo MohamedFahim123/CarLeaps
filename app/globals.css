@@ -184,3 +184,14 @@ img {
   text-decoration: underline;
   color: #6e499f;
 }
+.dealerNameInCarCard {
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+}
+.dealerNameInCarCard:hover {
+  text-decoration: underline;
+  color: #6e499f;
+}

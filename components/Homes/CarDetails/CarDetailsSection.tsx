@@ -43,7 +43,7 @@ export default function CarDetailsSection({
                 </div>
               </div>
             </div>
-            <SideCard carItem={carItem} />
+            <SideCard region={region} carItem={carItem} />
             <div className="inspection-column col-lg-12">
               <div className="inner-column">
                 <div className="faqs-section pt-0">

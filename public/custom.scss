@@ -75,9 +75,11 @@
   background-color: var(--theme-color1);
 }
 @media (max-width: 1550px) {
-  .boxcar-banner-section-nine,
-  .boxcar-banner-section-v8 {
+  .boxcar-banner-section-nine {
     min-height: calc(100vw * 0.55);
+  }
+  .boxcar-banner-section-v8 {
+    min-height: calc(100vw * 0.4) ;
   }
 }
 .nav-link {

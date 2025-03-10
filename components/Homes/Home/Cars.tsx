@@ -32,7 +32,7 @@ export default function Cars() {
     <section className="cars-section-three">
       <div className="boxcar-container">
         <div className="boxcar-title wow fadeInUp">
-          <h2>Explore All Vehicles</h2>
+          <h2 className="mb-5">Explore Recent Cars For Sale</h2>
           <Link
             href={`/${currentRegion}/cars/cars-for-sale/search`}
             className="btn-title"
@@ -85,7 +85,7 @@ export default function Cars() {
               modules={[Pagination, Autoplay]}
               className="car-slider-three slider-layout-1 row"
             >
-              {carsForSale?.map((car, index) => (
+              {carsForSale?.slice(0,8).map((car, index) => (
                 <SwiperSlide
                   key={index}
                   className="box-car car-block-three col-lg-3 col-md-6 col-sm-12"
@@ -174,9 +174,12 @@ export default function Cars() {
                         </li>
                         <li className="d-flex flex-column justify-content-between align-items-start">
                           <span>Sold By</span>
-                          <span className="fw-bold fs-6">
+                          <Link
+                            href={`/${currentRegion}/cars/dealer/${car?.dealer?.id}`}
+                            className="fw-bold fs-6 dealerNameInCarCard"
+                          >
                             {car?.dealer?.name}
-                          </span>
+                          </Link>
                         </li>
                       </ul>
                       <div className="btn-box">

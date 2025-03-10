@@ -2,22 +2,34 @@ import { Car } from "@/app/store/CarsForSale";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function SideCard({ carItem }: { carItem: Car }) {
+export default function SideCard({
+  carItem,
+  region,
+}: {
+  carItem: Car;
+  region: string;
+}) {
   return (
     <div className="side-bar-column style-1 col-lg-4 col-md-12 col-sm-12">
       <div className="inner-column">
         <div className="contact-box">
           <div className="icon-box">
-            <Image
-              src={carItem.dealer.image}
-              width={55}
-              height={54}
-              alt={`${carItem.dealer.name} image`}
-              className="rounded-circle object-fit-contain w-100 h-100"
-            />
+            <Link href={`/${region}/cars/dealer/${carItem.dealer.id}`}>
+              <Image
+                src={carItem.dealer.image}
+                width={55}
+                height={54}
+                alt={`${carItem.dealer.name} image`}
+                className="rounded-circle object-fit-contain w-100 h-100"
+              />
+            </Link>
           </div>
           <div className="content-box">
-            <h6 className="title">{carItem.dealer.name}</h6>
+            <h6 className="title">
+              <Link href={`/${region}/cars/dealer/${carItem.dealer.id}`}>
+                {carItem.dealer.name}
+              </Link>
+            </h6>
             <div className="text">{carItem.dealer.address}</div>
             <ul className="contact-list">
               <li>
@@ -43,9 +55,7 @@ export default function SideCard({ carItem }: { carItem: Car }) {
                       alt="phone icon"
                     />
                   </div>
-                  <span>
-                    {carItem.dealer.phone}
-                  </span>
+                  <span>{carItem.dealer.phone}</span>
                 </Link>
               </li>
             </ul>
@@ -72,7 +82,7 @@ export default function SideCard({ carItem }: { carItem: Car }) {
                   </defs>
                 </svg>
               </a>
-              <a href="#" className="side-btn-three">
+              <Link href={`/${region}/cars/dealer/${carItem.dealer.id}`} className="side-btn-three">
                 View all stock at this dealer
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -93,7 +103,7 @@ export default function SideCard({ carItem }: { carItem: Car }) {
                     </clipPath>
                   </defs>
                 </svg>
-              </a>
+              </Link>
             </div>
           </div>
         </div>
