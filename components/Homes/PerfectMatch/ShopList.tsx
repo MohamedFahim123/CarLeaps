@@ -1,17 +1,154 @@
 "use client";
-import Pagination from "@/components/Common/Pagination";
-import SelectComponent from "@/components/Common/SelectComponent";
-import { products } from "@/data/products";
+import { useBodiesStore } from "@/app/store/bodies";
+import { useCitiesStore } from "@/app/store/Cities";
+import { useInterestsStore } from "@/app/store/Interest";
+import { baseUrl, MainRegionName } from "@/app/utils/mainData";
+import axios from "axios";
+import Cookies from "js-cookie";
 import Image from "next/image";
 import Link from "next/link";
 import Slider from "rc-slider";
-import { useState } from "react";
+import "rc-slider/assets/index.css";
+import { useCallback, useEffect, useState } from "react";
+
+interface CarModel {
+  cover: string;
+  end_price: string;
+  gallery: {
+    id: number;
+    model_id: number;
+    model: string;
+    image: string;
+  }[];
+  image: string;
+  make: string;
+  make_id: number;
+  name: string;
+  specifications: string[];
+  start_price: string;
+  status: string;
+}
+
+let currentPage: number = 1;
+let totalPage: number = 1;
+let ErrorMessage: string = "";
 
 export default function ShopList() {
-  const [price, setPrice] = useState<number[]>([5000, 35000]);
-  const handlePrice = (value: number) => {
-    setPrice([value]);
+  const { bodies } = useBodiesStore();
+  const region: string = Cookies.get("region") || MainRegionName;
+  const { interests, interestsLoading, getInterests } = useInterestsStore();
+  const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
+  const [selectedBody, setSelectedBody] = useState<string>("");
+  const [price, setPrice] = useState<number[]>([0, 50000]);
+  const [debounceTimeout, setDebounceTimeout] = useState<NodeJS.Timeout | null>(
+    null
+  );
+  const [currentCars, setCurrentCars] = useState<CarModel[]>([]);
+  const [carLoading, setCarLoading] = useState<boolean>(false);
+  const { cities } = useCitiesStore();
+  const currentCurrency =
+    cities.find((city) => city.code === region)?.currency || "";
+
+  const getAllInterests = useCallback(() => {
+    if (interests.length === 0 && !interestsLoading) {
+      getInterests();
+    }
+  }, [interests.length, interestsLoading, getInterests]);
+
+  useEffect(() => {
+    getAllInterests();
+  }, [getAllInterests]);
+
+  const handleInterestChange = (interestId: string) => {
+    setSelectedInterests((prev) =>
+      prev.includes(interestId)
+        ? prev.filter((id) => id !== interestId)
+        : [...prev, interestId]
+    );
+    debounce(handleSubmit, 500);
   };
+
+  const handlePriceChange = (value: number | number[]) => {
+    if (Array.isArray(value)) {
+      setPrice(value);
+      debounce(handleSubmit, 500);
+    }
+  };
+
+  const debounce = (callback: () => void, delay: number) => {
+    if (debounceTimeout) clearTimeout(debounceTimeout);
+    const newTimeout = setTimeout(callback, delay);
+    setDebounceTimeout(newTimeout);
+  };
+
+  const handleBodyChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedBody(e.target.value);
+    debounce(handleSubmit, 500);
+  };
+
+  const handleReset = () => {
+    setSelectedInterests([]);
+    setSelectedBody("");
+    setPrice([0, 50000]);
+  };
+
+  const handleSubmit = useCallback(async () => {
+    const formData: Record<string, unknown> = {};
+
+    if (selectedInterests.length > 0) {
+      formData.interests = selectedInterests;
+    }
+
+    if (selectedBody) {
+      formData.body = [selectedBody];
+    }
+
+    if (price && price.length === 2) {
+      formData.minPrice = price[0];
+      formData.maxPrice = price[1];
+    }
+
+    if (debounceTimeout) clearTimeout(debounceTimeout);
+
+    if (Object.keys(formData).length > 0) {
+      ErrorMessage = "";
+      setCarLoading(true);
+      try {
+        const res = await axios.post(
+          `${baseUrl}/cars/perfect/match/search`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              code: region,
+            },
+          }
+        );
+
+        if (res.status === 200) {
+          setCurrentCars(res.data.data.models);
+          setCarLoading(false);
+          if (res.data.data.current_page)
+            currentPage = res.data.data.current_page;
+          if (res.data.data.last_page) totalPage = res.data.data.last_page;
+          console.log(res);
+        }
+      } catch (error) {
+        if (axios.isAxiosError(error)) {
+          ErrorMessage = error.response?.data.message;
+          setCarLoading(false);
+        }
+      }
+    }
+  }, [debounceTimeout, region, selectedInterests, selectedBody, price]);
+
+  useEffect(() => {
+    if (selectedInterests.length > 0 || selectedBody || price.length > 0) {
+      handleSubmit();
+    }
+  }, [handleSubmit, price.length, selectedBody, selectedInterests.length]);
+
   return (
     <section className={`cars-section-fourteen layout-radius`}>
       <div className="boxcar-container">
@@ -21,58 +158,48 @@ export default function ShopList() {
               <Link href={`/`}>Home</Link>
             </li>
             <li>
-              <span>Cars for Sale</span>
+              <span>Perfect Match</span>
             </li>
           </ul>
-          <h2>Shop List</h2>
+          <h2>Perfect Match Cars List</h2>
         </div>
         <div className="row">
           <div className="col-lg-3 col-md-12 col-sm-12">
             <div className="side-bar">
               <div className="categories-box">
-                <h6 className="title">Categories</h6>
+                <h6 className="title">Interests</h6>
                 <div className="cheak-box">
-                  <label className="contain">
-                    Accessories (1,456)
-                    <input type="checkbox" defaultChecked={true} />
-                    <span className="checkmark" />
-                  </label>
-                  <label className="contain">
-                    Body Kit (1,456)
-                    <input type="checkbox" />
-                    <span className="checkmark" />
-                  </label>
-                  <label className="contain">
-                    Interior (1,456)
-                    <input type="checkbox" />
-                    <span className="checkmark" />
-                  </label>
-                  <label className="contain">
-                    Exterior (1,456)
-                    <input type="checkbox" />
-                    <span className="checkmark" />
-                  </label>
-                  <label className="contain">
-                    Sound (1,456)
-                    <input type="checkbox" defaultChecked={true} />
-                    <span className="checkmark" />
-                  </label>
-                  <label className="contain">
-                    Fuel Systems (1,456)
-                    <input type="checkbox" />
-                    <span className="checkmark" />
-                  </label>
-                  <label className="contain">
-                    Wheels (1,456)
-                    <input type="checkbox" />
-                    <span className="checkmark" />
-                  </label>
-                  <label className="contain">
-                    Oil &amp; Filters (1,456)
-                    <input type="checkbox" />
-                    <span className="checkmark" />
-                  </label>
+                  {interests?.map((interest) => (
+                    <label className="contain" key={interest?.id}>
+                      {interest?.name}
+                      <input
+                        type="checkbox"
+                        value={interest?.id}
+                        checked={selectedInterests.includes(`${interest?.id}`)}
+                        onChange={() => handleInterestChange(`${interest?.id}`)}
+                      />
+                      <span className="checkmark" />
+                    </label>
+                  ))}
                 </div>
+              </div>
+              <div className="form_boxes accordion-flush p-3 border-1 border-bottom">
+                <label htmlFor="SearchBody">Body Type</label>
+                <select
+                  className="form-select"
+                  value={selectedBody}
+                  onChange={handleBodyChange}
+                  id="SearchBody"
+                >
+                  <option value="" disabled>
+                    Select Body
+                  </option>
+                  {bodies.map((body) => (
+                    <option key={body.id} value={body.id}>
+                      {body.name}
+                    </option>
+                  ))}
+                </select>
               </div>
               <div className="price-box">
                 <h6 className="title">Price</h6>
@@ -80,13 +207,17 @@ export default function ShopList() {
                   <div className="form-column col-lg-6">
                     <div className="form_boxes">
                       <label>Min price</label>
-                      <div className="drop-menu">${price[0]}</div>
+                      <div className="drop-menu">
+                        {currentCurrency} {price[0]}
+                      </div>
                     </div>
                   </div>
                   <div className="form-column v2 col-lg-6">
                     <div className="form_boxes">
                       <label>Max price</label>
-                      <div className="drop-menu">${price[1]}</div>
+                      <div className="drop-menu">
+                        {currentCurrency} {price[1]}
+                      </div>
                     </div>
                   </div>
                 </form>
@@ -95,77 +226,63 @@ export default function ShopList() {
                     range
                     max={50000}
                     min={0}
-                    defaultValue={price}
-                    onChange={(value) => handlePrice(+value)}
+                    value={price}
+                    onChange={handlePriceChange}
                     id="slider"
                   />
                 </div>
+                <button
+                  style={{ backgroundColor: "var(--theme-color1)" }}
+                  type="button"
+                  className="btn px-5 text-white py-2 fs-5 mb-4 w-100"
+                  onClick={handleReset}
+                >
+                  Reset
+                </button>
               </div>
             </div>
           </div>
           <div className="content-column col-lg-9 col-md-12 col-sm-12">
             <div className="inner-column">
-              <div className="text-box">
-                <div className="text">Showing 1 to 16 of 1559 vehicles</div>
-                <form onSubmit={(e) => e.preventDefault()}>
-                  <div className="form_boxes v3">
-                    <small>Best Match</small>
-                    <SelectComponent options={["Any Makes", "Audi", "Honda"]} />
-                  </div>
-                </form>
-              </div>
               <div className="row">
-                {products.map((product, index) => (
-                  <div
-                    key={index}
-                    className="car-block-fourteen col-lg-4 col-md-6 col-sm-6"
-                    data-wow-delay={product.wowDelay}
-                  >
-                    <div className="inner-box">
-                      <div className="image-box">
-                        <figure className="image">
-                          <Link href={`/shop-single/${product.id}`}>
+                {ErrorMessage && <p className="text-danger">{ErrorMessage}</p>}
+                {carLoading ? (
+                  <div className="fs-4 fw-bold">Loading....</div>
+                ) : (
+                  currentCars?.map((product, index) => (
+                    <div
+                      key={index}
+                      className="car-block-fourteen col-lg-4 col-md-6 col-sm-6"
+                    >
+                      <div className="inner-box">
+                        <div className="image-box">
+                          <figure className="image">
                             <Image
-                              alt={product.title}
-                              src={product.imgSrc}
+                              alt={product.name}
+                              src={product.cover}
                               width={186}
                               height={186}
                             />
-                          </Link>
-                        </figure>
-                      </div>
-                      <div className="content-box">
-                        <ul className="rating">
-                          {[...Array(5)].map((_, i) => (
-                            <li key={i}>
-                              <i className="fa fa-star" />
-                            </li>
-                          ))}
-                        </ul>
-                        <div className="text">
-                          <Link href={`/shop-single/${product.id}`} title="">
-                            {product.title}
-                          </Link>
+                          </figure>
                         </div>
-                        <h6 className="title">
-                          <del>${product.originalPrice}</del>$
-                          {product.discountedPrice}
-                        </h6>
-                        <a className="shoping-btn">
-                          <i className="fa-solid fa-cart-shopping" />
-                          {"Add To Cart"}
-                        </a>
+                        <div className="content-box">
+                          <div className="text">{product.name}</div>
+                          <h6 className="title">
+                            {currentCurrency} {product.end_price}
+                          </h6>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  ))
+                )}
               </div>
               <div className="pagination-sec">
                 <nav aria-label="Page navigation example">
                   <ul className="pagination">
-                    <Pagination />
+                    <li>
+                      {currentPage} | {totalPage}
+                    </li>
                   </ul>
-                  <div className="text">Showing results 1-30 of 1,415</div>
                 </nav>
               </div>
             </div>
