@@ -7,8 +7,6 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import Image from "next/image";
 import Link from "next/link";
-import Slider from "rc-slider";
-import "rc-slider/assets/index.css";
 import { useCallback, useEffect, useState } from "react";
 
 interface CarModel {
@@ -39,7 +37,6 @@ export default function ShopList() {
   const { interests, interestsLoading, getInterests } = useInterestsStore();
   const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
   const [selectedBody, setSelectedBody] = useState<string>("");
-  const [price, setPrice] = useState<number[]>([0, 50000]);
   const [debounceTimeout, setDebounceTimeout] = useState<NodeJS.Timeout | null>(
     null
   );
@@ -68,13 +65,6 @@ export default function ShopList() {
     debounce(handleSubmit, 500);
   };
 
-  const handlePriceChange = (value: number | number[]) => {
-    if (Array.isArray(value)) {
-      setPrice(value);
-      debounce(handleSubmit, 500);
-    }
-  };
-
   const debounce = (callback: () => void, delay: number) => {
     if (debounceTimeout) clearTimeout(debounceTimeout);
     const newTimeout = setTimeout(callback, delay);
@@ -89,7 +79,6 @@ export default function ShopList() {
   const handleReset = () => {
     setSelectedInterests([]);
     setSelectedBody("");
-    setPrice([0, 50000]);
   };
 
   const handleSubmit = useCallback(async () => {
@@ -103,51 +92,41 @@ export default function ShopList() {
       formData.body = [selectedBody];
     }
 
-    if (price && price.length === 2) {
-      formData.minPrice = price[0];
-      formData.maxPrice = price[1];
-    }
-
     if (debounceTimeout) clearTimeout(debounceTimeout);
 
-    if (Object.keys(formData).length > 0) {
-      ErrorMessage = "";
-      setCarLoading(true);
-      try {
-        const res = await axios.post(
-          `${baseUrl}/cars/perfect/match/search`,
-          formData,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json",
-              code: region,
-            },
-          }
-        );
+    ErrorMessage = "";
+    setCarLoading(true);
+    try {
+      const res = await axios.post(
+        `${baseUrl}/cars/perfect/match/search`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            code: region,
+          },
+        }
+      );
 
-        if (res.status === 200) {
-          setCurrentCars(res.data.data.models);
-          setCarLoading(false);
-          if (res.data.data.current_page)
-            currentPage = res.data.data.current_page;
-          if (res.data.data.last_page) totalPage = res.data.data.last_page;
-          console.log(res);
-        }
-      } catch (error) {
-        if (axios.isAxiosError(error)) {
-          ErrorMessage = error.response?.data.message;
-          setCarLoading(false);
-        }
+      if (res.status === 200) {
+        setCurrentCars(res.data.data.models);
+        setCarLoading(false);
+        if (res.data.data.current_page)
+          currentPage = res.data.data.current_page;
+        if (res.data.data.last_page) totalPage = res.data.data.last_page;
+      }
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        ErrorMessage = error.response?.data.message;
+        setCarLoading(false);
       }
     }
-  }, [debounceTimeout, region, selectedInterests, selectedBody, price]);
+  }, [debounceTimeout, region, selectedInterests, selectedBody]);
 
   useEffect(() => {
-    if (selectedInterests.length > 0 || selectedBody || price.length > 0) {
-      handleSubmit();
-    }
-  }, [handleSubmit, price.length, selectedBody, selectedInterests.length]);
+    handleSubmit();
+  }, [handleSubmit]);
 
   return (
     <section className={`cars-section-fourteen layout-radius`}>
@@ -202,35 +181,6 @@ export default function ShopList() {
                 </select>
               </div>
               <div className="price-box">
-                <h6 className="title">Price</h6>
-                <form onSubmit={(e) => e.preventDefault()} className="row g-0">
-                  <div className="form-column col-lg-6">
-                    <div className="form_boxes">
-                      <label>Min price</label>
-                      <div className="drop-menu">
-                        {currentCurrency} {price[0]}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="form-column v2 col-lg-6">
-                    <div className="form_boxes">
-                      <label>Max price</label>
-                      <div className="drop-menu">
-                        {currentCurrency} {price[1]}
-                      </div>
-                    </div>
-                  </div>
-                </form>
-                <div className="widget-price">
-                  <Slider
-                    range
-                    max={50000}
-                    min={0}
-                    value={price}
-                    onChange={handlePriceChange}
-                    id="slider"
-                  />
-                </div>
                 <button
                   style={{ backgroundColor: "var(--theme-color1)" }}
                   type="button"
