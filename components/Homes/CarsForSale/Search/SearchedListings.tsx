@@ -105,7 +105,13 @@ export default function SearchedListings() {
             </li>
           </ul>
           <h2>
-            What Kind of Car Should I Get? Try CarLeaps <Link className="linkPerfectMatch" href={`/${currRegion}/cars/perfect-match`}>Perfect Match</Link>
+            What Kind of Car Should I Get? Try CarLeaps{" "}
+            <Link
+              className="linkPerfectMatch"
+              href={`/${currRegion}/cars/perfect-match`}
+            >
+              Perfect Match
+            </Link>
           </h2>
         </div>
         <div className="row">
@@ -255,7 +261,10 @@ export default function SearchedListings() {
                 <p>Loading cars...</p>
               ) : carsSearch?.length > 0 ? (
                 carsSearch?.map((car, i) => (
-                  <div key={i} className="box-car car-block-three col-lg-4 col-md-6 col-sm-12">
+                  <div
+                    key={i}
+                    className="box-car car-block-three col-lg-4 col-md-6 col-sm-12"
+                  >
                     <div className="inner-box mx-2">
                       <div className={`image-box`}>
                         <div className="image d-block">
@@ -270,7 +279,11 @@ export default function SearchedListings() {
                             />
                           </Link>
                         </div>
-                        {car.status && <span>{car.status}</span>}
+                        {car.ad_state !== "N/A" &&
+                          (car?.ad_state === "CPO" ||
+                            car?.ad_state === "Authorized New") && (
+                            <span>{car.ad_state}</span>
+                          )}
                         <Link
                           href={`/${currentRegion}/cars/car-details/${car.name}`}
                           title=""

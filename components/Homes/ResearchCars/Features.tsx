@@ -3,7 +3,7 @@ export default function Features() {
     <section className="why-choose-us-section-five">
       <div className="boxcar-container">
         <div className="boxcar-title light wow fadeInUp">
-          <h2 className="title">Why Choose Us?</h2>
+          <h2 className="title">Why Researching New Cars Through Us?</h2>
         </div>
         <div className="row">
           {/* choose-us-block */}
@@ -140,7 +140,7 @@ export default function Features() {
                 </svg>
               </div>
               <div className="content-box">
-                <h6 className="title">Trusted Car Dealership</h6>
+                <h6 className="title">Authorized Dealers Only</h6>
                 <div className="text">
                   Our stress-free finance department that can find financial
                   solutions to save you money.
@@ -250,7 +250,7 @@ export default function Features() {
                 </svg>
               </div>
               <div className="content-box">
-                <h6 className="title">Expert Car Service</h6>
+                <h6 className="title">Special Incentives</h6>
                 <div className="text">
                   Our stress-free finance department that can find financial
                   solutions to save you money.

@@ -1,0 +1,31 @@
+.reset_btn {
+    background-color: var(--theme-color1);
+    transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    border: 1px solid var(--theme-color1) !important;
+}
+
+.reset_btn:hover {
+    background-color: #fff;
+    color: var(--theme-color1) !important;
+}
+
+.submit_price_btn {
+    background-color: #fff;
+    transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    border: 1px solid var(--theme-color1) !important;
+    color: var(--theme-color1) !important;
+    margin-top: 20px;
+}
+
+.submit_price_btn:hover {    
+    background-color: var(--theme-color1) !important;
+    color: #fff !important;
+}

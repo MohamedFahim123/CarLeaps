@@ -1,5 +1,5 @@
 "use client";
-import { useBodiesStore } from "@/app/store/bodies";
+import { useResearchBoodiesStore } from "@/app/store/ResearchCarBoodies";
 import { cars } from "@/data/categories";
 import Image from "next/image";
 import Link from "next/link";
@@ -60,14 +60,14 @@ export default function Categories() {
       },
     ],
   };
-  const { bodies } = useBodiesStore();
+  const { researchBoodies } = useResearchBoodiesStore();
 
   return (
     <section className="category-section">
       <div className="large-container">
         <h2 className="title">A Vehicle For Every Lifestyle</h2>
         <div className="nav nav-tabs cate-nav-tab">
-          {bodies?.map((body) => (
+          {researchBoodies?.map((body) => (
             <button title={body.name} className="nav-link" key={body?.id}>
               {body.name}
             </button>

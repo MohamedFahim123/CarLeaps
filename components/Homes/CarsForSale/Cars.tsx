@@ -7,6 +7,7 @@ import Cookies from "js-cookie";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import Slider from "react-slick";
+import { MainRegionName } from "@/app/utils/mainData";
 
 interface Button {
   label: string;
@@ -22,7 +23,7 @@ const buttons: Button[] = [
 export default function Cars() {
   const [selectedCategory, setSelectedCategory] = useState<Button>(buttons[0]);
   const [sortedItems, setSortedItems] = useState<Car[]>([...carData]);
-  const region: string = Cookies.get("region") || "riyadh";
+  const region: string = Cookies.get("region") || MainRegionName;
 
   useEffect(() => {
     setSortedItems([

@@ -1,7 +1,6 @@
 "use client";
 
 import { useCarsForSaleStore } from "@/app/store/CarsForSale";
-import { useCitiesStore } from "@/app/store/Cities";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -18,9 +17,6 @@ const icons: { icon: string }[] = [
 export default function Cars() {
   const [mounted, setMounted] = useState(false);
   const { carsForSale, currentRegion } = useCarsForSaleStore();
-  const { cities } = useCitiesStore();
-  const currentCurrency =
-    cities.find((city) => city.code === currentRegion)?.currency || "";
 
   useEffect(() => {
     setMounted(true);
@@ -85,7 +81,7 @@ export default function Cars() {
               modules={[Pagination, Autoplay]}
               className="car-slider-three slider-layout-1 row"
             >
-              {carsForSale?.slice(0,8).map((car, index) => (
+              {carsForSale?.slice(0, 8).map((car, index) => (
                 <SwiperSlide
                   key={index}
                   className="box-car car-block-three col-lg-3 col-md-6 col-sm-12"
@@ -108,7 +104,11 @@ export default function Cars() {
                           />
                         </Link>
                       </div>
-                      {car.status && <span>{car.status}</span>}
+                      {car.ad_state !== "N/A" &&
+                        (car?.ad_state === "CPO" ||
+                          car?.ad_state === "Authorized New") && (
+                          <span>{car.ad_state}</span>
+                        )}
                       <Link
                         href={`/${currentRegion}/cars/car-details/${car.name}`}
                         title=""
@@ -185,14 +185,23 @@ export default function Cars() {
                       <div className="btn-box">
                         {car?.offer_price && (
                           <span>
-                            <del>
-                              {car.price} {currentCurrency}
-                            </del>
+                            <span
+                              className="fw-light d-inline"
+                              style={{ fontSize: "10px" }}
+                            >
+                              {car.currency}
+                            </span>{" "}
+                            <del>{car.price}</del>
                           </span>
                         )}
                         <small>
-                          {car.offer_price ? car.offer_price : car.price}{" "}
-                          {currentCurrency}
+                          <span
+                            className="fw-light d-inline"
+                            style={{ fontSize: "14px" }}
+                          >
+                            {car.currency}
+                          </span>{" "}
+                          {car.offer_price ? car.offer_price : car.price}
                         </small>
                         <Link
                           href={`/${currentRegion}/cars/car-details/${car.name}`}

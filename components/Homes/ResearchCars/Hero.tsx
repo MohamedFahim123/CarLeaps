@@ -15,15 +15,15 @@ export default function Hero() {
               We make finding the right car simple
             </span>
             <h2 className="wow fadeInUp" data-wow-delay="100ms">
-              Search Less. Live More.
+              Search Less. Ride More.
             </h2>
             <div className="btn-box">
-              <a
-                href="#"
+              <Link
+                href={`/${currRegion}/cars/perfect-match`}
                 className="read-more active wow fadeInUp"
                 data-wow-delay="200ms"
               >
-                View Inventory
+                Perfect Match
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width={14}
@@ -43,13 +43,13 @@ export default function Hero() {
                     </clipPath>
                   </defs>
                 </svg>
-              </a>
+              </Link>
               <Link
-                href={`/${currRegion}/cars/perfect-match`}
+                href={`/${currRegion}/cars/cars-for-sale/search?condition=new&dealer_type=authorized_dealer`}
                 className="read-more wow fadeInUp"
                 data-wow-delay="200ms"
               >
-                Contact Us
+                New Cars Available Now
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width={14}

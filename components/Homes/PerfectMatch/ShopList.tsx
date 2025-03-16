@@ -8,6 +8,7 @@ import Cookies from "js-cookie";
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
+import styles from "./shopListStyles.module.css";
 
 interface CarModel {
   cover: string;
@@ -33,6 +34,8 @@ let ErrorMessage: string = "";
 
 export default function ShopList() {
   const { bodies } = useBodiesStore();
+  const [priceFrom, setPriceFrom] = useState<number>(0);
+  const [priceTo, setPriceTo] = useState<number>(10000000);
   const region: string = Cookies.get("region") || MainRegionName;
   const { interests, interestsLoading, getInterests } = useInterestsStore();
   const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
@@ -91,6 +94,12 @@ export default function ShopList() {
     if (selectedBody) {
       formData.body = [selectedBody];
     }
+    if (priceFrom) {
+      formData.price_from = priceFrom;
+    }
+    if (priceTo) {
+      formData.price_to = priceTo;
+    }
 
     if (debounceTimeout) clearTimeout(debounceTimeout);
 
@@ -122,11 +131,12 @@ export default function ShopList() {
         setCarLoading(false);
       }
     }
-  }, [debounceTimeout, region, selectedInterests, selectedBody]);
+  }, [selectedInterests, selectedBody, priceFrom, priceTo, debounceTimeout, region]);
 
   useEffect(() => {
     handleSubmit();
   }, [handleSubmit]);
+
 
   return (
     <section className={`cars-section-fourteen layout-radius`}>
@@ -181,10 +191,46 @@ export default function ShopList() {
                 </select>
               </div>
               <div className="price-box">
+                <h6 className="title">Price</h6>
+                <div className="row">
+                  <div className="form-column col-lg-6">
+                    <div className="form_boxes">
+                      <label htmlFor="priceFrom">Min price</label>
+                      <input
+                        id="priceFrom"
+                        type="number"
+                        className="form-control"
+                        name="price_from"
+                        defaultValue={""}
+                        placeholder={`${priceFrom}`}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                          setPriceFrom(+e?.target?.value)
+                        }
+                      />
+                    </div>
+                  </div>
+                  <div className="form-column v2 col-lg-6">
+                    <div className="form_boxes">
+                      <label htmlFor="priceTo">Max price</label>
+                      <input
+                        type="number"
+                        id="priceTo"
+                        className="form-control"
+                        name="price_to"
+                        placeholder={`${priceTo}`}
+                        defaultValue={""}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                          setPriceTo(+e?.target?.value)
+                        }
+                      />
+                    </div>
+                  </div>
+                </div>
+                <hr />
                 <button
-                  style={{ backgroundColor: "var(--theme-color1)" }}
+                  style={{ backgroundColor: "" }}
                   type="button"
-                  className="btn px-5 text-white py-2 fs-5 mb-4 w-100"
+                  className={`btn px-5 text-white py-2 fs-5 mb-4 w-100 ${styles.reset_btn}`}
                   onClick={handleReset}
                 >
                   Reset

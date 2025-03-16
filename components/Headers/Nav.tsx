@@ -3,12 +3,13 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
+import { MainRegionName } from "@/app/utils/mainData";
 
 function Nav() {
-  const [currRegion, setCurrRegion] = useState<string>("riyadh");
+  const [currRegion, setCurrRegion] = useState<string>(MainRegionName);
 
   useEffect(() => {
-    const region = Cookies.get("region") || "riyadh";
+    const region = Cookies.get("region") || MainRegionName;
     setCurrRegion(region);
   }, []);
 

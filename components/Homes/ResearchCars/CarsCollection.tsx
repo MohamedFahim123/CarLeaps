@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function CarsCollection() {
   return (
-    <section className="boxcar-pricing-section-four v9 pb-0">
+    <section className="boxcar-pricing-section-four v9">
       <div className="boxcar-container">
         <div className="row">
           <div className="image-column col-lg-6 col-md-6 col-sm-12">

@@ -8,7 +8,6 @@ import { useCitiesStore } from "@/app/store/Cities";
 import { useConditionStore } from "@/app/store/conditions";
 import { useCountriesStore } from "@/app/store/countries";
 import { useFuelTypesStore } from "@/app/store/fuel-types";
-import { useMakesCarsStore } from "@/app/store/makeCars";
 import { useProfileStore } from "@/app/store/profile";
 import { useTokenStore } from "@/app/store/Token";
 import { baseUrl, MainRegionName } from "@/app/utils/mainData";
@@ -24,6 +23,7 @@ import { toast } from "react-toastify";
 import styles from "./headerStyles.module.css";
 import Nav from "./Nav";
 import { useResearchCarsMakesStore } from "@/app/store/ResearchCarMakes";
+import { useResearchBoodiesStore } from "@/app/store/ResearchCarBoodies";
 
 interface Header1Props {
   headerClass?: string;
@@ -40,13 +40,13 @@ export default function Header1({
   const { countries, getCountries, countriesLoading } = useCountriesStore();
   const { token, clearToken, getToken, tokenLoading } = useTokenStore();
   const { profile, getProfile, profileLoading } = useProfileStore();
-  const { makesCars, getMakesCars, makesCarsLoading } = useMakesCarsStore();
   const { models, getModels, modelsLoading } = useModelsStore();
   const { trims, getTrims, trimsLoading } = useTrimsStore();
   const { bodies, getBodies, bodiesLoading } = useBodiesStore();
   const { condition, getCondition, conditionLoading } = useConditionStore();
   const { cities, getCities, citiesLoading } = useCitiesStore();
   const { fuelTypes, getFuelTypes, fuelTypesLoading } = useFuelTypesStore();
+  const {researchBoodies, researchBoodiesLoading,getResearchBoodies} = useResearchBoodiesStore();
   const { carsForSale, getCarsForSale, setRegion, carsForSaleLoading } =
     useCarsForSaleStore();
   const {
@@ -56,6 +56,12 @@ export default function Header1({
     researchCarsMakesLoading,
   } = useResearchCarsMakesStore();
 
+  const getAllResearchBoodies = useCallback(() => {
+    if (researchBoodies.length === 0 && !researchBoodiesLoading) {
+      getResearchBoodies();
+    }
+  }, [getResearchBoodies, researchBoodiesLoading, researchBoodies]);
+
   const getAllResearchMakes = useCallback(() => {
     if (researchCarsMakes.length === 0 && !researchCarsMakesLoading) {
       getResearchCarsMakes();
@@ -64,7 +70,8 @@ export default function Header1({
 
   useEffect(() => {
     getAllResearchMakes();
-  }, [getAllResearchMakes]);
+    getAllResearchBoodies();
+  }, [getAllResearchMakes, getAllResearchBoodies]);
 
   const getAllFuelTypes = useCallback(() => {
     if (fuelTypes.length === 0 && !fuelTypesLoading) {
@@ -89,12 +96,6 @@ export default function Header1({
       getBodies();
     }
   }, [getBodies, bodiesLoading, bodies.length]);
-
-  const getAllMakesCars = useCallback(() => {
-    if (makesCars.length === 0 && !makesCarsLoading) {
-      getMakesCars();
-    }
-  }, [getMakesCars, makesCarsLoading, makesCars.length]);
 
   const getAllCountries = useCallback(() => {
     if (countries.length === 0 && !countriesLoading) {
@@ -136,7 +137,6 @@ export default function Header1({
     getAllCountries();
     getTheToken();
     getTheProfile();
-    getAllMakesCars();
     getAllModels();
     getAllTrims();
     getAllCarsForSale();
@@ -149,7 +149,6 @@ export default function Header1({
     getAllFuelTypes,
     getAllConditions,
     getAllCountries,
-    getAllMakesCars,
     getTheToken,
     getTheProfile,
     getAllModels,

@@ -6,12 +6,12 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./Brands.module.css";
 import { ResearchCarsMakes } from "@/app/store/ResearchCarMakes";
 
-export default function IncentivesSection({ brand }: { brand?: ResearchCarsMakes }) {
+export default function IncentivesSection({ brand ,currRegion }: {currRegion: string; brand?: ResearchCarsMakes }) {
   return (
     <>
       {brand && brand?.incentives?.length > 0 && (
         <div className="boxcar-container py-5">
-          <h3 className="mb-4">{brand.name} Incentives</h3>
+          <h3 className="mb-4">{brand.name} Incentives in {currRegion}</h3>
           <Swiper
             modules={[Autoplay]}
             autoplay={{

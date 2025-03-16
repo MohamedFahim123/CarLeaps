@@ -350,6 +350,33 @@ export const blogPosts7: blogPost6[] = [
     datePublished: "April 20, 2023",
     title: "This Long-Awaited Technology May Finally Change the World",
   },
+  {
+    id: 26,
+    src: "/images/resource/blog-1.jpg",
+    wowDelay: "",
+    date: "news",
+    author: "Ali Tufan",
+    datePublished: "April 20, 2023",
+    title: "This Long-Awaited Technology May Finally Change the World",
+  },
+  {
+    id: 27,
+    src: "/images/resource/blog-2.jpg",
+    wowDelay: "100ms",
+    date: "news",
+    author: "Ali Tufan",
+    datePublished: "April 20, 2023",
+    title: "This Long-Awaited Technology May Finally Change the World",
+  },
+  {
+    id: 28,
+    src: "/images/resource/blog-3.jpg",
+    wowDelay: "200ms",
+    date: "news",
+    author: "Ali Tufan",
+    datePublished: "April 20, 2023",
+    title: "This Long-Awaited Technology May Finally Change the World",
+  },
 ];
 
 export const allBlogs = [

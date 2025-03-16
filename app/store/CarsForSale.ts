@@ -54,6 +54,7 @@ export interface Car {
   country_id: number;
   city_id: number;
   price: number;
+  currency: string;
   offer_price: number;
   mileage: number;
   drive_type: string;

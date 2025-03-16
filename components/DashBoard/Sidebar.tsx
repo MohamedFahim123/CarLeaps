@@ -6,7 +6,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
-import { baseUrl } from "@/app/utils/mainData";
+import { baseUrl, MainRegionName } from "@/app/utils/mainData";
 import axios from "axios";
 import { useTokenStore } from "@/app/store/Token";
 
@@ -26,7 +26,7 @@ export default function Sidebar() {
   const { token, clearToken } = useTokenStore();
 
   useEffect(() => {
-    const region = Cookies.get("region") || "riyadh";
+    const region = Cookies.get("region") || MainRegionName;
     setCurrentRegion(region);
   }, []);
 

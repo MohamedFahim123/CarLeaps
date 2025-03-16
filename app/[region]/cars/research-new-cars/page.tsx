@@ -19,11 +19,11 @@ export default function ResearchNewCarsPage() {
       <Hero />
       <Categories />
       <ResearchCarsBrands />
-      <CarsCollection />
-      <Banner />
-      <Cars />
       <Features />
+      <Cars />
       <Blogs />
+      <Banner />
+      <CarsCollection />
     </>
   );
 }

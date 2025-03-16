@@ -9,10 +9,15 @@ import BrandsHeroSection from "./BrandsHeroSection";
 import BrandsSpecialSection from "./BrandsSpecialSection";
 import IncentivesSection from "./IncentivesSection";
 import { useEffect } from "react";
+import { MainRegionName } from "@/app/utils/mainData";
 
 export default function BrandsMainPage({ brandId }: { brandId: number }) {
-  const { researchCarsMakes, researchCarsMakesLoading, setSelectedMake } =
-    useResearchCarsMakesStore();
+  const {
+    researchCarsMakes,
+    researchCarsMakesLoading,
+    setSelectedMake,
+    currRegion,
+  } = useResearchCarsMakesStore();
   const selectedBrand = researchCarsMakes.find((brand) => brand.id === brandId);
 
   useEffect(() => {
@@ -22,15 +27,18 @@ export default function BrandsMainPage({ brandId }: { brandId: number }) {
   }, [brandId, selectedBrand, setSelectedMake]);
 
   if (researchCarsMakesLoading) return <h1>Loading...</h1>;
-  console.log(selectedBrand)
+  console.log(selectedBrand);
 
   return (
     <>
       {selectedBrand ? (
         <>
-          <BrandsHeroSection brand={selectedBrand} />
-          <BrandsBanner brand={selectedBrand} />
-          <IncentivesSection brand={selectedBrand} />
+          <BrandsHeroSection
+            currRegion={currRegion || MainRegionName}
+            brand={selectedBrand}
+          />
+          <BrandsBanner currRegion={currRegion || MainRegionName} brand={selectedBrand} />
+          <IncentivesSection currRegion={currRegion || MainRegionName}  brand={selectedBrand} />
           <AboutBrand brand={selectedBrand} />
           <BrandsChooseUs brand={selectedBrand} />
           <BrandsSpecialSection />
