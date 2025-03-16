@@ -6,6 +6,6 @@ export const metadata: Metadata = {
   description: "",
 };
 
-export default function page() {
+export default function AddListingPage() {
   return <AddListing />;
 }

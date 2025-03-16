@@ -27,7 +27,6 @@ export default function BrandsMainPage({ brandId }: { brandId: number }) {
   }, [brandId, selectedBrand, setSelectedMake]);
 
   if (researchCarsMakesLoading) return <h1>Loading...</h1>;
-  console.log(selectedBrand);
 
   return (
     <>

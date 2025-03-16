@@ -88,7 +88,7 @@ export default function ShopList() {
     const formData: Record<string, unknown> = {};
 
     if (selectedInterests.length > 0) {
-      formData.interests = selectedInterests;
+      formData.interest = selectedInterests;
     }
 
     if (selectedBody) {

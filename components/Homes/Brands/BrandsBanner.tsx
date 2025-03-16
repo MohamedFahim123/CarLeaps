@@ -5,27 +5,33 @@ import "swiper/css";
 import "swiper/css/navigation";
 import styles from "./Brands.module.css";
 
-import { useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import Link from "next/link";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { Autoplay } from "swiper/modules";
 import { useCitiesStore } from "@/app/store/Cities";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { Autoplay } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 
-const buttons: { label: string; isActive: boolean }[] = [
-  { label: "All Models", isActive: true },
-  { label: "SUV", isActive: false },
-  { label: "Sedans", isActive: false },
-];
-
-export default function BrandsBanner({ brand,currRegion }: { brand: ResearchCarsMakes; currRegion: string }) {
+export default function BrandsBanner({
+  brand,
+  currRegion,
+}: {
+  brand: ResearchCarsMakes;
+  currRegion: string;
+}) {
+  const [buttons, setButtons] = useState<string[]>(["All Cars"]);
   const [selectedCategory, setSelectedCategory] = useState(buttons[0]);
   const router = useRouter();
-    const { cities } = useCitiesStore();
-    const currentCurrency =
-      cities.find((city) => city.code === currRegion)?.currency || "";
+  const { cities } = useCitiesStore();
+  const currentCurrency =
+    cities.find((city) => city.code === currRegion)?.currency || "";
 
+  useEffect(() => {
+    const currModels = brand.models.map((model) => model.name);
+    setButtons([...buttons, ...currModels]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [brand.models]);
 
   return (
     <div className={styles.brandsBannerSection}>
@@ -45,7 +51,7 @@ export default function BrandsBanner({ brand,currRegion }: { brand: ResearchCars
                     selectedCategory == button ? "active" : ""
                   }`}
                 >
-                  {button.label}
+                  {button}
                 </button>
               ))}
             </div>
@@ -70,30 +76,63 @@ export default function BrandsBanner({ brand,currRegion }: { brand: ResearchCars
             },
           }}
         >
-          {brand.models &&
-            brand.models?.length > 0 &&
-            brand?.models.map((car) => (
-              <SwiperSlide key={car.id}>
-                <div className={`brand-block ${styles.brandBlock}`}>
-                  <Link href={`/${currRegion}/cars/car-details/${car.id}`}>
-                    <Image
-                      alt={`${car.name} Image`}
-                      src={car.image}
-                      width={300}
-                      height={100}
-                    />
-                  </Link>
-                  <h4
-                    onClick={() =>
-                      router.push(`/${currRegion}/cars/car-details/${car.id}`)
-                    }
-                  >
-                    {car.name}
-                  </h4>
-                  <p>Starts at {currentCurrency}{122222}</p>
-                </div>
-              </SwiperSlide>
-            ))}
+          {brand?.models &&
+            brand?.models?.length > 0 &&
+            brand?.models?.map((car) =>
+              car.name === selectedCategory ? (
+                <SwiperSlide key={car.id}>
+                  <div className={`brand-block ${styles.brandBlock}`}>
+                    <Link href={`/${currRegion}/cars/car-details/${car.id}`}>
+                      <Image
+                        alt={`${car.name} Image`}
+                        src={car.image}
+                        width={300}
+                        height={100}
+                      />
+                    </Link>
+                    <h4
+                      onClick={() =>
+                        router.push(`/${currRegion}/cars/car-details/${car.id}`)
+                      }
+                    >
+                      {car.name}
+                    </h4>
+                    <p>
+                      Starts at {currentCurrency}
+                      {122222}
+                    </p>
+                  </div>
+                </SwiperSlide>
+              ) : (
+                selectedCategory === "All Cars" && (
+                  <SwiperSlide key={car.id}>
+                    <div className={`brand-block ${styles.brandBlock}`}>
+                      <Link href={`/${currRegion}/cars/car-details/${car.id}`}>
+                        <Image
+                          alt={`${car.name} Image`}
+                          src={car.image}
+                          width={300}
+                          height={100}
+                        />
+                      </Link>
+                      <h4
+                        onClick={() =>
+                          router.push(
+                            `/${currRegion}/cars/car-details/${car.id}`
+                          )
+                        }
+                      >
+                        {car.name}
+                      </h4>
+                      <p>
+                        Starts at {currentCurrency}
+                        {122222}
+                      </p>
+                    </div>
+                  </SwiperSlide>
+                )
+              )
+            )}
         </Swiper>
       </div>
     </div>
