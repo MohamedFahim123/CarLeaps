@@ -28,7 +28,7 @@ const ModelPageMain = ({ model }: { model: number }) => {
           <ModelHeroSection selectedMake={selectedMake} model={selectedModel} />
           <KeySpecifications />
           <GallerySection model={selectedModel} />
-          <IncentivesSection />
+          <IncentivesSection currRegion={currRegion} />
           <TrimView model={selectedModel} />
           <BrandsSpecialSection />
           {/* <Blogs /> */}
