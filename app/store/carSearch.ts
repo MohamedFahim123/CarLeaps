@@ -11,6 +11,7 @@ export interface SearchData {
   model?: string;
   fuel_type?: string;
   body?: string;
+  ad_state?: string;
 }
 
 export interface UseSearchCarsStoreIterface {

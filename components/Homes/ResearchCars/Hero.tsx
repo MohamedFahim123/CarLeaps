@@ -1,10 +1,13 @@
 "use client";
 
+import { useAdStatesStore } from "@/app/store/ad-states";
 import { useResearchCarsMakesStore } from "@/app/store/ResearchCarMakes";
 import Link from "next/link";
 
 export default function Hero() {
   const { currRegion } = useResearchCarsMakesStore();
+  const { adStates } = useAdStatesStore();
+  const authorizedDealer = adStates.find((state) => state.name === 'Authorized New');
 
   return (
     <section className="boxcar-banner-section-nine">
@@ -45,7 +48,7 @@ export default function Hero() {
                 </svg>
               </Link>
               <Link
-                href={`/${currRegion}/cars/cars-for-sale/search?condition=new&dealer_type=authorized_dealer`}
+                href={`/${currRegion}/cars/cars-for-sale/search?condition=new&ad_state=${authorizedDealer?.id}`}
                 className="read-more wow fadeInUp"
                 data-wow-delay="200ms"
               >

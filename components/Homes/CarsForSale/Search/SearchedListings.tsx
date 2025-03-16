@@ -18,6 +18,7 @@ export interface DefaultValues {
   model: string;
   fuel_type: string;
   body: string;
+  ad_state: string;
 }
 const icons: { icon: string }[] = [
   { icon: "flaticon-gasoline-pump" },
@@ -41,6 +42,7 @@ export default function SearchedListings() {
     model: "",
     fuel_type: "",
     body: "",
+    ad_state: "",
   });
 
   const { condition } = useConditionStore();
@@ -54,6 +56,7 @@ export default function SearchedListings() {
     const condition = searchParams.get("condition");
     const fuel_type = searchParams.get("fuel_type");
     const body = searchParams.get("body");
+    const ad_state = searchParams.get("ad_state");
 
     setDefaultValues({
       make: make || "",
@@ -61,6 +64,7 @@ export default function SearchedListings() {
       condition: condition || "",
       fuel_type: fuel_type || "",
       body: body || "",
+      ad_state: ad_state || "",
     });
 
     useSearchCarsStore.getState().getCarsSearch({
@@ -69,6 +73,7 @@ export default function SearchedListings() {
       model: model || undefined,
       fuel_type: fuel_type || undefined,
       body: body || undefined,
+      ad_state: ad_state || undefined,
     });
   }, [searchParams]);
 

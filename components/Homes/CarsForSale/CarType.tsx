@@ -33,8 +33,8 @@ export default function CarType() {
                 <div className="image-box">
                   <Image
                     src={body.image}
-                    width={35}
-                    height={35}
+                    width={100}
+                    height={100}
                     alt={body.name}
                   />
                 </div>

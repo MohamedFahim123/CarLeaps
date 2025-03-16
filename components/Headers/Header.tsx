@@ -24,6 +24,7 @@ import styles from "./headerStyles.module.css";
 import Nav from "./Nav";
 import { useResearchCarsMakesStore } from "@/app/store/ResearchCarMakes";
 import { useResearchBoodiesStore } from "@/app/store/ResearchCarBoodies";
+import { useAdStatesStore } from "@/app/store/ad-states";
 
 interface Header1Props {
   headerClass?: string;
@@ -46,9 +47,11 @@ export default function Header1({
   const { condition, getCondition, conditionLoading } = useConditionStore();
   const { cities, getCities, citiesLoading } = useCitiesStore();
   const { fuelTypes, getFuelTypes, fuelTypesLoading } = useFuelTypesStore();
-  const {researchBoodies, researchBoodiesLoading,getResearchBoodies} = useResearchBoodiesStore();
+  const { researchBoodies, researchBoodiesLoading, getResearchBoodies } =
+    useResearchBoodiesStore();
   const { carsForSale, getCarsForSale, setRegion, carsForSaleLoading } =
     useCarsForSaleStore();
+  const { adStates, getAdStates, adStatesLoading } = useAdStatesStore();
   const {
     researchCarsMakes,
     getResearchCarsMakes,
@@ -133,8 +136,15 @@ export default function Header1({
     }
   }, [getCities, citiesLoading, cities.length]);
 
+  const getAllAdStates = useCallback(() => {
+    if (adStates.length === 0 && !adStatesLoading) {
+      getAdStates();
+    }
+  }, [getAdStates, adStatesLoading, adStates.length]);
+
   useEffect(() => {
     getAllCountries();
+    getAllAdStates();
     getTheToken();
     getTheProfile();
     getAllModels();
@@ -149,6 +159,7 @@ export default function Header1({
     getAllFuelTypes,
     getAllConditions,
     getAllCountries,
+    getAllAdStates,
     getTheToken,
     getTheProfile,
     getAllModels,

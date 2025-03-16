@@ -131,12 +131,20 @@ export default function ShopList() {
         setCarLoading(false);
       }
     }
-  }, [selectedInterests, selectedBody, priceFrom, priceTo, debounceTimeout, region]);
+  }, [
+    selectedInterests,
+    selectedBody,
+    priceFrom,
+    priceTo,
+    debounceTimeout,
+    region,
+  ]);
 
   useEffect(() => {
     handleSubmit();
   }, [handleSubmit]);
 
+  console.log(currentCars);
 
   return (
     <section className={`cars-section-fourteen layout-radius`}>
@@ -199,7 +207,7 @@ export default function ShopList() {
                       <input
                         id="priceFrom"
                         type="number"
-                        className="form-control"
+                        className="form-control border border-1 px-2"
                         name="price_from"
                         defaultValue={""}
                         placeholder={`${priceFrom}`}
@@ -215,7 +223,7 @@ export default function ShopList() {
                       <input
                         type="number"
                         id="priceTo"
-                        className="form-control"
+                        className="form-control border border-1 px-2"
                         name="price_to"
                         placeholder={`${priceTo}`}
                         defaultValue={""}
@@ -262,7 +270,9 @@ export default function ShopList() {
                           </figure>
                         </div>
                         <div className="content-box">
-                          <div className="text">{product.name}</div>
+                          <div className="text">
+                            {product.make} - {product.name}
+                          </div>
                           <h6 className="title">
                             {currentCurrency} {product.end_price}
                           </h6>

@@ -28,7 +28,7 @@ export default function Cars() {
     <section className="cars-section-three">
       <div className="boxcar-container">
         <div className="boxcar-title wow fadeInUp">
-          <h2 className="mb-5">Explore Recent Cars For Sale</h2>
+          <h2 className="mb-5">Recent Cars For Sale in {currentRegion}</h2>
           <Link
             href={`/${currentRegion}/cars/cars-for-sale/search`}
             className="btn-title"

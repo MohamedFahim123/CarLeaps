@@ -1,7 +1,10 @@
+"use client";
+
 import { ResearchCarsMakes } from "@/app/store/ResearchCarMakes";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./Brands.module.css";
+import { useAdStatesStore } from "@/app/store/ad-states";
 
 export default function BrandsHeroSection({
   brand,
@@ -10,6 +13,10 @@ export default function BrandsHeroSection({
   brand: ResearchCarsMakes;
   currRegion: string;
 }) {
+  const { adStates } = useAdStatesStore();
+  const authorizedDealer = adStates.find(
+    (state) => state.name === "Authorized New"
+  );
   return (
     <div
       className={`boxcar-banner-section-nine ${styles.heroSection}`}
@@ -40,7 +47,7 @@ export default function BrandsHeroSection({
             </div>
             <div className={`d-flex gap-3 position-relative`}>
               <Link
-                href={`/${currRegion}/cars/cars-for-sale/search?condition=new&dealer_type=authorized_dealer&make=${brand.id}`}
+                href={`/${currRegion}/cars/cars-for-sale/search?condition=new&ad_state=${authorizedDealer?.id}&make=${brand.id}`}
                 className={`btn btn-outline-light text-capitalize ${styles.buttonLight}`}
               >
                 Shop {brand.name}

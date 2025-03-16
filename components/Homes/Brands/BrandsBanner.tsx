@@ -33,6 +33,8 @@ export default function BrandsBanner({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [brand.models]);
 
+  console.log(brand)
+
   return (
     <div className={styles.brandsBannerSection}>
       <div className="boxcar-container">
@@ -78,24 +80,24 @@ export default function BrandsBanner({
         >
           {brand?.models &&
             brand?.models?.length > 0 &&
-            brand?.models?.map((car) =>
-              car.name === selectedCategory ? (
-                <SwiperSlide key={car.id}>
+            brand?.models?.map((model) =>
+              model.name === selectedCategory ? (
+                <SwiperSlide key={model.id}>
                   <div className={`brand-block ${styles.brandBlock}`}>
-                    <Link href={`/${currRegion}/cars/car-details/${car.id}`}>
+                    <Link href={`/${currRegion}/cars/car-details/${model.id}`}>
                       <Image
-                        alt={`${car.name} Image`}
-                        src={car.image}
+                        alt={`${model.name} Image`}
+                        src={model.image}
                         width={300}
                         height={100}
                       />
                     </Link>
                     <h4
                       onClick={() =>
-                        router.push(`/${currRegion}/cars/car-details/${car.id}`)
+                        router.push(`/${currRegion}/cars/${brand.id}/${model.id}`)
                       }
                     >
-                      {car.name}
+                      {model.name}
                     </h4>
                     <p>
                       Starts at {currentCurrency}
@@ -105,12 +107,12 @@ export default function BrandsBanner({
                 </SwiperSlide>
               ) : (
                 selectedCategory === "All Cars" && (
-                  <SwiperSlide key={car.id}>
+                  <SwiperSlide key={model.id}>
                     <div className={`brand-block ${styles.brandBlock}`}>
-                      <Link href={`/${currRegion}/cars/car-details/${car.id}`}>
+                      <Link href={`/${currRegion}/cars/${brand.id}/${model.id}`}>
                         <Image
-                          alt={`${car.name} Image`}
-                          src={car.image}
+                          alt={`${model.name} Image`}
+                          src={model.image}
                           width={300}
                           height={100}
                         />
@@ -118,11 +120,11 @@ export default function BrandsBanner({
                       <h4
                         onClick={() =>
                           router.push(
-                            `/${currRegion}/cars/car-details/${car.id}`
+                            `/${currRegion}/cars/${brand.id}/${model.id}`
                           )
                         }
                       >
-                        {car.name}
+                        {model.name}
                       </h4>
                       <p>
                         Starts at {currentCurrency}

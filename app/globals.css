@@ -205,3 +205,15 @@ img {
   text-decoration: underline;
   color: #6e499f;
 }
+.price-box .form-control {
+  height: 3rem !important;
+  margin-top: 10px;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+}
+.price-box .form-control::placeholder {
+  color: #00000070 !important;
+}
