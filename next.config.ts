@@ -1,16 +1,17 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  output: 'export',
   images: {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "validcars.valureach.com",
+        hostname: "admin.carleaps.com",
         pathname: "/storage/**",
       },
       {
         protocol: "https",
-        hostname: "validcars.valureach.com",
+        hostname: "admin.carleaps.com",
         pathname: "/admin/img/default/**",
       },
     ],

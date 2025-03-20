@@ -1,5 +1,4 @@
 import CpoFeatures from "@/components/Homes/CPO/CpoFeatures";
-import Blogs from "@/components/Homes/Home/Blogs";
 import Banner from "@/components/Homes/PricingHub/Banner";
 import Hero from "@/components/Homes/PricingHub/Hero";
 import { Metadata } from "next";
@@ -15,7 +14,7 @@ export default function PricingHubPage() {
       <Hero />
       <CpoFeatures />
       <Banner />
-      <Blogs />
+      {/* <Blogs /> */}
     </>
   );
 }

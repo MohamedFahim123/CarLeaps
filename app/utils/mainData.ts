@@ -1,2 +1,2 @@
-export const baseUrl: string = `https://validcars.valureach.com/api`;
+export const baseUrl: string = `https://admin.carleaps.com/api`;
 export const MainRegionName: string = `Cairo`;

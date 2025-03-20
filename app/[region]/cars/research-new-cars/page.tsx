@@ -1,4 +1,3 @@
-import Blogs from "@/components/Homes/Home/Blogs";
 import Banner from "@/components/Homes/ResearchCars/Banner";
 import Cars from "@/components/Homes/ResearchCars/Cars";
 import CarsCollection from "@/components/Homes/ResearchCars/CarsCollection";
@@ -21,7 +20,7 @@ export default function ResearchNewCarsPage() {
       <ResearchCarsBrands />
       <Features />
       <Cars />
-      <Blogs />
+      {/* <Blogs /> */}
       <Banner />
       <CarsCollection />
     </>
