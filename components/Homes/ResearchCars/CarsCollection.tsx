@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
+import React from "react";
 
-export default function CarsCollection() {
+function CarsCollection() {
   return (
     <section className="boxcar-pricing-section-four v9">
       <div className="boxcar-container">
@@ -104,3 +105,4 @@ export default function CarsCollection() {
     </section>
   );
 }
+export default React.memo(CarsCollection);

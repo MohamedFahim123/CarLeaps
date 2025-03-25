@@ -1,6 +1,7 @@
 import Image from "next/image";
+import React from "react";
 
-export default function Banner() {
+function Banner() {
   return (
     <section className="blog-section-three">
       <div className="boxcar-container">
@@ -107,3 +108,4 @@ export default function Banner() {
     </section>
   );
 }
+export default React.memo(Banner);

@@ -1,4 +1,6 @@
-export default function Features() {
+import React from "react";
+
+function Features() {
   return (
     <section className="why-choose-us-section-five">
       <div className="boxcar-container">
@@ -263,3 +265,4 @@ export default function Features() {
     </section>
   );
 }
+export default React.memo(Features);

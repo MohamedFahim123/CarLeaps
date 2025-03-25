@@ -165,20 +165,20 @@ export default function Cars() {
                           style={{ height: "50px", width: "50px", margin: 0 }}
                         >
                           <Image
-                            src={car?.dealer?.image}
+                            src={car?.dealer?.dealer?.image}
                             width={25}
                             height={25}
-                            alt={car?.dealer?.name}
+                            alt={car?.dealer?.dealer?.name}
                             className="rounded-circle object-fit-contain w-100 h-100 mb-0"
                           />
                         </li>
                         <li className="d-flex flex-column justify-content-between align-items-start">
                           <span>Sold By</span>
                           <Link
-                            href={`/${currentRegion}/cars/dealer/${car?.dealer?.id}`}
+                            href={`/${currentRegion}/cars/dealer/${car?.dealer?.dealer?.id}`}
                             className="fw-bold fs-6 dealerNameInCarCard"
                           >
-                            {car?.dealer?.name}
+                            {car?.dealer?.dealer?.name}
                           </Link>
                         </li>
                       </ul>

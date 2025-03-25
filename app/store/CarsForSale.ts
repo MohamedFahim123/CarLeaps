@@ -6,12 +6,6 @@ import { baseUrl, MainRegionName } from "../utils/mainData";
 import { MakesCars } from "./makeCars";
 
 export interface CarDealerInterface {
-  id: number;
-  address: string;
-  bio: string;
-  phone: number;
-  image: string;
-  name: string;
   dealer: {
     id: number;
     name: string;

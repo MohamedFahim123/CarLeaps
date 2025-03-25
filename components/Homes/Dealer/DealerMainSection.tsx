@@ -19,7 +19,7 @@ const DealerMainSection = ({
               <li>
                 <Link href={`/`}>Home</Link>
               </li>
-              <li>{dealerItem.name}</li>
+              <li>{dealerItem?.dealer?.name}</li>
             </ul>
           </div>
           <div className="row">
@@ -30,13 +30,13 @@ const DealerMainSection = ({
                     <Image
                       width={100}
                       height={100}
-                      src={dealerItem.image}
-                      alt={dealerItem.name}
+                      src={dealerItem?.dealer?.image}
+                      alt={dealerItem?.dealer?.name}
                       className={`${styles.brandImage}`}
                     />
                   </div>
                   <div className="content-box">
-                    <h3 className="title">{dealerItem.name}</h3>
+                    <h3 className="title">{dealerItem?.dealer?.name}</h3>
                     <ul className="contact-list">
                       <li>
                         <span className="icon">
@@ -61,7 +61,7 @@ const DealerMainSection = ({
                             />
                           </svg>
                         </span>
-                        {dealerItem.address}
+                        {dealerItem?.dealer?.address}
                       </li>
                       <li>
                         <span className="icon">
@@ -88,8 +88,8 @@ const DealerMainSection = ({
                             />
                           </svg>
                         </span>
-                        <Link href={`tel:${dealerItem.phone}`}>
-                          {dealerItem.phone}
+                        <Link href={`tel:${dealerItem?.dealer?.phone}`}>
+                          {dealerItem?.dealer?.phone}
                         </Link>
                       </li>
                     </ul>
@@ -97,7 +97,7 @@ const DealerMainSection = ({
                 </div>
                 <div className="description-sec">
                   <h4 className="title">BIO</h4>
-                  <div className="text">{dealerItem.bio}</div>
+                  <div className="text">{dealerItem?.dealer?.bio}</div>
                 </div>
                 <div className="location-box">
                   <Location />
@@ -107,7 +107,7 @@ const DealerMainSection = ({
             <div className="col-xl-4 col-lg-12 col-md-12 col-sm-12">
               <div className="side-bar">
                 <Link
-                  href={`https://wa.me/${dealerItem.phone}`}
+                  href={`https://wa.me/${dealerItem?.dealer?.phone}`}
                   className="message"
                 >
                   Send WhatsApp Message
