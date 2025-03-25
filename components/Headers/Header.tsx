@@ -1,5 +1,6 @@
 "use client";
 
+import { useAdStatesStore } from "@/app/store/ad-states";
 import { useModelsStore } from "@/app/store/allModels";
 import { useTrimsStore } from "@/app/store/allTirms";
 import { useBodiesStore } from "@/app/store/bodies";
@@ -9,6 +10,8 @@ import { useConditionStore } from "@/app/store/conditions";
 import { useCountriesStore } from "@/app/store/countries";
 import { useFuelTypesStore } from "@/app/store/fuel-types";
 import { useProfileStore } from "@/app/store/profile";
+import { useResearchBoodiesStore } from "@/app/store/ResearchCarBoodies";
+import { useResearchCarsMakesStore } from "@/app/store/ResearchCarMakes";
 import { useTokenStore } from "@/app/store/Token";
 import { baseUrl, MainRegionName } from "@/app/utils/mainData";
 import { setRegionCookie } from "@/app/utils/setRegionCookie";
@@ -22,9 +25,6 @@ import { CiLogout } from "react-icons/ci";
 import { toast } from "react-toastify";
 import styles from "./headerStyles.module.css";
 import Nav from "./Nav";
-import { useResearchCarsMakesStore } from "@/app/store/ResearchCarMakes";
-import { useResearchBoodiesStore } from "@/app/store/ResearchCarBoodies";
-import { useAdStatesStore } from "@/app/store/ad-states";
 
 interface Header1Props {
   headerClass?: string;
@@ -38,26 +38,16 @@ export default function Header1({
   const pathName = usePathname();
   const router = useRouter();
   const [currRegion, setCurrRegion] = useState<string>(MainRegionName);
-  const { countries, getCountries, countriesLoading } = useCountriesStore();
-  const { token, clearToken, getToken, tokenLoading } = useTokenStore();
-  const { profile, getProfile, profileLoading } = useProfileStore();
-  const { models, getModels, modelsLoading } = useModelsStore();
-  const { trims, getTrims, trimsLoading } = useTrimsStore();
-  const { bodies, getBodies, bodiesLoading } = useBodiesStore();
-  const { condition, getCondition, conditionLoading } = useConditionStore();
-  const { cities, getCities, citiesLoading } = useCitiesStore();
-  const { fuelTypes, getFuelTypes, fuelTypesLoading } = useFuelTypesStore();
-  const { researchBoodies, researchBoodiesLoading, getResearchBoodies } =
-    useResearchBoodiesStore();
-  const { carsForSale, getCarsForSale, setRegion, carsForSaleLoading } =
-    useCarsForSaleStore();
-  const { adStates, getAdStates, adStatesLoading } = useAdStatesStore();
+  // ResearchPage Apis
   const {
     researchCarsMakes,
     getResearchCarsMakes,
     setResearchMakesRegion,
     researchCarsMakesLoading,
   } = useResearchCarsMakesStore();
+
+  const { researchBoodies, researchBoodiesLoading, getResearchBoodies } =
+    useResearchBoodiesStore();
 
   const getAllResearchBoodies = useCallback(() => {
     if (researchBoodies.length === 0 && !researchBoodiesLoading) {
@@ -75,6 +65,20 @@ export default function Header1({
     getAllResearchMakes();
     getAllResearchBoodies();
   }, [getAllResearchMakes, getAllResearchBoodies]);
+
+  // All WebsiteApis
+  const { countries, getCountries, countriesLoading } = useCountriesStore();
+  const { token, clearToken, getToken, tokenLoading } = useTokenStore();
+  const { profile, getProfile, profileLoading } = useProfileStore();
+  const { models, getModels, modelsLoading } = useModelsStore();
+  const { trims, getTrims, trimsLoading } = useTrimsStore();
+  const { bodies, getBodies, bodiesLoading } = useBodiesStore();
+  const { condition, getCondition, conditionLoading } = useConditionStore();
+  const { cities, getCities, citiesLoading } = useCitiesStore();
+  const { fuelTypes, getFuelTypes, fuelTypesLoading } = useFuelTypesStore();
+  const { carsForSale, getCarsForSale, setRegion, carsForSaleLoading } =
+    useCarsForSaleStore();
+  const { adStates, getAdStates, adStatesLoading } = useAdStatesStore();
 
   const getAllFuelTypes = useCallback(() => {
     if (fuelTypes.length === 0 && !fuelTypesLoading) {
@@ -154,6 +158,7 @@ export default function Header1({
     getAllConditions();
     getAllFuelTypes();
     getAllCities();
+
   }, [
     getAllBodiesCars,
     getAllFuelTypes,

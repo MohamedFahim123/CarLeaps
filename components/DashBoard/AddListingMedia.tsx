@@ -37,7 +37,7 @@ export default function AddListingMedia({
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setImages(reader.result as string); // Store Base64 URL
+        setImages(reader.result as string);
       };
       reader.readAsDataURL(file);
     }

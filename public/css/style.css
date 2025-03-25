@@ -10393,34 +10393,34 @@ Section Title
   margin-bottom: 57px;
 }
 
-.cars-section-four .form-box .form_boxes .drop-menu {
+.form-box .form_boxes .drop-menu {
   border: 1px solid #e1e1e1;
   border-radius: 120px;
   height: unset;
   margin-right: 10px;
 }
 
-.cars-section-four .form-box .form_boxes .drop-menu:active {
+.form-box .form_boxes .drop-menu:active {
   border-color: var(--theme-color-dark);
 }
 
-.cars-section-four .form-box .form_boxes .drop-menu .dropdown {
+.form-box .form_boxes .drop-menu .dropdown {
   background-color: var(--theme-color-light);
   -webkit-box-shadow: 30px 30px 60px 0px rgba(0, 0, 1, 0.05);
   box-shadow: 30px 30px 60px 0px rgba(0, 0, 1, 0.05);
 }
 
-.cars-section-four .form-box .form_boxes .drop-menu .select {
+.form-box .form_boxes .drop-menu .select {
   padding: 0 35px 0 25px;
   height: 48px;
   line-height: 48px;
 }
 
-.cars-section-four .form-box .form_boxes .drop-menu .select span {
+.form-box .form_boxes .drop-menu .select span {
   font-size: 15px;
 }
 
-.cars-section-four .form-box .form_boxes .drop-menu .select span i {
+.form-box .form_boxes .drop-menu .select span i {
   right: -11px;
 }
 
@@ -19567,15 +19567,12 @@ Section Title
   margin-top: 10px;
 }
 
-.dashboard-widget .content-column .inner-column .gallery-sec .attachment-sec {
+.gallery-sec .attachment-sec {
   margin-top: 23px;
   border-bottom: 1px solid #e1e1e1;
   padding-bottom: 21px;
 }
 
-.dashboard-widget
-  .content-column
-  .inner-column
   .gallery-sec
   .attachment-sec
   .text {
@@ -19584,9 +19581,6 @@ Section Title
   margin-top: 24px;
 }
 
-.dashboard-widget
-  .content-column
-  .inner-column
   .gallery-sec
   .attachment-sec
   .right-box-four {
@@ -19595,9 +19589,6 @@ Section Title
   display: flex;
 }
 
-.dashboard-widget
-  .content-column
-  .inner-column
   .gallery-sec
   .attachment-sec
   .right-box-four
@@ -19610,9 +19601,6 @@ Section Title
   margin-right: 30px;
 }
 
-.dashboard-widget
-  .content-column
-  .inner-column
   .gallery-sec
   .attachment-sec
   .right-box-four
@@ -19625,9 +19613,6 @@ Section Title
   display: inline-block;
 }
 
-.dashboard-widget
-  .content-column
-  .inner-column
   .gallery-sec
   .attachment-sec
   .right-box-four
@@ -19644,9 +19629,6 @@ Section Title
   justify-content: center;
 }
 
-.dashboard-widget
-  .content-column
-  .inner-column
   .gallery-sec
   .attachment-sec
   .right-box-four
@@ -19668,9 +19650,6 @@ Section Title
   margin-right: 0;
 }
 
-.dashboard-widget
-  .content-column
-  .inner-column
   .gallery-sec
   .attachment-sec
   .right-box-four
@@ -19704,9 +19683,6 @@ Section Title
   text-align: center;
 }
 
-.dashboard-widget
-  .content-column
-  .inner-column
   .gallery-sec
   .attachment-sec
   .right-box-four
@@ -19719,9 +19695,6 @@ Section Title
   transform: translate(-50%, -50%);
 }
 
-.dashboard-widget
-  .content-column
-  .inner-column
   .gallery-sec
   .attachment-sec
   .right-box-four
@@ -20603,9 +20576,6 @@ Section Title
   margin-top: 10px;
 }
 
-.dashboard-widget-two
-  .content-column
-  .inner-column
   .gallery-sec
   .attachment-sec {
   margin-top: 23px;
@@ -20613,9 +20583,6 @@ Section Title
   padding-bottom: 21px;
 }
 
-.dashboard-widget-two
-  .content-column
-  .inner-column
   .gallery-sec
   .attachment-sec
   .text {
@@ -20624,9 +20591,6 @@ Section Title
   margin-top: 24px;
 }
 
-.dashboard-widget-two
-  .content-column
-  .inner-column
   .gallery-sec
   .attachment-sec
   .right-box-four {
@@ -20635,9 +20599,6 @@ Section Title
   display: flex;
 }
 
-.dashboard-widget-two
-  .content-column
-  .inner-column
   .gallery-sec
   .attachment-sec
   .right-box-four
@@ -20650,9 +20611,6 @@ Section Title
   margin-right: 30px;
 }
 
-.dashboard-widget-two
-  .content-column
-  .inner-column
   .gallery-sec
   .attachment-sec
   .right-box-four
@@ -20665,9 +20623,6 @@ Section Title
   display: inline-block;
 }
 
-.dashboard-widget-two
-  .content-column
-  .inner-column
   .gallery-sec
   .attachment-sec
   .right-box-four
@@ -20684,9 +20639,6 @@ Section Title
   justify-content: center;
 }
 
-.dashboard-widget-two
-  .content-column
-  .inner-column
   .gallery-sec
   .attachment-sec
   .right-box-four
@@ -20696,9 +20648,6 @@ Section Title
   margin-right: 12px;
 }
 
-.dashboard-widget-two
-  .content-column
-  .inner-column
   .gallery-sec
   .attachment-sec
   .right-box-four
@@ -20708,9 +20657,6 @@ Section Title
   margin-right: 0;
 }
 
-.dashboard-widget-two
-  .content-column
-  .inner-column
   .gallery-sec
   .attachment-sec
   .right-box-four
@@ -20728,9 +20674,6 @@ Section Title
   display: inline-block;
 }
 
-.dashboard-widget-two
-  .content-column
-  .inner-column
   .gallery-sec
   .attachment-sec
   .right-box-four
@@ -20744,9 +20687,6 @@ Section Title
   text-align: center;
 }
 
-.dashboard-widget-two
-  .content-column
-  .inner-column
   .gallery-sec
   .attachment-sec
   .right-box-four
@@ -20759,9 +20699,6 @@ Section Title
   transform: translate(-50%, -50%);
 }
 
-.dashboard-widget-two
-  .content-column
-  .inner-column
   .gallery-sec
   .attachment-sec
   .right-box-four
@@ -28717,7 +28654,7 @@ Chat Widget
   border-bottom: 1px solid #e1e1e1;
 }
 
-.login-section form .form_boxes {
+form .form_boxes {
   border-radius: 12px;
   border: 1px solid rgb(225, 225, 225);
   background: var(--color-white, #fff);
@@ -28726,32 +28663,32 @@ Chat Widget
   width: 100%;
 }
 
-.login-section form .form_boxes textarea {
+form .form_boxes textarea {
   width: 100%;
   height: 200px;
 }
 
-.login-section form .form_boxes textarea::-webkit-input-placeholder {
+form .form_boxes textarea::-webkit-input-placeholder {
   color: var(--theme-color-dark);
 }
 
-.login-section form .form_boxes textarea::-moz-placeholder {
+form .form_boxes textarea::-moz-placeholder {
   color: var(--theme-color-dark);
 }
 
-.login-section form .form_boxes textarea:-ms-input-placeholder {
+form .form_boxes textarea:-ms-input-placeholder {
   color: var(--theme-color-dark);
 }
 
-.login-section form .form_boxes textarea::-ms-input-placeholder {
+form .form_boxes textarea::-ms-input-placeholder {
   color: var(--theme-color-dark);
 }
 
-.login-section form .form_boxes textarea::placeholder {
+form .form_boxes textarea::placeholder {
   color: var(--theme-color-dark);
 }
 
-.login-section form .form_boxes label {
+form .form_boxes label {
   display: block;
   color: #818181;
   font-size: 15px;
@@ -29085,7 +29022,7 @@ Chat Widget
   margin-bottom: 20px;
 }
 
-.cars-section-four .form-box .form_boxes .drop-menu {
+.form-box .form_boxes .drop-menu {
   margin-bottom: 10px;
 }
 
@@ -29397,9 +29334,6 @@ Chat Widget
     margin-right: 20px;
   }
 
-  .dashboard-widget
-    .content-column
-    .inner-column
     .gallery-sec
     .attachment-sec
     .right-box-four {
@@ -29407,9 +29341,6 @@ Chat Widget
     flex-wrap: wrap;
   }
 
-  .dashboard-widget
-    .content-column
-    .inner-column
     .gallery-sec
     .attachment-sec
     .right-box-four
@@ -29711,9 +29642,6 @@ Chat Widget
     flex-wrap: wrap;
   }
 
-  .dashboard-widget
-    .content-column
-    .inner-column
     .gallery-sec
     .right-box-three
     .gallery-box
@@ -29722,9 +29650,6 @@ Chat Widget
     margin-bottom: 30px;
   }
 
-  .dashboard-widget
-    .content-column
-    .inner-column
     .gallery-sec
     .attachment-sec
     .right-box-four
@@ -29811,7 +29736,7 @@ Chat Widget
     bottom: -15px;
   }
 
-  .cars-section-four .form-box .form_boxes .drop-menu {
+  .form-box .form_boxes .drop-menu {
     margin-bottom: 10px;
   }
 
@@ -30858,9 +30783,6 @@ Chat Widget
     width: 100%;
   }
 
-  .dashboard-widget
-    .content-column
-    .inner-column
     .gallery-sec
     .attachment-sec
     .right-box-four
