@@ -33,7 +33,6 @@ export default function BrandsBanner({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [brand.models]);
 
-  console.log(brand)
 
   return (
     <div className={styles.brandsBannerSection}>

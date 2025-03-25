@@ -38,7 +38,7 @@ export default function BrandsMainPage({ brandId }: { brandId: number }) {
           />
           <BrandsBanner currRegion={currRegion || MainRegionName} brand={selectedBrand} />
           <IncentivesSection currRegion={currRegion || MainRegionName}  brand={selectedBrand} />
-          <AboutBrand brand={selectedBrand} />
+          <AboutBrand currRegion={currRegion || MainRegionName} brand={selectedBrand} />
           <BrandsChooseUs brand={selectedBrand} />
           <BrandsSpecialSection />
           <AllCurrentModels brand={selectedBrand} />

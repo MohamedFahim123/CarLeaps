@@ -10,7 +10,6 @@ const DealerMainSection = ({
 }: {
   dealerItem: CarDealerInterface;
 }) => {
-  console.log(dealerItem);
   return (
     <section className="dealer-ship-section-two layout-radius mt-1">
       <div className="barnd-box">

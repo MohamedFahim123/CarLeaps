@@ -144,7 +144,6 @@ export default function ShopList() {
     handleSubmit();
   }, [handleSubmit]);
 
-  console.log(currentCars);
 
   return (
     <section className={`cars-section-fourteen layout-radius`}>

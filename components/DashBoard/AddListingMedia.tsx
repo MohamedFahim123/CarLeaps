@@ -52,7 +52,6 @@ export default function AddListingMedia({
   ) => {
     const file: File | null = e?.target?.files?.[0] ? e.target.files[0] : null;
 
-    console.log(file);
 
     if (!file) return;
 
@@ -71,7 +70,6 @@ export default function AddListingMedia({
       });
     };
 
-    console.log(images2);
 
     reader.readAsDataURL(file);
   };

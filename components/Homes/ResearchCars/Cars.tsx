@@ -1,4 +1,5 @@
 "use client";
+import { useResearchCarsMakesStore } from "@/app/store/ResearchCarMakes";
 import { Car, carData } from "@/data/cars";
 import Image from "next/image";
 import Link from "next/link";
@@ -16,6 +17,7 @@ export default function Cars() {
     isActive: boolean;
   }>(buttons[0]);
   const [sortedItems, setSortedItems] = useState<Car[]>([...carData]);
+  const {currRegion} = useResearchCarsMakesStore();
   useEffect(() => {
     setSortedItems([
       ...carData.filter((elm) =>
@@ -28,7 +30,7 @@ export default function Cars() {
     <section className="cars-section-four bg-1">
       <div className="boxcar-container">
         <div className="boxcar-title wow fadeInUp">
-          <h2>Explore All Vehicles</h2>
+          <h2>Authorized New Cars Available Today In {currRegion}</h2>
           <Link href={`/inventory-list-01`} className="btn-title">
             View All
             <svg

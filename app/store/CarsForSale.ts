@@ -6,23 +6,30 @@ import { baseUrl, MainRegionName } from "../utils/mainData";
 import { MakesCars } from "./makeCars";
 
 export interface CarDealerInterface {
-  id: number;
-  name: string;
-  email: string;
-  phone: string;
-  whatsapp: string;
-  bio: string;
   address: string;
-  sales_hours: string;
-  status: string;
-  type: string;
-  country_id: number;
-  country_name: string;
-  locale: string;
-  cover: string;
+  bio: string;
+  phone: number;
   image: string;
-  documents: string[];
-  cars: Car[];
+  name: string;
+  dealer: {
+    id: number;
+    name: string;
+    email: string;
+    phone: string;
+    whatsapp: string;
+    bio: string;
+    address: string;
+    sales_hours: string;
+    status: string;
+    type: string;
+    country_id: number;
+    country_name: string;
+    locale: string;
+    cover: string;
+    image: string;
+    documents: string[];
+    cars: Car[];
+  };
 }
 
 export interface CarFeatures {

@@ -1,100 +1,104 @@
 "use client";
-import { useResearchBoodiesStore } from "@/app/store/ResearchCarBoodies";
-import { cars } from "@/data/categories";
+import { useResearchFeatruedItemsStore } from "@/app/store/ResearchCarsFeaturedItems";
+import { debounce } from "@/app/utils/debounce";
 import Image from "next/image";
-import Link from "next/link";
-import Slider from "react-slick";
+import { useEffect, useMemo, useState } from "react";
+import styles from "./brandsStyles.module.css";
+
+import { Navigation } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 export default function Categories() {
-  const slickOptions = {
-    infinite: false,
-    slidesToShow: 5,
-    slidesToScroll: 1,
-    dots: false,
-    arrows: true,
-    responsive: [
-      {
-        breakpoint: 1600,
-        settings: {
-          slidesToShow: 4,
-          slidesToScroll: 1,
-          infinite: true,
-        },
-      },
-      {
-        breakpoint: 1300,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 1,
-          infinite: true,
-        },
-      },
-      {
-        breakpoint: 991,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-          infinite: true,
-        },
-      },
-      {
-        breakpoint: 767,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 576,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
-  const { researchBoodies } = useResearchBoodiesStore();
+  const [tabs, setTabs] = useState<string[]>([]);
+  const [activeTab, setActiveTab] = useState<string>("");
+
+  const { featuredItems, featuredItemsLoading, getFeaturedItems } =
+    useResearchFeatruedItemsStore();
+
+  const currItems = useMemo(() => {
+    return featuredItems?.find((item) => item?.name === activeTab)?.items || [];
+  }, [featuredItems, activeTab]);
+
+  useEffect(() => {
+    if (featuredItems.length === 0 && !featuredItemsLoading) {
+      getFeaturedItems();
+    }
+  }, [featuredItems.length, featuredItemsLoading, getFeaturedItems]);
+
+  useEffect(() => {
+    if (featuredItems.length > 0 && tabs.length === 0) {
+      const newAllTabs = featuredItems.map((item) => item.name);
+      setTabs(newAllTabs);
+      setActiveTab(newAllTabs[0]);
+    }
+  }, [featuredItems, tabs.length]);
+
+  const handleChangeActiveTab = useMemo(
+    () => debounce((tab: string) => setActiveTab(tab), 300),
+    []
+  );
 
   return (
     <section className="category-section">
       <div className="large-container">
         <h2 className="title">A Vehicle For Every Lifestyle</h2>
         <div className="nav nav-tabs cate-nav-tab">
-          {researchBoodies?.map((body) => (
-            <button title={body.name} className="nav-link" key={body?.id}>
-              {body.name}
+          {tabs?.map((tab) => (
+            <button
+              title={tab}
+              onClick={() => handleChangeActiveTab(tab)}
+              className={`nav-link ${tab === activeTab && styles.activeTab}`}
+              key={tab}
+            >
+              {tab}
             </button>
           ))}
         </div>
         <div className="tab-content wow fadeInUp">
           <div className="tab-pane fade show" style={{ display: "block" }}>
-            <Slider
-              {...slickOptions}
+            <Swiper
+              modules={[Navigation]}
+              spaceBetween={20}
+              slidesPerView={5}
+              navigation
+              breakpoints={{
+                1600: {
+                  slidesPerView: 4,
+                },
+                1300: {
+                  slidesPerView: 3,
+                },
+                991: {
+                  slidesPerView: 2,
+                },
+                767: {
+                  slidesPerView: 1,
+                },
+                576: {
+                  slidesPerView: 1,
+                },
+                480: {
+                  slidesPerView: 1,
+                },
+              }}
               className="wrap-slider-car car-slider-three relative w-100"
             >
-              {cars.map((car, index) => (
-                <div className="box-cate-car" key={index}>
-                  <Link href={car.href} className="car-image-home-9">
-                    <Image
-                      alt={car.name}
-                      src={car.src}
-                      width={car.width}
-                      height={car.height}
-                    />
-                  </Link>
-                  <Link href={car.href} className="name">
-                    {car.name}
-                  </Link>
-                </div>
+              {currItems?.map((item) => (
+                <SwiperSlide key={item.id}>
+                  <div className="box-cate-car">
+                    <span className="car-image-home-9">
+                      <Image
+                        alt={item.name}
+                        src={item.image}
+                        width={200}
+                        height={100}
+                      />
+                    </span>
+                    <span className="name">{item.name}</span>
+                  </div>
+                </SwiperSlide>
               ))}
-            </Slider>
+            </Swiper>
           </div>
         </div>
       </div>

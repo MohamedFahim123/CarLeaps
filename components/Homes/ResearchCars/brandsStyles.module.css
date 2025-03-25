@@ -9,3 +9,6 @@
     margin: 0 !important;
     cursor: pointer;
 }
+.activeTab {
+    border: 1px solid #fff !important;
+}

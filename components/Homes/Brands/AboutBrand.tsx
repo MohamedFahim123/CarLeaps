@@ -2,16 +2,28 @@
 
 import { ResearchCarsMakes } from "@/app/store/ResearchCarMakes";
 import styles from "./Brands.module.css";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination } from "swiper/modules";
+import Image from "next/image";
+import Link from "next/link";
 
-export default function AboutBrand({ brand }: { brand: ResearchCarsMakes }) {
+export default function AboutBrand({
+  brand,
+  currRegion,
+}: {
+  currRegion: string;
+  brand: ResearchCarsMakes;
+}) {
   return (
     <div className={`${styles.bgBlack} text-white py-5`}>
       <div className="container">
-        <p className="text-light">About {brand.name}</p>
+        <p className="text-light">
+        Authorized Dealers
+        </p>
         <h2 className="text-light mb-4">
-          Master the road with driving pleasure
+        {brand.name} Authorized Dealers in {currRegion}
         </h2>
-        {/* <Swiper
+        <Swiper
           modules={[Pagination, Autoplay]}
           pagination={{ clickable: true }}
           autoplay={{ delay: 3000, disableOnInteraction: false }}
@@ -24,24 +36,40 @@ export default function AboutBrand({ brand }: { brand: ResearchCarsMakes }) {
           spaceBetween={30}
           className="features-slider"
         >
-          {brand.features.map((feature, index) => (
-            <SwiperSlide key={index}>
-              <div className="card bg-dark text-white border-0 h-auto mb-4 shadow-none">
+          {brand.dealers.map((dealer) => (
+            <SwiperSlide key={dealer.dealer.id}>
+              <div className="card border-0 h-auto mb-4 shadow-none">
                 <Image
-                  src={feature.image}
+                  src={dealer.dealer.image}
                   className="card-img-top"
-                  alt={feature.title}
+                  alt={dealer.dealer.name}
                   width={300}
                   height={100}
+                  style={{ objectFit: "contain", height: "300px" }}
                 />
                 <div className="card-body">
-                  <h5 className="card-title">{feature.title}</h5>
-                  <p className="card-text text-light">{feature.description}</p>
+                  {dealer.dealer.cover !== "N/A" && (
+                    <Image
+                      src={dealer.dealer.cover}
+                      alt={dealer.dealer.name + " cover"}
+                      width={100}
+                      height={100}
+                      className={"rounded-circle"}
+                    />
+                  )}
+                  <h5 className="card-title text-dark">{dealer.dealer.name}</h5>
+                  <p className="card-text text-dark">{dealer.dealer.bio}</p>
+                  <Link
+                    href={`/${currRegion}/cars/dealer/${dealer.dealer.id}`}
+                    className="btn btn-outline-dark text-capitalize"
+                  >
+                    View Profile
+                  </Link>
                 </div>
               </div>
             </SwiperSlide>
           ))}
-        </Swiper> */}
+        </Swiper>
         <div className="d-flex justify-content-center mt-4">
           <button className="btn btn-light me-3">Build & price →</button>
           <button className="btn btn-outline-light">Learn more →</button>
