@@ -7,7 +7,6 @@ import { useTokenStore } from "@/app/store/Token";
 import { useYearsStore } from "@/app/store/years";
 import { baseUrl } from "@/app/utils/mainData";
 import axios from "axios";
-import Image from "next/image";
 import React, { useCallback, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
@@ -21,19 +20,16 @@ interface FormIDefaultValues {
   model_id: string;
   year_id: string;
   city_id: string;
-  image: File[];
-  history?: File;
 }
 
-const SellYourCarForm = () => {
+const FindCarForm = () => {
   const {
     register,
     handleSubmit,
     setError,
-    reset,
-    clearErrors,
     formState: { errors, isSubmitting },
     watch,
+    reset,
     setValue,
   } = useForm<FormIDefaultValues>();
 
@@ -112,92 +108,12 @@ const SellYourCarForm = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [watch("make_id")]);
 
-  const [images, setImages] = useState<string[]>([]);
-  const handleImageChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => {
-    const file: File | null = e?.target?.files?.[0] ? e.target.files[0] : null;
-
-    if (!file) return;
-
-    const currentImages = watch("image") ?? [];
-
-    setValue("image", [...currentImages, file]);
-
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setImages((prevImages) => {
-        const newImages = [...prevImages];
-        newImages[index] = file.name as string;
-        return newImages;
-      });
-    };
-
-    reader.readAsDataURL(file);
-  };
-  const handleDelete = (index: number) => {
-    setImages((prevImages) => {
-      const updatedImages = prevImages.filter(
-        (_, imgIndex) => imgIndex !== index
-      );
-
-      const currentImages = watch("image") ?? [];
-      const updatedFormImages = currentImages.filter(
-        (_, imgIndex) => imgIndex !== index
-      );
-      setValue("image", updatedFormImages);
-
-      return updatedImages;
-    });
-  };
-
-  const [images2, setImages2] = useState<string>("");
-  const handleImageChange2 = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-
-    setValue("history", file);
-
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImages2(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-  const handleDelete2 = () => {
-    setImages2("");
-  };
-
-  useEffect(() => {
-    if (watch("history") && errors.history) {
-      clearErrors("history");
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [watch("history"), errors.history]);
-
   const onSubmit: SubmitHandler<FormIDefaultValues> = async (data) => {
     const toastId = toast.loading("Loading...");
-    const formData = new FormData();
-
-    Object.keys(data).forEach((key) => {
-      const value = data[key as keyof FormIDefaultValues];
-
-      if (Array.isArray(value)) {
-        value.forEach((item) => formData.append(`${key}[]`, item));
-      } else if (value instanceof FileList) {
-        Array.from(value).forEach((file) => formData.append(key, file));
-      } else if (value instanceof File) {
-        formData.append(key, value);
-      } else if (value !== undefined && value !== null) {
-        formData.append(key, value.toString());
-      }
-    });
     try {
-      const res = await axios.post(`${baseUrl}/sell-car`, formData, {
+      const res = await axios.post(`${baseUrl}/find-car`, data, {
         headers: {
-          "Content-Type": "multipart/form-data",
+          "Content-Type": "application/json",
           Accept: "application/json",
           Authorization: `Bearer ${token}`,
         },
@@ -208,7 +124,7 @@ const SellYourCarForm = () => {
         isLoading: false,
         autoClose: 5000,
       });
-      reset();
+      reset()
     } catch (error) {
       toast.dismiss(toastId);
 
@@ -421,157 +337,6 @@ const SellYourCarForm = () => {
             )}
           </div>
         </div>
-        <div className="form-column col-lg-12 tab-pane gallery-sec px-4 mx-1">
-          <div className="attachment-sec">
-            <h6 className="title">Gallery</h6>
-            {errors.image && (
-              <span className="text-danger">{errors.image.message}</span>
-            )}
-            <div className="right-box-four row gap-2">
-              {images.map((imgSrc, index) => (
-                <div
-                  key={index}
-                  className="report-box col-lg-3 col-md-6 col-sm-12"
-                >
-                  <span>{imgSrc.slice(0, 15) + "..."}</span>
-                  <ul className="social-icon">
-                    <li>
-                      <a onClick={() => handleDelete(index)}>
-                        <Image
-                          width={18}
-                          height={18}
-                          src="/images/resource/delet.svg"
-                          alt=""
-                        />
-                      </a>
-                    </li>
-                    <li>
-                      <label
-                        style={{ cursor: "pointer" }}
-                        htmlFor={`addListing-image-upload-${index}`}
-                      >
-                        <a>
-                          <Image
-                            width={18}
-                            height={18}
-                            src="/images/resource/delet1-1.svg"
-                            alt="Upload"
-                          />
-                        </a>
-                      </label>
-                      <input
-                        id={`addListing-image-upload-${index}`}
-                        type="file"
-                        onChange={(e) => handleImageChange(e, index)}
-                        style={{ display: "none" }}
-                      />
-                    </li>
-                  </ul>
-                </div>
-              ))}
-              <div className="uplode-box col-lg-3 col-md-6 col-sm-12">
-                <div className="content-box">
-                  <label
-                    style={{ cursor: "pointer" }}
-                    htmlFor="addListing-image-upload-new2"
-                  >
-                    <Image
-                      width={34}
-                      height={34}
-                      src="/images/resource/uplode.svg"
-                      alt="Upload"
-                    />
-                    <span>Upload</span>
-                  </label>
-                  <input
-                    id="addListing-image-upload-new2"
-                    type="file"
-                    style={{ display: "none" }}
-                    onChange={(e) => handleImageChange(e, images.length)}
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="text">
-              Max file size is 1MB, Minimum dimension: 330x300 And Suitable
-              files are .jpg &amp; .png
-            </div>
-          </div>
-          <div className="attachment-sec">
-            <h6 className="title fw-semibold">
-              Car History <small className="fs-6">(optional)</small>
-            </h6>
-            {errors.history && (
-              <span className="text-danger">{errors.history.message}</span>
-            )}
-            <div className="right-box-four row gap-2">
-              {images2 && (
-                <div className="report-box col-lg-3 col-md-6 col-sm-12">
-                  <span>{images2.slice(0, 15) + "..."}</span>
-                  <ul className="social-icon">
-                    <li>
-                      <a onClick={() => handleDelete2()}>
-                        <Image
-                          width={18}
-                          height={18}
-                          src="/images/resource/delet.svg"
-                          alt=""
-                        />
-                      </a>
-                    </li>
-                    <li>
-                      <label
-                        style={{ cursor: "pointer" }}
-                        htmlFor={`addListing-history-upload2`}
-                      >
-                        <a>
-                          <Image
-                            width={18}
-                            height={18}
-                            src="/images/resource/delet1-1.svg"
-                            alt="Upload"
-                          />
-                        </a>
-                      </label>
-                      <input
-                        id={`addListing-history-upload2`}
-                        type="file"
-                        accept=".pdf,.doc,.docx"
-                        onChange={(e) => handleImageChange2(e)}
-                        style={{ display: "none" }}
-                      />
-                    </li>
-                  </ul>
-                </div>
-              )}
-              <div className="uplode-box col-lg-3 col-md-6 col-sm-12">
-                <div className="content-box">
-                  <label
-                    style={{ cursor: "pointer" }}
-                    htmlFor="addListing-history-new-upload2"
-                  >
-                    <Image
-                      width={34}
-                      height={34}
-                      src="/images/resource/uplode.svg"
-                      alt="Upload"
-                    />
-                    <span>Upload</span>
-                  </label>
-                  <input
-                    id="addListing-history-new-upload2"
-                    type="file"
-                    style={{ display: "none" }}
-                    onChange={(e) => handleImageChange2(e)}
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="text">
-              Max file size is 5MB,only docs files (pdf,doc,docx)
-            </div>
-          </div>
-        </div>
         <div className="col-12 my-3">
           <button
             type="submit"
@@ -587,4 +352,4 @@ const SellYourCarForm = () => {
   );
 };
 
-export default React.memo(SellYourCarForm);
+export default React.memo(FindCarForm);
