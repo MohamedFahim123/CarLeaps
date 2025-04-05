@@ -8,9 +8,9 @@ import { useCarsForSaleStore } from "@/app/store/CarsForSale";
 import { useCitiesStore } from "@/app/store/Cities";
 import { useConditionStore } from "@/app/store/conditions";
 import { useCountriesStore } from "@/app/store/countries";
+import { useCPOCarsMakesStore } from "@/app/store/cpoMakes";
 import { useFuelTypesStore } from "@/app/store/fuel-types";
 import { useProfileStore } from "@/app/store/profile";
-import { useResearchBoodiesStore } from "@/app/store/ResearchCarBoodies";
 import { useResearchCarsMakesStore } from "@/app/store/ResearchCarMakes";
 import { useTokenStore } from "@/app/store/Token";
 import { baseUrl, MainRegionName } from "@/app/utils/mainData";
@@ -46,15 +46,6 @@ export default function Header1({
     researchCarsMakesLoading,
   } = useResearchCarsMakesStore();
 
-  const { researchBoodies, researchBoodiesLoading, getResearchBoodies } =
-    useResearchBoodiesStore();
-
-  const getAllResearchBoodies = useCallback(() => {
-    if (researchBoodies.length === 0 && !researchBoodiesLoading) {
-      getResearchBoodies();
-    }
-  }, [getResearchBoodies, researchBoodiesLoading, researchBoodies]);
-
   const getAllResearchMakes = useCallback(() => {
     if (researchCarsMakes.length === 0 && !researchCarsMakesLoading) {
       getResearchCarsMakes();
@@ -63,8 +54,17 @@ export default function Header1({
 
   useEffect(() => {
     getAllResearchMakes();
-    getAllResearchBoodies();
-  }, [getAllResearchMakes, getAllResearchBoodies]);
+  }, [getAllResearchMakes]);
+
+  // CPO Apis
+  const { CPOCarsMakes, getCPOCarsMakes, CPOCarsMakesLoading } =
+    useCPOCarsMakesStore();
+
+  const getAllCPOCarsMakes = useCallback(() => {
+    if (CPOCarsMakes.length === 0 && !CPOCarsMakesLoading) {
+      getCPOCarsMakes();
+    }
+  }, [getCPOCarsMakes, CPOCarsMakesLoading, CPOCarsMakes]);
 
   // All WebsiteApis
   const { countries, getCountries, countriesLoading } = useCountriesStore();
@@ -158,9 +158,10 @@ export default function Header1({
     getAllConditions();
     getAllFuelTypes();
     getAllCities();
-
+    getAllCPOCarsMakes();
   }, [
     getAllBodiesCars,
+    getAllCPOCarsMakes,
     getAllFuelTypes,
     getAllConditions,
     getAllCountries,

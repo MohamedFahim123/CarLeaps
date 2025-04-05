@@ -7,7 +7,11 @@ import ModalVideo from "react-modal-video";
 import { Gallery, Item } from "react-photoswipe-gallery";
 import styles from "./modelStyle.module.css";
 
-export default function GallerySection({ model }: { model: ModelsDetailsInterface }) {
+export default function GallerySection({
+  model,
+}: {
+  model: ModelsDetailsInterface;
+}) {
   const [isOpen, setOpen] = useState<boolean>(false);
 
   return (
@@ -24,16 +28,16 @@ export default function GallerySection({ model }: { model: ModelsDetailsInterfac
                       <div className="image-box">
                         <figure className="image">
                           <Item
-                            original="/images/resource/inventory1-1.jpg"
-                            thumbnail="/images/resource/inventory1-1.jpg"
+                            original={model.gallery[0].image}
+                            thumbnail={model.gallery[0].image}
                             width={805}
                             height={550}
                           >
                             {({ ref, open }) => (
                               <a onClick={open}>
                                 <Image
-                                  alt=""
-                                  src="/images/resource/inventory1-1.jpg"
+                                  alt="main Image"
+                                  src={model.gallery[0].image}
                                   width={805}
                                   height={550}
                                   ref={ref}
@@ -52,8 +56,8 @@ export default function GallerySection({ model }: { model: ModelsDetailsInterfac
                           <div className="image-box">
                             <figure className="image">
                               <Item
-                                original="/images/resource/car-single-1.png"
-                                thumbnail="/images/resource/car-single-1.png"
+                                original={model.gallery[1].image}
+                                thumbnail={model.gallery[1].image}
                                 width={285}
                                 height={269}
                               >
@@ -62,7 +66,7 @@ export default function GallerySection({ model }: { model: ModelsDetailsInterfac
                                     <Image
                                       ref={ref}
                                       alt=""
-                                      src="/images/resource/inventory1-2.jpg"
+                                      src={model.gallery[1].image}
                                       width={285}
                                       height={269}
                                     />
@@ -78,8 +82,8 @@ export default function GallerySection({ model }: { model: ModelsDetailsInterfac
                           <div className="image-box">
                             <figure className="image">
                               <Item
-                                original="/images/resource/car-single-2.png"
-                                thumbnail="/images/resource/car-single-2.png"
+                                original={model?.gallery[2]?.image}
+                                thumbnail={model?.gallery[2]?.image}
                                 width={285}
                                 height={269}
                               >
@@ -88,7 +92,7 @@ export default function GallerySection({ model }: { model: ModelsDetailsInterfac
                                     <Image
                                       ref={ref}
                                       alt=""
-                                      src="/images/resource/inventory1-3.png"
+                                      src={model?.gallery[2]?.image}
                                       width={285}
                                       height={269}
                                     />
@@ -104,20 +108,19 @@ export default function GallerySection({ model }: { model: ModelsDetailsInterfac
                           <div className="image-box">
                             <figure className="image">
                               <Item
-                                original="/images/resource/car-single-3.png"
-                                thumbnail="/images/resource/car-single-3.png"
+                                original={model?.gallery[3]?.image}
+                                thumbnail={model?.gallery[3]?.image}
                                 width={285}
                                 height={269}
                               >
                                 {({ ref, open }) => (
                                   <a
-                                    href="/images/resource/car-single-3.png"
                                     onClick={open}
                                   >
                                     <Image
                                       ref={ref}
                                       alt=""
-                                      src="/images/resource/inventory1-4.jpg"
+                                      src={model?.gallery[3]?.image}
                                       width={285}
                                       height={269}
                                     />
@@ -133,8 +136,8 @@ export default function GallerySection({ model }: { model: ModelsDetailsInterfac
                           <div className="image-box">
                             <figure className="image">
                               <Item
-                                original="/images/resource/car-single-4.png"
-                                thumbnail="/images/resource/car-single-4.png"
+                                original={model?.gallery[4]?.image}
+                                thumbnail={model?.gallery[4]?.image}
                                 width={285}
                                 height={269}
                               >
@@ -143,7 +146,7 @@ export default function GallerySection({ model }: { model: ModelsDetailsInterfac
                                     <Image
                                       ref={ref}
                                       alt=""
-                                      src="/images/resource/inventory1-5.png"
+                                      src={model?.gallery[4]?.image}
                                       width={285}
                                       height={269}
                                     />

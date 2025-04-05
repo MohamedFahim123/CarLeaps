@@ -33,19 +33,19 @@ export default function ModelHeroSection({
         <nav className={`${styles.breadcrumb} position-relative z-1`}>
           <Link
             href={`/${region}/cars/home`}
-            className="breadcrumb-item active ms-1"
+            className={`${styles.linkNavBreadCrumb} breadcrumb-item active ms-1`}
           >
             Home /
           </Link>
           <Link
             href={`/${region}/cars/${model.make_id}`}
-            className="breadcrumb-item active ms-1"
+            className={`${styles.linkNavBreadCrumb} breadcrumb-item active ms-1`}
           >
             {model.make} /
           </Link>
           <Link
             href={`/${region}/cars/${model.make_id}/${model.id}`}
-            className="breadcrumb-item active ms-1"
+            className={`${styles.linkNavBreadCrumb} breadcrumb-item active ms-1`}
           >
             {model.name}
           </Link>

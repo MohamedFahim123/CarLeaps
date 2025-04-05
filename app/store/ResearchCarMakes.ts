@@ -30,8 +30,11 @@ export interface ModelsDetailsInterface {
   make: string;
   image: string;
   cover: string;
+  start_price: number;
+  end_price: number;
   status: string;
   specifications: ModelSpecification[];
+  gallery: { id: number; model_id: number; model: string; image: string }[];
   trims: TrimsDetailsInterface[];
 }
 

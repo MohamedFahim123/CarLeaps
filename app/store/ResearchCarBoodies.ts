@@ -2,16 +2,27 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { create } from "zustand";
 import { baseUrl, MainRegionName } from "../utils/mainData";
-import { useResearchCarsMakesStore } from "./ResearchCarMakes";
+import {
+  ModelsDetailsInterface,
+  useResearchCarsMakesStore,
+} from "./ResearchCarMakes";
 
 export interface ResearchBoodies {
   id: number;
   name: string;
   image: string;
+  models: {
+    body: {
+      id: number;
+      name: string;
+      image: string;
+    };
+    models: ModelsDetailsInterface[];
+  }[];
 }
 
 export interface UseResearchBoodiesStoreIterface {
-  researchBoodies: ResearchBoodies[];
+  researchBoodies: ResearchBoodies | null;
   researchBoodiesError: unknown;
   researchBoodiesLoading: boolean;
   hasFetchError: boolean;
@@ -23,14 +34,14 @@ const CACHE_EXPIRATION_TIME: number = 15 * 60 * 1000;
 
 export const useResearchBoodiesStore = create<UseResearchBoodiesStoreIterface>(
   (set, get) => ({
-    researchBoodies: [],
+    researchBoodies: null,
     researchBoodiesError: null,
     researchBoodiesLoading: false,
     hasFetchError: false,
 
     getResearchBoodies: async () => {
       const { hasFetchError } = get();
-      const { currRegion } = useResearchCarsMakesStore.getState();
+      const { currRegion, selectedMake } = useResearchCarsMakesStore.getState();
       const currentTime: number = new Date().getTime();
 
       if (hasFetchError) {
@@ -45,8 +56,9 @@ export const useResearchBoodiesStore = create<UseResearchBoodiesStoreIterface>(
       set({ researchBoodiesLoading: true });
 
       try {
-        const res = await axios.get(
+        const res = await axios.post(
           `${baseUrl}/research-bodies?t=${currentTime}`,
+          { make_id: selectedMake?.id },
           {
             headers: {
               "Content-Type": "application/json",
@@ -67,7 +79,7 @@ export const useResearchBoodiesStore = create<UseResearchBoodiesStoreIterface>(
         });
       } catch (err) {
         set({
-          researchBoodies: [],
+          researchBoodies: null,
           researchBoodiesError: axios.isAxiosError(err)
             ? err?.response?.data?.message || "Error fetching researchBoodies"
             : "Unexpected error occurred!",

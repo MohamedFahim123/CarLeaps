@@ -1,8 +1,8 @@
 import Cta from "@/components/Common/Cta";
+import CpoBrands from "@/components/Homes/CPO/CpoBrands";
 import CpoCars from "@/components/Homes/CPO/CpoCars";
 import CpoFeatures from "@/components/Homes/CPO/CpoFeatures";
 import CpoHero from "@/components/Homes/CPO/CpoHero";
-import Brands from "@/components/Homes/Home/Brands";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -17,7 +17,7 @@ export default function CPOPage() {
       <CpoCars />
       <Cta />
       <CpoFeatures />
-      <Brands currPage="cpo" />
+      <CpoBrands />
     </>
   );
 }

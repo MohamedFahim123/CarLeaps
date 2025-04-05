@@ -105,3 +105,25 @@
 .brandBlock p {
   margin-top: -10px;
 }
+.linkNavBreadCrumb::before {
+  content: "" !important;
+}
+.list {
+  position: relative;
+  padding-inline-start: 15px;
+}
+.list::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #000;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+}

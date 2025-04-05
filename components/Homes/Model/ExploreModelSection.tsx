@@ -8,11 +8,15 @@ import {
 import Image from "next/image";
 import React, { useState } from "react";
 import styles from "./modelStyle.module.css";
+import { useCitiesStore } from "@/app/store/Cities";
 
 const ExploreModelSection = ({ trim }: { trim: TrimsDetailsInterface }) => {
   const features = trim?.features || {};
   const [activeIndex, setActive] = useState<number>(0);
   const { currRegion } = useResearchCarsMakesStore();
+  const { cities } = useCitiesStore();
+  const currentCurrency =
+    cities.find((city) => city.code === currRegion)?.currency || "";
 
   const selectedTrimPrice = trim?.cities?.find(
     (city) => city.city === currRegion
@@ -32,7 +36,7 @@ const ExploreModelSection = ({ trim }: { trim: TrimsDetailsInterface }) => {
           src={trim?.image || "/default-image.jpg"}
         />
         <div className="price-section ps-5 mb-5 d-flex align-items-center gap-3">
-          <p className="fw-bold fs-4 mt-3">Starts at: {selectedTrimPrice}</p>
+          <p className="fw-bold fs-4 mt-3">Starts at: {currentCurrency}{selectedTrimPrice}</p>
           <h4 className="text-primary fs-3 fw-bold"></h4>
         </div>
       </div>
@@ -69,21 +73,18 @@ const ExploreModelSection = ({ trim }: { trim: TrimsDetailsInterface }) => {
                     aria-labelledby={`heading${key}`}
                     data-bs-parent="#accordionExample"
                   >
-                    <div className="accordion-body">
+                    <ul className={`accordion-body`}>
                       {featureCategory.map(
                         (
                           feature: { type: string; name: string },
                           featureIndex: React.Key | null | undefined
                         ) => (
-                          <div key={featureIndex}>
-                            <strong className="fw-bold fs-6">
-                              {feature.type?.toUpperCase()}
-                            </strong>
-                            <p>{feature.name}</p>
-                          </div>
+                          <li className={styles.list} key={featureIndex}>
+                            {feature.name}
+                          </li>
                         )
                       )}
-                    </div>
+                    </ul>
                   </div>
                 </div>
               );

@@ -1,7 +1,13 @@
+"use client";
+
+import { useResearchCarsMakesStore } from "@/app/store/ResearchCarMakes";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 function Banner() {
+  const { currRegion } = useResearchCarsMakesStore();
+
   return (
     <section className="blog-section-three">
       <div className="boxcar-container">
@@ -10,14 +16,13 @@ function Banner() {
             <div className="inner-box wow fadeInUp">
               <div className="hover-img">
                 <figure className="image">
-                  <a href="#">
-                    <Image
-                      alt=""
-                      src="/images/resource/blog3-1.jpg"
-                      width={686}
-                      height={396}
-                    />
-                  </a>
+                  <Image
+                    alt=""
+                    src="/images/resource/blog3-1.webp"
+                    width={686}
+                    height={396}
+                    style={{ color: "transparent" }}
+                  />
                 </figure>
                 <div className="content-box">
                   <h3 className="title">
@@ -28,7 +33,10 @@ function Banner() {
                     We are committed to providing our customers with exceptional
                     service.
                   </div>
-                  <a href="#" className="read-more">
+                  <Link
+                    href={`/${currRegion}/cars/find-car`}
+                    className="read-more"
+                  >
                     Get Started
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -49,7 +57,7 @@ function Banner() {
                         </clipPath>
                       </defs>
                     </svg>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -59,14 +67,12 @@ function Banner() {
             <div className="inner-box two wow fadeInUp" data-wow-delay="100ms">
               <div className="hover-img">
                 <figure className="image">
-                  <a href="#">
-                    <Image
-                      alt=""
-                      src="/images/resource/blog3-2.jpg"
-                      width={686}
-                      height={396}
-                    />
-                  </a>
+                  <Image
+                    alt=""
+                    src="/images/resource/blog3-2.webp"
+                    width={686}
+                    height={396}
+                  />
                 </figure>
                 <div className="content-box">
                   <h3 className="title">
@@ -77,7 +83,10 @@ function Banner() {
                     We are committed to providing our customers with exceptional
                     service.
                   </div>
-                  <a href="#" className="read-more">
+                  <Link
+                    href={`/${currRegion}/cars/sell-car`}
+                    className="read-more"
+                  >
                     Get Started
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -98,7 +107,7 @@ function Banner() {
                         </clipPath>
                       </defs>
                     </svg>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
