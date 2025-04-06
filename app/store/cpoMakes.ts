@@ -16,7 +16,7 @@ export interface WarrantiesInterface {
 }
 
 export interface CPOCarsMakes {
-  video_link: string | StaticImport;
+  video_link: string;
   cars: Car[];
   id: number;
   name: string;
