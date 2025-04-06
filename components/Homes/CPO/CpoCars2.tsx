@@ -1,33 +1,17 @@
 "use client";
 
-import { Car, carData } from "@/data/cars";
+import { carData } from "@/data/cars";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import Slider from "react-slick";
-import { Autoplay, Pagination } from "swiper/modules";
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-const buttons: { label: string; isActive: boolean }[] = [
-  { label: "New cars", isActive: true },
-  { label: "Used Cars", isActive: false },
-  { label: "In Stock", isActive: false },
-];
-
 export default function CpoCars2() {
-  const [selectedCategory, setSelectedCategory] = useState<{
-    label: string;
-    isActive: boolean;
-  }>(buttons[0]);
-  const [sortedItems, setSortedItems] = useState<Car[]>([...carData]);
 
-  useEffect(() => {
-    setSortedItems([
-      ...carData.filter((elm) =>
-        elm.filterCategories.includes(selectedCategory.label)
-      ),
-    ]);
-  }, [selectedCategory]);
 
   return (
     <section className="cars-section-five">
@@ -57,21 +41,6 @@ export default function CpoCars2() {
             </svg>
           </a>
         </div>
-        <nav className="wow fadeInUp" data-wow-delay="100ms">
-          <div className="nav nav-tabs">
-            {buttons.map((button, index) => (
-              <button
-                key={index}
-                onClick={() => setSelectedCategory(button)}
-                className={`nav-link ${
-                  selectedCategory === button ? "active" : ""
-                }`}
-              >
-                {button.label}
-              </button>
-            ))}
-          </div>
-        </nav>
         <div className="tab-content wow fadeInUp" id="nav-tabContent">
           <div className="tab-pane fade show active">
             <Swiper
@@ -86,10 +55,10 @@ export default function CpoCars2() {
                 767: { slidesPerView: 2, spaceBetween: 15 },
                 480: { slidesPerView: 1, spaceBetween: 10 },
               }}
-              modules={[Pagination, Autoplay]}
+              modules={[ Autoplay]}
               className="row car-slider-three"
             >
-              {[...sortedItems].map((car, index) => (
+              {carData.map((car, index) => (
                 <SwiperSlide
                   key={index}
                   className="car-block-five col-lg-3 col-md-6 col-sm-12"

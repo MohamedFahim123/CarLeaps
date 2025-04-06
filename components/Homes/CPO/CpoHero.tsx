@@ -2,18 +2,25 @@
 
 import SelectComponent from "@/components/Common/SelectComponent";
 import Link from "next/link";
+import Cookies from "js-cookie";
+import { MainRegionName } from "@/app/utils/mainData";
 
 export default function CpoHero() {
+  const region = Cookies.get("region") || MainRegionName;
   return (
     <section className="boxcar-banner-section-v1 banner-style-three">
       <div className="banner-content-three">
         <div className="boxcar-container">
           <div className="banner-content">
             <span className="wow fadeInUp">
-              Find cars for sale and for rent near you
+              Browse top-quality, dealer-certified pre-owned cars in {region}
             </span>
-            <h2 className="wow fadeInUp" data-wow-delay="100ms">
-              Find Your Perfect Car
+            <h2
+              className="wow fadeInUp"
+              style={{ lineHeight: "1.2" }}
+              data-wow-delay="100ms"
+            >
+              Your Trusted CPO Awaits
             </h2>
             <div className="form-tabs">
               <div
@@ -31,11 +38,6 @@ export default function CpoHero() {
                       <div className="form_boxes line-r">
                         <SelectComponent
                           options={["Any Models", "A3", "Accord"]}
-                        />
-                      </div>
-                      <div className="form_boxes">
-                        <SelectComponent
-                          options={["Any Price", "200$", "300$"]}
                         />
                       </div>
                       <Link href={`/inventory-list-01`} className="form-submit">

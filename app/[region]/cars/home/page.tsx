@@ -1,4 +1,3 @@
-import Cta from "@/components/Common/Cta";
 import CpoCars2 from "@/components/Homes/CPO/CpoCars2";
 import Brands from "@/components/Homes/Home/Brands";
 import Cars from "@/components/Homes/Home/Cars";
@@ -7,6 +6,7 @@ import Features from "@/components/Homes/Home/Features";
 import Features2 from "@/components/Homes/Home/Features2";
 import Features3 from "@/components/Homes/Home/Features3";
 import Hero from "@/components/Homes/Home/Hero";
+import Banner from "@/components/Homes/ResearchCars/Banner";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -19,7 +19,7 @@ export default function HomePage() {
     <>
       <Hero />
       <Brands currPage="home" />
-      <Cta />
+      <Banner />
       <Cars />
       <Features />
       <Facts />

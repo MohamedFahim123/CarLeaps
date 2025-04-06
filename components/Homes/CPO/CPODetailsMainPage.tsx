@@ -4,7 +4,7 @@ import { useCPOCarsMakesStore } from "@/app/store/cpoMakes";
 import { useResearchCarsMakesStore } from "@/app/store/ResearchCarMakes";
 import { MainRegionName } from "@/app/utils/mainData";
 import { useEffect } from "react";
-import BrandsSpecialSection from "../Brands/BrandsSpecialSection";
+import CpoCars2 from "./CpoCars2";
 import CPOChooseUs from "./CPOChooseUs";
 import CPODealerSection from "./CPODealerSection";
 import CPODetailsHero from "./CPODetailsHero";
@@ -33,12 +33,12 @@ const CPODetailsMainPage = ({ brandId }: { brandId: number }) => {
             currRegion={currRegion || MainRegionName}
             brand={selectedBrand}
           />
+          <CPOChooseUs brand={selectedBrand} />
+          <CpoCars2 />
           <CPODealerSection
             currRegion={currRegion || MainRegionName}
             brand={selectedBrand}
           />
-          <CPOChooseUs brand={selectedBrand} />
-          <BrandsSpecialSection />
         </>
       ) : (
         <h1>Not Found</h1>

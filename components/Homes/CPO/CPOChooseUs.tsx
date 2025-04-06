@@ -83,7 +83,7 @@ const CPOChooseUs = ({ brand }: { brand: CPOCarsMakes }) => {
         channel="youtube"
         youtube={{ mute: 0, autoplay: 0 }}
         isOpen={isOpen}
-        videoId="AC1cREPIw_o"
+        videoId={brand.video_link}
         onClose={() => setOpen(false)}
       />
     </>
