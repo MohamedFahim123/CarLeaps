@@ -68,6 +68,8 @@ export interface UseResearchCarsMakesStoreIterface {
   currRegion?: string;
   selectedMake?: ResearchCarsMakes;
   setSelectedMake: (make: ResearchCarsMakes) => void;
+  setSelectedModel: (model: ModelsDetailsInterface) => void;
+  selectedModel: ModelsDetailsInterface | null;
   setResearchMakesRegion: (region: string) => void;
   getResearchCarsMakes: () => Promise<void>;
 }
@@ -84,6 +86,10 @@ export const useResearchCarsMakesStore =
       set({ currRegion: region, hasFetchError: false });
       lastFetchedTime = 0;
       get().getResearchCarsMakes();
+    },
+    selectedModel: null,
+    setSelectedModel: (model: ModelsDetailsInterface) => {
+      set({ selectedModel: model });
     },
     setSelectedMake: (make: ResearchCarsMakes) => {
       set({ selectedMake: make });

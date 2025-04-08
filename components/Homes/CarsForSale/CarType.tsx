@@ -29,7 +29,7 @@ export default function CarType() {
                 )
               }
             >
-              <div className="inner-box wow fadeInUp">
+              <div className="inner-box wow fadeInUp p-2">
                 <div className="image-box">
                   <Image
                     src={body.image}

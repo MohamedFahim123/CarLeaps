@@ -13,11 +13,29 @@ export interface ModelGallery {
 
 export interface ModelSpecification {
   id: number;
-  name: string;
   title: string;
-  subtitle: string;
-  image: string;
   description: string;
+  model_id: string;
+  body_id: string
+  /* 
+  "id": 1,
+                            "model_id": "1",
+                            "model": "A4",
+                            "body_id": "1",
+                            "body": "Sedan",
+                            "fuel_type_id": "1",
+                            "fuel_type": "Petrol",
+                            "title": "Audi A4 2025",
+                            "description": "test description",
+                            "interests": [
+                                {
+                                    "id": 1,
+                                    "name": "Budget-Friendly"
+                                }
+                            ],
+                            "highlights": []
+  
+  */
 }
 
 export interface Models {
