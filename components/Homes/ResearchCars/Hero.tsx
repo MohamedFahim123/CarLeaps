@@ -2,12 +2,37 @@
 
 import { useAdStatesStore } from "@/app/store/ad-states";
 import { useResearchCarsMakesStore } from "@/app/store/ResearchCarMakes";
+import { useResearchCarsAuthorizedStore } from "@/app/store/ResearchCarsAuthorized";
 import Link from "next/link";
+import { useCallback, useEffect } from "react";
 
 export default function Hero() {
   const { currRegion } = useResearchCarsMakesStore();
   const { adStates } = useAdStatesStore();
-  const authorizedDealer = adStates.find((state) => state.name === 'Authorized New');
+  const authorizedDealer = adStates.find(
+    (state) => state.name === "Authorized New"
+  );
+  const {
+    researchCarsAuthorized,
+    researchCarsAuthorizedLoading,
+    getResearchCarsAuthorized,
+  } = useResearchCarsAuthorizedStore();
+
+  const getAllAuthorizedCars = useCallback(() => {
+    if (!authorizedDealer) return;
+    if (researchCarsAuthorized.length === 0 || !researchCarsAuthorizedLoading) {
+      getResearchCarsAuthorized();
+    }
+  }, [
+    authorizedDealer,
+    getResearchCarsAuthorized,
+    researchCarsAuthorized.length,
+    researchCarsAuthorizedLoading,
+  ]);
+
+  useEffect(() => {
+    getAllAuthorizedCars();
+  }, [getAllAuthorizedCars]);
 
   return (
     <section className="boxcar-banner-section-nine">

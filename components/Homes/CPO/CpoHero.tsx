@@ -4,9 +4,23 @@ import SelectComponent from "@/components/Common/SelectComponent";
 import Link from "next/link";
 import Cookies from "js-cookie";
 import { MainRegionName } from "@/app/utils/mainData";
+import { useCPOCarsStore } from "@/app/store/CPOCars";
+import { useCallback, useEffect } from "react";
 
 export default function CpoHero() {
   const region = Cookies.get("region") || MainRegionName;
+  const { CPOCars, getCPOCars, CPOCarsLoading } = useCPOCarsStore();
+
+  const getAllCPOCars = useCallback(() => {
+    if (!CPOCarsLoading || CPOCars.length === 0) {
+      getCPOCars();
+    }
+  }, [CPOCars.length, CPOCarsLoading, getCPOCars]);
+
+  useEffect(() => {
+    getAllCPOCars();
+  }, [getAllCPOCars]);
+
   return (
     <section className="boxcar-banner-section-v1 banner-style-three">
       <div className="banner-content-three">
