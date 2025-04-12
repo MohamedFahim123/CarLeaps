@@ -2,12 +2,12 @@
 import {
   ModelsDetailsInterface,
   ResearchCarsMakes,
+  useResearchCarsMakesStore,
 } from "@/app/store/ResearchCarMakes";
-import { MainRegionName } from "@/app/utils/mainData";
-import Cookies from "js-cookie";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./modelStyle.module.css";
+import { useCitiesStore } from "@/app/store/Cities";
 
 export default function ModelHeroSection({
   model,
@@ -16,7 +16,10 @@ export default function ModelHeroSection({
   selectedMake: ResearchCarsMakes;
   model: ModelsDetailsInterface;
 }) {
-  const region: string = Cookies.get("region") || MainRegionName;
+  const { currRegion } = useResearchCarsMakesStore();
+  const { cities } = useCitiesStore();
+  const currentCurrency =
+    cities.find((city) => city.code === currRegion)?.currency || "";
 
   return (
     <section className={`${styles.hero_section} position-relative`}>
@@ -32,19 +35,19 @@ export default function ModelHeroSection({
       <div className="boxcar-container position-relative py-5 d-flex flex-column justify-content-between h-100">
         <nav className={`${styles.breadcrumb} position-relative z-1`}>
           <Link
-            href={`/${region}/cars/home`}
+            href={`/${currRegion}/cars/home`}
             className={`${styles.linkNavBreadCrumb} breadcrumb-item active ms-1`}
           >
             Home /
           </Link>
           <Link
-            href={`/${region}/cars/${model.make_id}`}
+            href={`/${currRegion}/cars/${model.make_id}`}
             className={`${styles.linkNavBreadCrumb} breadcrumb-item active ms-1`}
           >
             {model.make} /
           </Link>
           <Link
-            href={`/${region}/cars/${model.make_id}/${model.id}`}
+            href={`/${currRegion}/cars/${model.make_id}/${model.id}`}
             className={`${styles.linkNavBreadCrumb} breadcrumb-item active ms-1`}
           >
             {model.name}
@@ -68,7 +71,9 @@ export default function ModelHeroSection({
           </p>
           <div className="price-section mb-5 d-flex align-items-center gap-3">
             <p className="fw-bold fs-4">Starts at:</p>
-            <h4 className="text-primary fs-3 fw-bold">$43,845</h4>
+            <h4 className="text-primary fs-3 fw-bold">
+              {currentCurrency}43,845
+            </h4>
           </div>
           <div className="d-flex align-items-center justify-content-center gap-4">
             <button className="btn btn-dark btn-lg px-4 w-100 text-capitalize">

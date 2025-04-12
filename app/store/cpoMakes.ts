@@ -15,6 +15,10 @@ export interface WarrantiesInterface {
   make: string;
 }
 
+export interface CPOFeatures {
+  title: string;
+}
+
 export interface CPOCarsMakes {
   video_link: string;
   cars: Car[];
@@ -24,8 +28,11 @@ export interface CPOCarsMakes {
   logo: string;
   cover: string;
   status: string;
+  make_name: string;
+  make_image: string;
   incentives: Incentive[];
   warranties: WarrantiesInterface[];
+  features: CPOFeatures[];
   dealers: CarDealerInterface[];
 }
 

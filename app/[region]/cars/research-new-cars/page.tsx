@@ -20,7 +20,6 @@ export default function ResearchNewCarsPage() {
       <ResearchCarsBrands />
       <Features />
       <Cars />
-      {/* <Blogs /> */}
       <Banner />
       <CarsCollection />
     </>

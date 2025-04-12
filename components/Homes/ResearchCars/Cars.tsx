@@ -24,7 +24,9 @@ export default function Cars() {
         <section className="cars-section-four bg-1">
           <div className="boxcar-container">
             <div className="boxcar-title wow fadeInUp">
-              <h2>Authorized New Cars Available Today In {currRegion}</h2>
+              <h2 className="mb-5">
+                Authorized New Cars Available Today In {currRegion}
+              </h2>
               <Link href={`/`} className="btn-title">
                 View All
                 <svg
@@ -51,12 +53,12 @@ export default function Cars() {
             <div className="tab-content wow fadeInUp" data-wow-delay="200ms">
               <div className="tab-pane fade show active">
                 <div className="row">
-                  {researchCarsAuthorized?.map((car, i) => (
+                  {researchCarsAuthorized?.slice(0, 8).map((car, i) => (
                     <div
                       key={i}
-                      className="box-car car-block-three col-lg-4 col-md-6 col-sm-12"
+                      className="box-car car-block-three col-lg-3 col-md-6 col-sm-12"
                     >
-                      <div className="inner-box mx-2">
+                      <div className="inner-box mx-2 shadow-lg rounded-4">
                         <div className={`image-box`}>
                           <div className="image d-block">
                             <Link
@@ -105,7 +107,7 @@ export default function Cars() {
                             </svg>
                           </Link>
                         </div>
-                        <div className="content-box">
+                        <div className="content-box border-0">
                           <h6 className="title fw-bold text-capitalize fs-4 mb-2">
                             <Link
                               href={`/${currRegion}/cars/car-details/${car.name}`}
@@ -157,13 +159,16 @@ export default function Cars() {
                             {car?.offer_price && (
                               <span>
                                 <del>
-                                  {car.price} {currentCurrency}
+                                  {currentCurrency}
+                                  {car.price}
                                 </del>
                               </span>
                             )}
                             <small>
-                              {car.offer_price ? car.offer_price : car.price}{" "}
-                              {currentCurrency}
+                              <span className="fw-semibold d-inline fs-6">{currentCurrency}</span>
+                              {car.offer_price
+                                ? car.offer_price
+                                : car.price}{" "}
                             </small>
                             <Link
                               href={`/${currRegion}/cars/car-details/${car.name}`}

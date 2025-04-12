@@ -32,15 +32,15 @@ const CpoBrands = () => {
                 <div className="image-box">
                   <figure className="image">
                     <Image
-                      alt={make.name}
-                      src={make.logo}
+                      alt={make.make_name}
+                      src={make.make_image}
                       width={70}
                       height={70}
                     />
                   </figure>
                 </div>
                 <div className="content-box">
-                  <h6 className="title mt-1">{make.name}</h6>
+                  <h6 className="title mt-1">{make.make_name}</h6>
                 </div>
               </div>
             </div>

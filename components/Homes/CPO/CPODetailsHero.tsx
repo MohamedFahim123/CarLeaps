@@ -34,8 +34,8 @@ const CPODetailsHero = ({
               >
                 <div className=" bg-white d-inline-block rounded-circle opacity-100 position-absolute start-0 top-0 w-100 h-100 z-0"></div>
                 <Image
-                  src={brand.logo}
-                  alt={brand.name}
+                  src={brand.make_image}
+                  alt={brand.make_name}
                   width={50}
                   height={50}
                   className="z-1 position-relative"

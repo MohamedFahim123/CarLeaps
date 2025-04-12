@@ -129,3 +129,18 @@
   color: #6e499f !important;
   text-decoration: underline;
 }
+.checkIcon {
+  display: inline;
+  padding: 5px;
+  border-radius: 50%;
+  border: 2px solid #6e499f;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  color: #6e499f;
+  margin-inline-end: 10px;
+}
+.featureLi {
+  padding-block: 10px;
+}

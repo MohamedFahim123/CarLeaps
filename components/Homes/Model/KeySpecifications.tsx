@@ -6,7 +6,7 @@ const KeySpecifications = ({ model }: { model: ModelsDetailsInterface }) => {
   return (
     <section className={`${styles.section} bg-black`}>
       <div className="boxcar-container">
-        <h2 className="text-center text-white mb-4">Key Specifications</h2>
+        <h2 className="text-center text-uppercase text-white mb-4">Highlights</h2>
         <div className="d-flex flex-wrap justify-content-center">
           {
             model.specifications?.map((spec) => (
@@ -38,11 +38,11 @@ const KeySpecifications = ({ model }: { model: ModelsDetailsInterface }) => {
             <p>Range</p>
           </div> */}
         </div>
-        <div className="text-center mt-4">
+        {/* <div className="text-center mt-4">
           <a href="#" className="btn btn-outline-light">
             See specifications list →
           </a>
-        </div>
+        </div> */}
       </div>
     </section>
   );

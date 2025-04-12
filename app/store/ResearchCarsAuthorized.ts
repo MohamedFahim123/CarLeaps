@@ -58,7 +58,7 @@ export const useResearchCarsAuthorizedStore =
           }
         );
 
-        const researchCarsAuthorizedCars = res?.data?.data?.cars || [];
+        const researchCarsAuthorizedCars = res?.data?.data || [];
 
         lastFetchedTime = currentTime;
 
