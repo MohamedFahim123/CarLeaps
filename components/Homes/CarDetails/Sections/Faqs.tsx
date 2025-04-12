@@ -1,6 +1,6 @@
 "use client";
 
-import { Car } from "@/app/store/CarsForSale";
+import { Car } from "@/app/[region]/cars/car-details/[id]/page";
 import { useState } from "react";
 
 export default function Faqs({ carItem }: { carItem: Car }) {

@@ -1,5 +1,4 @@
 "use client";
-import { Car } from "@/app/store/CarsForSale";
 import { useCitiesStore } from "@/app/store/Cities";
 import { useState } from "react";
 import ModalVideo from "react-modal-video";
@@ -11,6 +10,7 @@ import ImagesSection from "./Sections/ImagesSection";
 import Location from "./Sections/Location";
 import Overview from "./Sections/Overview";
 import SideCard from "./Sections/SideCard";
+import { Car } from "@/app/[region]/cars/car-details/[id]/page";
 
 export default function CarDetailsSection({
   carItem,
@@ -23,6 +23,7 @@ export default function CarDetailsSection({
   const { cities } = useCitiesStore();
   const currentCurrency =
     cities.find((city) => city.code === region)?.currency || "";
+
   return (
     <>
       <section className="inventory-section pb-0 layout-radius">

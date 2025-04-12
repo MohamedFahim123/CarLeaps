@@ -1,8 +1,9 @@
-import { CarDealerInterface } from "@/app/store/CarsForSale";
+
 import { baseUrl, MainRegionName } from "@/app/utils/mainData";
 import DealerMainSection from "@/components/Homes/Dealer/DealerMainSection";
 import { Metadata } from "next";
 import { cookies } from "next/headers";
+import { CarDealerInterface } from "../../car-details/[id]/page";
 
 export const metadata: Metadata = {
   title: "CarLeaps - Dealer Details",

@@ -1,4 +1,4 @@
-import { Car } from "@/app/store/CarsForSale";
+import { Car } from "@/app/[region]/cars/car-details/[id]/page";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";

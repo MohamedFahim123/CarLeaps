@@ -1,6 +1,6 @@
 "use client";
+import { CarDealerInterface } from "@/app/[region]/cars/car-details/[id]/page";
 import {
-    CarDealerInterface,
     useCarsForSaleStore,
 } from "@/app/store/CarsForSale";
 import { useCitiesStore } from "@/app/store/Cities";
@@ -87,7 +87,7 @@ const OurCars = ({ dealerItem }: { dealerItem: CarDealerInterface }) => {
               modules={[Pagination, Autoplay]}
               className="car-slider-three slider-layout-1 row"
             >
-              {dealerItem?.dealer?.cars?.map((car) => (
+              {dealerItem?.cars?.map((car) => (
                 <SwiperSlide
                   key={car.id}
                   className="box-car car-block-three col-lg-3 col-md-6 col-sm-12"
@@ -167,17 +167,17 @@ const OurCars = ({ dealerItem }: { dealerItem: CarDealerInterface }) => {
                           style={{ height: "50px", width: "50px", margin: 0 }}
                         >
                           <Image
-                            src={dealerItem?.dealer?.image}
+                            src={dealerItem?.image}
                             width={25}
                             height={25}
-                            alt={dealerItem?.dealer?.name}
+                            alt={dealerItem?.name}
                             className="rounded-circle object-fit-contain w-100 h-100 mb-0"
                           />
                         </li>
                         <li className="d-flex flex-column justify-content-between align-items-start">
                           <span>Sold By</span>
                           <span className="fw-bold fs-6">
-                            {dealerItem?.dealer?.name}
+                            {dealerItem?.name}
                           </span>
                         </li>
                       </ul>
