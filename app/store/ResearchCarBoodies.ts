@@ -25,7 +25,7 @@ export interface UseResearchBoodiesStoreIterface {
   researchBoodies: ResearchBoodies | null;
   researchBoodiesError: unknown;
   researchBoodiesLoading: boolean;
-  getResearchBoodies: () => Promise<void>;
+  getResearchBoodies: (id: number) => Promise<void>;
 }
 
 export const useResearchBoodiesStore = create<UseResearchBoodiesStoreIterface>(
@@ -35,16 +35,16 @@ export const useResearchBoodiesStore = create<UseResearchBoodiesStoreIterface>(
     researchBoodiesLoading: false,
     hasFetchError: false,
 
-    getResearchBoodies: async () => {
-      const { currRegion, selectedMake } = useResearchCarsMakesStore.getState();
+    getResearchBoodies: async (id) => {
+      const { currRegion } = useResearchCarsMakesStore.getState();
       const currentTime: number = new Date().getTime();
 
-      if (selectedMake) {
+      if (id) {
         set({ researchBoodiesLoading: true });
         try {
           const res = await axios.post(
             `${baseUrl}/research-bodies?t=${currentTime}`,
-            { make_id: selectedMake?.id },
+            { make_id: id },
             {
               headers: {
                 "Content-Type": "application/json",

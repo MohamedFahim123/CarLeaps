@@ -24,14 +24,11 @@ export default function BrandsBanner({
   brand: ResearchCarsMakes;
   currRegion: string;
 }) {
-  const { researchBoodies, getResearchBoodies } =
-    useResearchBoodiesStore();
-
-
+  const { researchBoodies, getResearchBoodies } = useResearchBoodiesStore();
 
   useEffect(() => {
-    getResearchBoodies();
-  }, [getResearchBoodies]);
+    if (brand?.id) getResearchBoodies(brand?.id);
+  }, [getResearchBoodies, brand?.id]);
 
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [allCurrModels, setAllCurrModels] = useState<ModelsDetailsInterface[]>(
