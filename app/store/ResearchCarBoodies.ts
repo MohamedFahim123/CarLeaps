@@ -44,18 +44,17 @@ export const useResearchBoodiesStore = create<UseResearchBoodiesStoreIterface>(
       const { currRegion, selectedMake } = useResearchCarsMakesStore.getState();
       const currentTime: number = new Date().getTime();
 
-      if (hasFetchError) {
-        console.warn("Skipping fetch due to previous error.");
-        return;
-      }
-
-      if (currentTime - lastFetchedTime < CACHE_EXPIRATION_TIME) {
-        return;
-      }
-
-      set({ researchBoodiesLoading: true });
-
       if (selectedMake) {
+        if (hasFetchError) {
+          console.warn("Skipping fetch due to previous error.");
+          return;
+        }
+
+        if (currentTime - lastFetchedTime < CACHE_EXPIRATION_TIME) {
+          return;
+        }
+
+        set({ researchBoodiesLoading: true });
         try {
           const res = await axios.post(
             `${baseUrl}/research-bodies?t=${currentTime}`,
