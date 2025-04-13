@@ -55,40 +55,42 @@ export const useResearchBoodiesStore = create<UseResearchBoodiesStoreIterface>(
 
       set({ researchBoodiesLoading: true });
 
-      try {
-        const res = await axios.post(
-          `${baseUrl}/research-bodies?t=${currentTime}`,
-          { make_id: selectedMake?.id },
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json",
-              code: currRegion || MainRegionName,
-            },
+      if (selectedMake) {
+        try {
+          const res = await axios.post(
+            `${baseUrl}/research-bodies?t=${currentTime}`,
+            { make_id: selectedMake?.id },
+            {
+              headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                code: currRegion || MainRegionName,
+              },
+            }
+          );
+
+          const researchBoodies = res?.data?.data || [];
+          lastFetchedTime = currentTime;
+
+          set({
+            researchBoodies,
+            researchBoodiesError: null,
+            researchBoodiesLoading: false,
+            hasFetchError: false,
+          });
+        } catch (err) {
+          set({
+            researchBoodies: null,
+            researchBoodiesError: axios.isAxiosError(err)
+              ? err?.response?.data?.message || "Error fetching researchBoodies"
+              : "Unexpected error occurred!",
+            researchBoodiesLoading: false,
+            hasFetchError: true,
+          });
+
+          if (!axios.isAxiosError(err)) {
+            toast.error("Unexpected error occurred!");
           }
-        );
-
-        const researchBoodies = res?.data?.data || [];
-        lastFetchedTime = currentTime;
-
-        set({
-          researchBoodies,
-          researchBoodiesError: null,
-          researchBoodiesLoading: false,
-          hasFetchError: false,
-        });
-      } catch (err) {
-        set({
-          researchBoodies: null,
-          researchBoodiesError: axios.isAxiosError(err)
-            ? err?.response?.data?.message || "Error fetching researchBoodies"
-            : "Unexpected error occurred!",
-          researchBoodiesLoading: false,
-          hasFetchError: true,
-        });
-
-        if (!axios.isAxiosError(err)) {
-          toast.error("Unexpected error occurred!");
         }
       }
     },
