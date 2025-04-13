@@ -25,7 +25,6 @@ export interface UseResearchBoodiesStoreIterface {
   researchBoodies: ResearchBoodies | null;
   researchBoodiesError: unknown;
   researchBoodiesLoading: boolean;
-  hasFetchError: boolean;
   getResearchBoodies: () => Promise<void>;
 }
 
@@ -33,23 +32,17 @@ let lastFetchedTime: number = 0;
 const CACHE_EXPIRATION_TIME: number = 15 * 60 * 1000;
 
 export const useResearchBoodiesStore = create<UseResearchBoodiesStoreIterface>(
-  (set, get) => ({
+  (set) => ({
     researchBoodies: null,
     researchBoodiesError: null,
     researchBoodiesLoading: false,
     hasFetchError: false,
 
     getResearchBoodies: async () => {
-      const { hasFetchError } = get();
       const { currRegion, selectedMake } = useResearchCarsMakesStore.getState();
       const currentTime: number = new Date().getTime();
 
       if (selectedMake) {
-        if (hasFetchError) {
-          console.warn("Skipping fetch due to previous error.");
-          return;
-        }
-
         if (currentTime - lastFetchedTime < CACHE_EXPIRATION_TIME) {
           return;
         }
@@ -75,7 +68,6 @@ export const useResearchBoodiesStore = create<UseResearchBoodiesStoreIterface>(
             researchBoodies,
             researchBoodiesError: null,
             researchBoodiesLoading: false,
-            hasFetchError: false,
           });
         } catch (err) {
           set({
@@ -84,7 +76,6 @@ export const useResearchBoodiesStore = create<UseResearchBoodiesStoreIterface>(
               ? err?.response?.data?.message || "Error fetching researchBoodies"
               : "Unexpected error occurred!",
             researchBoodiesLoading: false,
-            hasFetchError: true,
           });
 
           if (!axios.isAxiosError(err)) {
