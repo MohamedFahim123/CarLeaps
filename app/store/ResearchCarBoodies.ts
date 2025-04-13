@@ -28,9 +28,6 @@ export interface UseResearchBoodiesStoreIterface {
   getResearchBoodies: () => Promise<void>;
 }
 
-let lastFetchedTime: number = 0;
-const CACHE_EXPIRATION_TIME: number = 15 * 60 * 1000;
-
 export const useResearchBoodiesStore = create<UseResearchBoodiesStoreIterface>(
   (set) => ({
     researchBoodies: null,
@@ -43,10 +40,6 @@ export const useResearchBoodiesStore = create<UseResearchBoodiesStoreIterface>(
       const currentTime: number = new Date().getTime();
 
       if (selectedMake) {
-        if (currentTime - lastFetchedTime < CACHE_EXPIRATION_TIME) {
-          return;
-        }
-
         set({ researchBoodiesLoading: true });
         try {
           const res = await axios.post(
@@ -62,7 +55,6 @@ export const useResearchBoodiesStore = create<UseResearchBoodiesStoreIterface>(
           );
 
           const researchBoodies = res?.data?.data || [];
-          lastFetchedTime = currentTime;
 
           set({
             researchBoodies,
