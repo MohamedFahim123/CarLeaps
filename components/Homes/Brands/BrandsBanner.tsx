@@ -13,7 +13,7 @@ import { useResearchBoodiesStore } from "@/app/store/ResearchCarBoodies";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -24,18 +24,14 @@ export default function BrandsBanner({
   brand: ResearchCarsMakes;
   currRegion: string;
 }) {
-  const { researchBoodies, researchBoodiesLoading, getResearchBoodies } =
+  const { researchBoodies, getResearchBoodies } =
     useResearchBoodiesStore();
 
-  const getAllResearchBoodies = useCallback(() => {
-    if (!researchBoodies && !researchBoodiesLoading) {
-      getResearchBoodies();
-    }
-  }, [getResearchBoodies, researchBoodiesLoading, researchBoodies]);
+
 
   useEffect(() => {
-    getAllResearchBoodies();
-  }, [getAllResearchBoodies]);
+    getResearchBoodies();
+  }, [getResearchBoodies]);
 
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [allCurrModels, setAllCurrModels] = useState<ModelsDetailsInterface[]>(
