@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-import Link from "next/link";
 import { useState } from "react";
 import ModalVideo from "react-modal-video";
 export default function Features() {
