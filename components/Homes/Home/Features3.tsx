@@ -6,7 +6,7 @@ export default function Features3() {
     <section className="cars-section">
       <div className="boxcar-container">
         <div className="boxcar-title wow fadeInUp">
-          <h2>Shop BoxCar Your Way</h2>
+          <h2>Quick Links</h2>
           <Link href={`/inventory-list-01`} className="btn-title">
             View More
             <svg

@@ -12,9 +12,7 @@ export default function Hero() {
     <section className="boxcar-banner-section-v1">
       <div className="container">
         <div className="banner-content">
-          <span className="wow fadeInUp">
-            Find cars for sale and for rent near you
-          </span>
+          <span className="wow fadeInUp">New and Used Cars for Sale</span>
           <h2 className="wow fadeInUp" data-wow-delay="100ms">
             Find Your Perfect Car
           </h2>
