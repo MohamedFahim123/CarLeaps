@@ -1,15 +1,13 @@
 "use client";
 
 import { useResearchCarsMakesStore } from "@/app/store/ResearchCarMakes";
+import { MainRegionName } from "@/app/utils/mainData";
+import { useEffect } from "react";
 import AboutBrand from "./AboutBrand";
 import AllCurrentModels from "./AllCurrentModels";
 import BrandsBanner from "./BrandsBanner";
-import BrandsChooseUs from "./BrandsChooseUs";
 import BrandsHeroSection from "./BrandsHeroSection";
-import BrandsSpecialSection from "./BrandsSpecialSection";
 import IncentivesSection from "./IncentivesSection";
-import { useEffect } from "react";
-import { MainRegionName } from "@/app/utils/mainData";
 
 export default function BrandsMainPage({ brandId }: { brandId: number }) {
   const {
