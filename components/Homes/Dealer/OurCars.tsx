@@ -1,7 +1,6 @@
 "use client";
 import { CarDealerInterface } from "@/app/[region]/cars/car-details/[id]/page";
 import { useCarsForSaleStore } from "@/app/store/CarsForSale";
-import { useCitiesStore } from "@/app/store/Cities";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -18,9 +17,6 @@ const icons: { icon: string }[] = [
 const OurCars = ({ dealerItem }: { dealerItem: CarDealerInterface }) => {
   const [mounted, setMounted] = useState(false);
   const { currentRegion } = useCarsForSaleStore();
-  const { cities } = useCitiesStore();
-  const currentCurrency =
-    cities.find((city) => city.code === currentRegion)?.currency || "";
 
   useEffect(() => {
     setMounted(true);
