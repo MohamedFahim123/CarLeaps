@@ -1,11 +1,18 @@
 "use client";
 
-import SelectComponent from "@/components/Common/SelectComponent";
-import Link from "next/link";
-import Cookies from "js-cookie";
-import { MainRegionName } from "@/app/utils/mainData";
+import { useCarsForSaleStore } from "@/app/store/CarsForSale";
 import { useCPOCarsStore } from "@/app/store/CPOCars";
+import { MainRegionName } from "@/app/utils/mainData";
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 import { useCallback, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import styles from "../Home/heroStyles.module.css";
+
+interface SearchFormInputs {
+  make: string;
+  model: string;
+}
 
 export default function CpoHero() {
   const region = Cookies.get("region") || MainRegionName;
@@ -20,6 +27,29 @@ export default function CpoHero() {
   useEffect(() => {
     getAllCPOCars();
   }, [getAllCPOCars]);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<SearchFormInputs>();
+  const { makes, models } = useCarsForSaleStore();
+  const router = useRouter();
+  const currRegion: string = Cookies.get("region") || MainRegionName;
+
+  const onSubmit = (data: SearchFormInputs) => {
+    const filteredData = Object.fromEntries(
+      Object.entries(data).filter(([, value]) => value !== "")
+    );
+
+    const queryString = new URLSearchParams(filteredData).toString();
+
+    router.push(
+      `/${currRegion}/cars/cars-for-sale/search?ad_state=2&condition=used${
+        queryString ? `&${queryString}` : ""
+      }`
+    );
+  };
 
   return (
     <section className="boxcar-banner-section-v1 banner-style-three">
@@ -43,23 +73,66 @@ export default function CpoHero() {
               >
                 <div className="form-tab-content">
                   <div className="form-tab-pane current" id="tab-1">
-                    <form onSubmit={(e) => e.preventDefault()}>
-                      <div className="form_boxes line-r">
-                        <SelectComponent
-                          options={["Any Makes", "Audi", "Honda"]}
-                        />
+                    <form
+                      className={`${styles.form_container}`}
+                      onSubmit={handleSubmit(onSubmit)}
+                    >
+                      <div className={`${styles.form_boxes}`}>
+                        <select
+                          className="form-select w-100"
+                          defaultValue={""}
+                          {...register("make")}
+                          id="searchMake"
+                        >
+                          <option value="" disabled>
+                            Select Make
+                          </option>
+                          {makes.map((make) => (
+                            <option key={make.id} value={make.id}>
+                              {make.name}
+                            </option>
+                          ))}
+                        </select>
+                        {errors.make && (
+                          <div className="text-danger text-small">
+                            {errors.make.message}
+                          </div>
+                        )}
                       </div>
-                      <div className="form_boxes line-r">
-                        <SelectComponent
-                          options={["Any Models", "A3", "Accord"]}
-                        />
+                      <div className={`${styles.form_boxes}`}>
+                        <select
+                          className="form-select w-100"
+                          defaultValue={""}
+                          {...register("model")}
+                          id="searchModels"
+                        >
+                          <option value="" disabled>
+                            Select Model
+                          </option>
+                          {models?.map(
+                            (model: { id: number; name: string }) => (
+                              <option key={model.id} value={model.id}>
+                                {model.name}
+                              </option>
+                            )
+                          )}
+                        </select>
+                        {errors.model && (
+                          <div className="text-danger text-small">
+                            {errors.model.message}
+                          </div>
+                        )}
                       </div>
-                      <Link href={`/inventory-list-01`} className="form-submit">
-                        <button type="submit" className="theme-btn">
+                      <div className="form-submit">
+                        <button
+                          disabled={isSubmitting}
+                          type="submit"
+                          className="theme-btn"
+                        >
                           <i className="flaticon-search" />
-                          Search 9451 Cars
+                          Search
                         </button>
-                      </Link>
+                      </div>
                     </form>
                   </div>
                 </div>

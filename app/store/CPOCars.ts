@@ -52,13 +52,17 @@ export const useCPOCarsStore = create<UseCPOCarsStoreInterface>((set, get) => ({
     set({ CPOCarsLoading: true });
 
     try {
-      const res = await axios.get(`${baseUrl}/cpo-cars?t=${currentTime}`, {
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          code: currRegion || MainRegionName,
-        },
-      });
+      const res = await axios.post(
+        `${baseUrl}/cpo-cars?t=${currentTime}`,
+        {},
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            code: currRegion || MainRegionName,
+          },
+        }
+      );
 
       const CPOCarsCars = res?.data?.data || [];
 
