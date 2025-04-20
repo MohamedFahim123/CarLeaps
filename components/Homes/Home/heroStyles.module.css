@@ -1,0 +1,17 @@
+.form_container {
+    overflow: hidden;
+    display: grid !important;
+    gap: 30px;
+    grid-template-columns: 2fr 2fr 1fr;
+    width: 100%;
+}
+.form_boxes {
+    height: 100%;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-inline: 20px;
+    padding-block: 18px;
+    border-inline-end: 1px solid #e0e0e0;
+}

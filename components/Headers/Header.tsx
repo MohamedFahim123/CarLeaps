@@ -9,6 +9,7 @@ import { useCitiesStore } from "@/app/store/Cities";
 import { useConditionStore } from "@/app/store/conditions";
 import { useCountriesStore } from "@/app/store/countries";
 import { useCPOCarsMakesStore } from "@/app/store/cpoMakes";
+import { useFooterTapsStore } from "@/app/store/footerTaps";
 import { useFuelTypesStore } from "@/app/store/fuel-types";
 import { useProfileStore } from "@/app/store/profile";
 import { useResearchCarsMakesStore } from "@/app/store/ResearchCarMakes";
@@ -67,6 +68,7 @@ export default function Header1({
   }, [getCPOCarsMakes, CPOCarsMakesLoading, CPOCarsMakes]);
 
   // All WebsiteApis
+  const { footerTaps, getFooterTaps, footerTapsLoading } = useFooterTapsStore();
   const { countries, getCountries, countriesLoading } = useCountriesStore();
   const { token, clearToken, getToken, tokenLoading } = useTokenStore();
   const { profile, getProfile, profileLoading } = useProfileStore();
@@ -79,6 +81,12 @@ export default function Header1({
   const { carsForSale, getCarsForSale, setRegion, carsForSaleLoading } =
     useCarsForSaleStore();
   const { adStates, getAdStates, adStatesLoading } = useAdStatesStore();
+
+  const getAllFooterTaps = useCallback(() => {
+    if (footerTaps.length === 0 && !footerTapsLoading) {
+      getFooterTaps();
+    }
+  }, [getFooterTaps, footerTapsLoading, footerTaps]);
 
   const getAllFuelTypes = useCallback(() => {
     if (fuelTypes.length === 0 && !fuelTypesLoading) {
@@ -149,6 +157,7 @@ export default function Header1({
   useEffect(() => {
     getAllCountries();
     getAllAdStates();
+    getAllFooterTaps();
     getTheToken();
     getTheProfile();
     getAllModels();
@@ -172,6 +181,7 @@ export default function Header1({
     getAllTrims,
     getAllCarsForSale,
     getAllCities,
+    getAllFooterTaps,
   ]);
 
   useEffect(() => {
