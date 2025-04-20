@@ -1,9 +1,8 @@
+import { CarDealerInterface } from "@/app/[region]/cars/car-details/[id]/page";
 import Image from "next/image";
 import Link from "next/link";
-import Location from "../CarDetails/Sections/Location";
 import OurCars from "./OurCars";
 import styles from "./ourCars.module.css";
-import { CarDealerInterface } from "@/app/[region]/cars/car-details/[id]/page";
 
 const DealerMainSection = ({
   dealerItem,
@@ -99,9 +98,9 @@ const DealerMainSection = ({
                   <h4 className="title">BIO</h4>
                   <div className="text">{dealerItem?.bio}</div>
                 </div>
-                <div className="location-box">
+                {/* <div className="location-box">
                   <Location />
-                </div>
+                </div> */}
               </div>
             </div>
             <div className="col-xl-4 col-lg-12 col-md-12 col-sm-12">

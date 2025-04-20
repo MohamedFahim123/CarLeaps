@@ -8,7 +8,7 @@ function FactoryWranties({
   warranties: WarrantiesInterface[];
 }) {
   return (
-    <section className={`${styles.sectionDiff} ${styles.section}`}>
+    <section className={`${styles.sectionDiff} ${styles.section} border-top py-5`}>
       <div className="boxcar-container">
         <div className="row">
           <div className="col-12">

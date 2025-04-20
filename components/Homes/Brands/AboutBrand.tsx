@@ -80,10 +80,6 @@ export default function AboutBrand({
             </SwiperSlide>
           ))}
         </Swiper>
-        <div className="d-flex justify-content-center mt-4">
-          <button className="btn btn-light me-3">Build & price →</button>
-          <button className="btn btn-outline-light">Learn more →</button>
-        </div>
       </div>
     </div>
   );

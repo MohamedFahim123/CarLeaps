@@ -4,10 +4,9 @@ import { MainRegionName } from "@/app/utils/mainData";
 import Cookies from "js-cookie";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import styles from "./heroStyles.module.css";
-const categories = ["All", "New", "Used"];
+// const categories = ["All", "New", "Used"];
 
 interface SearchFormInputs {
   condition: string;
@@ -18,7 +17,6 @@ interface SearchFormInputs {
 export default function Hero() {
   const {
     register,
-    setValue,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<SearchFormInputs>();
@@ -27,7 +25,12 @@ export default function Hero() {
   const currRegion: string = Cookies.get("region") || MainRegionName;
 
   const onSubmit = (data: SearchFormInputs) => {
-    const newData = { ...data, condition: data.condition.toLowerCase() };
+    const newData = data.condition
+      ? {
+          ...data,
+          condition: data?.condition?.toLowerCase(),
+        }
+      : { ...data };
 
     const filteredData = Object.fromEntries(
       Object.entries(newData).filter(([, value]) => value !== "")
@@ -42,17 +45,20 @@ export default function Hero() {
     );
   };
 
-  const [selectedCategory, setSelectedCategory] = useState(categories[0]);
+  // const [selectedCategory, setSelectedCategory] = useState(categories[0]);
   return (
     <section className="boxcar-banner-section-v1">
       <div className="container">
         <div className="banner-content">
-          <span className="wow fadeInUp">New and Used Cars for Sale</span>
+          <span className="wow fadeInUp">
+            New and Used Cars for Sale in{" "}
+            {currRegion ? currRegion : MainRegionName}
+          </span>
           <h2 className="wow fadeInUp" data-wow-delay="100ms">
             Find Your Perfect Car
           </h2>
           <div className="form-tabs">
-            <ul className="form-tabs-list wow fadeInUp" data-wow-delay="200ms">
+            {/* <ul className="form-tabs-list wow fadeInUp" data-wow-delay="200ms">
               {categories.map((category) => (
                 <li
                   className={selectedCategory == category ? "current" : ""}
@@ -65,7 +71,7 @@ export default function Hero() {
                   {category}
                 </li>
               ))}
-            </ul>
+            </ul> */}
             <div className="form-tab-content">
               <div
                 className="form-tab-content wow fadeInUp"

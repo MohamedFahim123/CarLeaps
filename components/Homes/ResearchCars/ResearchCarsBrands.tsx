@@ -15,7 +15,7 @@ export default function ResearchCarsBrands() {
     <section className="boxcar-brand-section-five">
       <div className="boxcar-container">
         <div className="boxcar-title">
-          <h2 className="wow fadeInUp">Research By Brand</h2>
+          <h2 className="wow fadeInUp">Research New Cars By Brand</h2>
         </div>
         <div className={`${styles.carMakeContainer} right-box`}>
           {researchCarsMakes?.map((make) => (

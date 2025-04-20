@@ -2,7 +2,6 @@ import { Car } from "@/app/[region]/cars/car-details/[id]/page";
 import Image from "next/image";
 import Link from "next/link";
 
-
 export default function SideCard({
   carItem,
   region,
@@ -33,7 +32,7 @@ export default function SideCard({
             </h6>
             <div className="text">{carItem.dealer.address}</div>
             <ul className="contact-list">
-              <li>
+              {/* <li>
                 <a href="#">
                   <div className="image-box">
                     <Image
@@ -45,7 +44,7 @@ export default function SideCard({
                   </div>
                   Get Directions
                 </a>
-              </li>
+              </li> */}
               <li>
                 <Link href={`tel:${carItem.dealer.phone}`}>
                   <div className="image-box">
@@ -61,7 +60,10 @@ export default function SideCard({
               </li>
             </ul>
             <div className="btn-box">
-              <a href="#" className="side-btn two">
+              <Link
+                href={`https://wa.me/${carItem.dealer.whatsapp}`}
+                className="side-btn two"
+              >
                 Chat Via Whatsapp
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -82,7 +84,7 @@ export default function SideCard({
                     </clipPath>
                   </defs>
                 </svg>
-              </a>
+              </Link>
               <Link
                 href={`/${region}/cars/dealer/${carItem.dealer.id}`}
                 className="side-btn-three"

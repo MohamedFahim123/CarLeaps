@@ -1,6 +1,5 @@
 import Banner from "@/components/Homes/ResearchCars/Banner";
 import Cars from "@/components/Homes/ResearchCars/Cars";
-import CarsCollection from "@/components/Homes/ResearchCars/CarsCollection";
 import Categories from "@/components/Homes/ResearchCars/Categories";
 import Features from "@/components/Homes/ResearchCars/Features";
 import Hero from "@/components/Homes/ResearchCars/Hero";
@@ -21,7 +20,7 @@ export default function ResearchNewCarsPage() {
       <Features />
       <Cars />
       <Banner />
-      <CarsCollection />
+      {/* <CarsCollection /> */}
     </>
   );
 }

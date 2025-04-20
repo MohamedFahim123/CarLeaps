@@ -61,8 +61,8 @@ function Features() {
               <div className="content-box">
                 <h6 className="title">Special Financing Offers</h6>
                 <div className="text">
-                  Our stress-free finance department that can find financial
-                  solutions to save you money.
+                  Access exclusive finance options directly from authorized
+                  dealers—tailored to your budget and lifestyle.
                 </div>
               </div>
             </div>
@@ -144,8 +144,8 @@ function Features() {
               <div className="content-box">
                 <h6 className="title">Authorized Dealers Only</h6>
                 <div className="text">
-                  Our stress-free finance department that can find financial
-                  solutions to save you money.
+                  All listings come from official brand partners, ensuring
+                  authenticity and peace of mind.
                 </div>
               </div>
             </div>
@@ -211,8 +211,8 @@ function Features() {
               <div className="content-box">
                 <h6 className="title">Transparent Pricing</h6>
                 <div className="text">
-                  Our stress-free finance department that can find financial
-                  solutions to save you money.
+                  See real prices with no hidden costs. We show up-to-date
+                  market insights so you know what’s fair.
                 </div>
               </div>
             </div>
@@ -254,8 +254,8 @@ function Features() {
               <div className="content-box">
                 <h6 className="title">Special Incentives</h6>
                 <div className="text">
-                  Our stress-free finance department that can find financial
-                  solutions to save you money.
+                  Get access to limited-time promotions and dealership
+                  incentives you won’t find anywhere else.
                 </div>
               </div>
             </div>

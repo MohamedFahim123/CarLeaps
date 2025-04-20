@@ -3,15 +3,14 @@ import { useResearchFeatruedItemsStore } from "@/app/store/ResearchCarsFeaturedI
 import { debounce } from "@/app/utils/debounce";
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
-import styles from "./brandsStyles.module.css";
-
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import styles from "./brandsStyles.module.css";
+import Link from "next/link";
 
 export default function Categories() {
   const [tabs, setTabs] = useState<string[]>([]);
   const [activeTab, setActiveTab] = useState<string>("");
-
   const { featuredItems, featuredItemsLoading, getFeaturedItems } =
     useResearchFeatruedItemsStore();
 
@@ -86,15 +85,25 @@ export default function Categories() {
               {currItems?.map((item) => (
                 <SwiperSlide key={item.id}>
                   <div className="box-cate-car">
-                    <span className="car-image-home-9">
+                    <Link
+                      href={item.link !== "N/A" ? item?.link : "#"}
+                      target="_blank"
+                      className="car-image-home-9"
+                    >
                       <Image
                         alt={item.name}
                         src={item.image}
                         width={200}
                         height={100}
                       />
-                    </span>
-                    <span className="name">{item.name}</span>
+                    </Link>
+                    <Link
+                      href={item.link !== "N/A" ? item?.link : "#"}
+                      target="_blank"
+                      className="name"
+                    >
+                      {item.name}
+                    </Link>
                   </div>
                 </SwiperSlide>
               ))}

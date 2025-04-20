@@ -81,9 +81,9 @@ export default function Cars() {
               modules={[Pagination, Autoplay]}
               className="car-slider-three slider-layout-1 row"
             >
-              {carsForSale?.slice(0, 8).map((car, index) => (
+              {carsForSale?.slice(0, 8).map((car) => (
                 <SwiperSlide
-                  key={index}
+                  key={car.id}
                   className="box-car car-block-three col-lg-3 col-md-6 col-sm-12"
                   style={{
                     margin: "0 10px",
@@ -109,7 +109,7 @@ export default function Cars() {
                           car?.ad_state === "Authorized New") && (
                           <span>{car.ad_state}</span>
                         )}
-                      <Link
+                      {/* <Link
                         href={`/${currentRegion}/cars/car-details/${car.name}`}
                         title=""
                         className="icon-box"
@@ -133,14 +133,16 @@ export default function Cars() {
                             </clipPath>
                           </defs>
                         </svg>
-                      </Link>
+                      </Link> */}
                     </div>
                     <div className="content-box">
                       <h6 className="title fw-bold text-capitalize fs-4 mb-2">
                         <Link
                           href={`/${currentRegion}/cars/car-details/${car.name}`}
                         >
-                          {car.name.replaceAll("-", " ")}
+                          {car.year !== "N/A" ? car.year : ""}{" "}
+                          {car.make !== "N/A" ? car.make : ""}{" "}
+                          {car.model !== "N/A" ? car.model : ""}
                         </Link>
                       </h6>
                       <div className="text">

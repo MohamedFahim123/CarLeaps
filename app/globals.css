@@ -217,3 +217,11 @@ img {
 .price-box .form-control::placeholder {
   color: #00000070 !important;
 }
+.UnderLinedText {
+  text-decoration: underline !important;
+  text-transform: capitalize !important;
+  text-underline-offset: 2px;
+}
+.UnderLinedText:hover {
+  color: #6e499f !important;
+}

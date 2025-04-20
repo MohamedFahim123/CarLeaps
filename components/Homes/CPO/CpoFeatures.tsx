@@ -6,9 +6,13 @@ export default function CpoFeatures() {
           <div className="content-column col-lg-6 col-lg-6 col-sm-12">
             <div className="boxcar-title wow fadeInUp">
               <h2 className="title">
-                We{"'"}re BIG on what <br />
-                matters to you
+                Certified Like New. <br /> Backed Like Never Before.
               </h2>
+              <p className="text-muted pe-5 fs-5 mt-4">
+                Every CPO car on CarLeaps is handpicked from authorized dealers,
+                rigorously inspected, and comes with full peace of mind—because
+                your next car should feel as safe as your first.
+              </p>
             </div>
           </div>
           <div className="col-lg-6 col-md-12 col-sm-12">
@@ -70,10 +74,11 @@ export default function CpoFeatures() {
                     </svg>
                   </div>
                   <div className="content-box">
-                    <h6 className="title">Special Financing Offers</h6>
+                    <h6 className="title">Only from Authorized Dealers</h6>
                     <div className="text">
-                      Our stress-free finance department that can find financial
-                      solutions to save you money.
+                      All CPO vehicles are sourced directly from official brand
+                      partners and licensed dealers. No random uploads. No
+                      risks.
                     </div>
                   </div>
                 </div>
@@ -152,10 +157,11 @@ export default function CpoFeatures() {
                     </svg>
                   </div>
                   <div className="content-box">
-                    <h6 className="title">Trusted Car Dealership</h6>
+                    <h6 className="title">Backed by Warranty</h6>
                     <div className="text">
-                      Our stress-free finance department that can find financial
-                      solutions to save you money.
+                      Every CPO car includes a manufacturer-backed or
+                      dealer-provided warranty, giving you protection well
+                      beyond the purchase.
                     </div>
                   </div>
                 </div>
@@ -225,10 +231,10 @@ export default function CpoFeatures() {
                     </svg>
                   </div>
                   <div className="content-box">
-                    <h6 className="title">Transparent Pricing</h6>
+                    <h6 className="title">Full History. No Surprises.</h6>
                     <div className="text">
-                      Our stress-free finance department that can find financial
-                      solutions to save you money.
+                      Every CPO listing comes with a verified service and
+                      ownership history, so you know exactly what you’re buying.
                     </div>
                   </div>
                 </div>
@@ -267,10 +273,10 @@ export default function CpoFeatures() {
                     </svg>
                   </div>
                   <div className="content-box">
-                    <h6 className="title">Expert Car Service</h6>
+                    <h6 className="title">Flexible Finance Options</h6>
                     <div className="text">
-                      Our stress-free finance department that can find financial
-                      solutions to save you money.
+                      Get access to competitive financing solutions tailored for
+                      pre-owned vehicles—simple, fast, and stress-free.
                     </div>
                   </div>
                 </div>

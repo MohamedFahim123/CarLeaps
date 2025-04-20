@@ -36,11 +36,20 @@ export default function BrandsMainPage({ brandId }: { brandId: number }) {
             currRegion={currRegion || MainRegionName}
             brand={selectedBrand}
           />
-          <BrandsBanner currRegion={currRegion || MainRegionName} brand={selectedBrand} />
-          <IncentivesSection currRegion={currRegion || MainRegionName}  brand={selectedBrand} />
-          <AboutBrand currRegion={currRegion || MainRegionName} brand={selectedBrand} />
-          <BrandsChooseUs brand={selectedBrand} />
-          <BrandsSpecialSection />
+          <BrandsBanner
+            currRegion={currRegion || MainRegionName}
+            brand={selectedBrand}
+          />
+          <IncentivesSection
+            currRegion={currRegion || MainRegionName}
+            brand={selectedBrand}
+          />
+          <AboutBrand
+            currRegion={currRegion || MainRegionName}
+            brand={selectedBrand}
+          />
+          {/* <BrandsChooseUs brand={selectedBrand} /> */}
+          {/* <BrandsSpecialSection /> */}
           <AllCurrentModels brand={selectedBrand} />
         </>
       ) : (

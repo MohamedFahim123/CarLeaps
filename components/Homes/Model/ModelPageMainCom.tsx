@@ -3,15 +3,14 @@
 import { useResearchCarsMakesStore } from "@/app/store/ResearchCarMakes";
 import { MainRegionName } from "@/app/utils/mainData";
 import Cookies from "js-cookie";
+import { usePathname } from "next/navigation";
 import { useEffect } from "react";
-import BrandsSpecialSection from "../Brands/BrandsSpecialSection";
 import IncentivesSection from "../Brands/IncentivesSection";
 import FactoryWranties from "./FactoryWranties";
 import GallerySection from "./GallerySection";
 import KeySpecifications from "./KeySpecifications";
 import ModelHeroSection from "./ModelHeroSection";
 import TrimView from "./TrimView";
-import { usePathname } from "next/navigation";
 
 const ModelPageMainCom = ({ model }: { model: number }) => {
   const {
@@ -63,7 +62,7 @@ const ModelPageMainCom = ({ model }: { model: number }) => {
           <GallerySection model={selectedModel} />
           <IncentivesSection currRegion={currRegion} />
           <TrimView model={selectedModel} />
-          <BrandsSpecialSection />
+          {/* <BrandsSpecialSection /> */}
           {/* <Blogs /> */}
           <FactoryWranties warranties={selectedMake.warranties} />
         </>

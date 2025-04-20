@@ -1,16 +1,14 @@
 "use client";
+import { Car } from "@/app/[region]/cars/car-details/[id]/page";
 import { useCitiesStore } from "@/app/store/Cities";
 import { useState } from "react";
 import ModalVideo from "react-modal-video";
 import RelatedCars from "./RelatedCars";
 import Description from "./Sections/Description";
 import Faqs from "./Sections/Faqs";
-import Financing from "./Sections/Financing";
 import ImagesSection from "./Sections/ImagesSection";
-import Location from "./Sections/Location";
 import Overview from "./Sections/Overview";
 import SideCard from "./Sections/SideCard";
-import { Car } from "@/app/[region]/cars/car-details/[id]/page";
 
 export default function CarDetailsSection({
   carItem,
@@ -52,12 +50,12 @@ export default function CarDetailsSection({
                     <Faqs carItem={carItem} />
                   </div>
                 </div>
-                <div className="location-box">
+                {/* <div className="location-box">
                   <Location />
-                </div>
-                <div className="form-box">
+                </div> */}
+                {/* <div className="form-box">
                   <Financing />
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

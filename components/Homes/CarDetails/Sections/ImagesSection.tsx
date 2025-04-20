@@ -23,7 +23,12 @@ export default function ImagesSection({
             <Link href={`/${region}/cars/cars-for-sale`}>Cars for Sale</Link>
           </li>
         </ul>
-        <h2 className="mb-4 text-capitalize">{carItem?.name?.replaceAll("-", " ")}</h2>
+        <h2 className="mb-4 text-capitalize">
+          {carItem.condition !== "N/A" ? carItem.condition : ""}{" "}
+          {carItem?.year !== "N/A" ? carItem?.year : ""}{" "}
+          {carItem.make ? carItem.make : ""}{" "}
+          {carItem.model ? carItem.model : ""}
+        </h2>
         <ul className="spectes-list">
           <li>
             <span>
@@ -71,21 +76,9 @@ export default function ImagesSection({
           </li>
         </ul>
         <div className="content-box">
-          <div className="btn-box justify-content-end">
-            <div className="share-btn">
-              <span>Save</span>
-              <button type="button" title="Share" className="share">
-                <Image
-                  src="/images/resource/share1-1.svg"
-                  width={12}
-                  height={12}
-                  alt="Save Icon"
-                />
-              </button>
-            </div>
-          </div>
           <h3 className="title">
-            {carItem.offer_price} {currentCurrency}
+            <span className="fw-semibold fs-4">{currentCurrency}</span>
+            {carItem.offer_price}
           </h3>
         </div>
       </div>

@@ -262,9 +262,9 @@ export default function ShopList() {
                           <figure className="image">
                             <Image
                               alt={product.name}
-                              src={product.cover}
-                              width={186}
-                              height={186}
+                              src={product.image}
+                              width={230}
+                              height={230}
                             />
                           </figure>
                         </div>
