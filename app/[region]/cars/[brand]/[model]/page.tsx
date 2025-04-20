@@ -12,5 +12,5 @@ export default async function ModelPage({
 }) {
   const { model } = await params;
 
-  return <ModelPageMain model={+model} />;
+  return <ModelPageMain model={model} />;
 }

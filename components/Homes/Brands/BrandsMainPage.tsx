@@ -9,20 +9,22 @@ import BrandsBanner from "./BrandsBanner";
 import BrandsHeroSection from "./BrandsHeroSection";
 import IncentivesSection from "./IncentivesSection";
 
-export default function BrandsMainPage({ brandId }: { brandId: number }) {
+export default function BrandsMainPage({ brandName }: { brandName: string }) {
   const {
     researchCarsMakes,
     researchCarsMakesLoading,
     setSelectedMake,
     currRegion,
   } = useResearchCarsMakesStore();
-  const selectedBrand = researchCarsMakes.find((brand) => brand.id === brandId);
+  const selectedBrand = researchCarsMakes.find(
+    (brand) => brand.name.toLowerCase() === brandName.toLowerCase()
+  );
 
   useEffect(() => {
     if (selectedBrand) {
       setSelectedMake(selectedBrand);
     }
-  }, [brandId, selectedBrand, setSelectedMake]);
+  }, [brandName, selectedBrand, setSelectedMake]);
 
   if (researchCarsMakesLoading) return <h1>Loading...</h1>;
 

@@ -12,7 +12,7 @@ import KeySpecifications from "./KeySpecifications";
 import ModelHeroSection from "./ModelHeroSection";
 import TrimView from "./TrimView";
 
-const ModelPageMainCom = ({ model }: { model: number }) => {
+const ModelPageMainCom = ({ model }: { model: string }) => {
   const {
     setSelectedMake,
     researchCarsMakes,
@@ -33,11 +33,11 @@ const ModelPageMainCom = ({ model }: { model: number }) => {
       const MakeId = segments[segments.length - 2];
 
       setSelectedMake(
-        researchCarsMakes.find((brand) => brand.id === Number(MakeId))!
+        researchCarsMakes.find((brand) => brand.name === MakeId)!
       );
       if (selectedMake) {
         setSelectedModel(
-          selectedMake.models.find((m) => m.id === Number(ModelId))!
+          selectedMake.models.find((m) => m.name === ModelId)!
         );
       }
     }

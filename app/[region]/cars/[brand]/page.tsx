@@ -16,7 +16,7 @@ export default async function BrandsPage({
 
   return (
     <>
-      <BrandsMainPage brandId={+brand} />
+      <BrandsMainPage brandName={brand} />
     </>
   );
 }

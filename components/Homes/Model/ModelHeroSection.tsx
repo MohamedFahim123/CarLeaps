@@ -41,13 +41,13 @@ export default function ModelHeroSection({
             Home /
           </Link>
           <Link
-            href={`/${currRegion}/cars/${model.make_id}`}
+            href={`/${currRegion}/cars/${model?.make?.toLowerCase()}`}
             className={`${styles.linkNavBreadCrumb} breadcrumb-item active ms-1`}
           >
             {model.make} /
           </Link>
           <Link
-            href={`/${currRegion}/cars/${model.make_id}/${model.id}`}
+            href={`/${currRegion}/cars/${model?.make?.toLowerCase()}/${model?.name?.toLowerCase()}`}
             className={`${styles.linkNavBreadCrumb} breadcrumb-item active ms-1`}
           >
             {model.name}

@@ -1,10 +1,10 @@
 "use client";
+import { useResearchCarsMakesStore } from "@/app/store/ResearchCarMakes";
 import { MainRegionName } from "@/app/utils/mainData";
 import Cookies from "js-cookie";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import styles from "./brandsStyles.module.css";
-import { useResearchCarsMakesStore } from "@/app/store/ResearchCarMakes";
 
 export default function ResearchCarsBrands() {
   const router = useRouter();
@@ -22,7 +22,9 @@ export default function ResearchCarsBrands() {
             <div
               className={`${styles.carMake} cars-block-five`}
               key={make?.id}
-              onClick={() => router.push(`/${Region}/cars/${make.id}`)}
+              onClick={() =>
+                router.push(`/${Region}/cars/${make?.name?.toLocaleLowerCase()}`)
+              }
             >
               <div className={`inner-box wow fadeInUp`}>
                 <div className="image-box">

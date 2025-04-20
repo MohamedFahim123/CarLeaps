@@ -23,7 +23,11 @@ function AllCurrentModels({ brand }: { brand: ResearchCarsMakes }) {
                   <div className={styles.modelContainer}>
                     <h4
                       onClick={() =>
-                        router.push(`/${region}/cars/${brand.id}/${model.id}`)
+                        router.push(
+                          `/${region}/cars/${brand?.name?.toLowerCase()}/${
+                            model?.name?.toLowerCase()
+                          }`
+                        )
                       }
                     >
                       {model.name}
