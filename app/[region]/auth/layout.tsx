@@ -9,9 +9,11 @@ import WithoutAuth from "@/components/ProtectedRoute/WithoutAuth";
 import { PropsWithChildren } from "react";
 
 function AuthLayout({ children }: PropsWithChildren) {
+  const [showMenu, setShowMenu] = useState<boolean>(false);
+
   return (
     <>
-      <MobileMenu />
+      <MobileMenu showMenu={showMenu} setShowMenu={setShowMenu} />
       <div className="boxcar-wrapper">
         <Header1 headerClass="boxcar-header" />
         {children}
