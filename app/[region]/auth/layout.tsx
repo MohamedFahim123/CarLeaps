@@ -6,7 +6,7 @@ import Footer from "@/components/Footers/Footer";
 import Header1 from "@/components/Headers/Header";
 import MobileMenu from "@/components/Headers/MobileMenu";
 import WithoutAuth from "@/components/ProtectedRoute/WithoutAuth";
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, useState } from "react";
 
 function AuthLayout({ children }: PropsWithChildren) {
   const [showMenu, setShowMenu] = useState<boolean>(false);
