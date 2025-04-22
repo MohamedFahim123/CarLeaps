@@ -9,11 +9,12 @@ import "@/public/main.scss";
 import { usePathname } from "next/navigation";
 import "photoswipe/dist/photoswipe.css";
 import { ChildrenPropsInterface } from "../../utils/interfaces";
+import { useState } from "react";
 
 export default function CarsLayout({ children }: ChildrenPropsInterface) {
   const pathName = usePathname();
   const currRegion: string = pathName.split("/")[1];
-
+  const [showMenu, setShowMenu] = useState<boolean>(false);
   const condition: boolean =
     pathName.includes(`/${currRegion}/cars/cars-for-sale/search`) ||
     pathName.includes(`/${currRegion}/cars/car-details`) ||
@@ -21,7 +22,7 @@ export default function CarsLayout({ children }: ChildrenPropsInterface) {
 
   return (
     <>
-      <MobileMenu />
+      <MobileMenu showMenu={showMenu} setShowMenu={setShowMenu} />
       {condition ? (
         <>
           <Header1 headerClass="boxcar-header header-style-v1 style-two inner-header cus-style-1" />
