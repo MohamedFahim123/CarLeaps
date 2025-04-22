@@ -1,6 +1,5 @@
 import Image from "next/image";
 import React from "react";
-import styles from "./featuresStyles.module.css";
 
 function Features() {
   // const [isOpen, setOpen] = useState<boolean>(false);
