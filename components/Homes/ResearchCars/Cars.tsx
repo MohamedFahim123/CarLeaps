@@ -4,6 +4,7 @@ import { useResearchCarsMakesStore } from "@/app/store/ResearchCarMakes";
 import { useResearchCarsAuthorizedStore } from "@/app/store/ResearchCarsAuthorized";
 import Image from "next/image";
 import Link from "next/link";
+import styles from "../Home/heroStyles.module.css";
 
 const icons: { icon: string }[] = [
   { icon: "flaticon-gasoline-pump" },
@@ -24,7 +25,7 @@ export default function Cars() {
         <section className="cars-section-four bg-1">
           <div className="boxcar-container">
             <div className="boxcar-title wow fadeInUp">
-              <h2 className="mb-5">
+              <h2 className={`mb-5 ${styles.boxcar_title}`}>
                 Authorized New Cars Available Today In {currRegion}
               </h2>
               <Link href={`/`} className="btn-title">
@@ -88,7 +89,7 @@ export default function Cars() {
                               {car.make ? car.make : ""}
                             </Link>
                           </h6>
-                          <div className="text">
+                          <div className="text text-truncate">
                             {car?.description.slice(0, 30)}...
                           </div>
                           <ul className="d-flex justify-content-between">

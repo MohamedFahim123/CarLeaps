@@ -41,7 +41,7 @@ export default function Categories() {
     <section className="category-section">
       <div className="large-container">
         <h2 className="title">A Vehicle For Every Lifestyle</h2>
-        <div className="nav nav-tabs cate-nav-tab">
+        <div className="nav nav-tabs cate-nav-tab pb-5 justify-content-center">
           {tabs?.map((tab) => (
             <button
               title={tab}
@@ -76,7 +76,7 @@ export default function Categories() {
                 576: {
                   slidesPerView: 1,
                 },
-                480: {
+                300: {
                   slidesPerView: 1,
                 },
               }}

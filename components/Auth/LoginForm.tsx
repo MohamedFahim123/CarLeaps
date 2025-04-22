@@ -21,7 +21,9 @@ export default function LoginForm() {
   } = useForm<CompanyAndUserLoginForm>();
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
-  const onSubmit: SubmitHandler<CompanyAndUserLoginForm> = async (data: CompanyAndUserLoginForm) => {
+  const onSubmit: SubmitHandler<CompanyAndUserLoginForm> = async (
+    data: CompanyAndUserLoginForm
+  ) => {
     const toastId = toast.loading("Submitting...");
 
     try {
@@ -79,19 +81,43 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+    <div
+      className="tab-pane fade show active"
+      id="nav-home"
+      role="tabpanel"
+      aria-labelledby="nav-home-tab"
+    >
       <div className="form-box">
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form className="border-0" onSubmit={handleSubmit(onSubmit)}>
           <div className="form_boxes">
             <label>Email or Username</label>
-            <input {...register("email", { required: "Required" })} type="email" placeholder="Creativelayer088" />
-            {errors.email && <span className="text-danger text-sm error">{errors.email.message}</span>}
+            <input
+              {...register("email", { required: "Required" })}
+              type="email"
+              placeholder="Creativelayer088"
+            />
+            {errors.email && (
+              <span className="text-danger text-sm error">
+                {errors.email.message}
+              </span>
+            )}
           </div>
           <div className="form_boxes position-relative">
             <label>Password</label>
-            <input {...register("password", { required: "Required" })} type={showPassword ? "text" : "password"} placeholder="********" />
-            {errors.password && <span className="text-danger text-sm error">{errors.password.message}</span>}
-            <span className="show-password" onClick={() => setShowPassword(!showPassword)}>
+            <input
+              {...register("password", { required: "Required" })}
+              type={showPassword ? "text" : "password"}
+              placeholder="********"
+            />
+            {errors.password && (
+              <span className="text-danger text-sm error">
+                {errors.password.message}
+              </span>
+            )}
+            <span
+              className="show-password"
+              onClick={() => setShowPassword(!showPassword)}
+            >
               {showPassword ? <FaEyeSlash /> : <FaEye />}
             </span>
           </div>
@@ -106,12 +132,18 @@ export default function LoginForm() {
             </a>
           </div>
           <div className="form-submit">
-            <button title="login" disabled={isSubmitting} type="submit" className="theme-btn">
-              Login <Image alt="" src="/images/arrow.svg" width={14} height={14} />
+            <button
+              title="login"
+              disabled={isSubmitting}
+              type="submit"
+              className="theme-btn"
+            >
+              Login{" "}
+              <Image alt="" src="/images/arrow.svg" width={14} height={14} />
             </button>
           </div>
         </form>
-        <div className="btn-box-two">
+        {/* <div className="btn-box-two">
           <span>OR</span>
           <div className="social-btns row ">
             <a href="#" className="fb-btn col-md-5 mx-1">
@@ -123,7 +155,7 @@ export default function LoginForm() {
               Google
             </a>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

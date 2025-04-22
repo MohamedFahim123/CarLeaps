@@ -10,11 +10,17 @@ export default function ProfileShow({ profile }: { profile: Profile | null }) {
       >
         <div className="gallery-box">
           <div className="inner-box add-input-image">
-            <div className="image-box ">
+            <div className="image-box">
               <Image
-                className="object-fit-contain rounded-circle"
+                className="rounded-circle"
                 width={150}
                 height={150}
+                style={{
+                  aspectRatio: "1/1",
+                  objectFit: "contain",
+                  backgroundColor: "#ffffff90",
+                  boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.1)",
+                }}
                 src={
                   profile?.image === "N/A"
                     ? "/images/resource/list2-4.png"

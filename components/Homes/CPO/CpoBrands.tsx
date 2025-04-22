@@ -5,6 +5,7 @@ import { useResearchCarsMakesStore } from "@/app/store/ResearchCarMakes";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import styles from "../ResearchCars/brandsStyles.module.css";
+import styles2 from "../Home/heroStyles.module.css";
 
 const CpoBrands = () => {
   const { currRegion } = useResearchCarsMakesStore();
@@ -15,7 +16,7 @@ const CpoBrands = () => {
     <section className="boxcar-brand-section-five">
       <div className="boxcar-container">
         <div className="boxcar-title">
-          <h2 className="wow fadeInUp">Research By Brand</h2>
+          <h2 className={`${styles2.boxcar_title} wow fadeInUp`}>Research By Brand</h2>
         </div>
         <div className={`${styles.carMakeContainer} right-box`}>
           {CPOCarsMakes?.map((make) => (

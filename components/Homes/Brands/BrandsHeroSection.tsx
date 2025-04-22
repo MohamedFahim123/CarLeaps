@@ -22,7 +22,7 @@ export default function BrandsHeroSection({
       className={`boxcar-banner-section-nine ${styles.heroSection}`}
       style={{ backgroundImage: `url(${brand.cover})` }}
     >
-      <div className="container h-100">
+      <div className="boxcar-container h-100">
         <div className="row h-100">
           <div className="col-12 d-flex justify-content-end flex-column mb-5">
             <div className="section-title">

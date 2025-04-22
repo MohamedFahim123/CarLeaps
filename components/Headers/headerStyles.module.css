@@ -16,9 +16,37 @@
   color: red !important;
 }
 .btnCarPortal {
-  background-color: #6E499F !important;
+  background-color: #6e499f !important;
   color: #fff !important;
 }
 .btnCarPortal:hover {
   background-color: #4c1299 !important;
+}
+
+.regionSelector {
+  font-size: 14px !important;
+}
+
+@media (max-width: 992px) {
+  .regionSelector {
+    font-size: 18px !important;
+  }
+  .regionSelectorContainer {
+    max-width: 120px !important;
+    margin-inline-end: 0px !important
+  }
+}
+
+@media (max-width: 400px) {
+  .regionSelectorContainer {
+    max-width: 100px !important;
+    margin-inline-end: 0px !important
+  }
+  .regionSelector {
+    font-size: 15px !important;
+    padding: 5px 20px 5px 10px !important;
+  }
+  .logo {
+    width: 100px !important;
+  }
 }

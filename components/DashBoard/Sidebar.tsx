@@ -48,10 +48,10 @@ export default function Sidebar() {
       toast.success(res?.data?.message, {
         autoClose: 1500,
       });
+      clearToken();
       if (res.status === 200) {
-        clearToken();
-        axios.post("/api/logout", { token: "" });
-        window.location.reload();
+        await axios.post("/api/logout", { token: "" });
+        window.location.href = "/";
       }
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -86,10 +86,10 @@ export default function Sidebar() {
       label: "Add Listings",
     },
     {
-      href: "#",
+      href: `#`,
       src: "/images/icons/dash8.svg",
-      width: 18,
-      height: 18,
+      width: 22,
+      height: 22,
       label: "Logout",
       isExternal: true,
       onClick: logoutHandler,
@@ -102,17 +102,30 @@ export default function Sidebar() {
         {menuItems?.map((item, index) => (
           <li key={index}>
             {item?.isExternal ? (
-              // <a href={item.href}>
-              //   <Image alt="" src={item.src} width={item.width} height={item.height} />
-              //   {item.label}
-              // </a>
-              <button onClick={item.onClick} className="logout-button">
-                <Image alt="" src={item.src} width={item.width} height={item.height} />
+              <Link
+                href={item.href}
+                onClick={item.onClick}
+                className="logout-button"
+              >
+                <Image
+                  alt=""
+                  src={item.src}
+                  width={item.width}
+                  height={item.height}
+                />
                 {item.label}
-              </button>
+              </Link>
             ) : (
-              <Link href={item.href} className={pathname == item.href ? "menuActive" : ""}>
-                <Image alt="" src={item.src} width={item.width} height={item.height} />
+              <Link
+                href={item.href}
+                className={pathname == item.href ? "menuActive" : ""}
+              >
+                <Image
+                  alt=""
+                  src={item.src}
+                  width={item.width}
+                  height={item.height}
+                />
                 {item.label}
               </Link>
             )}

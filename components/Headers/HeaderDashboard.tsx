@@ -15,14 +15,16 @@ import { useTransmissionsStore } from "@/app/store/transmissions";
 import { useYearsStore } from "@/app/store/years";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Nav from "./Nav";
 import { useActiveCars } from "@/app/store/activecars";
 import { usePendingCars } from "@/app/store/pendingCars";
 import { useDeactiveCars } from "@/app/store/deactiveCars";
 import { useCitiesStore } from "@/app/store/Cities";
+import MobileDashboardMenue from "./MobileDashboardMenue";
 
 function HeaderDashboard() {
+  const [showMenu, setShowMenu] = useState<boolean>(false);
   const { makesCars, getMakesCars, makesCarsLoading } = useMakesCarsStore();
   const { models, getModels, modelsLoading } = useModelsStore();
   const { trims, getTrims, trimsLoading } = useTrimsStore();
@@ -208,41 +210,44 @@ function HeaderDashboard() {
                 </ul>
               </nav>
             </div>
-            <div className="right-box">
-              <a href="#" className="haeder-img">
-                <Image
-                  width={50}
-                  height={50}
-                  src={
-                    profile?.image === "N/A"
-                      ? "/images/resource/header-img.png"
-                      : profile?.image
-                      ? profile?.image
-                      : "/images/resource/header-img.png"
-                  }
-                  alt={"Profile Image"}
-                  className="object-fit-cover rounded-circle"
-                />
-              </a>
-              <div className="mobile-navigation">
-                <a href="#nav-mobile" title="">
-                  <svg
-                    width={22}
-                    height={11}
-                    viewBox="0 0 22 11"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <rect width={22} height={2} fill="white" />
-                    <rect y={9} width={22} height={2} fill="white" />
-                  </svg>
-                </a>
+            <Image
+              width={50}
+              height={50}
+              style={{
+                height: "50px",
+                width: "50px",
+                aspectRatio: "1/1",
+                objectFit: "contain",
+                backgroundColor: "white",
+              }}
+              src={
+                profile?.image === "N/A"
+                  ? "/images/resource/header-img.png"
+                  : profile?.image
+                  ? profile?.image
+                  : "/images/resource/header-img.png"
+              }
+              alt={"Profile Image"}
+              className="rounded-circle"
+            />
+            <div className="mobile-navigation" onClick={() => setShowMenu(true)}>
+              <div title="side Nav">
+                <svg
+                  width={22}
+                  height={11}
+                  viewBox="0 0 22 11"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect width={22} height={2} fill="white" />
+                  <rect y={9} width={22} height={2} fill="white" />
+                </svg>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div id="nav-mobile" />
+      </div>{" "}
+      {showMenu && <MobileDashboardMenue setShowMenu={setShowMenu} />}
     </header>
   );
 }

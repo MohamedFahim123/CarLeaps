@@ -160,7 +160,7 @@ export default function ShopList() {
           <h2>Perfect Match Cars List</h2>
         </div>
         <div className="row">
-          <div className="col-lg-3 col-md-12 col-sm-12">
+          <div className="col-lg-3 col-md-12 col-sm-12 mb-5">
             <div className="side-bar">
               <div className="categories-box">
                 <h6 className="title">Interests</h6>

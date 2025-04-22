@@ -19,13 +19,13 @@ export default function Features3() {
           <h2>Quick Links</h2>
         </div>
         <ul
-          className="nav nav-tabs wow fadeInUp"
+          className="nav nav-tabs wow fadeInUp flex-nowrap"
           data-wow-delay="100ms"
           id="myTab"
           role="tablist"
         >
           {footerTaps.map((tap) => (
-            <li className="nav-item" role="presentation" key={tap.id}>
+            <li className="nav-item w-auto mb-0" role="presentation" key={tap.id}>
               <button
                 className={`nav-link text-capitalize fw-semibold ${
                   activeTab === tap.name ? "active fw-bold" : ""
@@ -62,7 +62,7 @@ export default function Features3() {
                   aria-labelledby={`${tap.name}-tab`}
                 >
                   {tap.items.map((t) => (
-                    <li key={t.id} className="pe-5 me-5">
+                    <li key={t.id} className="pe-5 me-5 my-1">
                       <Link className="pe-5 UnderLinedText" href={t.link}>{t.title}</Link>
                     </li>
                   ))}

@@ -2,6 +2,7 @@
 
 import { ModelsDetailsInterface } from "@/app/store/ResearchCarMakes";
 import { useState } from "react";
+import styles2 from "../Home/heroStyles.module.css";
 import ExploreModelSection from "./ExploreModelSection";
 import styles from "./modelStyle.module.css";
 
@@ -16,7 +17,7 @@ export default function TrimView({ model }: { model: ModelsDetailsInterface }) {
           <div className="boxcar-container">
             <div className={`${styles.brandsBannerHead}`}>
               <p>Explore the full range</p>
-              <h3>
+              <h3 className={`${styles2.boxcar_title} fw-semibold`}>
                 Find the {model.name} that{"'"}s right for you
               </h3>
               <nav className="wow fadeInUp" data-wow-delay="100ms">

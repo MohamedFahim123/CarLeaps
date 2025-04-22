@@ -1,7 +1,11 @@
 .hero_section {
   position: relative;
-  height: 80vh;
+  height: 100vh;
   overflow: hidden;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: start !important;
+  justify-content: center !important;
 }
 .hero_section::after {
   content: "";
@@ -126,4 +130,73 @@
   -moz-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
   -o-transform: translateY(-50%);
+}
+@media (max-width: 1100px) {
+  .hero_section {
+    height: 120vh;
+  }
+  .hero_content {
+    max-width: 400px;
+  }
+  .hero_content h1 {
+    font-size: 40px;
+    margin-bottom: 20px !important;
+  }
+  .hero_content p {
+    font-size: 16px;
+    margin-bottom: 20px !important;
+  }
+  .hero_content div:not(:last-child) {
+    margin-bottom: 20px !important;
+  }
+  .hero_content .price-section {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .section_p {
+    font-size: 22px !important;
+  }
+  .section_p2 {
+    font-size: 17px !important;
+  }
+  .trimImage {
+    height: 500px !important;
+    object-fit: contain !important;
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero_section {
+    height: 100vh;
+  }
+  .hero_content {
+    max-width: 300px;
+  }
+  .hero_content h1 {
+    font-size: 30px;
+  }
+  .hero_content p:last-of-type {
+    font-size: 16px !important;
+  }
+  .hero_content h4 {
+    font-size: 16px !important;
+  }
+  .hero_content button {
+    font-size: 16px !important;
+  }
+  .section_p {
+    font-size: 20px !important;
+    margin-bottom: 10px !important;
+  }
+  .section_p2 {
+    font-size: 15px !important;
+    margin-bottom: 0 !important;
+  }
+  .spec_card {
+    width: 170px !important;
+    padding: 10px !important;
+  }
 }

@@ -27,8 +27,9 @@ export default function ModelHeroSection({
         <Image
           src={model.cover}
           alt="Car Background"
-          fill
-          className="img-fluid object-fit-cover"
+          className="object-fit-cover w-100 h-100"
+          width={1920}
+          height={1080}
           style={{ zIndex: -1 }}
         />
       </div>

@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import styles from "./brandsStyles.module.css";
 import { useCarsForSaleStore } from "@/app/store/CarsForSale";
+import styles2 from '../Home/heroStyles.module.css';
 
 export default function CarsForSaleBrands() {
   const router = useRouter();
@@ -16,7 +17,7 @@ export default function CarsForSaleBrands() {
     <section className="boxcar-brand-section-five pb-0">
       <div className="boxcar-container">
         <div className="boxcar-title">
-          <h2 className="wow fadeInUp">Browse By Make</h2>
+          <h2 className={`${styles2.boxcar_title} wow fadeInUp`}>Browse By Make</h2>
         </div>
         <div className={`${styles.carMakeContainer} right-box`}>
           {makes?.map((make) => (

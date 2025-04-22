@@ -98,7 +98,8 @@ export default async function CarDetailsPage({
     body: JSON.stringify(reqBody),
   });
   const responseJson = await carItemReq.json();
-  const carItem: Car = responseJson?.data;
+  const carItem: Car = responseJson?.data?.car;
+  const relatedCars : Car[] = responseJson?.data?.related_cars;
 
-  return <CarDetailsSection region={region} carItem={carItem} />;
+  return <CarDetailsSection region={region} carItem={carItem} relatedCars={relatedCars} />;
 }

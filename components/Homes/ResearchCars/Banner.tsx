@@ -4,6 +4,7 @@ import { useResearchCarsMakesStore } from "@/app/store/ResearchCarMakes";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import styles from "./bannerStyles.module.css";
 
 function Banner() {
   const { currRegion } = useResearchCarsMakesStore();
@@ -12,7 +13,7 @@ function Banner() {
     <section className="blog-section-three">
       <div className="boxcar-container">
         <div className="row">
-          <div className="blog-blockt-three home9 col-lg-6 col-md-6 col-sm-12">
+          <div className="blog-blockt-three home9 col-lg-6 col-md-6 col-sm-12 mb-4">
             <div className="inner-box wow fadeInUp">
               <div className="hover-img">
                 <figure className="image">
@@ -24,18 +25,14 @@ function Banner() {
                     style={{ color: "transparent" }}
                   />
                 </figure>
-                <div className="content-box">
+                <div className={`content-box ${styles.topMd50} top-0 d-flex flex-column justify-content-around h-100 py-3`}>
                   <h3 className="title">
                     Are You Looking <br />
                     For a Car ?
                   </h3>
-                  <div className="text">
-                    We are committed to providing our customers with exceptional
-                    service.
-                  </div>
                   <Link
                     href={`/${currRegion}/cars/find-car`}
-                    className="read-more"
+                    className="read-more mt-2 w-75"
                   >
                     Get Started
                     <svg
@@ -63,7 +60,7 @@ function Banner() {
             </div>
           </div>
           {/* blog-blockt-three */}
-          <div className="blog-blockt-three home9 col-lg-6 col-md-6 col-sm-12">
+          <div className="blog-blockt-three home9 col-lg-6 col-md-6 col-sm-12 mb-4">
             <div className="inner-box two wow fadeInUp" data-wow-delay="100ms">
               <div className="hover-img">
                 <figure className="image">
@@ -74,18 +71,14 @@ function Banner() {
                     height={396}
                   />
                 </figure>
-                <div className="content-box">
+                <div className={`content-box ${styles.topMd50} top-0 d-flex flex-column justify-content-around h-100 py-3`}>
                   <h3 className="title">
                     Do You Want to <br />
                     Sell a Car ?
                   </h3>
-                  <div className="text">
-                    We are committed to providing our customers with exceptional
-                    service.
-                  </div>
                   <Link
                     href={`/${currRegion}/cars/sell-car`}
-                    className="read-more"
+                    className="read-more mt-2 w-75"
                   >
                     Get Started
                     <svg

@@ -5,13 +5,21 @@ import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./Brands.module.css";
 import { ResearchCarsMakes } from "@/app/store/ResearchCarMakes";
-
-export default function IncentivesSection({ brand ,currRegion }: {currRegion: string; brand?: ResearchCarsMakes }) {
+import styles2 from "../Home/heroStyles.module.css";
+export default function IncentivesSection({
+  brand,
+  currRegion,
+}: {
+  currRegion: string;
+  brand?: ResearchCarsMakes;
+}) {
   return (
     <>
       {brand && brand?.incentives?.length > 0 && (
         <div className="boxcar-container py-5">
-          <h3 className="mb-4">{brand.name} Incentives in {currRegion}</h3>
+          <h3 className={`${styles2.boxcar_title} fw-semibold mb-4`}>
+            {brand.name} Incentives in {currRegion}
+          </h3>
           <Swiper
             modules={[Autoplay]}
             autoplay={{
@@ -38,9 +46,7 @@ export default function IncentivesSection({ brand ,currRegion }: {currRegion: st
               <SwiperSlide key={index} className={`py-3 ${styles.sliderSlide}`}>
                 <div className="card h-100 shadow-sm">
                   <div className="card-body d-flex flex-column justify-content-between">
-                    <span
-                      className={`badge mb-2 ${styles.sliderBadge}`}
-                    >
+                    <span className={`badge mb-2 ${styles.sliderBadge}`}>
                       {item?.label}
                     </span>
                     <h5 className="card-title">{item.title}</h5>

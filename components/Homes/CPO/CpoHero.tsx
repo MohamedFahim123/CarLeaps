@@ -60,7 +60,7 @@ export default function CpoHero() {
               Browse top-quality, dealer-certified pre-owned cars in {region}
             </span>
             <h2
-              className="wow fadeInUp"
+              className={`${styles.banner_h2} wow fadeInUp`}
               style={{ lineHeight: "1.2" }}
               data-wow-delay="100ms"
             >
@@ -123,7 +123,7 @@ export default function CpoHero() {
                           </div>
                         )}
                       </div>
-                      <div className="form-submit">
+                      <div className={`form-submit ${styles.form_submit}`}>
                         <button
                           disabled={isSubmitting}
                           type="submit"

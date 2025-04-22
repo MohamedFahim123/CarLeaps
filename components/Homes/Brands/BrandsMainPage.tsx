@@ -8,6 +8,7 @@ import AllCurrentModels from "./AllCurrentModels";
 import BrandsBanner from "./BrandsBanner";
 import BrandsHeroSection from "./BrandsHeroSection";
 import IncentivesSection from "./IncentivesSection";
+import Loader from "@/components/Common/Loader";
 
 export default function BrandsMainPage({ brandName }: { brandName: string }) {
   const {
@@ -26,7 +27,9 @@ export default function BrandsMainPage({ brandName }: { brandName: string }) {
     }
   }, [brandName, selectedBrand, setSelectedMake]);
 
-  if (researchCarsMakesLoading) return <h1>Loading...</h1>;
+  if (researchCarsMakesLoading) return <Loader />;
+
+  if (!selectedBrand) return <h1>Not Found</h1>;
 
   return (
     <>

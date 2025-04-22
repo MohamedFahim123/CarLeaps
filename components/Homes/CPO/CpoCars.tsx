@@ -5,7 +5,7 @@ import { useResearchCarsMakesStore } from "@/app/store/ResearchCarMakes";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-
+import styles2 from "../Home/heroStyles.module.css";
 const icons: { icon: string }[] = [
   { icon: "flaticon-gasoline-pump" },
   { icon: "flaticon-speedometer" },
@@ -33,7 +33,7 @@ export default function CpoCars() {
       {CPOCars?.length > 0 && (
         <section className="cars-section-four section-tab-car">
           <div className="boxcar-container">
-            <div className="nav nav-tabs nav-car-tab">
+            <div className="nav nav-tabs nav-car-tab gap-0 mb-5">
               {CPOCars.map((elm) => (
                 <button
                   type="button"
@@ -55,7 +55,7 @@ export default function CpoCars() {
                 aria-labelledby="suv-tab"
               >
                 <div className="boxcar-title">
-                  <h2>The Most Searched {selectedBody?.body_name} Cars</h2>
+                  <h2 className={`${styles2.boxcar_title} fw-semibold`}>The Most Searched {selectedBody?.body_name} Cars</h2>
                 </div>
                 <div className="row">
                   {selectedBody?.cars?.map((car, i) => (

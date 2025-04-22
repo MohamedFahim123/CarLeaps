@@ -48,14 +48,14 @@ export default function Hero() {
   // const [selectedCategory, setSelectedCategory] = useState(categories[0]);
   return (
     <section className="boxcar-banner-section-v1">
-      <div className="container">
+      <div className="boxcar-container">
         <div className="banner-content">
-          <span className="wow fadeInUp">
+          <span className={`wow fadeInUp ${styles.banner_span}`}>
             New and Used Cars for Sale in{" "}
             {currRegion ? currRegion : MainRegionName}
           </span>
-          <h2 className="wow fadeInUp" data-wow-delay="100ms">
-            Find Your Perfect Car
+            <h2 className={`wow fadeInUp ${styles.banner_h2}`} data-wow-delay="100ms">
+              Find Your Perfect Car
           </h2>
           <div className="form-tabs">
             {/* <ul className="form-tabs-list wow fadeInUp" data-wow-delay="200ms">
@@ -126,7 +126,7 @@ export default function Hero() {
                         </div>
                       )}
                     </div>
-                    <div className="form-submit">
+                    <div className={`form-submit ${styles.form_submit}`}>
                       <button
                         disabled={isSubmitting}
                         type="submit"
@@ -139,11 +139,11 @@ export default function Hero() {
                   </form>
                 </div>
               </div>
-              <span className="wow fadeInUp" data-wow-delay="400ms">
+              <span className={`wow fadeInUp ${styles.banner_span}`} data-wow-delay="400ms">
                 Or Browse With Body Type
               </span>
-              <ul className="model-links">
-                {boodies.map((body) => (
+              <ul className={`model-links ${styles.model_links}`}>
+                {boodies?.slice(0, 6)?.map((body) => (
                   <li key={body.id}>
                     <Link
                       href={`/${currRegion}/cars/cars-for-sale/search?body=${body.id}`}

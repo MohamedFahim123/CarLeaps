@@ -1,5 +1,4 @@
-import SearchedListings from "@/components/Homes/CarsForSale/Search/SearchedListings";
-import SidebarSearch from "@/components/Homes/CarsForSale/Search/SidebarSearch";
+import SearchMainPage from "@/components/Homes/CarsForSale/Search/SearchMainPage";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -7,10 +6,5 @@ export const metadata: Metadata = {
 };
 
 export default function SearchInCarsForSalepage() {
-  return (
-    <>
-      <SidebarSearch />
-      <SearchedListings />
-    </>
-  );
+  return <SearchMainPage />;
 }

@@ -14,6 +14,7 @@ const CPOPage = async ({
 }) => {
   const { id } = await params;
 
+
   return <CPODetailsMainPage brandId={+id} />;
 };
 

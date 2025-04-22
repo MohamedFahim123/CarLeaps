@@ -3,15 +3,39 @@
 import { useCPOCarsMakesStore } from "@/app/store/cpoMakes";
 import { useResearchCarsMakesStore } from "@/app/store/ResearchCarMakes";
 import { MainRegionName } from "@/app/utils/mainData";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import CpoCars2 from "./CpoCars2";
 import CPOChooseUs from "./CPOChooseUs";
-import CPODealerSection from "./CPODealerSection";
 import CPODetailsHero from "./CPODetailsHero";
-
+import { useCPOCarsInsideSelectedMakeStore } from "@/app/store/CPOCarsInsideSelectedMake";
+import Loader from "@/components/Common/Loader";
 const CPODetailsMainPage = ({ brandId }: { brandId: number }) => {
   const { CPOCarsMakes, CPOCarsMakesLoading, setSelectedMake } =
     useCPOCarsMakesStore();
+
+  const {
+    getCPOCarsInsideSelectedMake,
+    CPOCarsInsideSelectedMake,
+    CPOCarsInsideSelectedMakeLoading,
+  } = useCPOCarsInsideSelectedMakeStore();
+
+  useCallback(() => {
+    if (
+      brandId &&
+      CPOCarsInsideSelectedMake.length === 0 &&
+      !CPOCarsInsideSelectedMakeLoading
+    ) {
+      getCPOCarsInsideSelectedMake(brandId);
+    }
+  }, [
+    brandId,
+    CPOCarsInsideSelectedMake,
+    CPOCarsInsideSelectedMakeLoading,
+    getCPOCarsInsideSelectedMake,
+  ]);
+  useEffect(() => {
+    getCPOCarsInsideSelectedMake(brandId);
+  }, [getCPOCarsInsideSelectedMake, brandId]);
 
   const { currRegion } = useResearchCarsMakesStore();
 
@@ -23,7 +47,8 @@ const CPODetailsMainPage = ({ brandId }: { brandId: number }) => {
     }
   }, [brandId, selectedBrand, setSelectedMake]);
 
-  if (CPOCarsMakesLoading) return <h1>Loading...</h1>;
+  if (CPOCarsMakesLoading || CPOCarsInsideSelectedMakeLoading)
+    return <Loader />;
 
   return (
     <>
@@ -34,11 +59,11 @@ const CPODetailsMainPage = ({ brandId }: { brandId: number }) => {
             brand={selectedBrand}
           />
           <CPOChooseUs brand={selectedBrand} />
-          <CpoCars2 />
-          <CPODealerSection
+          <CpoCars2 cars={CPOCarsInsideSelectedMake.flatMap((make) => make.cars)} />
+          {/* <CPODealerSection
             currRegion={currRegion || MainRegionName}
             brand={selectedBrand}
-          />
+          /> */}
         </>
       ) : (
         <h1>Not Found</h1>

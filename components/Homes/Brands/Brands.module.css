@@ -144,3 +144,32 @@
 .featureLi {
   padding-block: 10px;
 }
+.swiperSlide,
+.card {
+  height: 570px !important;
+  max-height: 570px !important;
+}
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.card .cardImgTop {
+  max-height: 250px !important;
+  height: 250px !important;
+  object-fit: cover !important;
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 3rem;
+  }
+}
+@media (max-width: 400px) {
+  .title {
+    font-size: 2.5rem;
+  }
+  .description {
+    font-size: 0.9rem;
+  }
+}

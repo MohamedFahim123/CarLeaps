@@ -12,3 +12,23 @@
 .activeTab {
     border: 1px solid #fff !important;
 }
+
+@media (max-width: 991px) {
+    .carMake {
+        width: calc(100% / 6);
+    }
+}
+
+@media (max-width: 768px) {
+    .carMake {
+        width: calc(100% / 3);
+    }
+}
+
+@media (max-width: 576px) {
+    .carMake {
+        width: calc(100% / 2);
+    }
+}
+
+

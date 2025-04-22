@@ -1,5 +1,6 @@
 import axios from "axios";
 import { create } from "zustand";
+import Cookies from "js-cookie";
 
 export interface UseTokenStoreInterface {
   token: string | null;
@@ -33,5 +34,8 @@ export const useTokenStore = create<UseTokenStoreInterface>((set) => ({
     }
   },
 
-  clearToken: () => set({ token: null }),
+  clearToken: () => {
+    set({ token: null });
+    Cookies.remove("CARS_TOKEN");
+  },
 }));

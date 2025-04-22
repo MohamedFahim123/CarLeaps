@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import styles from "./heroStyles.module.css";
 
 interface VihicleTab {
   label: string;
@@ -36,6 +37,7 @@ export default function Hero() {
   const [activeVehiclesTab, setactiveVehiclesTab] = useState<string>(
     vehicleTabs[0].label
   );
+  const { makes, models } = useCarsForSaleStore();
 
   useEffect(() => {
     setValue("condition", activeVehiclesTab.toLowerCase());
@@ -57,15 +59,13 @@ export default function Hero() {
     );
   };
 
-  const { makes, models } = useCarsForSaleStore();
-
   return (
-    <section className="boxcar-banner-section-v8">
+    <section className={`${styles.boxcar_banner_section_v8} boxcar-banner-section-v8`}>
       <div className="boxcar-container">
-        <div className="banner-content-v8">
+        <div className={`${styles.banner_content} banner-content-v8`}>
           <h2 className="wow fadeInUp">Let’s Find Your Perfect Car</h2>
-          <div className="banner-v8-form wow fadeInUp" data-wow-delay="200ms">
-            <ul className="form-tabs-list">
+          <div className={`${styles.form_tab_content} banner-v8-form wow fadeInUp`} data-wow-delay="200ms">
+            <ul className={`${styles.form_tabs_list} form-tabs-list`}>
               {vehicleTabs.map(({ label, tab }) => (
                 <li
                   key={tab}
@@ -79,10 +79,10 @@ export default function Hero() {
                 </li>
               ))}
             </ul>
-            <div className="form-tab-content">
+            <div className={`form-tab-content`}>
               <div className="form-tab-pane current" id="tab-1">
                 <form onSubmit={handleSubmit(onSubmit)}>
-                  <div className="form_boxes border border-1 rounded">
+                  <div className={`${styles.form_boxes} border border-1 rounded`}>
                     <select
                       className="form-select"
                       defaultValue={""}
@@ -104,7 +104,7 @@ export default function Hero() {
                       </div>
                     )}
                   </div>
-                  <div className="form_boxes border border-1 rounded">
+                  <div className={`${styles.form_boxes} border border-1 rounded`}>
                     <select
                       className="form-select"
                       defaultValue={""}
@@ -127,7 +127,7 @@ export default function Hero() {
                     )}
                   </div>
 
-                  <div className="form-submit">
+                  <div className={`${styles.form_submit} form-submit`}>
                     <button
                       disabled={isSubmitting}
                       type="submit"

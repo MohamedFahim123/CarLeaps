@@ -26,6 +26,7 @@ import { CiLogout } from "react-icons/ci";
 import { toast } from "react-toastify";
 import styles from "./headerStyles.module.css";
 import Nav from "./Nav";
+import MobileMenu from "./MobileMenu";
 
 interface Header1Props {
   headerClass?: string;
@@ -38,6 +39,7 @@ export default function Header1({
 }: Header1Props) {
   const pathName = usePathname();
   const router = useRouter();
+  const [showMenu, setShowMenu] = useState<boolean>(false);
   const [currRegion, setCurrRegion] = useState<string>(MainRegionName);
   // ResearchPage Apis
   const {
@@ -248,10 +250,10 @@ export default function Header1({
       } ${headerClass}`}
     >
       <div className="header-inner py-3">
-        <div className="container">
+        <div className="boxcar-container">
           <div className="c-box">
             <div className="logo-inner">
-              <div className="logo">
+              <div className={`logo ${styles.logo}`}>
                 <Link href={`/${currRegion}/cars/home`}>
                   {white ? (
                     <Image
@@ -282,15 +284,17 @@ export default function Header1({
             </div>
             <div className="right-box ms-auto">
               {cities.length > 0 && (
-                <div className="region-selector me-3">
+                <div
+                  className={`region-selector me-3 ${styles.regionSelectorContainer}`}
+                >
                   <select
-                    className="form-select"
+                    className={`form-select ${styles.regionSelector}`}
                     value={currRegion}
                     onChange={handleRegionChange}
                   >
                     {cities?.map((city) => (
                       <option key={city.id} value={city.code}>
-                        {city.code.toUpperCase()}
+                        {city.code}
                       </option>
                     ))}
                   </select>
@@ -299,8 +303,8 @@ export default function Header1({
               {!token ? (
                 <Link
                   href={`/${currRegion}/auth/login`}
-                  title=""
-                  className="box-account"
+                  title="Login Page"
+                  className="box-account d-none d-lg-block"
                 >
                   <span className="icon">
                     <svg
@@ -331,7 +335,7 @@ export default function Header1({
                 </Link>
               ) : (
                 <>
-                  <div className="btn">
+                  <div className="btn d-none d-lg-block">
                     <Link
                       href={`/${currRegion}/dashboard/profile`}
                       className={`btn ${styles.btnCarPortal} px-3`}
@@ -340,7 +344,7 @@ export default function Header1({
                     </Link>
                   </div>
                   <button
-                    className={`btn text-white ${styles.logoutBtn}`}
+                    className={`btn text-white ${styles.logoutBtn} d-block mx-0 px-1`}
                     type="button"
                     title="Logout"
                     onClick={logoutHandler}
@@ -349,9 +353,9 @@ export default function Header1({
                   </button>
                 </>
               )}
-              <div className="mobile-navigation">
+              <div className="mobile-navigation ms-1">
                 {white ? (
-                  <a href="#nav-mobile" title="">
+                  <div onClick={() => setShowMenu(true)}>
                     <svg
                       width={22}
                       height={11}
@@ -362,9 +366,9 @@ export default function Header1({
                       <rect width={22} height={2} fill="#050B20" />
                       <rect y={9} width={22} height={2} fill="#050B20" />
                     </svg>
-                  </a>
+                  </div>
                 ) : (
-                  <a href="#nav-mobile" title="">
+                  <div onClick={() => setShowMenu(true)} title="nav-mobile">
                     <svg
                       width={22}
                       height={11}
@@ -375,14 +379,14 @@ export default function Header1({
                       <rect width={22} height={2} fill="white" />
                       <rect y={9} width={22} height={2} fill="white" />
                     </svg>
-                  </a>
+                  </div>
                 )}
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div id="nav-mobile" />
+      {showMenu && <MobileMenu showMenu={showMenu} setShowMenu={setShowMenu} />}
     </header>
   );
 }

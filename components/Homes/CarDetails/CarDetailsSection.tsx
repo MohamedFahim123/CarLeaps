@@ -9,12 +9,14 @@ import Faqs from "./Sections/Faqs";
 import ImagesSection from "./Sections/ImagesSection";
 import Overview from "./Sections/Overview";
 import SideCard from "./Sections/SideCard";
-
+import "swiper/css";
 export default function CarDetailsSection({
   carItem,
+  relatedCars,
   region,
 }: {
   carItem: Car;
+  relatedCars: Car[];
   region: string;
 }) {
   const [isOpen, setOpen] = useState<boolean>(false);
@@ -67,7 +69,7 @@ export default function CarDetailsSection({
           videoId="7e90gBu4pas"
           onClose={() => setOpen(false)}
         />
-        <RelatedCars />
+        <RelatedCars relatedCars={relatedCars} />
       </section>
     </>
   );

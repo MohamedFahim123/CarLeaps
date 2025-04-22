@@ -2,6 +2,7 @@
 
 import { useResearchCarsMakesStore } from "@/app/store/ResearchCarMakes";
 import { MainRegionName } from "@/app/utils/mainData";
+import Loader from "@/components/Common/Loader";
 import Cookies from "js-cookie";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
@@ -33,12 +34,10 @@ const ModelPageMainCom = ({ model }: { model: string }) => {
       const MakeId = segments[segments.length - 2];
 
       setSelectedMake(
-        researchCarsMakes.find((brand) => brand.name === MakeId)!
+        researchCarsMakes.find((brand) => brand.name.toLowerCase() === MakeId.toLowerCase())!
       );
       if (selectedMake) {
-        setSelectedModel(
-          selectedMake.models.find((m) => m.name === ModelId)!
-        );
+        setSelectedModel(selectedMake.models.find((m) => m.name.toLowerCase() === ModelId.toLowerCase())!);
       }
     }
   }, [
@@ -51,7 +50,7 @@ const ModelPageMainCom = ({ model }: { model: string }) => {
     setSelectedModel,
   ]);
 
-  if (!selectedMake || !selectedModel) return <h1>Loading...</h1>;
+  if (!selectedMake || !selectedModel) return <Loader />;
 
   return (
     <>

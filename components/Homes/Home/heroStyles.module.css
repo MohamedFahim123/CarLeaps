@@ -1,17 +1,84 @@
 .form_container {
-    overflow: hidden;
-    display: grid !important;
-    gap: 30px;
-    grid-template-columns: 2fr 2fr 1fr;
-    width: 100%;
+  overflow: hidden;
+  display: grid !important;
+  gap: 30px;
+  grid-template-columns: 2fr 2fr 1fr;
+  width: 100%;
 }
 .form_boxes {
-    height: 100%;
-    padding: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-inline: 20px;
-    padding-block: 18px;
-    border-inline-end: 1px solid #e0e0e0;
+  height: 100%;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-inline: 20px;
+  padding-block: 18px;
+  border-inline-end: 1px solid #e0e0e0;
+}
+
+@media (max-width: 991px) {
+  .form_submit {
+    margin-inline-start: 50px !important;
+  }
+}
+
+@media (max-width: 767px) {
+    .banner_span {
+        font-size: 14px !important;
+    }
+    .banner_h2 {
+        font-size: 30px !important;
+    }
+    .model_links {
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+    }
+    .form_container {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 10px;
+    }
+    .form_boxes {
+        border: 1px solid #e0e0e0;
+    }
+    .form_boxes {
+        height: 40px;
+        width: 49% !important;
+        border-radius: 10px;
+        max-width: 49% !important;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        -ms-border-radius: 10px;
+        -o-border-radius: 10px;
+}
+    .form_submit {
+        width: 49% !important;
+        max-width: 49% !important;
+        height: 50px !important;
+        margin-top: 10px;
+        margin-inline-start: 0 !important;
+    }
+    .form_submit button {
+        height: 50px !important;
+    }
+}
+@media (max-width: 767px) {
+    .form_boxes {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    .form_submit {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    .boxcar_title {
+        font-size: 30px !important;
+    }
+}
+
+@media (max-width: 560px) {
+    .boxcar_title {
+        font-size: 25px !important;
+    }
 }

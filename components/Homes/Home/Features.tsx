@@ -1,35 +1,36 @@
-"use client";
 import Image from "next/image";
-import { useState } from "react";
-import ModalVideo from "react-modal-video";
-export default function Features() {
-  const [isOpen, setOpen] = useState<boolean>(false);
+import React from "react";
+import styles from "./featuresStyles.module.css";
+
+function Features() {
+  // const [isOpen, setOpen] = useState<boolean>(false);
   return (
     <>
       <section className="boxcar-pricing-section pb-0 pt-0">
-        <div className="large-container">
+        <div className="container-fluid px-0">
           <div className="row g-0">
-            <div className="image-column col-lg-6 col-md-12 col-sm-12">
-              <div className="inner-column">
-                <div className="image-box">
-                  <figure className="image">
-                    <a href="#">
-                      <Image
-                        alt=""
-                        src="/images/resource/pricing1-1.jpg"
-                        width={836}
-                        height={700}
-                      />
-                    </a>
+            <div className="image-column col-lg-6 d-none d-lg-block">
+              <div className="inner-column radius-0">
+                <div className="image-box radius-0">
+                  <figure className="image radius-0">
+                    {/* <a href="#"> */}
+                    <Image
+                      alt="Default image"
+                      className="object-fit-auto h-100"
+                      src="/images/resource/coverImage.jpg"
+                      width={836}
+                      height={700}
+                    />
+                    {/* </a> */}
                   </figure>
-                  <a
+                  {/* <a
                     onClick={() => setOpen(true)}
                     className="play-now"
                     data-caption=""
                   >
                     <i className="fa fa-play" aria-hidden="true" />
                     <span className="ripple" />
-                  </a>
+                  </a> */}
                 </div>
               </div>
             </div>
@@ -68,13 +69,14 @@ export default function Features() {
           </div>
         </div>
       </section>
-      <ModalVideo
+      {/* <ModalVideo
         channel="youtube"
         youtube={{ mute: 0, autoplay: 0 }}
         isOpen={isOpen}
         videoId="AC1cREPIw_o"
         onClose={() => setOpen(false)}
-      />
+      /> */}
     </>
   );
 }
+export default React.memo(Features);

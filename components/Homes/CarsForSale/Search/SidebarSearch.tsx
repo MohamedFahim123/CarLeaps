@@ -7,8 +7,12 @@ import Image from "next/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { DefaultValues } from "./SearchedListings";
+import { sideBarPropsInterface } from "./SearchMainPage";
 
-export default function SidebarSearch() {
+export default function SidebarSearch({
+  isSidebarOpen,
+  setIsSidebarOpen,
+}: sideBarPropsInterface) {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
@@ -71,19 +75,22 @@ export default function SidebarSearch() {
   };
 
   return (
-    <div className="wrap-fixed-sidebar">
+    <div className={`wrap-fixed-sidebar ${isSidebarOpen ? "active" : ""}`}>
       <div className="sidebar-backdrop" />
       <div className="widget-sidebar-filter">
         <div className="fixed-sidebar-title">
           <h3>More Filter</h3>
-          <a href="#" title="" className="close-filters">
+          <button
+            onClick={() => setIsSidebarOpen(false)}
+            className="close-filters"
+          >
             <Image
               alt="Close"
               src="/images/icons/close.svg"
               width={30}
               height={30}
             />
-          </a>
+          </button>
         </div>
         <div className="inventory-sidebar">
           <div className="inventroy-widget widget-location">

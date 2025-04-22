@@ -34,13 +34,14 @@ const ExploreModelSection = ({ trim }: { trim: TrimsDetailsInterface }) => {
           height={700}
           alt={trim?.name || "Default Trim"}
           src={trim?.image || "/default-image.jpg"}
+          className={`${styles.trimImage}`}
         />
-        <div className="price-section ps-5 mb-5 d-flex align-items-center gap-3">
+        <div className="price-section ps-5 d-flex justify-content-center align-items-center gap-3">
           <p className="fw-bold fs-4 mt-3">Starts at: {currentCurrency}{selectedTrimPrice}</p>
           <h4 className="text-primary fs-3 fw-bold"></h4>
         </div>
       </div>
-      <div className="col-lg-6 py-5">
+      <div className="col-lg-6 py-5 text-center">
         <h2>Features</h2>
         <div className="accordion" id="accordionExample">
           {Object.keys(features).map((key, index) => {

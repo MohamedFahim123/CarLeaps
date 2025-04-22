@@ -1,11 +1,11 @@
 import React from "react";
-
+import styles from "../Home/heroStyles.module.css"
 function Features() {
   return (
     <section className="why-choose-us-section-five">
       <div className="boxcar-container">
         <div className="boxcar-title light wow fadeInUp">
-          <h2 className="title">Why Researching New Cars Through Us?</h2>
+          <h2 className={`title ${styles.boxcar_title}`}>Why Researching New Cars Through Us?</h2>
         </div>
         <div className="row">
           {/* choose-us-block */}

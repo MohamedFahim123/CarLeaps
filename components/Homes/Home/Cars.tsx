@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import "swiper/css";
 import { Autoplay, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import styles from './heroStyles.module.css';
 
 const icons: { icon: string }[] = [
   { icon: "flaticon-gasoline-pump" },
@@ -28,7 +29,7 @@ export default function Cars() {
     <section className="cars-section-three">
       <div className="boxcar-container">
         <div className="boxcar-title wow fadeInUp">
-          <h2 className="mb-5">Recent Cars For Sale in {currentRegion}</h2>
+          <h2 className={`${styles.boxcar_title} mb-5`}>Recent Cars For Sale in {currentRegion}</h2>
           <Link
             href={`/${currentRegion}/cars/cars-for-sale/search`}
             className="btn-title"
@@ -76,7 +77,7 @@ export default function Cars() {
                 1300: { slidesPerView: 4, spaceBetween: 20 },
                 991: { slidesPerView: 3, spaceBetween: 20 },
                 767: { slidesPerView: 2, spaceBetween: 15 },
-                480: { slidesPerView: 1, spaceBetween: 10 },
+                300: { slidesPerView: 1, spaceBetween: 10 },
               }}
               modules={[Pagination, Autoplay]}
               className="car-slider-three slider-layout-1 row"

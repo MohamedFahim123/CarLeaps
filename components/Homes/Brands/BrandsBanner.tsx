@@ -16,6 +16,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import styles2 from "../Home/heroStyles.module.css";
 
 export default function BrandsBanner({
   brand,
@@ -74,7 +75,7 @@ export default function BrandsBanner({
       <div className="boxcar-container">
         <div className={`${styles.brandsBannerHead}`}>
           <p>Explore the full range</p>
-          <h3>
+          <h3 className={`${styles2.boxcar_title}`}>
             Find the {brand.name} that{"'"}s right for you in {currRegion}
           </h3>
           <nav className="wow fadeInUp" data-wow-delay="100ms">
@@ -113,13 +114,16 @@ export default function BrandsBanner({
           }}
           breakpoints={{
             1024: {
-              slidesPerView: 3,
+              slidesPerView: 3.5,
+            },
+            768: {
+              slidesPerView: 2.5,
             },
             600: {
               slidesPerView: 2,
             },
             480: {
-              slidesPerView: 1,
+              slidesPerView: 1.5,
             },
           }}
         >

@@ -1,4 +1,4 @@
-import ModelPageMain from "@/components/Homes/Model/ModelPageMain";
+import ModelPageMainCom from "@/components/Homes/Model/ModelPageMainCom";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -12,5 +12,5 @@ export default async function ModelPage({
 }) {
   const { model } = await params;
 
-  return <ModelPageMain model={model} />;
+  return <ModelPageMainCom model={model} />;
 }

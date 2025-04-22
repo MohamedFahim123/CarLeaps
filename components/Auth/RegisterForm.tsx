@@ -30,6 +30,7 @@ export default function RegisterForm() {
     reset,
     formState: { errors, isSubmitting },
   } = useForm<IFormInput>();
+
   const onSubmit: SubmitHandler<IFormInput> = async (data: IFormInput) => {
     const Region: string = Cookies.get("region") || MainRegionName;
 
@@ -102,7 +103,7 @@ export default function RegisterForm() {
   return (
     <div className="tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
       <div className="form-box two">
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form className="border-0" onSubmit={handleSubmit(onSubmit)}>
           <div className="form_boxes">
             <label>Name</label>
             <input {...register("name", { required: "Required" })} type="text" placeholder="Creativelayer088" />
@@ -172,7 +173,7 @@ export default function RegisterForm() {
             </button>
           </div>
         </form>
-        <div className="btn-box-two">
+        {/* <div className="btn-box-two">
           <span>OR</span>
           <div className="social-btns row ">
             <a href="#" className="fb-btn col-md-5 mx-1">
@@ -184,7 +185,7 @@ export default function RegisterForm() {
               Google
             </a>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

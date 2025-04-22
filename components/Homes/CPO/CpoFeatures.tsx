@@ -1,3 +1,5 @@
+import styles2 from "../Home/heroStyles.module.css";
+
 export default function CpoFeatures() {
   return (
     <section className="why-choose-us-section ">
@@ -5,7 +7,7 @@ export default function CpoFeatures() {
         <div className="row">
           <div className="content-column col-lg-6 col-lg-6 col-sm-12">
             <div className="boxcar-title wow fadeInUp">
-              <h2 className="title">
+              <h2 className={`${styles2.boxcar_title} fw-semibold`}>
                 Certified Like New. <br /> Backed Like Never Before.
               </h2>
               <p className="text-muted pe-5 fs-5 mt-4">

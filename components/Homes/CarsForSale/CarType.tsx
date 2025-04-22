@@ -6,6 +6,7 @@ import Link from "next/link";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import { useCarsForSaleStore } from "@/app/store/CarsForSale";
+import styles from '../Home/heroStyles.module.css';
 
 export default function CarType() {
   const region: string = Cookies.get("region") || MainRegionName;
@@ -16,7 +17,7 @@ export default function CarType() {
     <section className="boxcar-brand-section-six pb-0">
       <div className="boxcar-container">
         <div className="boxcar-title wow fadeInUp">
-          <h2>Browse by Type</h2>
+          <h2 className={`${styles.boxcar_title} wow fadeInUp`}>Browse by Type</h2>
         </div>
         <div className="right-box">
           {boodies.map((body) => (
