@@ -1,8 +1,9 @@
-
 import { baseUrl, MainRegionName } from "@/app/utils/mainData";
+import Loader from "@/components/Common/Loader";
 import DealerMainSection from "@/components/Homes/Dealer/DealerMainSection";
 import { Metadata } from "next";
 import { cookies } from "next/headers";
+import { Suspense } from "react";
 import { CarDealerInterface } from "../../car-details/[id]/page";
 
 export const metadata: Metadata = {
@@ -31,5 +32,9 @@ export default async function DealerPage({
   const respose = await req.json();
   const dealerData: CarDealerInterface = respose?.data;
 
-  return <DealerMainSection dealerItem={dealerData} />;
+  return (
+    <Suspense fallback={<Loader />}>
+      <DealerMainSection dealerItem={dealerData} />
+    </Suspense>
+  );
 }

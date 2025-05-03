@@ -1,8 +1,10 @@
 import { CarFeatures } from "@/app/store/CarsForSale";
 import { baseUrl, MainRegionName } from "@/app/utils/mainData";
+import Loader from "@/components/Common/Loader";
 import CarDetailsSection from "@/components/Homes/CarDetails/CarDetailsSection";
 import { Metadata } from "next";
 import { cookies } from "next/headers";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "CarLeaps - Car Details",
@@ -76,7 +78,6 @@ export interface Car {
   deleted_at: string;
   carImages: { image: string }[];
 }
-
 export default async function CarDetailsPage({
   params,
 }: {
@@ -99,7 +100,15 @@ export default async function CarDetailsPage({
   });
   const responseJson = await carItemReq.json();
   const carItem: Car = responseJson?.data?.car;
-  const relatedCars : Car[] = responseJson?.data?.related_cars;
+  const relatedCars: Car[] = responseJson?.data?.related_cars;
 
-  return <CarDetailsSection region={region} carItem={carItem} relatedCars={relatedCars} />;
+  return (
+    <Suspense fallback={<Loader />}>
+      <CarDetailsSection
+        region={region}
+        carItem={carItem}
+        relatedCars={relatedCars}
+      />
+    </Suspense>
+  );
 }

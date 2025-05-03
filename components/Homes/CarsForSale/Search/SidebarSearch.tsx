@@ -5,7 +5,7 @@ import { useConditionStore } from "@/app/store/conditions";
 import { useFuelTypesStore } from "@/app/store/fuel-types";
 import Image from "next/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { DefaultValues } from "./SearchedListings";
 import { sideBarPropsInterface } from "./SearchMainPage";
 
@@ -13,9 +13,6 @@ export default function SidebarSearch({
   isSidebarOpen,
   setIsSidebarOpen,
 }: sideBarPropsInterface) {
-  const searchParams = useSearchParams();
-  const router = useRouter();
-  const pathname = usePathname();
   const [defaultValues, setDefaultValues] = useState<DefaultValues>({
     condition: "",
     make: "",
@@ -24,37 +21,53 @@ export default function SidebarSearch({
     body: "",
     ad_state: "",
   });
-
+  const router = useRouter();
+  const pathname = usePathname();
   const { condition } = useConditionStore();
   const { fuelTypes } = useFuelTypesStore();
   const { makes, models, boodies } = useCarsForSaleStore();
+  const { getCarsSearch } = useSearchCarsStore();
+
+  const searchParams = useSearchParams();
+  const searchValues = useMemo(() => {
+    const make = searchParams.get("make") || "";
+    const model = searchParams.get("model") || "";
+    const condition = searchParams.get("condition") || "";
+    const fuel_type = searchParams.get("fuel_type") || "";
+    const body = searchParams.get("body") || "";
+    const ad_state = searchParams.get("ad_state") || "";
+
+    return {
+      make,
+      model,
+      condition,
+      fuel_type,
+      body,
+      ad_state,
+    };
+  }, [searchParams]);
 
   useEffect(() => {
-    const make = searchParams.get("make");
-    const model = searchParams.get("model");
-    const condition = searchParams.get("condition");
-    const fuel_type = searchParams.get("fuel_type");
-    const body = searchParams.get("body");
-    const ad_state = searchParams.get("ad_state");
+    const controller = new AbortController();
 
-    setDefaultValues({
-      make: make || "",
-      model: model || "",
-      condition: condition || "",
-      fuel_type: fuel_type || "",
-      body: body || "",
-      ad_state: ad_state || "",
-    });
+    const fetchData = async () => {
+      await getCarsSearch({
+        ...searchValues,
+        condition: searchValues.condition || undefined,
+        make: searchValues.make || undefined,
+        model: searchValues.model || undefined,
+        fuel_type: searchValues.fuel_type || undefined,
+        body: searchValues.body || undefined,
+        ad_state: searchValues.ad_state || undefined,
+      });
+    };
 
-    useSearchCarsStore.getState().getCarsSearch({
-      condition: condition || undefined,
-      make: make || undefined,
-      model: model || undefined,
-      fuel_type: fuel_type || undefined,
-      body: body || undefined,
-      ad_state: ad_state || undefined,
-    });
-  }, [searchParams]);
+    fetchData();
+
+    return () => {
+      controller.abort();
+    };
+  }, [getCarsSearch, searchValues]);
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;

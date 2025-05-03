@@ -4,14 +4,15 @@ import { useSearchCarsStore } from "@/app/store/carSearch";
 import { useCarsForSaleStore } from "@/app/store/CarsForSale";
 import { useCitiesStore } from "@/app/store/Cities";
 import { MainRegionName } from "@/app/utils/mainData";
+import Loader from "@/components/Common/Loader";
 import Cookies from "js-cookie";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import FilterCol from "./FilterCol";
-import { sideBarPropsInterface } from "./SearchMainPage";
 import styles from "./searchedListingStyles.module.css";
+import { sideBarPropsInterface } from "./SearchMainPage";
 
 export interface DefaultValues {
   condition: string;
@@ -32,12 +33,33 @@ export default function SearchedListings({
   setIsSidebarOpen,
 }: sideBarPropsInterface) {
   const searchParams = useSearchParams();
-
   const currRegion: string = Cookies.get("region") || MainRegionName;
   const { currentRegion } = useCarsForSaleStore();
   const { cities } = useCitiesStore();
-  const currentCurrency =
-    cities.find((city) => city.code === currentRegion)?.currency || "";
+  const { carsSearch, carsSearchLoading, getCarsSearch } = useSearchCarsStore();
+
+  const searchValues = useMemo(() => {
+    const make = searchParams.get("make") || "";
+    const model = searchParams.get("model") || "";
+    const condition = searchParams.get("condition") || "";
+    const fuel_type = searchParams.get("fuel_type") || "";
+    const body = searchParams.get("body") || "";
+    const ad_state = searchParams.get("ad_state") || "";
+
+    return {
+      make,
+      model,
+      condition,
+      fuel_type,
+      body,
+      ad_state,
+    };
+  }, [searchParams]);
+
+  const currentCurrency = useMemo(
+    () => cities.find((city) => city.code === currentRegion)?.currency || "",
+    [cities, currentRegion]
+  );
 
   const [defaultValues, setDefaultValues] = useState<DefaultValues>({
     condition: "",
@@ -48,34 +70,27 @@ export default function SearchedListings({
     ad_state: "",
   });
 
-  const { carsSearch, carsSearchLoading } = useSearchCarsStore();
-
   useEffect(() => {
-    const make = searchParams.get("make");
-    const model = searchParams.get("model");
-    const condition = searchParams.get("condition");
-    const fuel_type = searchParams.get("fuel_type");
-    const body = searchParams.get("body");
-    const ad_state = searchParams.get("ad_state");
+    const controller = new AbortController();
 
-    setDefaultValues({
-      make: make || "",
-      model: model || "",
-      condition: condition || "",
-      fuel_type: fuel_type || "",
-      body: body || "",
-      ad_state: ad_state || "",
-    });
+    const fetchData = async () => {
+      await getCarsSearch({
+        ...searchValues,
+        condition: searchValues.condition || undefined,
+        make: searchValues.make || undefined,
+        model: searchValues.model || undefined,
+        fuel_type: searchValues.fuel_type || undefined,
+        body: searchValues.body || undefined,
+        ad_state: searchValues.ad_state || undefined,
+      });
+    };
 
-    useSearchCarsStore.getState().getCarsSearch({
-      condition: condition || undefined,
-      make: make || undefined,
-      model: model || undefined,
-      fuel_type: fuel_type || undefined,
-      body: body || undefined,
-      ad_state: ad_state || undefined,
-    });
-  }, [searchParams]);
+    fetchData();
+
+    return () => {
+      controller.abort();
+    };
+  }, [getCarsSearch, searchValues]);
 
   return (
     <section className="cars-section-thirteen layout-radius">
@@ -102,11 +117,16 @@ export default function SearchedListings({
           </h2>
         </div>
         <div className="row">
-          <FilterCol defaultValues={defaultValues} setDefaultValues={setDefaultValues} isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} />
+          <FilterCol
+            defaultValues={defaultValues}
+            setDefaultValues={setDefaultValues}
+            isSidebarOpen={isSidebarOpen}
+            setIsSidebarOpen={setIsSidebarOpen}
+          />
           <div className="col-xl-9 col-md-12 col-sm-12">
             <div className="right-box row">
               {carsSearchLoading ? (
-                <p>Loading cars...</p>
+                <Loader />
               ) : carsSearch?.length > 0 ? (
                 carsSearch?.map((car, i) => (
                   <div

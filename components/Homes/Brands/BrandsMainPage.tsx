@@ -2,13 +2,13 @@
 
 import { useResearchCarsMakesStore } from "@/app/store/ResearchCarMakes";
 import { MainRegionName } from "@/app/utils/mainData";
-import { useEffect } from "react";
+import Loader from "@/components/Common/Loader";
+import { Suspense, useEffect } from "react";
 import AboutBrand from "./AboutBrand";
 import AllCurrentModels from "./AllCurrentModels";
 import BrandsBanner from "./BrandsBanner";
 import BrandsHeroSection from "./BrandsHeroSection";
 import IncentivesSection from "./IncentivesSection";
-import Loader from "@/components/Common/Loader";
 
 export default function BrandsMainPage({ brandName }: { brandName: string }) {
   const {
@@ -32,7 +32,7 @@ export default function BrandsMainPage({ brandName }: { brandName: string }) {
   if (!selectedBrand) return <h1>Not Found</h1>;
 
   return (
-    <>
+    <Suspense fallback={<Loader />}>
       {selectedBrand ? (
         <>
           <BrandsHeroSection
@@ -58,6 +58,6 @@ export default function BrandsMainPage({ brandName }: { brandName: string }) {
       ) : (
         <h1>Not Found</h1>
       )}
-    </>
+    </Suspense>
   );
 }

@@ -5,7 +5,7 @@ import { MainRegionName } from "@/app/utils/mainData";
 import Loader from "@/components/Common/Loader";
 import Cookies from "js-cookie";
 import { usePathname } from "next/navigation";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import IncentivesSection from "../Brands/IncentivesSection";
 import FactoryWranties from "./FactoryWranties";
 import GallerySection from "./GallerySection";
@@ -20,6 +20,7 @@ const ModelPageMainCom = ({ model }: { model: string }) => {
     selectedMake,
     setSelectedModel,
     selectedModel,
+    researchCarsMakesLoading,
   } = useResearchCarsMakesStore();
   const currRegion: string = Cookies.get("region") || MainRegionName;
   const pathName = usePathname();
@@ -34,10 +35,16 @@ const ModelPageMainCom = ({ model }: { model: string }) => {
       const MakeId = segments[segments.length - 2];
 
       setSelectedMake(
-        researchCarsMakes.find((brand) => brand.name.toLowerCase() === MakeId.toLowerCase())!
+        researchCarsMakes.find(
+          (brand) => brand.name.toLowerCase() === MakeId.toLowerCase()
+        )!
       );
       if (selectedMake) {
-        setSelectedModel(selectedMake.models.find((m) => m.name.toLowerCase() === ModelId.toLowerCase())!);
+        setSelectedModel(
+          selectedMake.models.find(
+            (m) => m.name.toLowerCase() === ModelId.toLowerCase()
+          )!
+        );
       }
     }
   }, [
@@ -50,10 +57,12 @@ const ModelPageMainCom = ({ model }: { model: string }) => {
     setSelectedModel,
   ]);
 
+  if (researchCarsMakesLoading) return <Loader />;
+
   if (!selectedMake || !selectedModel) return <Loader />;
 
   return (
-    <>
+    <Suspense fallback={<Loader />}>
       {selectedModel ? (
         <>
           <ModelHeroSection selectedMake={selectedMake} model={selectedModel} />
@@ -68,7 +77,7 @@ const ModelPageMainCom = ({ model }: { model: string }) => {
       ) : (
         <div>No Model Found</div>
       )}
-    </>
+    </Suspense>
   );
 };
 

@@ -7,8 +7,9 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import Image from "next/image";
 import Link from "next/link";
-import { useCallback, useEffect, useState } from "react";
+import { Suspense, useCallback, useEffect, useState } from "react";
 import styles from "./shopListStyles.module.css";
+import Loader from "@/components/Common/Loader";
 
 interface CarModel {
   cover: string;
@@ -144,7 +145,6 @@ export default function ShopList() {
     handleSubmit();
   }, [handleSubmit]);
 
-
   return (
     <section className={`cars-section-fourteen layout-radius`}>
       <div className="boxcar-container">
@@ -250,33 +250,35 @@ export default function ShopList() {
               <div className="row">
                 {ErrorMessage && <p className="text-danger">{ErrorMessage}</p>}
                 {carLoading ? (
-                  <div className="fs-4 fw-bold">Loading....</div>
+                  <Loader />
                 ) : (
                   currentCars?.map((product, index) => (
                     <div
                       key={index}
                       className="car-block-fourteen col-lg-4 col-md-6 col-sm-6"
                     >
-                      <div className="inner-box">
-                        <div className="image-box">
-                          <figure className="image">
-                            <Image
-                              alt={product.name}
-                              src={product.image}
-                              width={230}
-                              height={230}
-                            />
-                          </figure>
-                        </div>
-                        <div className="content-box">
-                          <div className="text">
-                            {product.make} - {product.name}
+                      <Suspense fallback={<Loader />}>
+                        <div className="inner-box">
+                          <div className="image-box">
+                            <figure className="image">
+                              <Image
+                                alt={product.name}
+                                src={product.image}
+                                width={230}
+                                height={230}
+                              />
+                            </figure>
                           </div>
-                          <h6 className="title">
-                            {currentCurrency} {product.end_price}
-                          </h6>
+                          <div className="content-box">
+                            <div className="text">
+                              {product.make} - {product.name}
+                            </div>
+                            <h6 className="title">
+                              {currentCurrency} {product.end_price}
+                            </h6>
+                          </div>
                         </div>
-                      </div>
+                      </Suspense>
                     </div>
                   ))
                 )}

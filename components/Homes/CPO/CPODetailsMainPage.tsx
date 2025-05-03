@@ -1,14 +1,14 @@
 "use client";
 
+import { useCPOCarsInsideSelectedMakeStore } from "@/app/store/CPOCarsInsideSelectedMake";
 import { useCPOCarsMakesStore } from "@/app/store/cpoMakes";
 import { useResearchCarsMakesStore } from "@/app/store/ResearchCarMakes";
 import { MainRegionName } from "@/app/utils/mainData";
-import { useCallback, useEffect } from "react";
+import Loader from "@/components/Common/Loader";
+import { Suspense, useCallback, useEffect } from "react";
 import CpoCars2 from "./CpoCars2";
 import CPOChooseUs from "./CPOChooseUs";
 import CPODetailsHero from "./CPODetailsHero";
-import { useCPOCarsInsideSelectedMakeStore } from "@/app/store/CPOCarsInsideSelectedMake";
-import Loader from "@/components/Common/Loader";
 const CPODetailsMainPage = ({ brandId }: { brandId: number }) => {
   const { CPOCarsMakes, CPOCarsMakesLoading, setSelectedMake } =
     useCPOCarsMakesStore();
@@ -51,7 +51,7 @@ const CPODetailsMainPage = ({ brandId }: { brandId: number }) => {
     return <Loader />;
 
   return (
-    <>
+    <Suspense fallback={<Loader />}>
       {selectedBrand ? (
         <>
           <CPODetailsHero
@@ -59,7 +59,9 @@ const CPODetailsMainPage = ({ brandId }: { brandId: number }) => {
             brand={selectedBrand}
           />
           <CPOChooseUs brand={selectedBrand} />
-          <CpoCars2 cars={CPOCarsInsideSelectedMake.flatMap((make) => make.cars)} />
+          <CpoCars2
+            cars={CPOCarsInsideSelectedMake.flatMap((make) => make.cars)}
+          />
           {/* <CPODealerSection
             currRegion={currRegion || MainRegionName}
             brand={selectedBrand}
@@ -68,7 +70,7 @@ const CPODetailsMainPage = ({ brandId }: { brandId: number }) => {
       ) : (
         <h1>Not Found</h1>
       )}
-    </>
+    </Suspense>
   );
 };
 

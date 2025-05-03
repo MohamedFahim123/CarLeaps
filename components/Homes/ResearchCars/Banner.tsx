@@ -1,6 +1,8 @@
 "use client";
 
 import { useResearchCarsMakesStore } from "@/app/store/ResearchCarMakes";
+import { MainRegionName } from "@/app/utils/mainData";
+import Cookies from "js-cookie";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -8,6 +10,7 @@ import styles from "./bannerStyles.module.css";
 
 function Banner() {
   const { currRegion } = useResearchCarsMakesStore();
+  const currentRegion = Cookies.get("region") || MainRegionName;
 
   return (
     <section className="blog-section-three">
@@ -25,13 +28,17 @@ function Banner() {
                     style={{ color: "transparent" }}
                   />
                 </figure>
-                <div className={`content-box ${styles.topMd50} top-0 d-flex flex-column justify-content-around h-100 py-3`}>
+                <div
+                  className={`content-box ${styles.topMd50} top-0 d-flex flex-column justify-content-around h-100 py-3`}
+                >
                   <h3 className="title">
                     Are You Looking <br />
                     For a Car ?
                   </h3>
                   <Link
-                    href={`/${currRegion}/cars/find-car`}
+                    href={`/${
+                      currRegion ? currRegion : currentRegion
+                    }/cars/find-car`}
                     className="read-more mt-2 w-75"
                   >
                     Get Started
@@ -71,13 +78,17 @@ function Banner() {
                     height={396}
                   />
                 </figure>
-                <div className={`content-box ${styles.topMd50} top-0 d-flex flex-column justify-content-around h-100 py-3`}>
+                <div
+                  className={`content-box ${styles.topMd50} top-0 d-flex flex-column justify-content-around h-100 py-3`}
+                >
                   <h3 className="title">
                     Do You Want to <br />
                     Sell a Car ?
                   </h3>
                   <Link
-                    href={`/${currRegion}/cars/sell-car`}
+                    href={`/${
+                      currRegion ? currRegion : currentRegion
+                    }/cars/sell-car`}
                     className="read-more mt-2 w-75"
                   >
                     Get Started
