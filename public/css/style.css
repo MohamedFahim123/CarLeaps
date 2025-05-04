@@ -5535,7 +5535,7 @@ Section Title
   background-image: url(../images/banner/banner-page1.jpg);
   background-repeat: no-repeat;
   background-size: cover;
-  height: 120vh;
+  height: 100vh;
   position: relative;
 }
 
@@ -5795,7 +5795,7 @@ Section Title
 }
 
 .boxcar-banner-section-v1.banner-style-three {
-  background-image: url(../images/banner/banner-hp3.jpg);
+  background-image: url(../images/banner/banner-hp3.png);
 }
 
 .boxcar-banner-section-v1.banner-style-three:before {
@@ -6686,7 +6686,7 @@ Section Title
 }
 
 .boxcar-banner-section-five.banner-style-three {
-  background-image: url(../images/banner/banner-hp3.jpg);
+  background-image: url(../images/banner/banner-hp3.png);
 }
 
 .boxcar-banner-section-five.banner-style-three:before {
@@ -7594,7 +7594,7 @@ Section Title
 }
 
 .boxcar-banner-section-nine.banner-style-three {
-  background-image: url(../images/banner/banner-hp3.jpg);
+  background-image: url(../images/banner/banner-hp3.png);
 }
 
 .boxcar-banner-section-nine.banner-style-three:before {

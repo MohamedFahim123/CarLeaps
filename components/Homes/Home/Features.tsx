@@ -2,7 +2,6 @@ import Image from "next/image";
 import React from "react";
 
 function Features() {
-  // const [isOpen, setOpen] = useState<boolean>(false);
   return (
     <>
       <section className="boxcar-pricing-section pb-0 pt-0">
@@ -12,24 +11,15 @@ function Features() {
               <div className="inner-column radius-0">
                 <div className="image-box radius-0">
                   <figure className="image radius-0">
-                    {/* <a href="#"> */}
                     <Image
                       alt="Default image"
-                      className="object-fit-auto h-100"
-                      src="/images/resource/coverImage.jpg"
+                      className="object-fit-cover h-100"
+                      src="/images/resource/coverImage.png"
                       width={836}
-                      height={700}
+                      height={550}
+                      style={{maxHeight: "550px"}}
                     />
-                    {/* </a> */}
                   </figure>
-                  {/* <a
-                    onClick={() => setOpen(true)}
-                    className="play-now"
-                    data-caption=""
-                  >
-                    <i className="fa fa-play" aria-hidden="true" />
-                    <span className="ripple" />
-                  </a> */}
                 </div>
               </div>
             </div>

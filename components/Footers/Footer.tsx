@@ -1,19 +1,23 @@
 "use client";
-import React from "react";
-import Image from "next/image";
+import { useCarsForSaleStore } from "@/app/store/CarsForSale";
+import { MainRegionName } from "@/app/utils/mainData";
 import {
   carBrands,
-  contactItems,
   navItems,
-  socialMediaLinks,
-  vehicleTypes,
+  socialMediaLinks
 } from "@/data/footerLinks";
+import Cookies from "js-cookie";
+import Image from "next/image";
 import Link from "next/link";
+
 export default function Footer({
   parentClass = "boxcar-footer footer-style-one cus-st-1",
 }: {
   parentClass: string;
 }) {
+  const { boodies } = useCarsForSaleStore();
+  const currRegion = Cookies.get("region") || MainRegionName;
+
   return (
     <footer className={parentClass}>
       <div className="widgets-section">
@@ -28,7 +32,7 @@ export default function Footer({
                       <ul className="user-links style-two">
                         {navItems.map((elm, i) => (
                           <li key={i}>
-                            <Link href={elm.link}>{elm.name}</Link>
+                            <Link href={"#"}>{elm.name}</Link>
                           </li>
                         ))}
                       </ul>
@@ -42,12 +46,39 @@ export default function Footer({
                   >
                     <h4 className="widget-title">Quick Links</h4>
                     <div className="widget-content">
-                      <ul className="user-links style-two">
-                        {contactItems.map((elm, i) => (
-                          <li key={i}>
-                            <Link href={elm.link}>{elm.name}</Link>
-                          </li>
-                        ))}
+                      <ul className="user-links style-two position-relative z-10">
+                        <li>
+                          <Link href={`/${currRegion}/cars/cars-for-sale`}>
+                            Cars for Sale
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href={`/${currRegion}/cars/research-new-cars`}>
+                            Research New Cars
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href={`/${currRegion}/cars/perfect-match`}>
+                            Perfect Match
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            href={`/${currRegion}/cars/certified-preowned-cars`}
+                          >
+                            CPO
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href={`/${currRegion}/cars/find-car`}>
+                            Find a Car
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href={`/${currRegion}/cars/sell-car`}>
+                            Sell a Car
+                          </Link>
+                        </li>
                       </ul>
                     </div>
                   </div>
@@ -62,7 +93,7 @@ export default function Footer({
                       <ul className="user-links style-two">
                         {carBrands.map((elm, i) => (
                           <li key={i}>
-                            <Link href={elm.link}>{elm.name}</Link>
+                            <Link href={"#"}>{elm.name}</Link>
                           </li>
                         ))}
                       </ul>
@@ -74,12 +105,16 @@ export default function Footer({
                     className="footer-widget links-widget wow fadeInUp"
                     data-wow-delay="300ms"
                   >
-                    <h4 className="widget-title">Vehicles Type</h4>
+                    <h4 className="widget-title">Body Types</h4>
                     <div className="widget-content">
                       <ul className="user-links style-two">
-                        {vehicleTypes.map((elm, i) => (
-                          <li key={i}>
-                            <Link href={elm.link}>{elm.name}</Link>
+                        {boodies?.slice(0, 6).map((elm) => (
+                          <li key={elm.id}>
+                            <Link
+                              href={`/${currRegion}/cars/cars-for-sale/search?body=${elm.id}`}
+                            >
+                              {elm.name}
+                            </Link>
                           </li>
                         ))}
                       </ul>
@@ -120,7 +155,7 @@ export default function Footer({
                     <ul>
                       {socialMediaLinks.map((social, index) => (
                         <li key={index}>
-                          <a href={social.link}>
+                          <a href={"#"}>
                             <i className={social.iconClass} />
                           </a>
                         </li>
@@ -139,8 +174,9 @@ export default function Footer({
             <div className="copyright-text wow fadeInUp">
               ©{" "}
               <span>
-                2025 CarLeaps.com. Managed By <strong style={{ color: "#b785fa" }}>VALKII LTD</strong>. All rights
-                reserved.
+                2025 CarLeaps.com. Managed By{" "}
+                <strong style={{ color: "#b785fa" }}>VALKII LTD</strong>. All
+                rights reserved.
               </span>
             </div>
             <ul className="footer-nav wow fadeInUp" data-wow-delay="200ms">

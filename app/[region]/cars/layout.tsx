@@ -27,7 +27,7 @@ export default function CarsLayout({ children }: ChildrenPropsInterface) {
         <>
           <Header1 headerClass="boxcar-header header-style-v1 style-two inner-header cus-style-1" />
           {children}
-          <Footer parentClass="boxcar-footer footer-style-one v1 cus-st-1" />
+          <Footer parentClass="boxcar-footer footer-style-one" />
         </>
       ) : (
         <div className="boxcar-wrapper">

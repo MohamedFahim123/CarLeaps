@@ -206,7 +206,7 @@ export default function ShopList() {
                       <input
                         id="priceFrom"
                         type="number"
-                        className="form-control border border-1 px-2"
+                        className="form-control border px-2"
                         name="price_from"
                         defaultValue={""}
                         placeholder={`${priceFrom}`}
@@ -222,7 +222,7 @@ export default function ShopList() {
                       <input
                         type="number"
                         id="priceTo"
-                        className="form-control border border-1 px-2"
+                        className="form-control border px-2"
                         name="price_to"
                         placeholder={`${priceTo}`}
                         defaultValue={""}
