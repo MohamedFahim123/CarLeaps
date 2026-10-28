@@ -1,0 +1,227 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+#nav-mobile {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 300px;
+  height: 100%;
+  background-color: #000;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.3s ease;
+  z-index: 101;
+}
+
+img {
+  height: auto !important;
+}
+
+#nav-mobile.mm-menu_opened {
+  left: 0;
+  visibility: visible;
+  opacity: 1;
+}
+.overlay-mobile {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+}
+
+.overlay-mobile.active {
+  display: block;
+}
+
+.auth-form {
+  border: 1px solid #e1e1e1;
+  border-radius: 8px;
+  padding: 30px 45px;
+  background: #fff;
+  box-shadow: 0px 10px 40px 0px rgba(0, 0, 0, 0.05);
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+}
+
+.form-select,
+.form-select:focus,
+.form-select:active {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.form-control {
+  border: none;
+  box-shadow: none;
+  outline: none;
+  background-color: transparent;
+  border-radius: 0;
+  padding: 5px 0;
+}
+.form-control:focus,
+.form-control:active {
+  border: none;
+  box-shadow: none;
+  outline: none;
+}
+
+.show-password {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background-color: #2c25eb;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  z-index: 1;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+}
+
+.pointer {
+  cursor: pointer !important;
+}
+.region-selector {
+  max-width: 100px;
+}
+.cursor-pointer {
+  cursor: pointer !important;
+}
+
+.accordion-container {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.accordion-item {
+  border-bottom: 1px solid #ddd;
+}
+
+.accordion-header {
+  cursor: pointer;
+  padding: 15px;
+  background: rgb(237, 223, 255);
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.3s;
+}
+
+.accordion-header.open {
+  background: #6e499f;
+  color: white;
+}
+
+.accordion-content {
+  padding: 10px 15px;
+  display: none;
+}
+
+.accordion-content.show {
+  display: block;
+}
+
+.features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.features-list li {
+  padding: 5px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.features-list li:last-child {
+  border-bottom: none;
+}
+
+.icon {
+  font-size: 14px;
+}
+.boxcar-banner-section-v8
+  .banner-content-v8
+  .banner-v8-form
+  .form-tab-pane
+  form
+  .form_boxes {
+  height: 3.75rem !important;
+}
+.service-block-thirteen .inner-box .right-box .content-box-two::before {
+  width: 0px !important;
+  height: 0px !important;
+}
+.linkPerfectMatch {
+  color: #6e499f;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+}
+
+.linkPerfectMatch:hover {
+  text-decoration: underline;
+  color: #6e499f;
+}
+.dealerNameInCarCard {
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+}
+.dealerNameInCarCard:hover {
+  text-decoration: underline;
+  color: #6e499f;
+}
+.price-box .form-control {
+  height: 3rem !important;
+  margin-top: 10px;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+}
+.price-box .form-control::placeholder {
+  color: #00000070 !important;
+}
+.UnderLinedText {
+  text-decoration: underline !important;
+  text-transform: capitalize !important;
+  text-underline-offset: 2px;
+}
+.UnderLinedText:hover {
+  color: #6e499f !important;
+}

@@ -1,0 +1,17 @@
+@media (max-width: 991px) {
+  .car_card {
+    margin-bottom: 30px !important;
+  }
+}
+@media (max-width: 768px) {
+  .title {
+    font-size: 30px !important;
+  }
+}
+@media (max-width: 576px) {
+  .title {
+    font-size: 25px !important;
+  }
+}
+
+

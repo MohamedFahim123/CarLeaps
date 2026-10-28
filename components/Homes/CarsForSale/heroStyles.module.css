@@ -1,0 +1,56 @@
+.form_boxes {
+  height: 60px !important;
+  margin-bottom: 12px !important;
+}
+
+@media (max-width: 1150px) {
+  .boxcar_banner_section_v8 {
+    height: 100vh !important;
+  }
+  .boxcar_banner_section_v8 h2 {
+    max-width: 600px !important;
+  }
+}
+@media (max-width: 900px) {
+  .boxcar_banner_section_v8 {
+    height: 120vh !important;
+  }
+  .boxcar_banner_section_v8 h2 {
+    max-width: 100% !important;
+  }
+  .banner_content {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    flex-wrap: wrap !important;
+    align-items: start !important;
+    gap: 10px !important;
+  }
+  .form_tab_content {
+    width: 100% !important;
+  }
+  .form_boxes {
+    width: 100% !important;
+    height: 50px !important;
+    margin-bottom: 10px !important;
+  }
+  .form_submit {
+    height: 50px !important;
+    width: 100% !important;
+  }
+  .form_submit button {
+    height: 50px !important;
+  }
+  .form_tabs_list {
+    height: 50px !important;
+    margin-bottom: 15px !important;
+  }
+}
+@media (max-width: 560px) {
+    .banner_content {
+        padding-top: 20px !important;
+    }
+    .banner_content h2 {
+        margin-bottom: 10px !important;
+    }
+}

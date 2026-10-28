@@ -1,0 +1,9 @@
+.topMd50 {
+    top: 0% !important;
+}
+
+@media (max-width: 991px) {
+    .topMd50 {
+        top: 50% !important;
+    }
+}

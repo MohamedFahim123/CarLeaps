@@ -1,0 +1,6 @@
+@media (max-width: 1024px) {
+    .login_form_container {
+        width: 600px;
+        max-width: 100%;
+    }
+}

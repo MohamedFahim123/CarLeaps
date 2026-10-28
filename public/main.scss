@@ -1,0 +1,8 @@
+@use "sass:meta";
+
+@import "css/slick-theme.css";
+@import "css/slick.css";
+@import "css/mmenu.css";
+@import "css/style.css";
+
+@include meta.load-css("custom");

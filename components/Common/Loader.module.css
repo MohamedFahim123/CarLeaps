@@ -1,0 +1,43 @@
+
+.loaderContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: white;
+}
+
+.loader {
+  width: 50px;
+  height: 50px;
+  border: 7px double;
+  border-color: #050b20 transparent;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: spin13213 2s linear infinite;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  -webkit-animation: spin13213 2s linear infinite;
+}
+
+.loader div {
+  width: 50%;
+  height: 50%;
+  background-color: #050b20;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
+
+@keyframes spin13213 {
+  to {
+    transform: rotate(360deg);
+  }
+}
