@@ -1,3 +1,5 @@
+import { MainRegionName } from "@/app/utils/constants";
+
 export function slugifyCarSegment(value: string): string {
   let decoded = value;
   try {
@@ -13,22 +15,29 @@ export function slugifyCarSegment(value: string): string {
     .replace(/(^-|-$)/g, "");
 }
 
+function resolveRegion(region?: string | null): string {
+  return region?.trim() || MainRegionName;
+}
+
 export function carDetailsHref(
-  region: string,
+  region: string | undefined | null,
   car: { id: number | string; name?: string | null }
 ): string {
   const slug = car.name ? slugifyCarSegment(car.name) : "";
-  return `/${region}/cars/car-details/${slug || car.id}`;
+  return `/${resolveRegion(region)}/cars/car-details/${slug || car.id}`;
 }
 
-export function brandHref(region: string, brandName: string): string {
-  return `/${region}/cars/${slugifyCarSegment(brandName)}`;
+export function brandHref(
+  region: string | undefined | null,
+  brandName: string
+): string {
+  return `/${resolveRegion(region)}/cars/${slugifyCarSegment(brandName)}`;
 }
 
 export function brandModelHref(
-  region: string,
+  region: string | undefined | null,
   brandName: string,
   modelName: string
 ): string {
-  return `/${region}/cars/${slugifyCarSegment(brandName)}/${slugifyCarSegment(modelName)}`;
+  return `/${resolveRegion(region)}/cars/${slugifyCarSegment(brandName)}/${slugifyCarSegment(modelName)}`;
 }
