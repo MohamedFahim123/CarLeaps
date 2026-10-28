@@ -1,7 +1,7 @@
 import { CPOCarsMakes } from "@/app/store/cpoMakes";
 import Image from "next/image";
 import { useState } from "react";
-import ModalVideo from "react-modal-video";
+import YoutubeModal from "@/components/Common/YoutubeModal";
 import styles from "../Brands/Brands.module.css";
 import { FaCheck } from "react-icons/fa";
 
@@ -52,7 +52,7 @@ const CPOChooseUs = ({ brand }: { brand: CPOCarsMakes }) => {
           </div>
         </div>
       </section>
-      <ModalVideo
+      <YoutubeModal
         channel="youtube"
         youtube={{ mute: 0, autoplay: 0 }}
         isOpen={isOpen}

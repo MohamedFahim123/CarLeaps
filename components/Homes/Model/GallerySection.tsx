@@ -3,7 +3,7 @@
 import { ModelsDetailsInterface } from "@/app/store/ResearchCarMakes";
 import Image from "next/image";
 import { useState } from "react";
-import ModalVideo from "react-modal-video";
+import YoutubeModal from "@/components/Common/YoutubeModal";
 import { Gallery, Item } from "react-photoswipe-gallery";
 import styles from "./modelStyle.module.css";
 import styles2 from "../Home/heroStyles.module.css";
@@ -178,7 +178,7 @@ export default function GallerySection({
           </div>
         </div>
       </div>
-      <ModalVideo
+      <YoutubeModal
         channel="youtube"
         youtube={{ mute: 0, autoplay: 0 }}
         isOpen={isOpen}

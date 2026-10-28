@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import React, { useState } from "react";
-import ModalVideo from "react-modal-video";
+import YoutubeModal from "@/components/Common/YoutubeModal";
 import styles from "./Brands.module.css";
 import { ResearchCarsMakes } from "@/app/store/ResearchCarMakes";
 
@@ -80,7 +80,7 @@ function BrandsChooseUs({ brand }: {brand: ResearchCarsMakes}) {
           </div>
         </div>
       </section>
-      <ModalVideo
+      <YoutubeModal
         channel="youtube"
         youtube={{ mute: 0, autoplay: 0 }}
         isOpen={isOpen}

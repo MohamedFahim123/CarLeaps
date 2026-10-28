@@ -2,7 +2,7 @@
 import { Car } from "@/app/[region]/cars/car-details/[id]/page";
 import { useCitiesStore } from "@/app/store/Cities";
 import { useState } from "react";
-import ModalVideo from "react-modal-video";
+import YoutubeModal from "@/components/Common/YoutubeModal";
 import RelatedCars from "./RelatedCars";
 import Description from "./Sections/Description";
 import Faqs from "./Sections/Faqs";
@@ -62,7 +62,7 @@ export default function CarDetailsSection({
             </div>
           </div>
         </div>
-        <ModalVideo
+        <YoutubeModal
           channel="youtube"
           youtube={{ mute: 0, autoplay: 0 }}
           isOpen={isOpen}
